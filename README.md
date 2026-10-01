@@ -19,7 +19,7 @@ Este projeto nasceu com o objetivo de facilitar o mapeamento mental e a compreen
 
 A aplicação roda 100% no navegador (Client-side), sem necessidade de banco de dados ou backend complexo em sua versão inicial.
 
-**Acesse a página do projeto via GitHub Pages:** [Árvores Jurídicas BR](https://amorim-rc.github.io/lex-tree-br/)
+**Acesse a página do projeto via GitHub Pages:** [Árvores Jurídicas BR](https://luccas-amorim.github.io/lex-tree-br/)
 
 * **Navegação:** Utilize o mouse para arrastar *(pan)* a visualização.
 * **Zoom:** Utilize o scroll do mouse ou o gesto de pinça no trackpad para dar zoom.
