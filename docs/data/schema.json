@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://luccas-amorim.github.io/lex-tree-br/data/schema.json",
+  "title": "Árvores Jurídicas BR — formato dos dados",
+  "description": "Um arquivo por diploma legal (docs/data/<id>.json), um catálogo (index.json), as relações internormativas (relations.json) e o glossário (glossary.json). A árvore vai até Títulos e Capítulos; artigos aparecem apenas como faixa no campo subtitle.",
+  "definitions": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Identificador em kebab-case, único entre irmãos. Compõe a URL (#/cc/parte-geral/livro-i)."
+    },
+    "nodeKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*(/[a-z0-9]+(-[a-z0-9]+)*)*$",
+      "description": "Caminho de um nó: id do diploma seguido dos ids das divisões, separados por barra. Ex.: cc/parte-especial/livro-i."
+    },
+    "ramo": {
+      "type": "string",
+      "enum": ["constitucional", "privado", "publico", "social", "penal"]
+    },
+    "natureza": {
+      "type": "string",
+      "enum": ["material", "processual"],
+      "description": "material = direito substantivo; processual = direito formal, ramo colateral ao ramo material que conforma."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["rascunho", "revisado"],
+      "description": "rascunho = estrutura ainda não conferida contra o texto oficial; revisado = conferida por ao menos um revisor além do autor."
+    },
+    "historyEntry": {
+      "type": "object",
+      "required": ["year", "norm", "note"],
+      "additionalProperties": false,
+      "properties": {
+        "year": { "type": "integer", "minimum": 1800, "maximum": 2200 },
+        "norm": { "type": "string", "minLength": 3, "description": "Norma que alterou a estrutura. Ex.: 'EC 45/2004', 'Lei 13.467/2017'." },
+        "note": { "type": "string", "minLength": 10, "description": "O que mudou na estrutura desta divisão: inclusão, renumeração, revogação ou renomeação." }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": ["id", "name", "label", "subtitle", "content"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/definitions/id" },
+        "name": { "type": "string", "minLength": 3, "description": "Nome completo da divisão. Ex.: 'Título II - Dos Direitos e Garantias Fundamentais'." },
+        "label": { "type": "string", "minLength": 1, "maxLength": 28, "description": "Rótulo curto exibido no nó. Ex.: 'Título II'." },
+        "subtitle": { "type": "string", "minLength": 1, "description": "Faixa de artigos ou qualificador. Ex.: 'Arts. 5º a 17'." },
+        "content": { "type": "string", "minLength": 20, "description": "Síntese didática do que a divisão regula, em uma a três frases." },
+        "revoked": { "type": "boolean", "description": "true quando a divisão inteira foi revogada e permanece no mapa apenas por referência histórica." },
+        "history": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/historyEntry" },
+          "description": "Alterações estruturais relevantes desta divisão, em ordem cronológica."
+        },
+        "children": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/node" }
+        }
+      }
+    },
+    "diplomaMeta": {
+      "type": "object",
+      "required": ["id", "title", "shortTitle", "norm", "ramo", "natureza", "source"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "id": { "$ref": "#/definitions/id" },
+        "title": { "type": "string", "minLength": 3 },
+        "shortTitle": { "type": "string", "minLength": 1, "maxLength": 14 },
+        "norm": { "type": "string", "description": "Espécie, número e data do ato normativo." },
+        "ramo": { "$ref": "#/definitions/ramo" },
+        "natureza": { "$ref": "#/definitions/natureza" },
+        "status": { "$ref": "#/definitions/status" },
+        "source": { "type": "string", "format": "uri", "pattern": "^https://", "description": "Texto oficial compilado, preferencialmente no Planalto." },
+        "year": { "type": "integer", "minimum": 1800, "maximum": 2200 },
+        "note": { "type": "string", "description": "Observação sobre a classificação, quando ela for discutível." }
+      }
+    },
+    "diploma": {
+      "allOf": [
+        { "$ref": "#/definitions/diplomaMeta" },
+        {
+          "type": "object",
+          "required": ["root"],
+          "properties": {
+            "root": { "$ref": "#/definitions/node" }
+          }
+        }
+      ]
+    },
+    "catalog": {
+      "type": "object",
+      "required": ["root", "ramos", "diplomas", "planned"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "root": { "$ref": "#/definitions/id", "description": "Diploma que ocupa o centro do mapa (a Constituição)." },
+        "ramos": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "short", "color", "description"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/definitions/ramo" },
+              "name": { "type": "string" },
+              "short": { "type": "string", "maxLength": 16 },
+              "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+              "description": { "type": "string", "minLength": 20 }
+            }
+          }
+        },
+        "diplomas": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/id" },
+          "description": "Ids dos diplomas já mapeados; cada um tem um arquivo <id>.json nesta pasta."
+        },
+        "planned": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/diplomaMeta" },
+          "description": "Diplomas previstos no roadmap. Aparecem esmaecidos no mapa até ganharem arquivo próprio."
+        },
+        "relationTypes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["label", "description"],
+            "properties": {
+              "label": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          },
+          "description": "Tipos de relação internormativa admitidos em relations.json."
+        }
+      }
+    },
+    "relations": {
+      "type": "object",
+      "required": ["relations"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "description": { "type": "string" },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "type"],
+            "additionalProperties": false,
+            "properties": {
+              "from": { "$ref": "#/definitions/nodeKey" },
+              "to": { "$ref": "#/definitions/nodeKey" },
+              "type": { "type": "string", "description": "Chave de index.json → relationTypes." },
+              "note": { "type": "string", "minLength": 10 }
+            }
+          }
+        }
+      }
+    },
+    "glossary": {
+      "type": "object",
+      "required": ["terms"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "description": { "type": "string" },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["term", "definition"],
+            "additionalProperties": false,
+            "properties": {
+              "term": { "type": "string", "minLength": 2 },
+              "aliases": { "type": "array", "items": { "type": "string", "minLength": 2 } },
+              "definition": { "type": "string", "minLength": 20 }
+            }
+          }
+        }
+      }
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/definitions/diploma" },
+    { "$ref": "#/definitions/catalog" },
+    { "$ref": "#/definitions/relations" },
+    { "$ref": "#/definitions/glossary" }
+  ]
+}

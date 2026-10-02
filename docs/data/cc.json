@@ -1,0 +1,446 @@
+{
+  "id": "cc",
+  "title": "Código Civil",
+  "shortTitle": "CC",
+  "norm": "Lei nº 10.406, de 10 de janeiro de 2002",
+  "ramo": "privado",
+  "natureza": "material",
+  "status": "revisado",
+  "source": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+  "year": 2002,
+  "root": {
+    "id": "cc",
+    "name": "Código Civil",
+    "label": "CC",
+    "subtitle": "Raiz",
+    "content": "Lei nº 10.406/2002. Institui o Código Civil, regulando os direitos e obrigações de ordem privada relativos às pessoas, aos bens e às suas relações.",
+    "children": [
+      {
+        "id": "parte-geral",
+        "name": "Parte Geral",
+        "label": "Parte Geral",
+        "subtitle": "Arts. 1º a 232",
+        "content": "Estabelece as regras e princípios fundamentais que se aplicam a todo o direito civil, tratando das pessoas, dos bens e dos fatos jurídicos.",
+        "children": [
+          {
+            "id": "livro-i",
+            "name": "Livro I - Das Pessoas",
+            "label": "Livro I",
+            "subtitle": "Arts. 1º a 78",
+            "content": "Trata das pessoas naturais e jurídicas, definindo quem é sujeito de direitos e obrigações.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Das Pessoas Naturais",
+                "label": "Título I",
+                "subtitle": "Arts. 1º a 39",
+                "content": "Personalidade, capacidade, direitos da personalidade e ausência.",
+                "history": [
+                  {
+                    "year": 2015,
+                    "norm": "Lei 13.146/2015 (Estatuto da Pessoa com Deficiência)",
+                    "note": "Nova disciplina da capacidade civil: a deficiência deixou de ser causa de incapacidade absoluta."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Das Pessoas Jurídicas",
+                "label": "Título II",
+                "subtitle": "Arts. 40 a 69",
+                "content": "Disposições gerais, associações e fundações."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Do Domicílio",
+                "label": "Título III",
+                "subtitle": "Arts. 70 a 78",
+                "content": "Regras sobre o domicílio da pessoa natural e jurídica."
+              }
+            ]
+          },
+          {
+            "id": "livro-ii",
+            "name": "Livro II - Dos Bens",
+            "label": "Livro II",
+            "subtitle": "Arts. 79 a 103",
+            "content": "Classifica os diferentes tipos de bens: imóveis, móveis, fungíveis, consumíveis, singulares, coletivos e bens públicos.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Diferentes Classes de Bens",
+                "label": "Título I",
+                "subtitle": "Arts. 79 a 91",
+                "content": "Bens imóveis, móveis, fungíveis, consumíveis, divisíveis e singulares/coletivos."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Bens Reciprocamente Considerados",
+                "label": "Título II",
+                "subtitle": "Arts. 92 a 97",
+                "content": "Bens principais, acessórios, frutos, produtos e benfeitorias."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Dos Bens Públicos",
+                "label": "Título III",
+                "subtitle": "Arts. 98 a 103",
+                "content": "Bens de uso comum, uso especial e dominicais."
+              }
+            ]
+          },
+          {
+            "id": "livro-iii",
+            "name": "Livro III - Dos Fatos Jurídicos",
+            "label": "Livro III",
+            "subtitle": "Arts. 104 a 232",
+            "content": "Regula o negócio jurídico, atos lícitos e ilícitos, prescrição, decadência e prova.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Do Negócio Jurídico",
+                "label": "Título I",
+                "subtitle": "Arts. 104 a 184",
+                "content": "Requisitos de validade, representação, condição, termo, defeitos e invalidade."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Dos Atos Jurídicos Lícitos",
+                "label": "Título II",
+                "subtitle": "Art. 185",
+                "content": "Disposição sobre os atos lícitos que não são negócios jurídicos."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Dos Atos Ilícitos",
+                "label": "Título III",
+                "subtitle": "Arts. 186 a 188",
+                "content": "Ação ou omissão voluntária, negligência ou imprudência que causa dano."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Prescrição e Decadência",
+                "label": "Título IV",
+                "subtitle": "Arts. 189 a 211",
+                "content": "Prazos e regras sobre a perda do direito de ação e do próprio direito."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Da Prova",
+                "label": "Título V",
+                "subtitle": "Arts. 212 a 232",
+                "content": "Meios de prova dos fatos jurídicos (confissão, documento, testemunha, presunção, perícia)."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "parte-especial",
+        "name": "Parte Especial",
+        "label": "Parte Especial",
+        "subtitle": "Arts. 233 a 2.027",
+        "content": "Detalha as áreas específicas do direito civil (Obrigações, Empresa, Coisas, Família e Sucessões).",
+        "children": [
+          {
+            "id": "livro-i",
+            "name": "Livro I - Direito das Obrigações",
+            "label": "Livro I",
+            "subtitle": "Arts. 233 a 965",
+            "content": "Vínculos jurídicos (dar, fazer, não fazer), contratos e responsabilidade civil.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Modalidades das Obrigações",
+                "label": "Título I",
+                "subtitle": "Arts. 233 a 285",
+                "content": "Obrigação de dar, fazer, não fazer, alternativas, divisíveis, indivisíveis e solidárias."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Transmissão das Obrigações",
+                "label": "Título II",
+                "subtitle": "Arts. 286 a 303",
+                "content": "Cessão de crédito e assunção de dívida."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Adimplemento e Extinção",
+                "label": "Título III",
+                "subtitle": "Arts. 304 a 388",
+                "content": "Pagamento, consignação, sub-rogação, imputação, dação, novação e compensação."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Inadimplemento",
+                "label": "Título IV",
+                "subtitle": "Arts. 389 a 420",
+                "content": "Mora, perdas e danos, juros, cláusula penal e arras."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Contratos em Geral",
+                "label": "Título V",
+                "subtitle": "Arts. 421 a 480",
+                "content": "Disposições gerais, formação, estipulação em favor de terceiro, vícios redibitórios."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Várias Espécies de Contrato",
+                "label": "Título VI",
+                "subtitle": "Arts. 481 a 853",
+                "content": "Compra e venda, troca, doação, locação, empréstimo, prestação de serviço, mandato, fiança, etc."
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Atos Unilaterais",
+                "label": "Título VII",
+                "subtitle": "Arts. 854 a 886",
+                "content": "Promessa de recompensa, gestão de negócios, pagamento indevido."
+              },
+              {
+                "id": "titulo-viii",
+                "name": "Título VIII - Títulos de Crédito",
+                "label": "Título VIII",
+                "subtitle": "Arts. 887 a 926",
+                "content": "Disposições gerais sobre títulos ao portador, à ordem e nominativos."
+              },
+              {
+                "id": "titulo-ix",
+                "name": "Título IX - Responsabilidade Civil",
+                "label": "Título IX",
+                "subtitle": "Arts. 927 a 954",
+                "content": "Obrigação de indemnizar e indemnização."
+              },
+              {
+                "id": "titulo-x",
+                "name": "Título X - Preferências e Privilégios",
+                "label": "Título X",
+                "subtitle": "Arts. 955 a 965",
+                "content": "Concurso de credores e privilégios creditórios."
+              }
+            ]
+          },
+          {
+            "id": "livro-ii",
+            "name": "Livro II - Direito de Empresa",
+            "label": "Livro II",
+            "subtitle": "Arts. 966 a 1.195",
+            "content": "Disciplina o empresário, as sociedades e o estabelecimento.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Do Empresário",
+                "label": "Título I",
+                "subtitle": "Arts. 966 a 980",
+                "content": "Caracterização, inscrição e capacidade."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Da Sociedade",
+                "label": "Título II",
+                "subtitle": "Arts. 981 a 1.141",
+                "content": "Sociedades não personificadas (comum, conta de participação) e personificadas (simples, limitada, anônima, cooperativa)."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Do Estabelecimento",
+                "label": "Título III",
+                "subtitle": "Arts. 1.142 a 1.149",
+                "content": "Disposições gerais sobre o complexo de bens organizado."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Institutos Complementares",
+                "label": "Título IV",
+                "subtitle": "Arts. 1.150 a 1.195",
+                "content": "Registro, nome empresarial e prepostos."
+              }
+            ],
+            "history": [
+              {
+                "year": 2002,
+                "norm": "Lei 10.406/2002",
+                "note": "Unificação do direito das obrigações: o Livro II revogou a Parte Primeira do Código Comercial de 1850."
+              }
+            ]
+          },
+          {
+            "id": "livro-iii",
+            "name": "Livro III - Direito das Coisas",
+            "label": "Livro III",
+            "subtitle": "Arts. 1.196 a 1.510-E",
+            "content": "Trata da posse e de todos os direitos reais estabelecidos na lei.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Da Posse",
+                "label": "Título I",
+                "subtitle": "Arts. 1.196 a 1.224",
+                "content": "Classificação, aquisição, efeitos e perda da posse."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Dos Direitos Reais",
+                "label": "Título II",
+                "subtitle": "Arts. 1.225 a 1.227",
+                "content": "Disposições gerais e rol dos direitos reais."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da Propriedade",
+                "label": "Título III",
+                "subtitle": "Arts. 1.228 a 1.368",
+                "content": "Aquisição, perda, vizinhança e condomínio (geral e edilício)."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Da Superfície",
+                "label": "Título IV",
+                "subtitle": "Arts. 1.369 a 1.377",
+                "content": "Concessão do direito de construir ou plantar em terreno alheio."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Das Servidões",
+                "label": "Título V",
+                "subtitle": "Arts. 1.378 a 1.389",
+                "content": "Constituição, exercício e extinção das servidões."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Do Usufruto",
+                "label": "Título VI",
+                "subtitle": "Arts. 1.390 a 1.411",
+                "content": "Direito de fruição sobre a utilidade e os frutos de uma coisa."
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Do Uso",
+                "label": "Título VII",
+                "subtitle": "Arts. 1.412 a 1.413",
+                "content": "Direito de usar a coisa e perceber os seus frutos para as necessidades da família."
+              },
+              {
+                "id": "titulo-viii",
+                "name": "Título VIII - Da Habitação",
+                "label": "Título VIII",
+                "subtitle": "Arts. 1.414 a 1.416",
+                "content": "Direito real temporário de ocupar gratuitamente casa alheia."
+              },
+              {
+                "id": "titulo-ix",
+                "name": "Título IX - Promitente Comprador",
+                "label": "Título IX",
+                "subtitle": "Arts. 1.417 a 1.418",
+                "content": "Direito real à aquisição do imóvel."
+              },
+              {
+                "id": "titulo-x",
+                "name": "Título X - Penhor, Hipoteca e Anticrese",
+                "label": "Título X",
+                "subtitle": "Arts. 1.419 a 1.510",
+                "content": "Direitos reais de garantia."
+              },
+              {
+                "id": "titulo-xi",
+                "name": "Título XI - Do Direito de Laje",
+                "label": "Título XI",
+                "subtitle": "Arts. 1.510-A a 1.510-E",
+                "content": "Direito real sobre a unidade imobiliária autónoma construída em elevação.",
+                "history": [
+                  {
+                    "year": 2017,
+                    "norm": "Lei 13.465/2017",
+                    "note": "Inclusão do Título XI, Do Direito de Laje."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "livro-iv",
+            "name": "Livro IV - Direito de Família",
+            "label": "Livro IV",
+            "subtitle": "Arts. 1.511 a 1.783",
+            "content": "Regula o casamento, relações de parentesco, regime de bens, união estável e tutela.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Do Direito Pessoal",
+                "label": "Título I",
+                "subtitle": "Arts. 1.511 a 1.638",
+                "content": "Casamento (formalidades, invalidade, dissolução), parentesco e poder familiar."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Do Direito Patrimonial",
+                "label": "Título II",
+                "subtitle": "Arts. 1.639 a 1.722",
+                "content": "Regimes de bens, usufruto dos bens dos filhos, alimentos e bem de família."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da União Estável",
+                "label": "Título III",
+                "subtitle": "Arts. 1.723 a 1.727",
+                "content": "Reconhecimento, direitos e deveres."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Tutela e Curatela",
+                "label": "Título IV",
+                "subtitle": "Arts. 1.728 a 1.783",
+                "content": "Tutela, curatela e tomada de decisão apoiada."
+              }
+            ]
+          },
+          {
+            "id": "livro-v",
+            "name": "Livro V - Direito das Sucessões",
+            "label": "Livro V",
+            "subtitle": "Arts. 1.784 a 2.027",
+            "content": "Disciplina a herança, sucessão legítima, testamentária e partilha.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Da Sucessão em Geral",
+                "label": "Título I",
+                "subtitle": "Arts. 1.784 a 1.828",
+                "content": "Herança, vocação hereditária, aceitação, renúncia, excluídos e herança jacente."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Da Sucessão Legítima",
+                "label": "Título II",
+                "subtitle": "Arts. 1.829 a 1.856",
+                "content": "Ordem da vocação hereditária, herdeiros necessários e direito de representação."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Sucessão Testamentária",
+                "label": "Título III",
+                "subtitle": "Arts. 1.857 a 1.990",
+                "content": "Testamento, disposições testamentárias, legados, deserdação e revogação."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Inventário e Partilha",
+                "label": "Título IV",
+                "subtitle": "Arts. 1.991 a 2.027",
+                "content": "Apuração e divisão do acervo hereditário, sonegados e colação."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "livro-comp",
+        "name": "Livro Complementar",
+        "label": "Livro Comp.",
+        "subtitle": "Arts. 2.028 a 2.046",
+        "content": "Das Disposições Finais e Transitórias. Trata da transição e aplicação das regras do novo Código Civil (2002) em relação ao antigo (1916)."
+      }
+    ]
+  }
+}

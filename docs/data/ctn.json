@@ -1,0 +1,100 @@
+{
+  "$schema": "./schema.json#/definitions/diploma",
+  "id": "ctn",
+  "title": "Código Tributário Nacional",
+  "shortTitle": "CTN",
+  "norm": "Lei nº 5.172, de 25 de outubro de 1966",
+  "ramo": "publico",
+  "natureza": "material",
+  "status": "rascunho",
+  "source": "https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm",
+  "year": 1966,
+  "note": "Lei ordinária na origem, recepcionada pela Constituição de 1988 com status de lei complementar (art. 146 da CF).",
+  "root": {
+    "id": "ctn",
+    "name": "Código Tributário Nacional",
+    "label": "CTN",
+    "subtitle": "Raiz",
+    "content": "Lei nº 5.172/1966. Dispõe sobre o Sistema Tributário Nacional e institui normas gerais de direito tributário aplicáveis à União, Estados e Municípios: competência, impostos, obrigação, crédito e administração tributária.",
+    "children": [
+      {
+        "id": "livro-primeiro", "name": "Livro Primeiro - Sistema Tributário Nacional", "label": "Livro I", "subtitle": "Arts. 1º a 95",
+        "content": "Define tributo e suas espécies, distribui competências, limita o poder de tributar e descreve cada imposto. Boa parte foi superada pela Constituição de 1988, mas as definições permanecem referência.",
+        "children": [
+          { "id": "titulo-i", "name": "Título I - Disposições Gerais", "label": "Título I", "subtitle": "Arts. 1º a 5º", "content": "Conceito de tributo (art. 3º), natureza jurídica determinada pelo fato gerador e espécies: impostos, taxas e contribuições de melhoria." },
+          {
+            "id": "titulo-ii", "name": "Título II - Competência Tributária", "label": "Título II", "subtitle": "Arts. 6º a 15",
+            "content": "Atribuição constitucional de competência, indelegabilidade e limitações (legalidade, anterioridade, imunidades).",
+            "children": [
+              { "id": "cap-i", "name": "Capítulo I - Disposições Gerais", "label": "Cap. I", "subtitle": "Arts. 6º a 8º", "content": "Competência plena, indelegabilidade e não exercício da competência." },
+              { "id": "cap-ii", "name": "Capítulo II - Limitações da Competência Tributária", "label": "Cap. II", "subtitle": "Arts. 9º a 15", "content": "Vedações aos entes, imunidades recíproca, de templos, partidos e livros, e empréstimos compulsórios." }
+            ]
+          },
+          {
+            "id": "titulo-iii", "name": "Título III - Impostos", "label": "Título III", "subtitle": "Arts. 16 a 76",
+            "content": "Conceito de imposto e disciplina de cada um por grupo econômico: comércio exterior, patrimônio e renda, produção e circulação, impostos especiais.",
+            "children": [
+              { "id": "cap-i", "name": "Capítulo I - Disposições Gerais", "label": "Cap. I", "subtitle": "Arts. 16 a 18", "content": "Imposto como tributo não vinculado a atividade estatal específica; competência residual e impostos extraordinários." },
+              { "id": "cap-ii", "name": "Capítulo II - Impostos sobre o Comércio Exterior", "label": "Cap. II", "subtitle": "Arts. 19 a 28", "content": "Imposto de importação e imposto de exportação: fato gerador, base de cálculo e contribuinte." },
+              { "id": "cap-iii", "name": "Capítulo III - Impostos sobre o Patrimônio e a Renda", "label": "Cap. III", "subtitle": "Arts. 29 a 45", "content": "ITR, IPTU, ITBI e imposto de renda." },
+              { "id": "cap-iv", "name": "Capítulo IV - Impostos sobre a Produção e a Circulação", "label": "Cap. IV", "subtitle": "Arts. 46 a 73", "content": "IPI, o antigo ICM (hoje ICMS), IOF e imposto sobre serviços; vários dispositivos revogados ou superados." },
+              { "id": "cap-v", "name": "Capítulo V - Impostos Especiais", "label": "Cap. V", "subtitle": "Arts. 74 a 76", "content": "Impostos únicos sobre combustíveis, energia e minerais (extintos) e impostos extraordinários de guerra." }
+            ]
+          },
+          { "id": "titulo-iv", "name": "Título IV - Taxas", "label": "Título IV", "subtitle": "Arts. 77 a 80", "content": "Poder de polícia e serviço público específico e divisível; vedação de base de cálculo própria de imposto." },
+          { "id": "titulo-v", "name": "Título V - Contribuição de Melhoria", "label": "Título V", "subtitle": "Arts. 81 e 82", "content": "Valorização imobiliária decorrente de obra pública; limites total e individual e requisitos da lei instituidora." },
+          { "id": "titulo-vi", "name": "Título VI - Distribuições de Receitas Tributárias", "label": "Título VI", "subtitle": "Arts. 83 a 95", "content": "Repartição do produto da arrecadação entre os entes e fundos de participação; em grande parte superado pelos arts. 157 a 162 da CF." }
+        ]
+      },
+      {
+        "id": "livro-segundo", "name": "Livro Segundo - Normas Gerais de Direito Tributário", "label": "Livro II", "subtitle": "Arts. 96 a 218",
+        "content": "A parte viva do CTN: legislação tributária, obrigação, crédito e administração. É aqui que estão lançamento, suspensão, extinção e exclusão do crédito.",
+        "children": [
+          {
+            "id": "titulo-i", "name": "Título I - Legislação Tributária", "label": "Título I", "subtitle": "Arts. 96 a 112",
+            "content": "Fontes, vigência, aplicação, interpretação e integração da legislação tributária.",
+            "children": [
+              { "id": "cap-i", "name": "Capítulo I - Disposições Gerais", "label": "Cap. I", "subtitle": "Arts. 96 a 100", "content": "Conceito de legislação tributária, reserva legal, tratados, decretos e normas complementares." },
+              { "id": "cap-ii", "name": "Capítulo II - Vigência da Legislação Tributária", "label": "Cap. II", "subtitle": "Arts. 101 a 104", "content": "Vigência no espaço e no tempo e regras especiais para impostos sobre patrimônio e renda." },
+              { "id": "cap-iii", "name": "Capítulo III - Aplicação da Legislação Tributária", "label": "Cap. III", "subtitle": "Arts. 105 e 106", "content": "Aplicação imediata a fatos pendentes e retroatividade benigna em matéria de infrações." },
+              { "id": "cap-iv", "name": "Capítulo IV - Interpretação e Integração da Legislação Tributária", "label": "Cap. IV", "subtitle": "Arts. 107 a 112", "content": "Analogia, princípios gerais, equidade, interpretação literal das isenções e interpretação benigna das infrações." }
+            ]
+          },
+          {
+            "id": "titulo-ii", "name": "Título II - Obrigação Tributária", "label": "Título II", "subtitle": "Arts. 113 a 138",
+            "content": "Obrigação principal e acessória, fato gerador, sujeitos ativo e passivo, solidariedade, capacidade, domicílio e responsabilidade.",
+            "children": [
+              { "id": "cap-i", "name": "Capítulo I - Disposições Gerais", "label": "Cap. I", "subtitle": "Art. 113", "content": "Obrigação principal (pagar tributo ou penalidade) e acessória (prestações positivas ou negativas)." },
+              { "id": "cap-ii", "name": "Capítulo II - Fato Gerador", "label": "Cap. II", "subtitle": "Arts. 114 a 118", "content": "Fato gerador da obrigação principal e acessória, momento de ocorrência, negócios condicionais e norma antielisiva." },
+              { "id": "cap-iii", "name": "Capítulo III - Sujeito Ativo", "label": "Cap. III", "subtitle": "Arts. 119 e 120", "content": "Pessoa jurídica de direito público titular da competência para exigir o tributo." },
+              { "id": "cap-iv", "name": "Capítulo IV - Sujeito Passivo", "label": "Cap. IV", "subtitle": "Arts. 121 a 127", "content": "Contribuinte e responsável, convenções particulares, solidariedade, capacidade tributária e domicílio." },
+              { "id": "cap-v", "name": "Capítulo V - Responsabilidade Tributária", "label": "Cap. V", "subtitle": "Arts. 128 a 138", "content": "Responsabilidade dos sucessores, de terceiros, por infrações e denúncia espontânea." }
+            ]
+          },
+          {
+            "id": "titulo-iii", "name": "Título III - Crédito Tributário", "label": "Título III", "subtitle": "Arts. 139 a 193",
+            "content": "Constituição do crédito pelo lançamento e suas vicissitudes: suspensão, extinção, exclusão, garantias e privilégios.",
+            "children": [
+              { "id": "cap-i", "name": "Capítulo I - Disposições Gerais", "label": "Cap. I", "subtitle": "Arts. 139 a 141", "content": "O crédito decorre da obrigação principal e só se modifica nos casos previstos no Código." },
+              { "id": "cap-ii", "name": "Capítulo II - Constituição de Crédito Tributário", "label": "Cap. II", "subtitle": "Arts. 142 a 150", "content": "Lançamento: conceito, modalidades de ofício, por declaração e por homologação, e sua revisão." },
+              { "id": "cap-iii", "name": "Capítulo III - Suspensão do Crédito Tributário", "label": "Cap. III", "subtitle": "Arts. 151 a 155-A", "content": "Moratória, depósito integral, reclamações e recursos, liminares, tutela antecipada e parcelamento." },
+              { "id": "cap-iv", "name": "Capítulo IV - Extinção do Crédito Tributário", "label": "Cap. IV", "subtitle": "Arts. 156 a 174", "content": "Pagamento, compensação, transação, remissão, prescrição e decadência, conversão de depósito, consignação, decisão definitiva e dação em pagamento." },
+              { "id": "cap-v", "name": "Capítulo V - Exclusão de Crédito Tributário", "label": "Cap. V", "subtitle": "Arts. 175 a 182", "content": "Isenção (dispensa legal do tributo devido) e anistia (perdão das infrações e respectivas penalidades)." },
+              { "id": "cap-vi", "name": "Capítulo VI - Garantias e Privilégios do Crédito Tributário", "label": "Cap. VI", "subtitle": "Arts. 183 a 193", "content": "Universalidade dos bens do devedor, presunção de fraude, preferências, concurso de credores e quitação em falência e inventário." }
+            ]
+          },
+          {
+            "id": "titulo-iv", "name": "Título IV - Administração Tributária", "label": "Título IV", "subtitle": "Arts. 194 a 208",
+            "content": "Poderes e deveres da Fazenda: fiscalização, sigilo, dívida ativa e certidões.",
+            "children": [
+              { "id": "cap-i", "name": "Capítulo I - Fiscalização", "label": "Cap. I", "subtitle": "Arts. 194 a 200", "content": "Competência e poderes das autoridades, dever de informar, sigilo fiscal e assistência mútua." },
+              { "id": "cap-ii", "name": "Capítulo II - Dívida Ativa", "label": "Cap. II", "subtitle": "Arts. 201 a 204", "content": "Inscrição, requisitos do termo e presunção de certeza e liquidez." },
+              { "id": "cap-iii", "name": "Capítulo III - Certidões Negativas", "label": "Cap. III", "subtitle": "Arts. 205 a 208", "content": "Certidão negativa e positiva com efeitos de negativa; responsabilidade do servidor." }
+            ]
+          },
+          { "id": "disposicoes-finais", "name": "Disposições Finais e Transitórias", "label": "Disp. Finais", "subtitle": "Arts. 209 a 218", "content": "Prazos, vigência e regras de transição." }
+        ]
+      }
+    ]
+  }
+}

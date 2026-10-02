@@ -1,0 +1,213 @@
+{
+  "id": "cp",
+  "title": "Código Penal",
+  "shortTitle": "CP",
+  "norm": "Decreto-Lei nº 2.848, de 7 de dezembro de 1940",
+  "ramo": "penal",
+  "natureza": "material",
+  "status": "revisado",
+  "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
+  "year": 1940,
+  "root": {
+    "id": "cp",
+    "name": "Código Penal",
+    "label": "CP",
+    "subtitle": "Raiz",
+    "content": "Decreto-Lei nº 2.848/1940. É o principal diploma legal brasileiro para a tipificação de crimes e previsão de penas, estabelecendo os princípios do direito penal no país.",
+    "children": [
+      {
+        "id": "parte-geral",
+        "name": "Parte Geral",
+        "label": "Parte Geral",
+        "subtitle": "Arts. 1º a 120",
+        "content": "Reúne os princípios gerais do Direito Penal, tratando da aplicação da lei, da teoria do crime, da imputabilidade, das penas e da extinção da punibilidade.",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Da Aplicação da Lei Penal",
+            "label": "Título I",
+            "subtitle": "Arts. 1º a 12",
+            "content": "Princípio da legalidade, lei penal no tempo e no espaço, extraterritorialidade e eficácia de sentença estrangeira."
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Do Crime",
+            "label": "Título II",
+            "subtitle": "Arts. 13 a 25",
+            "content": "Relação de causalidade, consumação, tentativa, desistência, arrependimento, erro de tipo/proibição e excludentes de ilicitude (legítima defesa, estado de necessidade)."
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Da Imputabilidade Penal",
+            "label": "Título III",
+            "subtitle": "Arts. 26 a 28",
+            "content": "Regras sobre doença mental, desenvolvimento mental incompleto, menoridade penal e embriaguez."
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Do Concurso de Pessoas",
+            "label": "Título IV",
+            "subtitle": "Arts. 29 a 31",
+            "content": "Regras aplicáveis quando duas ou mais pessoas concorrem para a prática de uma infração penal."
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Das Penas",
+            "label": "Título V",
+            "subtitle": "Arts. 32 a 95",
+            "content": "Espécies de pena (privativas de liberdade, restritivas de direitos, multa), cominação, aplicação, suspensão condicional e livramento condicional."
+          },
+          {
+            "id": "titulo-vi",
+            "name": "Título VI - Das Medidas de Segurança",
+            "label": "Título VI",
+            "subtitle": "Arts. 96 a 99",
+            "content": "Medidas aplicáveis a inimputáveis ou semi-imputáveis (internação em hospital de custódia e tratamento ambulatorial)."
+          },
+          {
+            "id": "titulo-vii",
+            "name": "Título VII - Da Ação Penal",
+            "label": "Título VII",
+            "subtitle": "Arts. 100 a 106",
+            "content": "Ação penal pública (incondicionada e condicionada) e ação penal de iniciativa privada."
+          },
+          {
+            "id": "titulo-viii",
+            "name": "Título VIII - Extinção da Punibilidade",
+            "label": "Título VIII",
+            "subtitle": "Arts. 107 a 120",
+            "content": "Causas que extinguem o direito de punir do Estado (morte do agente, anistia, prescrição, decadência, perdão)."
+          }
+        ],
+        "history": [
+          {
+            "year": 1984,
+            "norm": "Lei 7.209/1984",
+            "note": "Nova Parte Geral: sistema vicariante, penas restritivas de direitos e reforma da teoria do crime."
+          }
+        ]
+      },
+      {
+        "id": "parte-especial",
+        "name": "Parte Especial",
+        "label": "Parte Especial",
+        "subtitle": "Arts. 121 a 359-U",
+        "content": "Tipifica, um a um, os crimes previstos no Brasil, dividindo-os de acordo com o bem jurídico tutelado protegido (vida, patrimônio, honra, etc).",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Crimes Contra a Pessoa",
+            "label": "Título I",
+            "subtitle": "Arts. 121 a 154-B",
+            "content": "Crimes contra a vida (homicídio, aborto), lesões corporais, periclitação da vida, crimes contra a honra (calúnia, difamação) e contra a liberdade."
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Crimes Contra o Patrimônio",
+            "label": "Título II",
+            "subtitle": "Arts. 155 a 183",
+            "content": "Furto, roubo, extorsão, apropriação indébita, estelionato, fraudes, receptação e disposições gerais aplicáveis à família."
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Crimes Contra a Propriedade Imaterial",
+            "label": "Título III",
+            "subtitle": "Arts. 184 a 196",
+            "content": "Violação de direito autoral e crimes contra o privilégio de invenção e marcas."
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Crimes Contra a Organização do Trabalho",
+            "label": "Título IV",
+            "subtitle": "Arts. 197 a 207",
+            "content": "Atentado contra a liberdade de trabalho, paralisação, aliciamento de trabalhadores e frustração de direitos trabalhistas."
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Crimes Contra Sentimento Religioso e Mortos",
+            "label": "Título V",
+            "subtitle": "Arts. 208 a 212",
+            "content": "Vilipêndio a cadáver, destruição de sepultura e impedimento de culto religioso."
+          },
+          {
+            "id": "titulo-vi",
+            "name": "Título VI - Crimes Contra a Dignidade Sexual",
+            "label": "Título VI",
+            "subtitle": "Arts. 213 a 234-C",
+            "content": "Estupro, violação sexual mediante fraude, assédio sexual, estupro de vulnerável e exploração sexual.",
+            "history": [
+              {
+                "year": 2009,
+                "norm": "Lei 12.015/2009",
+                "note": "Título renomeado de Crimes contra os Costumes para Crimes contra a Dignidade Sexual."
+              }
+            ]
+          },
+          {
+            "id": "titulo-vii",
+            "name": "Título VII - Crimes Contra a Família",
+            "label": "Título VII",
+            "subtitle": "Arts. 235 a 249",
+            "content": "Bigamia, ocultação de impedimento, crimes contra o estado de filiação e abandono (material, intelectual ou moral)."
+          },
+          {
+            "id": "titulo-viii",
+            "name": "Título VIII - Crimes Contra a Incolumidade Pública",
+            "label": "Título VIII",
+            "subtitle": "Arts. 250 a 285",
+            "content": "Incêndio, explosão, inundação e crimes contra a saúde pública (falsificação de remédios, epidemia)."
+          },
+          {
+            "id": "titulo-ix",
+            "name": "Título IX - Crimes Contra a Paz Pública",
+            "label": "Título IX",
+            "subtitle": "Arts. 286 a 288-A",
+            "content": "Incitação ao crime, apologia de crime ou criminoso, associação criminosa e constituição de milícia."
+          },
+          {
+            "id": "titulo-x",
+            "name": "Título X - Crimes Contra a Fé Pública",
+            "label": "Título X",
+            "subtitle": "Arts. 289 a 311-A",
+            "content": "Moeda falsa, falsificação de documentos públicos e particulares, falsidade ideológica e fraudes em certames de interesse público."
+          },
+          {
+            "id": "titulo-xi",
+            "name": "Título XI - Crimes Contra a Administração Pública",
+            "label": "Título XI",
+            "subtitle": "Arts. 312 a 359-H",
+            "content": "Peculato, corrupção (ativa e passiva), concussão, prevaricação, desacato, falso testemunho e crimes contra as finanças públicas.",
+            "history": [
+              {
+                "year": 2021,
+                "norm": "Lei 14.133/2021",
+                "note": "Inclusão do Capítulo II-B, Dos Crimes em Licitações e Contratos Administrativos (arts. 337-E a 337-P)."
+              }
+            ]
+          },
+          {
+            "id": "titulo-xii",
+            "name": "Título XII - Crimes Contra o Estado Democrático de Direito",
+            "label": "Título XII",
+            "subtitle": "Arts. 359-I a 359-U",
+            "content": "Atentado à soberania, abolição violenta do Estado Democrático de Direito, golpe de estado e violência política (Incluído em 2021).",
+            "history": [
+              {
+                "year": 2021,
+                "norm": "Lei 14.197/2021",
+                "note": "Inclusão do Título XII, Dos Crimes contra o Estado Democrático de Direito, com revogação da Lei de Segurança Nacional."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "disposicoes-f",
+        "name": "Disposições Finais",
+        "label": "Disposições F.",
+        "subtitle": "Arts. 360 e 361",
+        "content": "Regras de encerramento do diploma legal penal e ressalvas em relação à legislação especial vigente."
+      }
+    ]
+  }
+}

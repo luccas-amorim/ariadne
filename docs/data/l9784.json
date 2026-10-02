@@ -1,0 +1,35 @@
+{
+  "$schema": "./schema.json#/definitions/diploma",
+  "id": "l9784",
+  "title": "Lei do Processo Administrativo Federal",
+  "shortTitle": "Lei 9.784",
+  "norm": "Lei nº 9.784, de 29 de janeiro de 1999",
+  "ramo": "publico",
+  "natureza": "processual",
+  "status": "rascunho",
+  "source": "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm",
+  "year": 1999,
+  "note": "Direito formal da Administração: aplica-se subsidiariamente aos processos administrativos específicos e, por construção jurisprudencial, a Estados e Municípios sem lei própria.",
+  "root": {
+    "id": "l9784",
+    "name": "Lei do Processo Administrativo Federal",
+    "label": "Lei 9.784",
+    "subtitle": "Raiz",
+    "content": "Lei nº 9.784/1999. Regula o processo administrativo no âmbito da Administração Pública Federal, concretizando o contraditório e a ampla defesa (art. 5º, LV, da CF) e fixando o regime de anulação, revogação e convalidação dos atos administrativos.",
+    "children": [
+      { "id": "cap-i", "name": "Capítulo I - Das Disposições Gerais", "label": "Cap. I", "subtitle": "Arts. 1º e 2º", "content": "Âmbito de aplicação, definições e os princípios do processo administrativo: legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público e eficiência." },
+      { "id": "cap-ii-iii", "name": "Capítulos II e III - Dos Direitos e dos Deveres dos Administrados", "label": "Caps. II-III", "subtitle": "Arts. 3º e 4º", "content": "Direito de ser tratado com respeito, ter ciência da tramitação, formular alegações e fazer-se assistir por advogado; deveres de lealdade e verdade." },
+      { "id": "cap-iv-v", "name": "Capítulos IV e V - Do Início do Processo e dos Interessados", "label": "Caps. IV-V", "subtitle": "Arts. 5º a 10", "content": "Início de ofício ou a pedido, requisitos do requerimento, vedação à recusa de recebimento e legitimados como interessados." },
+      { "id": "cap-vi", "name": "Capítulo VI - Da Competência", "label": "Cap. VI", "subtitle": "Arts. 11 a 17", "content": "Irrenunciabilidade, delegação e avocação de competência e seus limites." },
+      { "id": "cap-vii", "name": "Capítulo VII - Dos Impedimentos e da Suspeição", "label": "Cap. VII", "subtitle": "Arts. 18 a 21", "content": "Hipóteses de impedimento e suspeição da autoridade ou servidor e dever de comunicação." },
+      { "id": "cap-viii-ix", "name": "Capítulos VIII e IX - Da Forma, Tempo e Lugar dos Atos e da Comunicação", "label": "Caps. VIII-IX", "subtitle": "Arts. 22 a 28", "content": "Informalismo moderado, atos em dias úteis, intimação do interessado e efeitos do não comparecimento." },
+      { "id": "cap-x", "name": "Capítulo X - Da Instrução", "label": "Cap. X", "subtitle": "Arts. 29 a 47", "content": "Produção de provas, consulta e audiência públicas, pareceres, alegações finais e relatório." },
+      { "id": "cap-xi-xii", "name": "Capítulos XI e XII - Do Dever de Decidir e da Motivação", "label": "Caps. XI-XII", "subtitle": "Arts. 48 a 50", "content": "Prazo de 30 dias para decidir e hipóteses em que a motivação explícita é obrigatória." },
+      { "id": "cap-xiii", "name": "Capítulo XIII - Da Desistência e Outros Casos de Extinção do Processo", "label": "Cap. XIII", "subtitle": "Arts. 51 e 52", "content": "Desistência, renúncia e extinção por exaurimento ou impossibilidade do objeto." },
+      { "id": "cap-xiv", "name": "Capítulo XIV - Da Anulação, Revogação e Convalidação", "label": "Cap. XIV", "subtitle": "Arts. 53 a 55", "content": "Autotutela, decadência de 5 anos para anular atos favoráveis e convalidação de defeitos sanáveis." },
+      { "id": "cap-xv", "name": "Capítulo XV - Do Recurso Administrativo e da Revisão", "label": "Cap. XV", "subtitle": "Arts. 56 a 65", "content": "Recurso em até três instâncias, efeitos, legitimados, prazos, vedação à reformatio in pejus na revisão e súmula vinculante." },
+      { "id": "cap-xvi-xvii", "name": "Capítulos XVI e XVII - Dos Prazos e das Sanções", "label": "Caps. XVI-XVII", "subtitle": "Arts. 66 a 68", "content": "Contagem de prazos e garantia de processo administrativo prévio à aplicação de sanções." },
+      { "id": "cap-xviii", "name": "Capítulo XVIII - Das Disposições Finais", "label": "Cap. XVIII", "subtitle": "Arts. 69 a 70", "content": "Aplicação subsidiária aos processos específicos e vigência." }
+    ]
+  }
+}

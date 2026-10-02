@@ -1,0 +1,350 @@
+{
+  "id": "cpc",
+  "title": "Código de Processo Civil",
+  "shortTitle": "CPC",
+  "norm": "Lei nº 13.105, de 16 de março de 2015",
+  "ramo": "privado",
+  "natureza": "processual",
+  "status": "revisado",
+  "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+  "year": 2015,
+  "root": {
+    "id": "cpc",
+    "name": "Código de Processo Civil",
+    "label": "CPC",
+    "subtitle": "Raiz",
+    "content": "Lei nº 13.105/2015. Estabelece as normas fundamentais e disciplina a tramitação do processo civil no Brasil.",
+    "children": [
+      {
+        "id": "parte-geral",
+        "name": "Parte Geral",
+        "label": "Parte Geral",
+        "subtitle": "Arts. 1º a 317",
+        "content": "Estabelece as normas processuais fundamentais, a jurisdição, sujeitos, atos e tutela provisória.",
+        "children": [
+          {
+            "id": "livro-i",
+            "name": "Livro I - Normas Processuais Civis",
+            "label": "Livro I",
+            "subtitle": "Arts. 1º a 15",
+            "content": "Das Normas Fundamentais e da Aplicação das Normas Processuais.",
+            "children": [
+              {
+                "id": "tit-unico",
+                "name": "Título Único",
+                "label": "Tít. Único",
+                "subtitle": "Arts. 1º a 15",
+                "content": "Normas fundamentais do processo civil brasileiro."
+              }
+            ]
+          },
+          {
+            "id": "livro-ii",
+            "name": "Livro II - Função Jurisdicional",
+            "label": "Livro II",
+            "subtitle": "Arts. 16 a 69",
+            "content": "Trata dos limites da jurisdição e da competência.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Jurisdição e Ação",
+                "label": "Título I",
+                "subtitle": "Arts. 16 a 20",
+                "content": "Princípio da inércia e interesse de agir."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Limites da Jurisdição e Cooperação",
+                "label": "Título II",
+                "subtitle": "Arts. 21 a 41",
+                "content": "Jurisdição nacional e cooperação internacional."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Competência Interna",
+                "label": "Título III",
+                "subtitle": "Arts. 42 a 69",
+                "content": "Regras de competência, modificação e conflitos."
+              }
+            ]
+          },
+          {
+            "id": "livro-iii",
+            "name": "Livro III - Sujeitos do Processo",
+            "label": "Livro III",
+            "subtitle": "Arts. 70 a 187",
+            "content": "Quem atua no processo: partes, juiz e auxiliares.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Partes e Procuradores",
+                "label": "Título I",
+                "subtitle": "Arts. 70 a 112",
+                "content": "Capacidade, deveres, despesas, honorários e procuradores."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Do Litisconsórcio",
+                "label": "Título II",
+                "subtitle": "Arts. 113 a 118",
+                "content": "Pluralidade de partes no processo."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Intervenção de Terceiros",
+                "label": "Título III",
+                "subtitle": "Arts. 119 a 138",
+                "content": "Assistência, denunciação da lide, chamamento ao processo, amicus curiae."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Juiz e Auxiliares",
+                "label": "Título IV",
+                "subtitle": "Arts. 139 a 175",
+                "content": "Poderes, impedimento, suspeição e serventuários da justiça."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Do Ministério Público",
+                "label": "Título V",
+                "subtitle": "Arts. 176 a 181",
+                "content": "Atuação do MP como parte ou fiscal da ordem jurídica."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Da Advocacia Pública",
+                "label": "Título VI",
+                "subtitle": "Arts. 182 a 184",
+                "content": "Prerrogativas dos procuradores federais, estaduais e municipais."
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Da Defensoria Pública",
+                "label": "Título VII",
+                "subtitle": "Arts. 185 a 187",
+                "content": "Prerrogativas da defesa de necessitados."
+              }
+            ]
+          },
+          {
+            "id": "livro-iv",
+            "name": "Livro IV - Atos Processuais",
+            "label": "Livro IV",
+            "subtitle": "Arts. 188 a 293",
+            "content": "Forma, tempo, lugar, prazos e nulidades dos atos processuais.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Forma, Tempo e Lugar",
+                "label": "Título I",
+                "subtitle": "Arts. 188 a 235",
+                "content": "Como e onde os atos devem ser praticados e prazos."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Da Comunicação",
+                "label": "Título II",
+                "subtitle": "Arts. 236 a 275",
+                "content": "Citação, cartas e intimação."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Das Nulidades",
+                "label": "Título III",
+                "subtitle": "Arts. 276 a 283",
+                "content": "Quando um ato processual é considerado nulo."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Distribuição e Registro",
+                "label": "Título IV",
+                "subtitle": "Arts. 284 a 290",
+                "content": "Regras sobre a distribuição das petições."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Do Valor da Causa",
+                "label": "Título V",
+                "subtitle": "Arts. 291 a 293",
+                "content": "Regras de fixação do valor da ação."
+              }
+            ]
+          },
+          {
+            "id": "livro-v",
+            "name": "Livro V - Tutela Provisória",
+            "label": "Livro V",
+            "subtitle": "Arts. 294 a 311",
+            "content": "Medidas concedidas antes do julgamento final.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Disposições Gerais",
+                "label": "Título I",
+                "subtitle": "Arts. 294 a 299",
+                "content": "Princípios gerais da tutela provisória."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Tutela de Urgência",
+                "label": "Título II",
+                "subtitle": "Arts. 300 a 310",
+                "content": "Medidas cautelares e antecipadas, em caráter antecedente ou incidental."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Tutela da Evidência",
+                "label": "Título III",
+                "subtitle": "Art. 311",
+                "content": "Concessão independente de perigo de dano, em casos de direito evidente."
+              }
+            ]
+          },
+          {
+            "id": "livro-vi",
+            "name": "Livro VI - Formação e Extinção",
+            "label": "Livro VI",
+            "subtitle": "Arts. 312 a 317",
+            "content": "O início, a pausa e o fim do processo.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Da Formação",
+                "label": "Título I",
+                "subtitle": "Art. 312",
+                "content": "Quando se considera proposto o processo."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Da Suspensão",
+                "label": "Título II",
+                "subtitle": "Arts. 313 a 315",
+                "content": "Hipóteses de paragem provisória do processo."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da Extinção",
+                "label": "Título III",
+                "subtitle": "Arts. 316 a 317",
+                "content": "Encerramento da fase de conhecimento."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "parte-especial",
+        "name": "Parte Especial",
+        "label": "Parte Especial",
+        "subtitle": "Arts. 318 a 1.044",
+        "content": "Regula o Processo de Conhecimento, Cumprimento de Sentença, Execução e Recursos.",
+        "children": [
+          {
+            "id": "livro-i",
+            "name": "Livro I - Conhecimento e Cumprimento",
+            "label": "Livro I",
+            "subtitle": "Arts. 318 a 770",
+            "content": "Procedimento comum, especiais e o cumprimento das sentenças.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Procedimento Comum",
+                "label": "Título I",
+                "subtitle": "Arts. 318 a 512",
+                "content": "Petição inicial, contestação, provas, audiências, sentença e coisa julgada."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Cumprimento de Sentença",
+                "label": "Título II",
+                "subtitle": "Arts. 513 a 538",
+                "content": "Execução dos títulos judiciais (pagar quantia, alimentos, contra a Fazenda)."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Procedimentos Especiais",
+                "label": "Título III",
+                "subtitle": "Arts. 539 a 770",
+                "content": "Consignação, ações possessórias, inventário, embargos de terceiro, ação monitória, etc."
+              }
+            ]
+          },
+          {
+            "id": "livro-ii",
+            "name": "Livro II - Processo de Execução",
+            "label": "Livro II",
+            "subtitle": "Arts. 771 a 925",
+            "content": "Execução de títulos extrajudiciais.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Execução em Geral",
+                "label": "Título I",
+                "subtitle": "Arts. 771 a 796",
+                "content": "Requisitos, competência e responsabilidade patrimonial (penhora)."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Espécies de Execução",
+                "label": "Título II",
+                "subtitle": "Arts. 797 a 913",
+                "content": "Para entrega de coisa, obrigações de fazer/não fazer e quantia certa."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Embargos à Execução",
+                "label": "Título III",
+                "subtitle": "Arts. 914 a 920",
+                "content": "Defesa do executado."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Suspensão e Extinção",
+                "label": "Título IV",
+                "subtitle": "Arts. 921 a 925",
+                "content": "Pausa e fim da execução."
+              }
+            ]
+          },
+          {
+            "id": "livro-iii",
+            "name": "Livro III - Processos nos Tribunais",
+            "label": "Livro III",
+            "subtitle": "Arts. 926 a 1.044",
+            "content": "Atuação nas cortes de segunda instância e tribunais superiores.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Ordem dos Processos e Competência Originária",
+                "label": "Título I",
+                "subtitle": "Arts. 926 a 993",
+                "content": "Precedentes, ação rescisória, IRDR e assunção de competência."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Dos Recursos",
+                "label": "Título II",
+                "subtitle": "Arts. 994 a 1.044",
+                "content": "Apelação, agravo de instrumento, embargos de declaração, REsp, RE, etc."
+              }
+            ],
+            "history": [
+              {
+                "year": 2015,
+                "norm": "Lei 13.105/2015",
+                "note": "Sistema de precedentes vinculantes (arts. 926 a 928) e IRDR, novidades do CPC de 2015."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "livro-comp",
+        "name": "Livro Complementar",
+        "label": "Livro Comp.",
+        "subtitle": "Arts. 1.045 a 1.072",
+        "content": "Disposições Finais e Transitórias do CPC."
+      }
+    ]
+  }
+}
