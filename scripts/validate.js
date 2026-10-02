@@ -18,8 +18,8 @@ const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*(\/[a-z0-9]+(-[a-z0-9]+)*)*$/;
 const NATUREZAS = new Set(['material', 'processual']);
 const STATUS = new Set(['rascunho', 'revisado']);
-const NODE_KEYS = new Set(['id', 'name', 'label', 'subtitle', 'content', 'children', 'history', 'revoked']);
-const META_KEYS = new Set(['$schema', 'id', 'title', 'shortTitle', 'norm', 'ramo', 'natureza', 'status', 'source', 'year', 'note', 'root']);
+const NODE_KEYS = new Set(['id', 'name', 'label', 'subtitle', 'content', 'children', 'history', 'revoked', 'since', 'until']);
+const META_KEYS = new Set(['$schema', 'id', 'title', 'shortTitle', 'norm', 'ramo', 'natureza', 'status', 'source', 'year', 'note', 'root', 'predecessors']);
 
 const errors = [];
 const warnings = [];
@@ -55,6 +55,24 @@ function checkMeta(file, meta, ramos, { requireYear }) {
   if (meta.source && !/^https:\/\//.test(meta.source)) err(file, `source deve ser URL https: ${meta.source}`);
   if (meta.source && !/planalto\.gov\.br/.test(meta.source)) warn(file, `source fora do Planalto: ${meta.source}`);
   if (requireYear && typeof meta.year !== 'number') warn(file, 'campo year ausente');
+  if (meta.predecessors !== undefined) {
+    if (!Array.isArray(meta.predecessors) || !meta.predecessors.length) err(file, 'predecessors deve ser um array não vazio');
+    else {
+      let last = 0;
+      meta.predecessors.forEach((p, i) => {
+        const where = `predecessors[${i}]`;
+        for (const k of ['title', 'shortTitle', 'norm']) if (typeof p[k] !== 'string' || !p[k]) err(file, `${where}: campo ausente: ${k}`);
+        for (const k of ['from', 'to']) if (typeof p[k] !== 'number') err(file, `${where}: ${k} deve ser número`);
+        for (const k of Object.keys(p)) if (!['title', 'shortTitle', 'norm', 'from', 'to'].includes(k)) err(file, `${where}: campo não previsto: ${k}`);
+        if (p.shortTitle && p.shortTitle.length > 14) err(file, `${where}: shortTitle com mais de 14 caracteres`);
+        if (typeof p.from === 'number' && typeof p.to === 'number' && p.to <= p.from) err(file, `${where}: to deve ser maior que from`);
+        if (typeof p.from === 'number' && p.from < last) err(file, `${where}: antecessores devem estar em ordem cronológica`);
+        last = p.from;
+      });
+      const lastP = meta.predecessors[meta.predecessors.length - 1];
+      if (typeof meta.year === 'number' && lastP && lastP.to !== meta.year) warn(file, `último antecessor termina em ${lastP.to}, mas o diploma é de ${meta.year}`);
+    }
+  }
 }
 
 function checkHistory(file, where, history) {
@@ -82,6 +100,9 @@ function checkNode(file, node, trail, stats, keys, docId) {
   if (node.label && node.label.length > 28) err(file, `${where}: label com mais de 28 caracteres: "${node.label}"`);
   if (node.content && node.content.length < 20) err(file, `${where}: content curto demais (mínimo 20 caracteres)`);
   if (node.revoked !== undefined && typeof node.revoked !== 'boolean') err(file, `${where}: revoked deve ser booleano`);
+  for (const k of ['since', 'until']) if (node[k] !== undefined && (typeof node[k] !== 'number' || node[k] < 1800)) err(file, `${where}: ${k} deve ser um ano`);
+  if (typeof node.since === 'number' && typeof node.until === 'number' && node.until <= node.since) err(file, `${where}: until deve ser maior que since`);
+  if (typeof node.since === 'number' && typeof stats.docYear === 'number' && node.since <= stats.docYear) err(file, `${where}: since (${node.since}) não é posterior ao ano do diploma (${stats.docYear}); omita o campo`);
   if (node.history !== undefined) { checkHistory(file, where, node.history); stats.history += node.history.length || 0; }
   if (node.children !== undefined) {
     if (!Array.isArray(node.children) || node.children.length === 0) {
@@ -140,14 +161,14 @@ function main() {
       continue;
     }
     if (doc.root.id !== id) err(file, `root.id "${doc.root.id}" deve ser igual ao id do diploma`);
-    const stats = { nodes: 0, depth: 0, history: 0 };
+    const stats = { nodes: 0, depth: 0, history: 0, docYear: doc.year };
     checkNode(file, doc.root, [], stats, keys, id);
     if (!doc.status) warn(file, 'sem campo status (rascunho | revisado)');
     summary.push({ id, nodes: stats.nodes, depth: stats.depth, history: stats.history, ramo: doc.ramo, natureza: doc.natureza, status: doc.status || '—' });
   }
 
   // Arquivos órfãos: existem na pasta mas não estão no catálogo.
-  const reserved = new Set(['index.json', 'schema.json', 'relations.json', 'glossary.json']);
+  const reserved = new Set(['index.json', 'schema.json', 'relations.json', 'glossary.json', 'tours.json']);
   for (const f of fs.readdirSync(DATA_DIR)) {
     if (!f.endsWith('.json') || reserved.has(f)) continue;
     const id = f.replace(/\.json$/, '');
@@ -211,7 +232,35 @@ function main() {
     }
   }
 
-  finish(summary, { relCount, termCount });
+  // Percursos guiados
+  let tourCount = 0;
+  const tours = readJson('tours.json');
+  if (tours) {
+    if (!Array.isArray(tours.tours)) err('tours.json', 'tours deve ser um array');
+    else {
+      const ids = new Set();
+      tours.tours.forEach((t, i) => {
+        const where = `tours[${t.id || i}]`;
+        for (const k of ['id', 'title', 'summary']) if (typeof t[k] !== 'string' || !t[k]) err('tours.json', `${where}: campo ausente: ${k}`);
+        for (const k of Object.keys(t)) if (!['id', 'title', 'summary', 'status', 'steps'].includes(k)) err('tours.json', `${where}: campo não previsto: ${k}`);
+        if (t.id && !ID_RE.test(t.id)) err('tours.json', `${where}: id fora do padrão kebab-case`);
+        if (ids.has(t.id)) err('tours.json', `${where}: id duplicado`);
+        ids.add(t.id);
+        if (t.status !== undefined && !STATUS.has(t.status)) err('tours.json', `${where}: status desconhecido`);
+        if (!Array.isArray(t.steps) || t.steps.length < 2) { err('tours.json', `${where}: steps precisa de ao menos 2 passos`); return; }
+        t.steps.forEach((s, j) => {
+          const sw = `${where}.steps[${j}]`;
+          if (typeof s.key !== 'string' || !KEY_RE.test(s.key)) err('tours.json', `${sw}: key inválida`);
+          else if (!keys.has(s.key)) err('tours.json', `${sw}: key aponta para nó inexistente: ${s.key}`);
+          if (typeof s.text !== 'string' || s.text.length < 20) err('tours.json', `${sw}: text curto demais`);
+          for (const k of Object.keys(s)) if (!['key', 'text'].includes(k)) err('tours.json', `${sw}: campo não previsto: ${k}`);
+        });
+      });
+      tourCount = tours.tours.length;
+    }
+  }
+
+  finish(summary, { relCount, termCount, tourCount });
 }
 
 function finish(summary = [], extra = {}) {
@@ -220,7 +269,7 @@ function finish(summary = [], extra = {}) {
     for (const s of summary) {
       console.log(`  ${s.id.padEnd(7)} ${String(s.nodes).padStart(3)} nós, profundidade ${s.depth}, ${String(s.history).padStart(2)} marcos  [${s.ramo}/${s.natureza}]  ${s.status}`);
     }
-    console.log(`Relações internormativas: ${extra.relCount || 0}   Termos do glossário: ${extra.termCount || 0}`);
+    console.log(`Relações internormativas: ${extra.relCount || 0}   Termos do glossário: ${extra.termCount || 0}   Percursos: ${extra.tourCount || 0}`);
   }
   for (const w of warnings) console.warn(`aviso  ${w}`);
   for (const e of errors) console.error(`ERRO   ${e}`);
