@@ -55,7 +55,10 @@ Campos de cada nó:
 | `subtitle` | faixa de artigos | `Arts. 5º a 17` |
 | `content` | síntese didática (mínimo 20 caracteres) | ver estilo abaixo |
 | `history` | opcional: marcos estruturais `{year, norm, note}` | inclusão, renomeação, revogação |
+| `since` / `until` | opcional: ano em que a divisão passou ou deixou de existir; a linha do tempo obedece | `2017` |
 | `revoked` | opcional: `true` se a divisão inteira foi revogada | |
+
+No cabeçalho do diploma, `predecessors` lista os diplomas que ocuparam o mesmo lugar antes dele, com `title`, `shortTitle`, `norm`, `from` e `to`. A linha do tempo os mostra como fantasmas nos anos em que vigeram.
 | `children` | filhos; omita o campo se não houver | |
 
 `ramo` aceita `constitucional`, `privado`, `publico`, `social`, `penal`. `natureza` aceita `material` ou `processual`. `status` começa em `rascunho`.
@@ -89,6 +92,10 @@ Cada relação liga duas divisões de **diplomas distintos**:
 * `from` e `to` são chaves `diploma/divisao/subdivisao`, exatamente como aparecem na URL.
 * `type` é uma chave de `relationTypes` em `index.json` (concretiza, regulamenta, processa, executa, subsidiario, excepciona, insere, organiza). Para propor um tipo novo, defina-o lá com descrição.
 * `note` cita o dispositivo que fundamenta a relação. Sem fundamento, sem relação.
+
+## 5-A. Percursos guiados: `docs/data/tours.json`
+
+Um percurso é uma sequência de 5 a 10 passos, cada um com uma `key` (como nas relações) e um `text` de uma a três frases que explica por que se vai daquele nó ao próximo. Escreva como quem conduz uma aula: o texto do passo fala do nó em que se está e prepara o seguinte. Percursos novos entram com `"status": "rascunho"` e seguem a mesma revisão por pares dos diplomas.
 
 ## 6. Revisão por pares
 
