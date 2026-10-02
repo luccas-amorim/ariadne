@@ -137,6 +137,44 @@ test('navegação por teclado percorre irmãos e expande filhos', async ({ page 
   await expect(page).toHaveURL(/#\/cc\/parte-especial\/livro-i$/);
 });
 
+test('linha do tempo mostra antecessores e oculta diplomas futuros', async ({ page }) => {
+  await page.goto('/#/?ano=1975');
+  await expect(page.locator('#timeline-bar')).toBeVisible();
+  await expect(page.locator('#tl-year')).toHaveText('1975');
+  // CF/88 ainda não existe: o centro é a Constituição de 1967
+  await expect(nodeByKey(page, 'cf').locator('text.label')).toHaveText('CF/1967');
+  // CDC (1990) não aparece; CC aparece como o Código de 1916
+  await expect(nodeByKey(page, 'cdc')).toHaveCount(0);
+  await expect(nodeByKey(page, 'cc').locator('text.label')).toHaveText('CC/1916');
+  await expect(nodeByKey(page, 'cp')).toBeVisible();
+  await page.click('#tl-today');
+  await expect(page).toHaveURL(/#\/$/);
+  await expect(nodeByKey(page, 'cdc')).toBeVisible();
+});
+
+test('divisão incluída depois só aparece a partir do seu ano', async ({ page }) => {
+  await page.goto('/#/clt?ano=2010');
+  await expect(nodeByKey(page, 'clt/titulo-iv-a')).toHaveCount(0);
+  await page.goto('/#/clt?ano=2018');
+  await expect(nodeByKey(page, 'clt/titulo-iv-a')).toBeVisible();
+});
+
+test('percurso guiado navega passo a passo', async ({ page }) => {
+  await page.goto('/#/');
+  await page.click('#btn-tours');
+  await page.click('[data-tour="compra-defeituosa"]');
+  await expect(page.locator('#tour-card')).toBeVisible();
+  await expect(page.locator('#tour-card .tour-head')).toContainText('passo 1 de');
+  await expect(page).toHaveURL(/#\/cf\/titulo-vii\/cap-i/);
+  await page.click('#tour-next');
+  await expect(page.locator('#tour-card .tour-head')).toContainText('passo 2 de');
+  await page.click('#tour-next');
+  await expect(page).toHaveURL(/#\/cdc\/titulo-i\/cap-iv/);
+  await expect(page.locator('#content-panel h2')).toContainText('Capítulo IV');
+  await page.click('#tour-close');
+  await expect(page.locator('#tour-card')).toBeHidden();
+});
+
 test('modo 3D cria um canvas WebGL quando suportado', async ({ page }) => {
   await page.goto('/#/?m=3d');
   const supported = await page.evaluate(() => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } });
