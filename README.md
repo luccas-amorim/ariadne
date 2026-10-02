@@ -31,6 +31,8 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Expandir tudo.** Abre, nível a nível e de forma animada, todas as divisões a partir do nó selecionado. "Recolher" ou `Esc` volta ao início.
 * **Foco em um diploma.** Radial especializado, com o diploma no centro. **Comparar** põe dois diplomas lado a lado, cada um em seu radial.
 * **Diplomas.** Filtra quais códigos entram na árvore (todos, por padrão) e mostra ou oculta os em mapeamento.
+* **Linha do tempo.** Um controle por ano (ou `T`) mostra o ordenamento como era em cada data: os diplomas surgem no ano de promulgação, antes disso aparece o antecessor como fantasma (CC/1916, CPC/1973, Constituições de 1824 a 1967), e as divisões incluídas depois só aparecem no seu ano. O botão ▶ reproduz a história, marco a marco, com a árvore crescendo.
+* **Percursos guiados.** Sequências curadas de nós com uma frase de transição: uma compra defeituosa, do crime à execução da pena, uma demissão, um tributo, uma obra pública, a criança entre a família e o Estado. A câmera viaja e o painel acompanha. `N` e `P` avançam e voltam.
 * **Relações internormativas.** Linhas roxas ligam o nó selecionado ao que ele concretiza, regulamenta, processa ou executa em outro diploma. Quando o destino está recolhido, a linha termina tracejada no nó visível mais próximo; o painel lista cada relação com o dispositivo que a fundamenta e leva à divisão exata. O botão "Relações" (ou `X`) liga e desliga as linhas.
 * **Trackpad e mouse.** No 2D, dois dedos movem a tela e a pinça aproxima; a roda do mouse continua aproximando. No 3D, arraste orbita e a roda aproxima.
 * **Estudo.** Perguntas de múltipla escolha geradas da estrutura selecionada: síntese → divisão, divisão → diploma, divisão → faixa de artigos. Errou? O nó entra na sua trilha como "revisar". Dá para ocultar os rótulos da árvore durante o estudo.
@@ -39,7 +41,7 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Exportar.** SVG ou PNG do que está na tela, com título e licença; impressão limpa.
 * **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
 * **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `L` abre a lista, `Esc` recolhe.
-* **Links diretos.** A URL guarda nó, foco, filtro e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/compare?a=cc&b=cpc`.
+* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`.
 
 Para rodar localmente, sirva a pasta `docs/` por HTTP (abrir o arquivo direto bloqueia os módulos e os dados):
 
@@ -57,6 +59,7 @@ Os dados são JSON estáticos servidos junto com a página e podem ser consumido
 | `data/<id>.json` | Um diploma: metadados, status e a árvore de divisões com sínteses e marcos |
 | `data/relations.json` | Relações internormativas entre divisões de diplomas distintos |
 | `data/glossary.json` | Termos e definições |
+| `data/tours.json` | Percursos guiados: sequências de nós com texto de transição |
 | `data/schema.json` | JSON Schema de todos os formatos |
 
 URL base: `https://luccas-amorim.github.io/lex-tree-br/data/`. Licença do conteúdo: CC BY 4.0 (veja abaixo). O GitHub Pages responde com CORS liberado para leitura.
@@ -96,7 +99,7 @@ npm test                        # interface: abrir, expandir, focar, buscar, com
 ## Roadmap
 
 * Mapear os diplomas em roadmap (LINDB, Lei 9.099, Lei 8.112, Lei 8.429, LGPD, Lei 11.340, Lei 11.343) e revisar os marcados como rascunho.
-* Ampliar as relações internormativas e o glossário.
+* Ampliar relações internormativas, glossário, marcos da linha do tempo e percursos (os seis atuais são rascunhos).
 * Modo estudo com repetição espaçada sobre a trilha.
 
 ## Tecnologias
