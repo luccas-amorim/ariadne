@@ -1,0 +1,16 @@
+{
+  "name": "lex-tree-br",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Árvores Jurídicas BR: a macroestrutura da legislação brasileira em árvores interativas, 2D e 3D.",
+  "license": "MIT",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "serve": "python3 -m http.server --directory docs 8080",
+    "test": "playwright test",
+    "test:install": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.47.2"
+  }
+}
