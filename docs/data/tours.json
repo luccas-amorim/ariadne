@@ -1,0 +1,104 @@
+{
+  "$schema": "./schema.json#/definitions/tours",
+  "description": "Percursos guiados: sequências de nós com uma frase de transição. Cada passo aponta para uma chave diploma/divisao. Os textos são didáticos e devem ser revisados por quem conhece a matéria (status).",
+  "tours": [
+    {
+      "id": "compra-defeituosa",
+      "title": "O caminho de uma compra defeituosa",
+      "summary": "Da Constituição ao Código Penal: por onde passa um produto com defeito.",
+      "status": "rascunho",
+      "steps": [
+        { "key": "cf/titulo-vii/cap-i", "text": "Tudo começa na ordem econômica: a defesa do consumidor é princípio da atividade econômica (art. 170, V). A livre iniciativa vem acompanhada desse limite." },
+        { "key": "cf/titulo-ii/cap-i", "text": "E é também direito fundamental: o Estado promoverá, na forma da lei, a defesa do consumidor (art. 5º, XXXII). A lei prometida é o CDC." },
+        { "key": "cdc/titulo-i/cap-iv", "text": "O produto quebrou. Aqui o CDC distingue vício (o produto não serve) de fato (o produto causou dano), com prazos de decadência e prescrição próprios e responsabilidade objetiva do fornecedor." },
+        { "key": "cdc/titulo-i/cap-vi", "text": "Se o contrato tenta afastar essa responsabilidade, a cláusula é nula: o Capítulo da proteção contratual lista as cláusulas abusivas e garante o direito de arrependimento." },
+        { "key": "cdc/titulo-iii", "text": "Sem acordo, o consumidor vai a juízo. O Título III organiza a tutela individual e coletiva, com foro no domicílio do autor e inversão do ônus da prova." },
+        { "key": "cpc/parte-especial/livro-i/titulo-i", "text": "O rito, porém, é o do CPC: o procedimento comum conduz a ação, porque o CDC aplica o processo civil no que não contrariar suas regras (art. 90)." },
+        { "key": "cdc/titulo-ii", "text": "Se houve dolo, a conduta pode ser crime de consumo: omitir informação relevante ou fazer publicidade enganosa são tipos do Título II." },
+        { "key": "cp/parte-geral", "text": "E esses crimes seguem as regras gerais do Código Penal, de tempo e lugar do crime à aplicação da pena: o CDC remete expressamente a ele (art. 61)." }
+      ]
+    },
+    {
+      "id": "crime-execucao",
+      "title": "Do crime à execução da pena",
+      "summary": "O percurso completo do jus puniendi: garantia, tipo, processo, pena e execução.",
+      "status": "rascunho",
+      "steps": [
+        { "key": "cf/titulo-ii/cap-i", "text": "Antes de punir, a Constituição limita: legalidade penal, presunção de inocência, devido processo, juiz natural e vedação a penas cruéis estão todos no art. 5º." },
+        { "key": "cp/parte-geral/titulo-ii", "text": "O que é crime? A Parte Geral define o fato típico, a relação de causalidade, a tentativa e as excludentes de ilicitude, como a legítima defesa." },
+        { "key": "cp/parte-especial/titulo-ii", "text": "Um furto, por exemplo, está entre os crimes contra o patrimônio. A Parte Especial descreve cada conduta e comina a pena." },
+        { "key": "cpp/livro-i/titulo-ii", "text": "O Estado reage pelo inquérito policial: investigação preliminar, sigilosa e dispensável, que reúne elementos para a acusação." },
+        { "key": "cpp/livro-i/titulo-iii", "text": "Com indícios, o Ministério Público oferece a denúncia. A ação penal pública é a regra; a privada, exceção definida no próprio Código Penal." },
+        { "key": "cpp/livro-ii/titulo-i", "text": "O processo comum conduz a instrução e o julgamento: citação, resposta, audiência de instrução e sentença." },
+        { "key": "cp/parte-geral/titulo-v", "text": "Condenado, o réu recebe uma pena dosada em três fases, segundo o Título V: privativa de liberdade, restritiva de direitos ou multa, com regime inicial definido." },
+        { "key": "lep/titulo-v", "text": "A execução sai do CPP e vai para a LEP: progressão de regime, remição, saídas e livramento condicional estão no Título V." },
+        { "key": "lep/titulo-ii/cap-iv", "text": "Durante o cumprimento, o preso conserva direitos e sujeita-se à disciplina: faltas, sanções e o Regime Disciplinar Diferenciado fecham o percurso." }
+      ]
+    },
+    {
+      "id": "demissao",
+      "title": "Uma demissão e seus desdobramentos",
+      "summary": "Da garantia constitucional ao recurso no TST, passando pela rescisão e pela Vara do Trabalho.",
+      "status": "rascunho",
+      "steps": [
+        { "key": "cf/titulo-ii/cap-ii", "text": "O art. 7º lista os direitos dos trabalhadores: proteção contra despedida arbitrária, FGTS, aviso prévio proporcional, férias e décimo terceiro. É o piso de tudo o que vem depois." },
+        { "key": "clt/titulo-iv/cap-i", "text": "O contrato individual de trabalho é o vínculo: a CLT define empregado e empregador, prazo e as modalidades, inclusive o trabalho intermitente." },
+        { "key": "clt/titulo-iv/cap-v", "text": "A rescisão: sem justa causa, por justa causa, indireta ou por acordo. Cada hipótese tem suas verbas, e o Capítulo V as detalha." },
+        { "key": "clt/titulo-iv/cap-vi", "text": "O aviso prévio antecede a saída, trabalhado ou indenizado, e cresce com o tempo de casa por força da Lei 12.506/2011." },
+        { "key": "clt/titulo-x/cap-iii", "text": "Se há divergência sobre as verbas, nasce o dissídio individual: a reclamação trabalhista, com audiência, tentativa de conciliação e instrução." },
+        { "key": "clt/titulo-viii/cap-ii", "text": "Quem julga é a Vara do Trabalho, órgão de primeiro grau da Justiça do Trabalho, cuja organização está no Título VIII." },
+        { "key": "clt/titulo-x/cap-vi", "text": "Da sentença cabe recurso ordinário ao TRT e, em tese, recurso de revista ao TST, agora filtrado pela transcendência." },
+        { "key": "cpc", "text": "Nas lacunas do processo do trabalho, aplica-se o CPC (art. 769 da CLT e art. 15 do CPC): é o direito processual comum que completa o especial." }
+      ]
+    },
+    {
+      "id": "tributo",
+      "title": "Um tributo, do fato gerador à certidão",
+      "summary": "Como um imposto nasce, é lançado, cobrado e, por fim, atestado como pago.",
+      "status": "rascunho",
+      "steps": [
+        { "key": "cf/titulo-vi/cap-i", "text": "A Constituição reparte o poder de tributar entre União, Estados e Municípios e o limita com princípios e imunidades. É o Sistema Tributário Nacional." },
+        { "key": "ctn/livro-primeiro/titulo-ii", "text": "O CTN detalha a competência e suas limitações, cumprindo o papel de lei complementar que o art. 146 da CF exige." },
+        { "key": "ctn/livro-segundo/titulo-ii/cap-ii", "text": "Ocorre o fato gerador: a situação definida em lei como necessária e suficiente para que a obrigação tributária nasça." },
+        { "key": "ctn/livro-segundo/titulo-iii/cap-ii", "text": "A obrigação vira crédito pelo lançamento, de ofício, por declaração ou por homologação. Só então a Fazenda pode exigir." },
+        { "key": "ctn/livro-segundo/titulo-iii/cap-iii", "text": "O contribuinte discute o valor e pede parcelamento: a exigibilidade fica suspensa enquanto durar a discussão ou o parcelamento." },
+        { "key": "ctn/livro-segundo/titulo-iii/cap-iv", "text": "Pagamento, compensação, prescrição ou decisão definitiva extinguem o crédito. Cada causa tem seu regime." },
+        { "key": "ctn/livro-segundo/titulo-iv/cap-iii", "text": "Quitado, o contribuinte obtém a certidão negativa, documento que prova a regularidade fiscal e abre portas em licitações e financiamentos." },
+        { "key": "l9784", "text": "Toda a discussão administrativa correu sob um processo com contraditório e ampla defesa: na esfera federal, é a Lei 9.784 que o disciplina." }
+      ]
+    },
+    {
+      "id": "obra-publica",
+      "title": "Uma obra pública, da licitação ao contrato",
+      "summary": "O ciclo da contratação pública e o que acontece quando ele é fraudado.",
+      "status": "rascunho",
+      "steps": [
+        { "key": "cf/titulo-iii/cap-vii", "text": "A Administração só contrata mediante licitação, ressalvados os casos previstos em lei: é o comando do art. 37, XXI, da Constituição." },
+        { "key": "l14133/titulo-i/cap-ii", "text": "A Lei 14.133 abre com os princípios: planejamento, segregação de funções, eficiência e os clássicos da Administração." },
+        { "key": "l14133/titulo-ii/fase-preparatoria", "text": "Antes do edital, a fase preparatória: estudo técnico preliminar, projeto, orçamento e matriz de riscos. É onde a maioria dos problemas nasce ou se evita." },
+        { "key": "l14133/titulo-ii/modalidades", "text": "Escolhe-se a modalidade: concorrência para obras, pregão para bens e serviços comuns, diálogo competitivo para soluções inovadoras." },
+        { "key": "l14133/titulo-ii/habilitacao", "text": "Vence quem oferece a melhor proposta e comprova habilitação jurídica, técnica, fiscal e econômica, agora depois do julgamento." },
+        { "key": "l14133/titulo-iii/cap-vii", "text": "Durante a execução, alterações e reequilíbrio econômico-financeiro seguem limites quantitativos e exigem motivação." },
+        { "key": "l14133/titulo-iv/cap-i", "text": "Descumprimento gera sanções administrativas: advertência, multa, impedimento de licitar e declaração de inidoneidade." },
+        { "key": "l14133/titulo-v/alteracoes", "text": "A lei também alterou o Código Penal, inserindo nele os crimes em licitações e contratos (arts. 337-E a 337-P)." },
+        { "key": "cp/parte-especial/titulo-xi", "text": "Esses crimes vivem hoje no Título XI do Código Penal, entre os crimes contra a Administração Pública: a fraude à licitação é crime, não só infração." }
+      ]
+    },
+    {
+      "id": "crianca",
+      "title": "A criança entre a família e o Estado",
+      "summary": "Proteção integral, família, medidas de proteção e ato infracional.",
+      "status": "rascunho",
+      "steps": [
+        { "key": "cf/titulo-viii/cap-iv-viii", "text": "O art. 227 impõe à família, à sociedade e ao Estado o dever de assegurar à criança, com absoluta prioridade, seus direitos fundamentais." },
+        { "key": "eca/livro-i/titulo-i", "text": "O ECA traduz isso na doutrina da proteção integral: criança e adolescente são sujeitos de direitos, não objetos de tutela." },
+        { "key": "eca/livro-i/titulo-ii/cap-iii", "text": "O primeiro direito é conviver com a família. Quando isso falha, entram guarda, tutela e adoção, com prioridade à família extensa." },
+        { "key": "cc/parte-especial/livro-iv", "text": "O direito de família do Código Civil dá a base: poder familiar, parentesco, alimentos. O ECA o especializa para a infância." },
+        { "key": "eca/livro-ii/titulo-ii", "text": "Diante de ameaça ou violação de direitos, aplicam-se medidas de proteção, do encaminhamento à família ao acolhimento institucional." },
+        { "key": "eca/livro-ii/titulo-v", "text": "Quem as aplica, no dia a dia, é o Conselho Tutelar, órgão autônomo e não jurisdicional eleito pela comunidade." },
+        { "key": "eca/livro-ii/titulo-iii", "text": "Se o adolescente pratica ato infracional, a resposta não é pena, mas medida socioeducativa, da advertência à internação." },
+        { "key": "cp/parte-geral/titulo-iii", "text": "Porque, pelo Código Penal, menores de 18 anos são inimputáveis (art. 27): a Constituição e o ECA os colocam fora do jus puniendi comum." }
+      ]
+    }
+  ]
+}
