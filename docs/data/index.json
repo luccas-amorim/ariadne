@@ -1,0 +1,108 @@
+{
+  "$schema": "./schema.json#/definitions/catalog",
+  "root": "cf",
+  "ramos": [
+    {
+      "id": "constitucional",
+      "name": "Direito Constitucional",
+      "short": "Constitucional",
+      "color": "#0f172a",
+      "description": "A Constituição é o nó central do ordenamento. Dela derivam a validade e os limites de todos os demais ramos: organiza o Estado, distribui competências e enuncia os direitos fundamentais que cada código concretiza."
+    },
+    {
+      "id": "privado",
+      "name": "Direito Privado",
+      "short": "Privado",
+      "color": "#059669",
+      "description": "Relações entre particulares em posição de igualdade formal: pessoas, bens, obrigações, contratos, família, sucessões e empresa. O Estado atua como garantidor, não como parte."
+    },
+    {
+      "id": "publico",
+      "name": "Direito Público",
+      "short": "Público",
+      "color": "#2563eb",
+      "description": "Relação Estado ↔ particular em posição de supremacia do interesse público: administração, tributação, licitações, processo administrativo. O Estado é parte e, ao mesmo tempo, sujeito a limites."
+    },
+    {
+      "id": "social",
+      "name": "Direito Social",
+      "short": "Social",
+      "color": "#d97706",
+      "description": "Relações entre instituições e pessoas em que o Estado intervém em favor do equilíbrio: trabalho, consumo, criança e adolescente. Parte-se da desigualdade material e corrige-se com normas de ordem pública."
+    },
+    {
+      "id": "penal",
+      "name": "Direito Penal",
+      "short": "Penal",
+      "color": "#e11d48",
+      "description": "O jus puniendi: a definição de crimes, a cominação de penas e o procedimento pelo qual o Estado pode aplicá-las. Ramo em que a Constituição impõe as garantias mais rígidas ao poder estatal."
+    }
+  ],
+  "diplomas": ["cf", "cc", "cpc", "cp", "cpp"],
+  "planned": [
+    {
+      "id": "clt",
+      "title": "Consolidação das Leis do Trabalho",
+      "shortTitle": "CLT",
+      "norm": "Decreto-Lei nº 5.452, de 1º de maio de 1943",
+      "ramo": "social",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm"
+    },
+    {
+      "id": "cdc",
+      "title": "Código de Defesa do Consumidor",
+      "shortTitle": "CDC",
+      "norm": "Lei nº 8.078, de 11 de setembro de 1990",
+      "ramo": "social",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "note": "Classificação assumidamente didática: parte da doutrina situa o CDC no Direito Privado, como microssistema de ordem pública."
+    },
+    {
+      "id": "eca",
+      "title": "Estatuto da Criança e do Adolescente",
+      "shortTitle": "ECA",
+      "norm": "Lei nº 8.069, de 13 de julho de 1990",
+      "ramo": "social",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l8069.htm"
+    },
+    {
+      "id": "ctn",
+      "title": "Código Tributário Nacional",
+      "shortTitle": "CTN",
+      "norm": "Lei nº 5.172, de 25 de outubro de 1966",
+      "ramo": "publico",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm"
+    },
+    {
+      "id": "l14133",
+      "title": "Lei de Licitações e Contratos Administrativos",
+      "shortTitle": "Lei 14.133",
+      "norm": "Lei nº 14.133, de 1º de abril de 2021",
+      "ramo": "publico",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm"
+    },
+    {
+      "id": "l9784",
+      "title": "Lei do Processo Administrativo Federal",
+      "shortTitle": "Lei 9.784",
+      "norm": "Lei nº 9.784, de 29 de janeiro de 1999",
+      "ramo": "publico",
+      "natureza": "processual",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm"
+    },
+    {
+      "id": "lep",
+      "title": "Lei de Execução Penal",
+      "shortTitle": "LEP",
+      "norm": "Lei nº 7.210, de 11 de julho de 1984",
+      "ramo": "penal",
+      "natureza": "processual",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l7210.htm"
+    }
+  ]
+}
