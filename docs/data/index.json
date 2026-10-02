@@ -1,0 +1,120 @@
+{
+  "$schema": "./schema.json#/definitions/catalog",
+  "root": "cf",
+  "ramos": [
+    {
+      "id": "constitucional",
+      "name": "Direito Constitucional",
+      "short": "Constitucional",
+      "color": "#0f172a",
+      "description": "A Constituição é o nó central do ordenamento. Dela derivam a validade e os limites de todos os demais ramos: organiza o Estado, distribui competências e enuncia os direitos fundamentais que cada código concretiza."
+    },
+    {
+      "id": "privado",
+      "name": "Direito Privado",
+      "short": "Privado",
+      "color": "#059669",
+      "description": "Relações entre particulares em posição de igualdade formal: pessoas, bens, obrigações, contratos, família, sucessões e empresa. O Estado atua como garantidor, não como parte."
+    },
+    {
+      "id": "publico",
+      "name": "Direito Público",
+      "short": "Público",
+      "color": "#2563eb",
+      "description": "Relação Estado ↔ particular em posição de supremacia do interesse público: administração, tributação, licitações, processo administrativo. O Estado é parte e, ao mesmo tempo, sujeito a limites."
+    },
+    {
+      "id": "social",
+      "name": "Direito Social",
+      "short": "Social",
+      "color": "#d97706",
+      "description": "Relações entre instituições e pessoas em que o Estado intervém em favor do equilíbrio: trabalho, consumo, criança e adolescente. Parte-se da desigualdade material e corrige-se com normas de ordem pública."
+    },
+    {
+      "id": "penal",
+      "name": "Direito Penal",
+      "short": "Penal",
+      "color": "#e11d48",
+      "description": "O jus puniendi: a definição de crimes, a cominação de penas e o procedimento pelo qual o Estado pode aplicá-las. Ramo em que a Constituição impõe as garantias mais rígidas ao poder estatal."
+    }
+  ],
+  "diplomas": ["cf", "cc", "cpc", "cp", "cpp", "clt", "cdc", "eca", "ctn", "l14133", "l9784", "lep"],
+  "planned": [
+    {
+      "id": "lindb",
+      "title": "Lei de Introdução às Normas do Direito Brasileiro",
+      "shortTitle": "LINDB",
+      "norm": "Decreto-Lei nº 4.657, de 4 de setembro de 1942",
+      "ramo": "privado",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del4657compilado.htm",
+      "note": "Norma sobre normas: vigência, interpretação e aplicação do direito. Fica no ramo privado por tradição histórica, embora alcance todo o ordenamento."
+    },
+    {
+      "id": "l8112",
+      "title": "Regime Jurídico dos Servidores Públicos Civis da União",
+      "shortTitle": "Lei 8.112",
+      "norm": "Lei nº 8.112, de 11 de dezembro de 1990",
+      "ramo": "publico",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "l8429",
+      "title": "Lei de Improbidade Administrativa",
+      "shortTitle": "Lei 8.429",
+      "norm": "Lei nº 8.429, de 2 de junho de 1992",
+      "ramo": "publico",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm"
+    },
+    {
+      "id": "lgpd",
+      "title": "Lei Geral de Proteção de Dados Pessoais",
+      "shortTitle": "LGPD",
+      "norm": "Lei nº 13.709, de 14 de agosto de 2018",
+      "ramo": "social",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "note": "Protege a pessoa natural frente a agentes de tratamento públicos e privados, com autoridade estatal interveniente; por isso o ramo social."
+    },
+    {
+      "id": "l11340",
+      "title": "Lei Maria da Penha",
+      "shortTitle": "Lei 11.340",
+      "norm": "Lei nº 11.340, de 7 de agosto de 2006",
+      "ramo": "penal",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm"
+    },
+    {
+      "id": "l11343",
+      "title": "Lei de Drogas",
+      "shortTitle": "Lei 11.343",
+      "norm": "Lei nº 11.343, de 23 de agosto de 2006",
+      "ramo": "penal",
+      "natureza": "material",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm"
+    },
+    {
+      "id": "l9099",
+      "title": "Lei dos Juizados Especiais",
+      "shortTitle": "Lei 9.099",
+      "norm": "Lei nº 9.099, de 26 de setembro de 1995",
+      "ramo": "privado",
+      "natureza": "processual",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+      "note": "Reúne juizados cíveis e criminais; classificada pelo ramo da sua primeira parte."
+    }
+  ],
+  "relationTypes": {
+    "concretiza": { "label": "concretiza", "description": "O diploma ou divisão dá densidade a um comando constitucional ou a um princípio de outro diploma." },
+    "regulamenta": { "label": "regulamenta", "description": "Disciplina em detalhe matéria cujo fundamento está na outra divisão." },
+    "processa": { "label": "processa", "description": "Direito formal que dá curso judicial ao direito material da outra divisão." },
+    "executa": { "label": "executa", "description": "Disciplina a execução daquilo que a outra divisão define." },
+    "subsidiario": { "label": "aplicação subsidiária", "description": "A outra divisão se aplica nas lacunas desta." },
+    "excepciona": { "label": "excepciona", "description": "Afasta ou modula a regra geral da outra divisão." },
+    "insere": { "label": "insere em", "description": "Introduz dispositivos no corpo da outra divisão." },
+    "organiza": { "label": "organiza", "description": "Estrutura o órgão ou sistema previsto na outra divisão." }
+  }
+}

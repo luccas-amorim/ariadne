@@ -1,0 +1,300 @@
+{
+  "$schema": "./schema.json#/definitions/diploma",
+  "id": "l14133",
+  "title": "Lei de Licitações e Contratos Administrativos",
+  "shortTitle": "Lei 14.133",
+  "norm": "Lei nº 14.133, de 1º de abril de 2021",
+  "ramo": "publico",
+  "natureza": "material",
+  "status": "rascunho",
+  "source": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm",
+  "year": 2021,
+  "note": "Rascunho: a numeração interna dos Capítulos do Título II foi simplificada em grupos e deve ser conferida contra o texto oficial.",
+  "predecessors": [
+    {
+      "title": "Estatuto das Licitações de 1986",
+      "shortTitle": "DL 2.300",
+      "norm": "Decreto-Lei nº 2.300, de 21 de novembro de 1986",
+      "from": 1986,
+      "to": 1993
+    },
+    {
+      "title": "Lei de Licitações de 1993",
+      "shortTitle": "Lei 8.666",
+      "norm": "Lei nº 8.666, de 21 de junho de 1993",
+      "from": 1993,
+      "to": 2021
+    }
+  ],
+  "root": {
+    "id": "l14133",
+    "name": "Lei de Licitações e Contratos Administrativos",
+    "label": "Lei 14.133",
+    "subtitle": "Raiz",
+    "content": "Lei nº 14.133/2021. Substitui a Lei 8.666/1993, a Lei do Pregão e o RDC, estabelecendo normas gerais de licitação e contratação para as Administrações Públicas diretas, autárquicas e fundacionais de todos os entes.",
+    "children": [
+      {
+        "id": "titulo-i",
+        "name": "Título I - Disposições Preliminares",
+        "label": "Título I",
+        "subtitle": "Arts. 1º a 10",
+        "content": "Âmbito de aplicação, princípios, definições legais e regras sobre os agentes públicos que atuam nas contratações.",
+        "children": [
+          {
+            "id": "cap-i",
+            "name": "Capítulo I - Do Âmbito de Aplicação desta Lei",
+            "label": "Cap. I",
+            "subtitle": "Arts. 1º a 4º",
+            "content": "Entes e órgãos abrangidos, exclusões (estatais, Lei 13.303) e aplicação às contratações com recursos de empréstimos internacionais."
+          },
+          {
+            "id": "cap-ii",
+            "name": "Capítulo II - Dos Princípios",
+            "label": "Cap. II",
+            "subtitle": "Art. 5º",
+            "content": "Legalidade, impessoalidade, moralidade, publicidade, eficiência, planejamento, segregação de funções, entre outros, e aplicação da LINDB."
+          },
+          {
+            "id": "cap-iii",
+            "name": "Capítulo III - Das Definições",
+            "label": "Cap. III",
+            "subtitle": "Art. 6º",
+            "content": "Glossário legal: órgão, entidade, obra, serviço, bens e serviços comuns, contratação integrada, matriz de riscos e outros conceitos."
+          },
+          {
+            "id": "cap-iv",
+            "name": "Capítulo IV - Dos Agentes Públicos",
+            "label": "Cap. IV",
+            "subtitle": "Arts. 7º a 10",
+            "content": "Agente de contratação, comissão de contratação, pregoeiro, vedações e assessoramento jurídico."
+          }
+        ]
+      },
+      {
+        "id": "titulo-ii",
+        "name": "Título II - Das Licitações",
+        "label": "Título II",
+        "subtitle": "Arts. 11 a 88",
+        "content": "Todo o procedimento licitatório, do planejamento ao encerramento, mais a contratação direta, as alienações e os instrumentos auxiliares.",
+        "children": [
+          {
+            "id": "processo-licitatorio",
+            "name": "Do Processo Licitatório",
+            "label": "Processo",
+            "subtitle": "Arts. 11 a 17",
+            "content": "Objetivos da licitação, formato preferencialmente eletrônico, participação, impedimentos e fases do procedimento (art. 17)."
+          },
+          {
+            "id": "fase-preparatoria",
+            "name": "Da Fase Preparatória",
+            "label": "Fase prep.",
+            "subtitle": "Arts. 18 a 27",
+            "content": "Planejamento: estudo técnico preliminar, termo de referência, anteprojeto e projetos, orçamento estimado, edital e minuta de contrato."
+          },
+          {
+            "id": "modalidades",
+            "name": "Das Modalidades de Licitação",
+            "label": "Modalidades",
+            "subtitle": "Arts. 28 a 32",
+            "content": "Pregão, concorrência, concurso, leilão e diálogo competitivo; extinção da tomada de preços e do convite."
+          },
+          {
+            "id": "criterios-julgamento",
+            "name": "Dos Critérios de Julgamento",
+            "label": "Julgamento",
+            "subtitle": "Arts. 33 a 39",
+            "content": "Menor preço, maior desconto, melhor técnica ou conteúdo artístico, técnica e preço, maior lance e maior retorno econômico."
+          },
+          {
+            "id": "disposicoes-setoriais",
+            "name": "Das Disposições Setoriais",
+            "label": "Setoriais",
+            "subtitle": "Arts. 40 a 52",
+            "content": "Regras específicas para compras, obras e serviços de engenharia, serviços em geral, locação de imóveis e licitações internacionais."
+          },
+          {
+            "id": "edital-propostas",
+            "name": "Da Divulgação do Edital, das Propostas e dos Lances",
+            "label": "Edital e lances",
+            "subtitle": "Arts. 53 a 61",
+            "content": "Controle prévio de legalidade, publicação no PNCP, prazos mínimos, apresentação de propostas, modos de disputa aberto e fechado e desempate."
+          },
+          {
+            "id": "habilitacao",
+            "name": "Da Habilitação",
+            "label": "Habilitação",
+            "subtitle": "Arts. 62 a 70",
+            "content": "Habilitação jurídica, técnica, fiscal, social, trabalhista e econômico-financeira; inversão de fases como regra."
+          },
+          {
+            "id": "encerramento",
+            "name": "Do Encerramento da Licitação",
+            "label": "Encerramento",
+            "subtitle": "Art. 71",
+            "content": "Homologação, adjudicação, revogação e anulação."
+          },
+          {
+            "id": "contratacao-direta",
+            "name": "Da Contratação Direta",
+            "label": "Contr. direta",
+            "subtitle": "Arts. 72 a 75",
+            "content": "Processo de contratação direta, inexigibilidade (art. 74) e dispensa de licitação (art. 75)."
+          },
+          {
+            "id": "alienacoes",
+            "name": "Das Alienações",
+            "label": "Alienações",
+            "subtitle": "Art. 76",
+            "content": "Alienação de bens imóveis e móveis da Administração, com os casos de dispensa."
+          },
+          {
+            "id": "instrumentos-auxiliares",
+            "name": "Dos Instrumentos Auxiliares",
+            "label": "Instr. auxiliares",
+            "subtitle": "Arts. 77 a 88",
+            "content": "Credenciamento, pré-qualificação, procedimento de manifestação de interesse, sistema de registro de preços e registro cadastral."
+          }
+        ]
+      },
+      {
+        "id": "titulo-iii",
+        "name": "Título III - Dos Contratos Administrativos",
+        "label": "Título III",
+        "subtitle": "Arts. 89 a 154",
+        "content": "Formalização, garantias, riscos, prerrogativas, duração, execução, alteração, extinção, recebimento, pagamento, nulidade e meios alternativos de solução de controvérsias.",
+        "children": [
+          {
+            "id": "cap-i",
+            "name": "Capítulo I - Da Formalização dos Contratos",
+            "label": "Cap. I",
+            "subtitle": "Arts. 89 a 95",
+            "content": "Cláusulas necessárias, convocação para assinatura, publicidade e instrumento de contrato."
+          },
+          {
+            "id": "cap-ii",
+            "name": "Capítulo II - Das Garantias",
+            "label": "Cap. II",
+            "subtitle": "Arts. 96 a 102",
+            "content": "Caução, seguro-garantia e fiança bancária; cláusula de retomada em obras."
+          },
+          {
+            "id": "cap-iii-iv",
+            "name": "Capítulos III e IV - Alocação de Riscos e Prerrogativas da Administração",
+            "label": "Caps. III-IV",
+            "subtitle": "Arts. 103 e 104",
+            "content": "Matriz de riscos e as prerrogativas de modificar, extinguir, fiscalizar, sancionar e ocupar provisoriamente."
+          },
+          {
+            "id": "cap-v",
+            "name": "Capítulo V - Da Duração dos Contratos",
+            "label": "Cap. V",
+            "subtitle": "Arts. 105 a 114",
+            "content": "Vigência, contratos de serviços contínuos de até 5 anos prorrogáveis até 10, e contratos de até 35 anos para certos objetos."
+          },
+          {
+            "id": "cap-vi",
+            "name": "Capítulo VI - Da Execução dos Contratos",
+            "label": "Cap. VI",
+            "subtitle": "Arts. 115 a 123",
+            "content": "Fiscalização, subcontratação, responsabilidade do contratado e encargos trabalhistas e previdenciários."
+          },
+          {
+            "id": "cap-vii",
+            "name": "Capítulo VII - Da Alteração dos Contratos e dos Preços",
+            "label": "Cap. VII",
+            "subtitle": "Arts. 124 a 136",
+            "content": "Alterações unilaterais e consensuais, limites de 25% e 50%, equilíbrio econômico-financeiro, reajuste e repactuação."
+          },
+          {
+            "id": "cap-viii",
+            "name": "Capítulo VIII - Das Hipóteses de Extinção dos Contratos",
+            "label": "Cap. VIII",
+            "subtitle": "Arts. 137 a 139",
+            "content": "Extinção unilateral, consensual, judicial ou arbitral e seus efeitos."
+          },
+          {
+            "id": "cap-ix-x",
+            "name": "Capítulos IX e X - Recebimento do Objeto e Pagamento",
+            "label": "Caps. IX-X",
+            "subtitle": "Arts. 140 a 146",
+            "content": "Recebimento provisório e definitivo, ordem cronológica de pagamentos e antecipação."
+          },
+          {
+            "id": "cap-xi",
+            "name": "Capítulo XI - Da Nulidade dos Contratos",
+            "label": "Cap. XI",
+            "subtitle": "Arts. 147 a 150",
+            "content": "Declaração de nulidade ponderada pelas consequências e indenização do contratado de boa-fé."
+          },
+          {
+            "id": "cap-xii",
+            "name": "Capítulo XII - Dos Meios Alternativos de Resolução de Controvérsias",
+            "label": "Cap. XII",
+            "subtitle": "Arts. 151 a 154",
+            "content": "Conciliação, mediação, comitê de resolução de disputas e arbitragem."
+          }
+        ]
+      },
+      {
+        "id": "titulo-iv",
+        "name": "Título IV - Das Irregularidades",
+        "label": "Título IV",
+        "subtitle": "Arts. 155 a 173",
+        "content": "Infrações e sanções administrativas, impugnações, recursos e o controle das contratações.",
+        "children": [
+          {
+            "id": "cap-i",
+            "name": "Capítulo I - Das Infrações e Sanções Administrativas",
+            "label": "Cap. I",
+            "subtitle": "Arts. 155 a 163",
+            "content": "Advertência, multa, impedimento de licitar e declaração de inidoneidade; processo de responsabilização e reabilitação."
+          },
+          {
+            "id": "cap-ii",
+            "name": "Capítulo II - Das Impugnações, dos Pedidos de Esclarecimento e dos Recursos",
+            "label": "Cap. II",
+            "subtitle": "Arts. 164 a 168",
+            "content": "Impugnação ao edital, recurso hierárquico e pedido de reconsideração, com prazos."
+          },
+          {
+            "id": "cap-iii",
+            "name": "Capítulo III - Do Controle das Contratações",
+            "label": "Cap. III",
+            "subtitle": "Arts. 169 a 173",
+            "content": "Três linhas de defesa, controle interno e externo, tribunais de contas e gestão de riscos."
+          }
+        ]
+      },
+      {
+        "id": "titulo-v",
+        "name": "Título V - Disposições Gerais",
+        "label": "Título V",
+        "subtitle": "Arts. 174 a 194",
+        "content": "Portal Nacional de Contratações Públicas, alterações em outras leis (inclusive os crimes em licitações inseridos no Código Penal) e regras de transição.",
+        "children": [
+          {
+            "id": "pncp",
+            "name": "Do Portal Nacional de Contratações Públicas",
+            "label": "PNCP",
+            "subtitle": "Arts. 174 a 176",
+            "content": "Sítio eletrônico oficial para divulgação centralizada e obrigatória dos atos de contratação."
+          },
+          {
+            "id": "alteracoes",
+            "name": "Das Alterações Legislativas",
+            "label": "Alterações",
+            "subtitle": "Arts. 177 a 178",
+            "content": "Inclusão do Capítulo II-B no Título XI do Código Penal (arts. 337-E a 337-P): crimes em licitações e contratos administrativos."
+          },
+          {
+            "id": "transitorias",
+            "name": "Disposições Transitórias e Finais",
+            "label": "Transitórias",
+            "subtitle": "Arts. 179 a 194",
+            "content": "Período de convivência com a Lei 8.666, revogações e vigência."
+          }
+        ]
+      }
+    ]
+  }
+}
