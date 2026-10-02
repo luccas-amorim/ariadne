@@ -140,6 +140,35 @@ input[type="checkbox"] { accent-color: var(--text-strong); }
 #outline a.current { background: var(--accent); color: var(--accent-text); }
 #outline a .muted { font-size: .75rem; }
 
+/* Linha do tempo */
+#timeline-bar input[type="range"] { accent-color: var(--text-strong); height: 1.5rem; }
+#timeline-bar.hidden { display: none; }
+#tl-events .ev { display: inline-flex; align-items: center; gap: .35rem; }
+#tl-events .ev::before { content: ""; width: .5rem; height: .5rem; border-radius: 999px; background: var(--text-faint); flex: 0 0 auto; }
+#tl-events .ev.diploma::before { background: var(--text-strong); }
+#tl-events .ev.antecessor::before { background: var(--text-faint); }
+#tl-events .ev.marco::before { background: var(--relation); }
+#tl-events .ev.inclusao::before { background: var(--studied); }
+#tl-events a { text-decoration: underline dotted; }
+.year-chip { background: var(--relation) !important; }
+
+/* Percurso guiado */
+#tour-card { position: absolute; left: .75rem; bottom: .75rem; z-index: 12; width: min(26rem, calc(100% - 1.5rem)); background: var(--surface); border: 1px solid var(--border-strong); border-radius: .75rem; box-shadow: var(--shadow-lg); padding: .9rem 1rem; font-size: .9rem; }
+#tour-card.hidden { display: none; }
+#tour-card .tour-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; font-size: .75rem; color: var(--text-muted); margin-bottom: .35rem; }
+#tour-card .tour-title { font-weight: 700; color: var(--text-strong); font-size: .95rem; }
+#tour-card .tour-text { line-height: 1.5; margin: .35rem 0 .7rem; }
+#tour-card .tour-node { font-size: .78rem; color: var(--text-muted); margin-bottom: .5rem; }
+#tour-card .tour-foot { display: flex; align-items: center; gap: .5rem; }
+#tour-card .tour-dots { margin-left: auto; display: flex; gap: .25rem; }
+#tour-card .tour-dots i { width: .45rem; height: .45rem; border-radius: 999px; background: var(--border-strong); display: inline-block; }
+#tour-card .tour-dots i.done { background: var(--text-muted); }
+#tour-card .tour-dots i.cur { background: var(--relation); }
+#tours-pop .tour-item { display: block; padding: .5rem .6rem; border-radius: .5rem; }
+#tours-pop .tour-item:hover { background: var(--surface-2); }
+#tours-pop .tour-item b { color: var(--text-strong); }
+@media (max-width: 639px) { #tour-card { bottom: 5.5rem; } }
+
 /* Diálogo */
 dialog { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
 dialog::backdrop { background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px); }
