@@ -1,0 +1,133 @@
+# Árvores Jurídicas BR 🌳⚖️
+
+A macroestrutura da legislação brasileira em uma única árvore interativa, em duas ou três dimensões. A Constituição ocupa o centro; dela derivam os ramos do Direito, de cada ramo os diplomas, e de cada diploma seus Livros, Títulos e Capítulos.
+
+**Acesse:** [luccas-amorim.github.io/lex-tree-br](https://luccas-amorim.github.io/lex-tree-br/)
+
+## O que é
+
+Textos legais são longos e lineares. Este projeto mostra apenas a **estrutura** deles (Partes, Livros, Títulos e Capítulos), com uma síntese didática de cada divisão, para que se entenda onde um instituto se encontra dentro do todo da lei.
+
+Não reproduzimos artigos. Por isso o mapa envelhece devagar: a estrutura de um código raramente muda, e o projeto só precisa crescer quando surge um diploma novo. Quando a estrutura muda, registramos o marco (a emenda ou lei que incluiu, renomeou ou revogou a divisão).
+
+## Diplomas mapeados
+
+| Ramo | Critério | Diplomas | Em mapeamento |
+|---|---|---|---|
+| **Constitucional** | Fundação do ordenamento | CF/88 | |
+| **Direito Privado** | Relações entre particulares em igualdade formal | Código Civil, Código de Processo Civil | LINDB, Lei 9.099 |
+| **Direito Público** | Relação Estado ↔ particular | CTN, Lei 14.133, Lei 9.784 | Lei 8.112, Lei 8.429 |
+| **Direito Social** | Instituições vs. pessoas; o Estado intervém pelo equilíbrio | CLT, CDC, ECA | LGPD |
+| **Direito Penal** | O *jus puniendi* | Código Penal, Código de Processo Penal, LEP | Lei 11.340, Lei 11.343 |
+
+Os códigos de processo são ramos autônomos, mas nascem **colaterais** ao ramo material que conformam, por serem direito formal (borda tracejada). A classificação é assumidamente didática; escolhas discutíveis trazem uma nota no próprio arquivo de dados. Leia mais em [ABOUT.md](ABOUT.md).
+
+Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não conferida contra o texto oficial por um segundo revisor. O painel avisa quando é o caso.
+
+## Como usar
+
+* **Mapa.** Clique em um ramo para ler sua definição e em um diploma para abrir suas Partes e Livros ali mesmo, conectadas ao resto. O número no canto do nó indica quantas divisões estão recolhidas.
+* **2D ou 3D.** O mesmo grafo, com o mesmo layout radial. No 3D cada camada sobe um nível; arraste para orbitar, role para aproximar.
+* **Expandir tudo.** Abre, nível a nível e de forma animada, todas as divisões a partir do nó selecionado. "Recolher" ou `Esc` volta ao início.
+* **Foco em um diploma.** Radial especializado, com o diploma no centro. **Comparar** põe dois diplomas lado a lado, cada um em seu radial.
+* **Diplomas.** Filtra quais códigos entram na árvore (todos, por padrão) e mostra ou oculta os em mapeamento.
+* **Linha do tempo.** Um controle por ano (ou `T`) mostra o ordenamento como era em cada data: os diplomas surgem no ano de promulgação, antes disso aparece o antecessor como fantasma (CC/1916, CPC/1973, Constituições de 1824 a 1967), e as divisões incluídas depois só aparecem no seu ano. O botão ▶ reproduz a história, marco a marco, com a árvore crescendo.
+* **Percursos guiados.** Sequências curadas de nós com uma frase de transição: uma compra defeituosa, do crime à execução da pena, uma demissão, um tributo, uma obra pública, a criança entre a família e o Estado. A câmera viaja e o painel acompanha. `N` e `P` avançam e voltam.
+* **Relações internormativas.** Linhas roxas ligam o nó selecionado ao que ele concretiza, regulamenta, processa ou executa em outro diploma. Quando o destino está recolhido, a linha termina tracejada no nó visível mais próximo; o painel lista cada relação com o dispositivo que a fundamenta e leva à divisão exata. O botão "Relações" (ou `X`) liga e desliga as linhas.
+* **Trackpad e mouse.** No 2D, dois dedos movem a tela e a pinça aproxima; a roda do mouse continua aproximando. No 3D, arraste orbita e a roda aproxima.
+* **Estudo.** Perguntas de múltipla escolha geradas da estrutura selecionada: síntese → divisão, divisão → diploma, divisão → faixa de artigos. Errou? O nó entra na sua trilha como "revisar". Dá para ocultar os rótulos da árvore durante o estudo.
+* **Trilha pessoal.** Marque divisões como estudadas ou para revisar; o progresso aparece por diploma. Fica só no seu navegador e pode ser exportada e importada em JSON.
+* **Glossário.** Termos recorrentes das sínteses ganham definição ao passar o mouse.
+* **Exportar.** SVG ou PNG do que está na tela, com título e licença; impressão limpa.
+* **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
+* **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `L` abre a lista, `Esc` recolhe.
+* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`.
+
+Para rodar localmente, sirva a pasta `docs/` por HTTP (abrir o arquivo direto bloqueia os módulos e os dados):
+
+```bash
+python3 -m http.server --directory docs 8080
+```
+
+## Dados abertos
+
+Os dados são JSON estáticos servidos junto com a página e podem ser consumidos por outros sites e scripts:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `data/index.json` | Catálogo: ramos, diplomas mapeados, roadmap e tipos de relação |
+| `data/<id>.json` | Um diploma: metadados, status e a árvore de divisões com sínteses e marcos |
+| `data/relations.json` | Relações internormativas entre divisões de diplomas distintos |
+| `data/glossary.json` | Termos e definições |
+| `data/tours.json` | Percursos guiados: sequências de nós com texto de transição |
+| `data/schema.json` | JSON Schema de todos os formatos |
+
+URL base: `https://luccas-amorim.github.io/lex-tree-br/data/`. Licença do conteúdo: CC BY 4.0 (veja abaixo). O GitHub Pages responde com CORS liberado para leitura.
+
+## Arquitetura
+
+Tudo roda no navegador, sem build e sem backend. Dados, modelo e renderizadores são separados:
+
+```
+docs/
+  index.html            casca da aplicação
+  css/app.css           tema claro/escuro, impressão
+  js/
+    data.js             carga, busca, glossário
+    model.js            árvore, visão (foco/filtro), layout radial, URL, relações
+    radial2d.js         renderizador SVG (D3)
+    tree3d.js           renderizador WebGL (Three.js, carregado sob demanda)
+    features.js         trilha, tema, exportação, lista acessível
+    study.js            modo estudo
+    app.js              roteamento, painel, controles, comparação, teclado
+  data/                 ver "Dados abertos"
+scripts/validate.js     validação dos dados (node, sem dependências)
+tests/e2e.spec.js       testes de interface (Playwright)
+.github/workflows/      validação dos dados e testes a cada PR
+```
+
+O modelo calcula ângulos e raios uma vez; o 2D desenha em SVG e o 3D eleva cada camada no eixo vertical. Qualquer renderizador novo recebe a mesma hierarquia.
+
+## Validação e testes
+
+Requer Node 24 ou superior.
+
+```bash
+node scripts/validate.js        # dados: campos, ids, relações, glossário, percursos
+npm install && npm run test:install
+npm test                        # interface: abrir, expandir, focar, buscar, comparar, estudar, linha do tempo, percursos, 3D
+```
+
+Os dois workflows em `.github/workflows/` rodam o mesmo a cada push e pull request. Atenção ao publicar pela interface web do GitHub: o upload de pasta ignora arquivos e pastas iniciados por ponto (`.github/`, `.gitignore`); crie-os pelo botão "Add file → Create new file" informando o caminho completo, ou use `git push`.
+
+## Roadmap
+
+O conjunto de funções está completo; o trabalho pendente é sobretudo conteúdo e revisão. A fila detalhada, por prioridade, está em [ROADMAP.md](ROADMAP.md):
+
+1. Revisar os sete diplomas em rascunho e os seis percursos.
+2. Mapear os diplomas em roadmap (LINDB, Lei 9.099, Lei 8.429, Lei 8.112, LGPD, Lei 11.340, Lei 11.343).
+3. Ampliar relações internormativas, marcos da linha do tempo e glossário.
+4. Melhorias de interface e infraestrutura listadas lá.
+
+## Tecnologias
+
+* HTML, CSS e JavaScript (módulos ES) sem framework e sem etapa de build
+* [D3.js v7](https://d3js.org/) para o layout e o SVG
+* [Three.js](https://threejs.org/) r160 para o 3D, via CDN com `importmap`
+* [Tailwind CSS](https://tailwindcss.com/) via CDN para utilitários de layout
+* [Playwright](https://playwright.dev/) para os testes de interface
+
+## Contribuindo
+
+Leia o [CONTRIBUTING.md](CONTRIBUTING.md): formato dos dados, estilo das sínteses, revisão por pares e validação. O template de pull request traz o checklist de conteúdo.
+
+## Créditos e inspiração
+
+A ideia de explorar textos densos em árvores interativas vem da [Tractatus' Tree](https://pbellon.github.io/tractatus-tree/#/), de pbellon. Os textos legais são obtidos nas versões compiladas do [Planalto](https://www.planalto.gov.br/ccivil_03/).
+
+## Licença
+
+* **Código** (HTML, CSS, JavaScript, scripts, testes): [MIT](LICENSE.md).
+* **Conteúdo** (estrutura, sínteses, relações, glossário e marcos em `docs/data/`): [Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)](LICENSE-CONTENT.md).
+
+Os textos das leis em si são de domínio público (Lei 9.610/1998, art. 8º, IV). As licenças acima incidem sobre o código e sobre o conteúdo autoral, não sobre a legislação.
