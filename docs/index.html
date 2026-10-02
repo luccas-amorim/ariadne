@@ -65,6 +65,12 @@
                 <button id="seg-3d" type="button" aria-pressed="false" title="A mesma árvore em três dimensões">3D</button>
             </div>
             <span class="sep"></span>
+            <button id="btn-timeline" class="btn btn-sm" aria-pressed="false" title="Ver o ordenamento como era em cada ano (T)">Linha do tempo</button>
+            <div class="relative">
+                <button id="btn-tours" class="btn btn-sm" aria-haspopup="true" aria-expanded="false" title="Percursos guiados pela legislação">Percursos</button>
+                <div id="tours-pop" class="pop hidden w-96 max-h-[70vh] overflow-y-auto p-2"></div>
+            </div>
+            <span class="sep"></span>
             <button id="btn-relations" class="btn btn-sm" aria-pressed="true" title="Mostrar ou ocultar as linhas de relações internormativas (X)">Relações</button>
             <button id="btn-outline" class="btn btn-sm" aria-pressed="false" title="Estrutura em lista, navegável por teclado e leitor de tela (L)">Lista</button>
             <button id="btn-compare" class="btn btn-sm" aria-pressed="false" title="Dois diplomas lado a lado, cada um em seu radial">Comparar</button>
@@ -81,6 +87,24 @@
         </div>
     </div>
 
+    <!-- Linha do tempo -->
+    <div id="timeline-bar" class="border-b-ui hidden" style="background: color-mix(in srgb, var(--surface) 85%, transparent)">
+        <div class="px-4 sm:px-6 py-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <div class="flex items-center gap-2">
+                <button id="tl-play" class="ctl" title="Reproduzir a história do ordenamento" aria-label="Reproduzir">▶</button>
+                <span id="tl-year" class="text-lg font-bold strong tabular-nums w-14 text-center">hoje</span>
+            </div>
+            <div class="flex-1 min-w-0 flex items-center gap-2">
+                <span class="text-xs muted" id="tl-min">1824</span>
+                <input id="tl-range" type="range" min="1824" max="2026" step="1" value="2026" class="flex-1" list="tl-ticks" aria-label="Ano">
+                <datalist id="tl-ticks"></datalist>
+                <span class="text-xs muted" id="tl-max">hoje</span>
+            </div>
+            <button id="tl-today" class="btn btn-sm" title="Voltar ao presente">Hoje</button>
+        </div>
+        <div id="tl-events" class="px-4 sm:px-6 pb-2 text-xs muted flex flex-wrap gap-x-4 gap-y-1"></div>
+    </div>
+
     <!-- Árvore -->
     <main id="tree-container" class="flex-1 relative overflow-hidden cursor-move">
         <div id="view-main"></div>
@@ -90,7 +114,7 @@
         <div id="legend" class="hint absolute top-3 left-3 sm:top-4 sm:left-4 pointer-events-none space-y-1">
             <div class="flex items-center gap-2"><span class="inline-block w-6 h-3 rounded-sm border-2 bg-transparent" style="border-color:var(--text-muted)"></span>Direito material</div>
             <div class="flex items-center gap-2"><span class="inline-block w-6 h-3 rounded-sm border-2 border-dashed bg-transparent" style="border-color:var(--text-muted)"></span>Direito processual (formal)</div>
-            <div class="flex items-center gap-2"><span class="inline-block w-6 h-3 rounded-sm border border-dotted" style="border-color:var(--text-faint);background:var(--surface-2)"></span>Em mapeamento</div>
+            <div class="flex items-center gap-2"><span class="inline-block w-6 h-3 rounded-sm border border-dotted" style="border-color:var(--text-faint);background:var(--surface-2)"></span>Em mapeamento ou antecessor histórico</div>
             <div class="flex items-center gap-2"><span class="inline-flex w-4 h-4 rounded-full text-[9px] items-center justify-center font-bold" style="background:var(--accent);color:var(--accent-text)">3</span>Divisões recolhidas</div>
             <div class="flex items-center gap-2"><span class="inline-block w-6 border-t-2 border-dashed" style="border-color:var(--relation)"></span>Relação internormativa</div>
             <div class="flex items-center gap-2"><span class="trail-dot studied" style="margin:0"></span><span class="trail-dot review" style="margin:0"></span>Trilha: estudado · revisar</div>
@@ -111,6 +135,8 @@
                 <button id="ctl-out" class="ctl" title="Afastar" aria-label="Afastar">−</button>
             </div>
         </div>
+        <!-- Cartão do percurso guiado -->
+        <aside id="tour-card" class="hidden" aria-live="polite"></aside>
         <div id="loading" class="absolute inset-0 flex items-center justify-center muted text-sm">Carregando os diplomas…</div>
     </main>
 
