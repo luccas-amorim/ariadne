@@ -18,6 +18,7 @@ export class Tree3D {
         this.trailProvider = trailProvider;
         this.selected = null;
         this.hideLabels = false;
+        this.showRelations = true;
         this.userZoomed = false;
         this.items = new Map();      // node.id → { slab, label, link }
         this.relMeshes = [];
@@ -144,6 +145,7 @@ export class Tree3D {
     setSelected(d) { this.selected = d; }
     setTrailProvider(fn) { this.trailProvider = fn; }
     setHideLabels(b) { this.hideLabels = b; this.textures.clear(); if (this.model.root) this.update(this.selected || this.model.root); }
+    setShowRelations(b) { this.showRelations = b; if (this.scene && this.model.root) this.drawRelations(); }
     setPalette(p) {
         this.palette = p; this.textures.clear(); this.matCache.clear();
         if (this.scene) this.applyPaletteToScene();
@@ -386,7 +388,7 @@ export class Tree3D {
         const THREE = this.THREE, m = this.model, p = this.palette, sel = this.selected;
         this.relMeshes.forEach(x => { this.scene.remove(x); x.geometry.dispose(); });
         this.relMeshes = [];
-        if (!sel) return;
+        if (!sel || !this.showRelations) return;
         const items = m.relationsFor(sel, { includeDescendants: sel.data.kind !== 'division' }).filter(r => r.other);
         for (const r of items) {
             const rep = m.visibleRep(r.other);
