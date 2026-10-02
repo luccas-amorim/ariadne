@@ -1,13 +1,5 @@
 # Sobre o projeto
 
-## Texto para o campo "About" do GitHub
-
-> Árvores Jurídicas BR: a macroestrutura da Constituição e dos grandes diplomas brasileiros em uma única árvore interativa, 2D e 3D, com relações internormativas, modo estudo e dados abertos (CC BY 4.0).
-
-Tópicos sugeridos: `brasil`, `direito`, `legislacao`, `d3js`, `threejs`, `visualizacao-de-dados`, `open-data`, `constituicao`, `codigo-civil`, `codigo-penal`, `educacao-juridica`
-
-Website: `https://luccas-amorim.github.io/lex-tree-br/`
-
 ## Por que estrutura, e não artigos
 
 Um código tem centenas ou milhares de artigos, e eles mudam o tempo todo. Sua **estrutura**, porém, quase não muda: o Código Civil de 2002 continua dividido em Parte Geral e Parte Especial, com os mesmos Livros e Títulos de quando foi promulgado. Mapear apenas Partes, Livros, Títulos e Capítulos produz um material que:
