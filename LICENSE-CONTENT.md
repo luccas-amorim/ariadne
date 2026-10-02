@@ -1,4 +1,4 @@
-# Licença do conteúdo — CC BY 4.0
+# CC BY 4.0
 
 O **conteúdo autoral** deste repositório está licenciado sob a
 **Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)**.
