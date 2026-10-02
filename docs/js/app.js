@@ -1,7 +1,7 @@
 // Orquestração: roteamento por hash, painel de leitura, trilha de navegação, filtros,
 // alternância 2D/3D, comparação lado a lado, modo estudo, trilha pessoal, exportação,
 // lista acessível, teclado e tema.
-import { loadAll, buildSearchIndex, search, glossaryHighlight, esc, sleep } from './data.js';
+import { loadAll, buildSearchIndex, search, glossaryHighlight, timelineEvents, esc, sleep } from './data.js';
 import { TreeModel } from './model.js';
 import { Radial2D } from './radial2d.js';
 import { Tree3D } from './tree3d.js';
@@ -18,6 +18,8 @@ const el = {
     seg2d: $('seg-2d'), seg3d: $('seg-3d'), outlineBtn: $('btn-outline'), outline: $('outline'), relationsBtn: $('btn-relations'),
     compareBtn: $('btn-compare'), studyBtn: $('btn-study'), exportBtn: $('btn-export'), exportPop: $('export-pop'), themeBtn: $('btn-theme'),
     compareBar: $('compare-bar'), compareA: $('compare-a'), compareB: $('compare-b'),
+    timelineBtn: $('btn-timeline'), timelineBar: $('timeline-bar'), tlPlay: $('tl-play'), tlYear: $('tl-year'), tlRange: $('tl-range'), tlTicks: $('tl-ticks'), tlToday: $('tl-today'), tlEvents: $('tl-events'), tlMin: $('tl-min'),
+    toursBtn: $('btn-tours'), toursPop: $('tours-pop'), tourCard: $('tour-card'),
     about: $('about'), printFooter: $('print-footer')
 };
 
@@ -26,7 +28,9 @@ const state = {
     selected: null, growing: false, suppressRoute: null, booted: false,
     compare: null,   // { a, b, panes: [{model, renderer, el}], active }
     outlineOpen: false,
-    showRelations: (() => { try { return localStorage.getItem('lex-tree:relations') !== '0'; } catch { return true; } })()
+    showRelations: (() => { try { return localStorage.getItem('lex-tree:relations') !== '0'; } catch { return true; } })(),
+    events: [], timelineOpen: false, playing: null,
+    tour: null       // { tour, step }
 };
 const trail = new Trail();
 let study = null;
@@ -41,6 +45,9 @@ async function boot() {
         state.data = await loadAll('data/');
         state.index = buildSearchIndex(state.data);
         state.model = new TreeModel(state.data);
+        state.events = timelineEvents(state.data);
+        initTimeline();
+        renderToursPop();
         el.loading.remove();
         study = new Study({
             model: state.model, trail, container: el.panel,
@@ -113,6 +120,7 @@ function route() {
     const rebuilt = model.setView(view);
     let fresh = rendererChanged || rebuilt || !state.booted;
     if (rebuilt) renderFilter();
+    syncTimelineUi();
 
     const target = model.resolvePath(parts);
     if (!target) { location.hash = model.rootHash(); return; }
@@ -124,8 +132,10 @@ function route() {
     }
     target.ancestors().slice(1).forEach(a => model.expandOne(a));
     if ((target.data.kind === 'diploma' && !target.data.planned) || target.data.kind === 'ramo') model.expandOne(target);
-    if (fresh) state.renderer.reset();
-    select(target, fresh ? model.root : target.parent || target, { fit: fresh, reveal: !fresh });
+    // Na linha do tempo, a árvore muda de forma mas o enquadramento deve ficar estável.
+    const yearChange = rebuilt && !rendererChanged && state.booted && model.view.year != null;
+    if (fresh && !yearChange) state.renderer.reset();
+    select(target, fresh && !yearChange ? model.root : target.parent || target, { fit: fresh, reveal: !fresh });
 }
 
 function select(d, source, { fit = false, reveal = false } = {}) {
@@ -186,6 +196,7 @@ const action = (text, href, primary = false, onClick = null) => ({ text, href, p
 const link = (text, href) => ({ text, href, external: true });
 const natTag = doc => tag(doc.natureza === 'processual' ? 'Direito processual (formal)' : 'Direito material', '#64748b');
 const statusTag = doc => doc.status === 'rascunho' ? tag('Rascunho: estrutura a revisar', '#b45309') : '';
+const yearTag = model => model.view.year != null ? `<span class="chip year-chip">Em ${model.view.year}</span>` : '';
 
 function docKeys(model, doc) { return model.nodes.filter(n => n.data.kind === 'division' && model.docOf(n) === doc).map(n => n.key); }
 
@@ -260,11 +271,27 @@ function showPanel(d, model = activeModel()) {
             extra: progressHtml(model, m) + historyHtml(m.root) + relationsHtml(model, d),
             actions: state.compare ? common : [action('Ver no mapa completo', `#/${m.id}${model.viewParams({ focus: null })}`, true), link('Texto oficial no Planalto', m.source), ...common]
         });
+    } else if (d.data.kind === 'diploma' && d.data.ghost) {
+        const m = d.data.meta, cur = m.ghostOf;
+        setPanel({
+            tags: [tag(r.name, r.color), natTag(cur), yearTag(model), tag('Antecessor histórico', '#64748b')],
+            title: m.title, subtitle: m.norm,
+            html: `Em ${model.view.year}, este era o diploma vigente no lugar que hoje ocupa ${esc(cur.title)}. Vigeu de ${m.year} até ${esc(String((cur.predecessors.find(p => p.from === m.year) || {}).to || cur.year))}, quando foi substituído. A estrutura mapeada neste projeto é a do diploma atual.`,
+            extra: '', actions: [action(`Ver ${cur.shortTitle} hoje`, model.hashForNode(d, { year: null }), true), link('Texto oficial do diploma atual', cur.source), ...common]
+        });
+    } else if (d.data.kind === 'center' && d.data.meta.ghostOf) {
+        const m = d.data.meta;
+        setPanel({
+            tags: [tag('Nó central', '#0f172a'), tag(r.name, r.color), yearTag(model)],
+            title: m.title, subtitle: m.norm,
+            html: esc(m.root.content),
+            extra: '', actions: [action('Voltar ao presente', model.rootHash({ year: null }), true), ...common]
+        });
     } else if (d.data.kind === 'center') {
         const m = d.data.meta;
         const hidden = model.catalog.diplomas.length - model.view.diplomas.size;
         setPanel({
-            tags: [tag('Nó central', '#0f172a'), tag(r.name, r.color)],
+            tags: [tag('Nó central', '#0f172a'), tag(r.name, r.color), yearTag(model)],
             title: 'Mapa do ordenamento', subtitle: m.norm,
             html: gloss(m.root.content) + ' Clique em um ramo para ler sua definição, em um diploma para abri-lo no próprio mapa, ou use "Expandir tudo" para ver a árvore inteira conectada.'
                 + (hidden ? `<br><span class="text-sm muted mt-2 inline-block">${hidden} diploma(s) oculto(s) pelo filtro "Diplomas".</span>` : ''),
@@ -296,7 +323,7 @@ function showPanel(d, model = activeModel()) {
     } else if (d.data.kind === 'diploma') {
         const m = d.data.meta;
         setPanel({
-            tags: [tag(r.name, r.color), natTag(m), statusTag(m)],
+            tags: [tag(r.name, r.color), natTag(m), statusTag(m), yearTag(model)],
             title: m.title, subtitle: m.norm,
             html: gloss(m.root.content) + (m.note ? `<br><span class="text-sm muted mt-2 inline-block">${esc(m.note)}</span>` : ''),
             extra: progressHtml(model, m) + historyHtml(m.root) + relationsHtml(model, d),
@@ -308,7 +335,7 @@ function showPanel(d, model = activeModel()) {
             ? action('Ver no mapa completo', model.hashForNode(d, { focus: null }))
             : action(`Focar em ${doc.shortTitle}`, model.hashForNode(d, { focus: doc.id }));
         setPanel({
-            tags: [tag(r.name, r.color), natTag(doc), tag(doc.shortTitle, '#334155'), n.revoked ? tag('Revogado', '#991b1b') : ''],
+            tags: [tag(r.name, r.color), natTag(doc), tag(doc.shortTitle, '#334155'), n.revoked ? tag('Revogado', '#991b1b') : '', yearTag(model)],
             title: n.name, subtitle: n.subtitle,
             html: gloss(n.content).replace(/\n/g, '<br>'),
             extra: historyHtml(n) + relationsHtml(model, d),
@@ -432,8 +459,8 @@ function togglePop(pop, btn) {
     if (open) { pop.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); }
 }
 function closePopovers() {
-    [el.filterPop, el.exportPop].forEach(p => p.classList.add('hidden'));
-    [el.filterBtn, el.exportBtn].forEach(b => b.setAttribute('aria-expanded', 'false'));
+    [el.filterPop, el.exportPop, el.toursPop].forEach(p => p.classList.add('hidden'));
+    [el.filterBtn, el.exportBtn, el.toursBtn].forEach(b => b.setAttribute('aria-expanded', 'false'));
     el.results.innerHTML = '';
 }
 document.addEventListener('click', ev => { if (!ev.target.closest('.pop, [aria-haspopup], #search')) closePopovers(); });
@@ -524,6 +551,9 @@ document.addEventListener('keydown', ev => {
     if (ev.key === 'f' || ev.key === 'F') { activeRenderer().fit(); return; }
     if (ev.key === 'l' || ev.key === 'L') { el.outlineBtn.click(); return; }
     if (ev.key === 'x' || ev.key === 'X') { setShowRelations(!state.showRelations); return; }
+    if (ev.key === 't' || ev.key === 'T') { el.timelineBtn.click(); return; }
+    if (state.tour && (ev.key === 'PageDown' || ev.key === 'n' || ev.key === 'N')) { ev.preventDefault(); tourGo(state.tour.step + 1); return; }
+    if (state.tour && (ev.key === 'PageUp' || ev.key === 'p' || ev.key === 'P')) { ev.preventDefault(); tourGo(state.tour.step - 1); return; }
     if (!d) return;
     const go = n => { if (!n) return; if (state.compare) select(n, n, { reveal: true }); else location.hash = model.hashForNode(n); };
     if (ev.key === 'ArrowLeft') { ev.preventDefault(); go(d.parent); }
@@ -662,6 +692,171 @@ function exitCompare(reroute = true) {
 }
 el.compareA.addEventListener('change', () => { location.hash = `#/compare?a=${el.compareA.value}&b=${el.compareB.value}`; });
 el.compareB.addEventListener('change', () => { location.hash = `#/compare?a=${el.compareA.value}&b=${el.compareB.value}`; });
+
+// ==========================================
+// LINHA DO TEMPO
+//   ?ano=1975 na URL. Diplomas aparecem no ano de promulgação; antes disso, o antecessor
+//   surge como fantasma. Divisões com `since` só aparecem a partir do seu ano.
+// ==========================================
+const currentYear = new Date().getFullYear();
+function eventYears() { return [...new Set(state.events.map(e => e.year))].sort((a, b) => a - b); }
+
+function initTimeline() {
+    const years = eventYears();
+    const min = years[0] || 1824;
+    el.tlRange.min = String(min); el.tlRange.max = String(currentYear); el.tlRange.value = String(currentYear);
+    el.tlMin.textContent = String(min);
+    el.tlTicks.innerHTML = years.map(y => `<option value="${y}" label="${y}"></option>`).join('');
+}
+
+function yearFromHash() { return state.model.view.year; }
+
+function setYear(year, { fromPlay = false } = {}) {
+    const model = state.model;
+    const { parts } = model.parseHash(location.hash);
+    if (parts[0] === 'compare') { exitCompare(); }
+    const path = parts[0] === 'compare' ? [] : parts;
+    const target = (model.isFocus() ? `#/${model.view.focus}` : '#/' + path.join('/')) + model.viewParams({ year, focus: model.view.focus });
+    if (!fromPlay) stopPlay();
+    if (location.hash === target) return;
+    location.hash = target;
+}
+
+function syncTimelineUi() {
+    const y = yearFromHash();
+    el.tlYear.textContent = y == null ? 'hoje' : String(y);
+    el.tlRange.value = String(y == null ? currentYear : y);
+    el.timelineBtn.setAttribute('aria-pressed', String(state.timelineOpen));
+    if (y != null && !state.timelineOpen) toggleTimeline(true);
+    renderEvents(y);
+}
+
+function renderEvents(y) {
+    if (!state.timelineOpen) return;
+    if (y == null) {
+        const n = state.model.catalog.diplomas.length;
+        el.tlEvents.innerHTML = `<span class="ev diploma">${n} diplomas mapeados vigentes.</span><span>Arraste o controle ou pressione ▶ para ver o ordenamento crescer desde ${el.tlMin.textContent}.</span>`;
+        return;
+    }
+    const here = state.events.filter(e => e.year === y);
+    const model = state.model;
+    const inForce = Object.values(model.data.diplomas).filter(d => d.year <= y).length;
+    const ghosts = Object.values(model.data.diplomas).filter(d => d.year > y && (d.predecessors || []).some(p => p.from <= y && y < p.to)).length;
+    const head = `<span class="ev">${inForce} diploma(s) atuais já vigentes${ghosts ? `, ${ghosts} antecessor(es)` : ''}.</span>`;
+    if (!here.length) {
+        const prev = [...state.events].reverse().find(e => e.year < y);
+        el.tlEvents.innerHTML = head + (prev ? `<span class="ev ${prev.kind}">Último marco: ${prev.year}, ${esc(prev.text)}</span>` : '');
+        return;
+    }
+    el.tlEvents.innerHTML = head + here.map(e => `<span class="ev ${e.kind}"><a href="${linkToKey(e.key, { year: y })}">${esc(e.text)}</a></span>`).join('');
+}
+
+function toggleTimeline(open) {
+    state.timelineOpen = open == null ? !state.timelineOpen : open;
+    el.timelineBar.classList.toggle('hidden', !state.timelineOpen);
+    el.timelineBtn.setAttribute('aria-pressed', String(state.timelineOpen));
+    if (!state.timelineOpen) { stopPlay(); if (yearFromHash() != null) setYear(null); }
+    else renderEvents(yearFromHash());
+}
+
+function stopPlay() {
+    if (state.playing) { clearTimeout(state.playing); state.playing = null; }
+    el.tlPlay.textContent = '▶'; el.tlPlay.setAttribute('aria-label', 'Reproduzir');
+}
+function play() {
+    if (state.playing) { stopPlay(); return; }
+    const years = eventYears();
+    let i = yearFromHash() == null ? 0 : Math.max(0, years.findIndex(y => y > yearFromHash()));
+    if (i < 0 || i >= years.length) i = 0;
+    el.tlPlay.textContent = '❚❚'; el.tlPlay.setAttribute('aria-label', 'Pausar');
+    const step = () => {
+        if (i >= years.length) { setYear(null, { fromPlay: true }); stopPlay(); state.renderer.fit(); return; }
+        setYear(years[i++], { fromPlay: true });
+        state.playing = setTimeout(step, 1400);
+    };
+    step();
+}
+
+el.timelineBtn.addEventListener('click', () => toggleTimeline());
+el.tlRange.addEventListener('input', () => { el.tlYear.textContent = el.tlRange.value === String(currentYear) ? 'hoje' : el.tlRange.value; });
+el.tlRange.addEventListener('change', () => { const v = +el.tlRange.value; setYear(v >= currentYear ? null : v); });
+el.tlToday.addEventListener('click', () => setYear(null));
+el.tlPlay.addEventListener('click', play);
+
+/** Hash para uma chave diploma/divisao, garantindo que o diploma esteja no filtro e fora do foco. */
+function linkToKey(key, override = {}) {
+    const model = state.model;
+    const docId = key.split('/')[0];
+    const diplomas = model.view.diplomas.has(docId) ? model.view.diplomas : new Set([...model.view.diplomas, docId]);
+    return `#/${key}${model.viewParams({ focus: null, diplomas, year: null, ...override })}`;
+}
+
+// ==========================================
+// PERCURSOS GUIADOS
+// ==========================================
+function renderToursPop() {
+    const tours = state.data.tours;
+    el.toursPop.innerHTML = tours.length
+        ? `<div class="px-2 pt-1 pb-2 font-semibold strong">Percursos guiados</div>` + tours.map(t => `
+            <a href="#" class="tour-item" data-tour="${t.id}">
+                <b>${esc(t.title)}</b>${t.status === 'rascunho' ? ' <span class="chip outline" style="font-size:9px">rascunho</span>' : ''}
+                <div class="text-xs muted mt-0.5">${esc(t.summary)} · ${t.steps.length} passos</div>
+            </a>`).join('')
+        : '<div class="p-3 muted">Nenhum percurso cadastrado.</div>';
+    el.toursPop.querySelectorAll('[data-tour]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); startTour(a.dataset.tour); }));
+}
+el.toursBtn.addEventListener('click', ev => { ev.stopPropagation(); togglePop(el.toursPop, el.toursBtn); });
+
+function startTour(id) {
+    const tour = state.data.tours.find(t => t.id === id);
+    if (!tour) return;
+    closePopovers();
+    if (study && study.active) study.stop();
+    if (state.compare) location.hash = '#/';
+    state.tour = { tour, step: -1 };
+    el.toursBtn.setAttribute('aria-pressed', 'true');
+    tourGo(0);
+}
+function endTour() {
+    state.tour = null;
+    el.tourCard.classList.add('hidden');
+    el.tourCard.innerHTML = '';
+    el.toursBtn.setAttribute('aria-pressed', 'false');
+}
+function tourGo(i) {
+    if (!state.tour) return;
+    const { tour } = state.tour;
+    if (i < 0) return;
+    if (i >= tour.steps.length) { endTour(); toast('Percurso concluído'); return; }
+    state.tour.step = i;
+    const step = tour.steps[i];
+    location.hash = linkToKey(step.key);
+    renderTourCard();
+}
+function renderTourCard() {
+    const { tour, step } = state.tour;
+    const s = tour.steps[step];
+    const model = state.model;
+    const [docId, ...path] = s.key.split('/');
+    const doc = model.data.diplomas[docId];
+    let n = doc.root; const labels = [];
+    for (const seg of path) { n = (n.children || []).find(c => c.id === seg); if (!n) break; labels.push(n.label); }
+    const where = `${doc.shortTitle}${labels.length ? ' › ' + labels.join(' › ') : ''}${n && n !== doc.root ? ` · ${n.subtitle}` : ''}`;
+    el.tourCard.classList.remove('hidden');
+    el.tourCard.innerHTML = `
+        <div class="tour-head"><span>Percurso · passo ${step + 1} de ${tour.steps.length}</span><button type="button" class="muted" id="tour-close" aria-label="Encerrar percurso">×</button></div>
+        <div class="tour-title">${esc(tour.title)}</div>
+        <div class="tour-node">${esc(where)}</div>
+        <p class="tour-text">${glossaryHighlight(esc(s.text), model.data.glossary)}</p>
+        <div class="tour-foot">
+            <button type="button" class="btn btn-sm" id="tour-prev" ${step === 0 ? 'disabled' : ''}>Anterior</button>
+            <button type="button" class="btn btn-sm btn-primary" id="tour-next">${step === tour.steps.length - 1 ? 'Concluir' : 'Próximo'}</button>
+            <span class="tour-dots" aria-hidden="true">${tour.steps.map((_, j) => `<i class="${j < step ? 'done' : j === step ? 'cur' : ''}"></i>`).join('')}</span>
+        </div>`;
+    $('tour-prev').addEventListener('click', () => tourGo(step - 1));
+    $('tour-next').addEventListener('click', () => tourGo(step + 1));
+    $('tour-close').addEventListener('click', endTour);
+}
 
 // ==========================================
 // SOBRE
