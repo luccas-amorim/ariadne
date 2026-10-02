@@ -15,17 +15,35 @@ export class Radial2D {
         this.selected = null;
         this.userZoomed = false;
         this.hideLabels = false;
+        this.showRelations = true;
 
         this.svg = d3.select(container).append('svg').attr('width', '100%').attr('height', '100%').attr('role', 'img').attr('aria-label', 'Árvore radial da legislação');
         this.g = this.svg.append('g');
         this.gLinks = this.g.append('g').attr('class', 'links');
         this.gRel = this.g.append('g').attr('class', 'relations');
         this.gNodes = this.g.append('g').attr('class', 'nodes');
-        this.zoom = d3.zoom().scaleExtent([0.06, 3]).on('zoom', ev => {
-            this.g.attr('transform', ev.transform);
-            if (ev.sourceEvent) this.userZoomed = true;
-        });
+        this.zoom = d3.zoom().scaleExtent([0.06, 3])
+            .filter(ev => ev.type !== 'wheel' && !ev.button)   // a roda é tratada abaixo
+            .on('zoom', ev => {
+                this.g.attr('transform', ev.transform);
+                if (ev.sourceEvent) this.userZoomed = true;
+            });
         this.svg.call(this.zoom).on('dblclick.zoom', null);
+        // Trackpad: dois dedos movem; pinça (chega como wheel+ctrlKey) aproxima.
+        // Mouse: a roda tradicional (passos grandes, inteiros e só verticais) continua aproximando.
+        this.svg.on('wheel.pan', ev => {
+            ev.preventDefault();
+            const node = this.svg.node();
+            const t = d3.zoomTransform(node);
+            const mouseNotch = Math.abs(ev.deltaY) >= 40 && ev.deltaX === 0 && Number.isInteger(ev.deltaY);
+            if (ev.ctrlKey || ev.metaKey || mouseNotch) {
+                const k = Math.pow(2, -ev.deltaY * (ev.ctrlKey || ev.metaKey ? 0.01 : 0.0025));
+                this.svg.call(this.zoom.scaleBy, k, d3.pointer(ev, node));
+            } else {
+                this.svg.call(this.zoom.translateBy, -ev.deltaX / t.k, -ev.deltaY / t.k);
+            }
+            this.userZoomed = true;
+        }, { passive: false });
 
         let timer, last = '';
         this.ro = new ResizeObserver(() => {
@@ -44,6 +62,7 @@ export class Radial2D {
     setPalette(p) { this.palette = p; if (this.model.root) this.update(this.selected || this.model.root); }
     setTrailProvider(fn) { this.trailProvider = fn; }
     setHideLabels(b) { this.hideLabels = b; this.container.classList.toggle('hide-labels', b); }
+    setShowRelations(b) { this.showRelations = b; if (this.model.root) this.drawRelations(); }
     reset() { this.gLinks.selectAll('*').remove(); this.gRel.selectAll('*').remove(); this.gNodes.selectAll('*').remove(); }
     destroy() {
         this.ro.disconnect();
@@ -167,7 +186,7 @@ export class Radial2D {
     drawRelations() {
         const m = this.model, p = this.palette, sel = this.selected;
         this.gNodes.selectAll('.rel-ring').style('display', 'none');
-        const items = sel ? m.relationsFor(sel, { includeDescendants: sel.data.kind !== 'division' }).filter(r => r.other) : [];
+        const items = sel && this.showRelations ? m.relationsFor(sel, { includeDescendants: sel.data.kind !== 'division' }).filter(r => r.other) : [];
         const data = items.map(r => ({ ...r, rep: m.visibleRep(r.other) })).filter(r => r.rep !== sel);
         const curve = r => {
             const sx = sel.px, sy = sel.py, tx = r.rep.px, ty = r.rep.py;
