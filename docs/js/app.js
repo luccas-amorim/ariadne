@@ -15,7 +15,7 @@ const el = {
     breadcrumb: $('breadcrumb'), search: $('search'), results: $('search-results'),
     filterBtn: $('filter-btn'), filterPop: $('filter-pop'), filterCount: $('filter-count'),
     grow: $('ctl-grow'), collapse: $('ctl-collapse'),
-    seg2d: $('seg-2d'), seg3d: $('seg-3d'), outlineBtn: $('btn-outline'), outline: $('outline'),
+    seg2d: $('seg-2d'), seg3d: $('seg-3d'), outlineBtn: $('btn-outline'), outline: $('outline'), relationsBtn: $('btn-relations'),
     compareBtn: $('btn-compare'), studyBtn: $('btn-study'), exportBtn: $('btn-export'), exportPop: $('export-pop'), themeBtn: $('btn-theme'),
     compareBar: $('compare-bar'), compareA: $('compare-a'), compareB: $('compare-b'),
     about: $('about'), printFooter: $('print-footer')
@@ -25,7 +25,8 @@ const state = {
     data: null, index: [], model: null, renderer: null, mode: '2d',
     selected: null, growing: false, suppressRoute: null, booted: false,
     compare: null,   // { a, b, panes: [{model, renderer, el}], active }
-    outlineOpen: false
+    outlineOpen: false,
+    showRelations: (() => { try { return localStorage.getItem('lex-tree:relations') !== '0'; } catch { return true; } })()
 };
 const trail = new Trail();
 let study = null;
@@ -68,7 +69,17 @@ const trailProvider = key => trail.get(key);
 // ==========================================
 function makeRenderer(mode, container, model) {
     const opts = { onSelect: d => clickNode(d, model), palette: Theme.palette(), trailProvider };
-    return mode === '3d' ? new Tree3D(container, model, opts) : new Radial2D(container, model, opts);
+    const r = mode === '3d' ? new Tree3D(container, model, opts) : new Radial2D(container, model, opts);
+    r.setShowRelations(state.showRelations);
+    return r;
+}
+
+function setShowRelations(on) {
+    state.showRelations = on;
+    try { localStorage.setItem('lex-tree:relations', on ? '1' : '0'); } catch { /* ignore */ }
+    el.relationsBtn.setAttribute('aria-pressed', String(on));
+    if (state.renderer) state.renderer.setShowRelations(on);
+    if (state.compare) state.compare.panes.forEach(p => p.renderer.setShowRelations(on));
 }
 
 function ensureRenderer(mode) {
@@ -467,6 +478,9 @@ function withMode(mode) {
 el.seg2d.addEventListener('click', () => { location.hash = withMode('2d'); });
 el.seg3d.addEventListener('click', () => { location.hash = withMode('3d'); });
 
+el.relationsBtn.addEventListener('click', () => setShowRelations(!state.showRelations));
+el.relationsBtn.setAttribute('aria-pressed', String(state.showRelations));
+
 el.outlineBtn.addEventListener('click', () => {
     state.outlineOpen = !state.outlineOpen;
     el.outline.classList.toggle('hidden', !state.outlineOpen);
@@ -509,6 +523,7 @@ document.addEventListener('keydown', ev => {
     if (ev.key === 'Escape') { closePopovers(); el.collapse.click(); return; }
     if (ev.key === 'f' || ev.key === 'F') { activeRenderer().fit(); return; }
     if (ev.key === 'l' || ev.key === 'L') { el.outlineBtn.click(); return; }
+    if (ev.key === 'x' || ev.key === 'X') { setShowRelations(!state.showRelations); return; }
     if (!d) return;
     const go = n => { if (!n) return; if (state.compare) select(n, n, { reveal: true }); else location.hash = model.hashForNode(n); };
     if (ev.key === 'ArrowLeft') { ev.preventDefault(); go(d.parent); }
@@ -618,6 +633,7 @@ function enterCompare(a, b) {
         const model = new TreeModel(data);
         model.setView({ focus: id, diplomas: new Set(ids), showPlanned: false, mode: '2d' });
         const renderer = new Radial2D(pane, model, { onSelect: d => clickNode(d, model), palette: Theme.palette(), trailProvider });
+        renderer.setShowRelations(state.showRelations);
         pane.addEventListener('pointerdown', () => setActivePane(i));
         return { model, renderer, el: pane, id };
     });
