@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://luccas-amorim.github.io/lex-tree-br/data/schema.json",
-  "title": "Árvores Jurídicas BR — formato dos dados",
+  "$id": "https://luccas-amorim.github.io/ariadne/data/schema.json",
+  "title": "Ariadne — formato dos dados",
   "description": "Um arquivo por diploma legal (docs/data/<id>.json), um catálogo (index.json), as relações internormativas (relations.json) e o glossário (glossary.json). A árvore vai até Títulos e Capítulos; artigos aparecem apenas como faixa no campo subtitle.",
   "definitions": {
     "id": {
