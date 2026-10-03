@@ -22,7 +22,7 @@ Você pode **compartilhar** (copiar e redistribuir em qualquer meio ou formato) 
 
 Forma sugerida de atribuição:
 
-> "Árvores Jurídicas BR", de Luccas de Amorim e contribuidores, licenciado sob CC BY 4.0. https://github.com/luccas-amorim/lex-tree-br
+> "Ariadne — Árvores Jurídicas BR", de Luccas de Amorim e contribuidores, licenciado sob CC BY 4.0. https://github.com/luccas-amorim/ariadne
 
 ## Texto legal
 
