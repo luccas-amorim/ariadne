@@ -1,8 +1,10 @@
-# Árvores Jurídicas BR 🌳⚖️
+# Ariadne — Árvores Jurídicas BR 🧵⚖️
+
+<sub>O nome vem de Ariadne. [Por quê?](MITO.md)</sub>
 
 A macroestrutura da legislação brasileira em uma única árvore interativa, em duas ou três dimensões. A Constituição ocupa o centro; dela derivam os ramos do Direito, de cada ramo os diplomas, e de cada diploma seus Livros, Títulos e Capítulos.
 
-**Acesse:** [luccas-amorim.github.io/lex-tree-br](https://luccas-amorim.github.io/lex-tree-br/)
+**Acesse:** [luccas-amorim.github.io/ariadne](https://luccas-amorim.github.io/ariadne/)
 
 ## O que é
 
@@ -62,7 +64,7 @@ Os dados são JSON estáticos servidos junto com a página e podem ser consumido
 | `data/tours.json` | Percursos guiados: sequências de nós com texto de transição |
 | `data/schema.json` | JSON Schema de todos os formatos |
 
-URL base: `https://luccas-amorim.github.io/lex-tree-br/data/`. Licença do conteúdo: CC BY 4.0 (veja abaixo). O GitHub Pages responde com CORS liberado para leitura.
+URL base: `https://luccas-amorim.github.io/ariadne/data/`. Licença do conteúdo: CC BY 4.0 (veja abaixo). O GitHub Pages responde com CORS liberado para leitura.
 
 ## Arquitetura
 
