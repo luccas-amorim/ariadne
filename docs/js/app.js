@@ -318,7 +318,7 @@ function showPanel(d, model = activeModel()) {
             tags: [tag(r.name, r.color), natTag(m), tag('Em mapeamento', '#94a3b8')],
             title: m.title, subtitle: m.norm,
             html: `Este diploma ainda não foi mapeado. ${m.note ? esc(m.note) + ' ' : ''}Contribuições são bem-vindas: o guia explica como estruturar Títulos e Capítulos em um arquivo JSON.`,
-            extra: '', actions: [link('Como contribuir', 'https://github.com/luccas-amorim/lex-tree-br/blob/main/CONTRIBUTING.md'), link('Texto oficial', m.source)]
+            extra: '', actions: [link('Como contribuir', 'https://github.com/luccas-amorim/ariadne/blob/main/CONTRIBUTING.md'), link('Texto oficial', m.source)]
         });
     } else if (d.data.kind === 'diploma') {
         const m = d.data.meta;
@@ -357,7 +357,7 @@ function setPanel({ tags, title, subtitle, html, extra, actions }) {
             <p id="node-text" class="text-base sm:text-lg leading-relaxed max-w-2xl">${html}</p>
             <div id="node-extra" class="w-full max-w-2xl flex flex-col items-center">${extra || ''}</div>
             <div id="node-actions" class="flex flex-wrap justify-center gap-2 mt-4"></div>
-            <p class="print-footer">Árvores Jurídicas BR · ${esc(location.href)} · código MIT · conteúdo CC BY 4.0</p>`;
+            <p class="print-footer">Ariadne — Árvores Jurídicas BR · ${esc(location.href)} · código MIT · conteúdo CC BY 4.0</p>`;
         const box = el.panel.querySelector('#node-actions');
         actions.forEach(a => {
             const b = document.createElement('a');
