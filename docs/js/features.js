@@ -130,7 +130,7 @@ export function svgSnapshot(svgEl, gEl, { title, subtitle, palette, bounds, tran
     svg.innerHTML = `<rect width="100%" height="100%" fill="${palette.bg}"/>` +
         (title ? `<text x="${pad}" y="${pad - 10}" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="700" fill="${palette.textStrong}">${esc(title)}</text>` +
             `<text x="${pad}" y="${pad + 14}" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="${palette.textMuted}">${esc(subtitle || '')}</text>` : '') +
-        `<text x="${pad}" y="${H - 16}" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="${palette.textMuted}">Árvores Jurídicas BR · luccas-amorim.github.io/lex-tree-br · código MIT · conteúdo CC BY 4.0</text>`;
+        `<text x="${pad}" y="${H - 16}" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="${palette.textMuted}">Ariadne · luccas-amorim.github.io/ariadne · código MIT · conteúdo CC BY 4.0</text>`;
     svg.appendChild(clone);
     return new XMLSerializer().serializeToString(svg);
 }
