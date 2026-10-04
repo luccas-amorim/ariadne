@@ -141,6 +141,12 @@ input[type="checkbox"] { accent-color: var(--text-strong); }
 .seg a + a { border-left: 1px solid var(--border-strong); }
 .seg a[aria-current="page"] { background: var(--accent); color: var(--accent-text); font-weight: 600; }
 #mode-nav { flex: 0 0 auto; }
+/* Celular: o seletor de vistas ganha linha própria */
+@media (max-width: 639px) {
+    .header-top { flex-wrap: wrap; row-gap: .5rem; }
+    #mode-nav { order: 3; width: 100%; display: flex; }
+    #mode-nav a { flex: 1 1 auto; text-align: center; white-space: nowrap; font-size: .75rem; padding-left: .3rem; padding-right: .3rem; }
+}
 
 /* Popovers */
 .pop { position: absolute; right: 0; margin-top: .25rem; background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; box-shadow: var(--shadow-lg); z-index: 30; font-size: .875rem; }
