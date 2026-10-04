@@ -161,11 +161,13 @@ function main() {
 
   const summary = [];
   const keys = new Set();
+  const docYears = {};
   for (const id of catalog.diplomas || []) {
     const file = `${id}.json`;
     const doc = readJson(file);
     if (!doc) continue;
     checkMeta(file, doc, ramos, { requireYear: true });
+    docYears[id] = doc.year;
     if (doc.id !== id) err(file, `id "${doc.id}" diferente do nome do arquivo`);
     if (!doc.root || typeof doc.root !== 'object') {
       err(file, 'campo root ausente');
@@ -205,7 +207,17 @@ function main() {
       rel.relations.forEach((r, i) => {
         const where = `relations[${i}]`;
         for (const k of ['from', 'to', 'type']) if (typeof r[k] !== 'string') err('relations.json', `${where}: campo ausente: ${k}`);
-        for (const k of Object.keys(r)) if (!['from', 'to', 'type', 'note'].includes(k)) err('relations.json', `${where}: campo não previsto: ${k}`);
+        for (const k of Object.keys(r)) if (!['from', 'to', 'type', 'note', 'basis', 'since', 'until', 'status'].includes(k)) err('relations.json', `${where}: campo não previsto: ${k}`);
+        if (r.basis !== undefined && (typeof r.basis !== 'string' || r.basis.length < 3)) err('relations.json', `${where}: basis curto demais`);
+        if (r.status !== undefined && !STATUS.has(r.status)) err('relations.json', `${where}: status desconhecido: ${r.status}`);
+        for (const k of ['since', 'until']) if (r[k] !== undefined && (!Number.isInteger(r[k]) || r[k] < 1800)) err('relations.json', `${where}: ${k} deve ser um ano`);
+        if (Number.isInteger(r.since) && Number.isInteger(r.until) && r.since > r.until) err('relations.json', `${where}: since (${r.since}) posterior a until (${r.until})`);
+        if (Number.isInteger(r.since)) {
+          for (const k of ['from', 'to']) {
+            const y = typeof r[k] === 'string' ? docYears[r[k].split('/')[0]] : undefined;
+            if (typeof y === 'number' && r.since < y) err('relations.json', `${where}: since (${r.since}) anterior ao diploma de ${k} (${y})`);
+          }
+        }
         for (const k of ['from', 'to']) {
           if (typeof r[k] !== 'string') continue;
           if (!KEY_RE.test(r[k])) err('relations.json', `${where}: ${k} fora do padrão diploma/divisao: ${r[k]}`);

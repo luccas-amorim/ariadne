@@ -2,6 +2,8 @@
 // constrói a hierarquia (centro → ramos → diplomas → divisões), controla a visão
 // (foco, filtro), a expansão, o layout radial, a URL e as relações internormativas.
 
+import { relationActiveAt } from './data.js';
+
 const RING = [0, 150, 290];   // raios das três primeiras camadas (centro, ramos, diplomas)
 const RING_STEP = 125;        // acréscimo mínimo de raio por nível a partir daí
 const RING_MIN_GAP = 95;
@@ -287,22 +289,29 @@ export class TreeModel {
     }
 
     // ---------- relações internormativas ----------
+    /** Relações vigentes no ano da visão (todas, se a linha do tempo estiver desligada). */
+    activeRelations() {
+        const Y = this.view.year == null ? null : this.view.year;
+        return this.data.relations.filter(rel => relationActiveAt(this.data, rel, Y));
+    }
+
     /**
      * Relações do nó (como origem ou destino), incluindo as de seus descendentes recolhidos
-     * quando `includeDescendants` é true. Cada item: { rel, dir, other, otherKey }.
+     * quando `includeDescendants` é true. Respeita since/until quando a linha do tempo está ativa.
+     * Cada item: { rel, direction: 'in' | 'out', other, otherKey, selfKey }.
      * `other` é o nó correspondente na árvore atual, ou null se o diploma não está visível.
      */
     relationsFor(d, { includeDescendants = false } = {}) {
         const keys = new Set([d.key]);
         if (includeDescendants) (function walk(x) { (x.children || x._children || []).forEach(c => { keys.add(c.key); walk(c); }); })(d);
         const out = [];
-        for (const rel of this.data.relations) {
-            let dir = null, otherKey = null;
-            if (keys.has(rel.from)) { dir = 'out'; otherKey = rel.to; }
-            else if (keys.has(rel.to)) { dir = 'in'; otherKey = rel.from; }
-            if (!dir) continue;
+        for (const rel of this.activeRelations()) {
+            let direction = null, otherKey = null;
+            if (keys.has(rel.from)) { direction = 'out'; otherKey = rel.to; }
+            else if (keys.has(rel.to)) { direction = 'in'; otherKey = rel.from; }
+            if (!direction) continue;
             if (keys.has(otherKey)) continue; // relação interna ao subconjunto
-            out.push({ rel, dir, otherKey, other: this.byKey.get(otherKey) || null, selfKey: dir === 'out' ? rel.from : rel.to });
+            out.push({ rel, direction, otherKey, other: this.byKey.get(otherKey) || null, selfKey: direction === 'out' ? rel.from : rel.to });
         }
         return out;
     }

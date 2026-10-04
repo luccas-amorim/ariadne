@@ -396,25 +396,30 @@ export class Tree3D {
         this.relMeshes = [];
         if (!sel || !this.showRelations) return;
         const items = m.relationsFor(sel, { includeDescendants: sel.data.kind !== 'division' }).filter(r => r.other);
+        const top = d => { const v = this.posOf(d), dm = this.dims(d); v.y += dm.sphere ? dm.r * 0.7 : dm.h / 2; return v; };
         for (const r of items) {
             const rep = m.visibleRep(r.other);
             if (rep === sel) continue;
-            const a = this.posOf(sel), b = this.posOf(rep);
+            // o arco sai da origem da relação e chega ao destino, onde fica o cone
+            const [from, to] = r.direction === 'out' ? [sel, rep] : [rep, sel];
+            const a = top(from), b = top(to);
             const mid = a.clone().add(b).multiplyScalar(0.5);
             mid.y = Math.max(a.y, b.y) + 160 + a.distanceTo(b) * 0.12;
             const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
             const resolved = rep === r.other;
+            const radius = resolved ? 3.2 : 2.2;
             const mat = this.material(p.relation, { emissive: 0.6, opacity: resolved ? 0.95 : 0.5, rough: 0.4 });
-            const tube = this.makeTube(curve, resolved ? 3.2 : 2.2, mat, 32);
+            const tube = this.makeTube(curve, radius, mat, 32);
             tube.castShadow = false;
             tube.renderOrder = 5;
             this.scene.add(tube);
             this.relMeshes.push(tube);
-            // marcador no destino
-            const dot = new THREE.Mesh(new THREE.SphereGeometry(7, 16, 12), mat);
-            dot.position.copy(b); dot.position.y += this.dims(rep).h / 2 + 6;
-            this.scene.add(dot);
-            this.relMeshes.push(dot);
+            const cone = new THREE.Mesh(new THREE.ConeGeometry(radius * 3.2, 30, 14), mat);
+            cone.position.copy(curve.getPoint(0.96));
+            cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), curve.getTangent(0.96).normalize());
+            cone.userData.relation = r.rel;
+            this.scene.add(cone);
+            this.relMeshes.push(cone);
         }
     }
 

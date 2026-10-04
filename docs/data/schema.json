@@ -208,7 +208,11 @@
               "from": { "$ref": "#/definitions/nodeKey" },
               "to": { "$ref": "#/definitions/nodeKey" },
               "type": { "type": "string", "description": "Chave de index.json → relationTypes." },
-              "note": { "type": "string", "minLength": 10 }
+              "note": { "type": "string", "minLength": 10 },
+              "basis": { "type": "string", "minLength": 3, "description": "Dispositivo que fundamenta a relação, separado da nota. Ex.: 'art. 5º, LXI a LXVI, da CF'." },
+              "since": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a relação passou a valer, quando posterior aos próprios nós. Não pode ser anterior ao year dos dois diplomas." },
+              "until": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a relação deixou de valer. A linha do tempo a oculta a partir daí." },
+              "status": { "$ref": "#/definitions/status" }
             }
           }
         }

@@ -4,6 +4,7 @@ import { mix } from './features.js';
 
 const DURATION = 450;
 const NODE_H = 30;
+let markerSeq = 0;
 
 export class Radial2D {
     constructor(container, model, { onSelect, palette, trailProvider = () => null } = {}) {
@@ -19,6 +20,13 @@ export class Radial2D {
 
         this.svg = d3.select(container).append('svg').attr('width', '100%').attr('height', '100%').attr('role', 'img').attr('aria-label', 'Árvore radial da legislação');
         this.g = this.svg.append('g');
+        // Seta das relações: tamanho fixo em unidades do desenho, para não crescer com a espessura.
+        // Fica dentro de `g` para acompanhar a exportação SVG.
+        this.markerId = `rel-arrow-${++markerSeq}`;
+        this.g.append('defs').append('marker').attr('id', this.markerId)
+            .attr('viewBox', '0 0 10 10').attr('refX', 8).attr('refY', 5)
+            .attr('markerWidth', 11).attr('markerHeight', 11).attr('markerUnits', 'userSpaceOnUse').attr('orient', 'auto')
+            .append('path').attr('class', 'relation-arrow').attr('d', 'M0 0L10 5L0 10z');
         this.gLinks = this.g.append('g').attr('class', 'links');
         this.gRel = this.g.append('g').attr('class', 'relations');
         this.gNodes = this.g.append('g').attr('class', 'nodes');
@@ -215,30 +223,55 @@ export class Radial2D {
         this.drawRelations();
     }
 
-    /** Arcos das relações internormativas do nó selecionado até o representante visível do outro nó. */
+    /** Distância do centro do nó até a borda, na direção (ux, uy), com folga para o anel de relação. */
+    borderOffset(d, ux, uy, pad = 0) {
+        if (d.data.kind === 'center') return 46 + pad;
+        const w = this.model.boxWidth(d) / 2 + pad;
+        const h = (d.data.kind === 'ramo' ? 36 : d.data.kind === 'diploma' ? NODE_H : NODE_H - 2) / 2 + pad;
+        return Math.min(w / Math.max(Math.abs(ux), 1e-6), h / Math.max(Math.abs(uy), 1e-6));
+    }
+
+    /** Arco dirigido de `a` para `b`, puxado para o centro, aparado nas bordas dos dois nós. */
+    relationGeometry(a, b) {
+        const cx = (a.px + b.px) / 2 * 0.35, cy = (a.py + b.py) / 2 * 0.35;
+        let ux = cx - a.px, uy = cy - a.py, l = Math.hypot(ux, uy) || 1; ux /= l; uy /= l;
+        const so = this.borderOffset(a, ux, uy, 2);
+        const sx = a.px + ux * so, sy = a.py + uy * so;
+        let vx = b.px - cx, vy = b.py - cy, k = Math.hypot(vx, vy) || 1; vx /= k; vy /= k;
+        const eo = this.borderOffset(b, vx, vy, 7);
+        const ex = b.px - vx * eo, ey = b.py - vy * eo;
+        return { d: `M ${sx} ${sy} Q ${cx} ${cy} ${ex} ${ey}`, mx: 0.25 * sx + 0.5 * cx + 0.25 * ex, my: 0.25 * sy + 0.5 * cy + 0.25 * ey };
+    }
+
+    /**
+     * Arcos das relações internormativas do nó selecionado até o representante visível do outro nó.
+     * O arco vai da origem ao destino da relação, com seta no destino.
+     */
     drawRelations() {
         const m = this.model, p = this.palette, sel = this.selected;
         this.gNodes.selectAll('.rel-ring').style('display', 'none');
+        this.g.select('.relation-arrow').attr('fill', p.relation);
         const items = sel && this.showRelations ? m.relationsFor(sel, { includeDescendants: sel.data.kind !== 'division' }).filter(r => r.other) : [];
-        const data = items.map(r => ({ ...r, rep: m.visibleRep(r.other) })).filter(r => r.rep !== sel);
-        const curve = r => {
-            const sx = sel.px, sy = sel.py, tx = r.rep.px, ty = r.rep.py;
-            const cx = (sx + tx) / 2 * 0.35, cy = (sy + ty) / 2 * 0.35; // puxa a curva para o centro
-            return `M ${sx} ${sy} Q ${cx} ${cy} ${tx} ${ty}`;
-        };
-        const rel = this.gRel.selectAll('path.relation').data(data, r => `${r.rel.from}|${r.rel.to}|${r.rel.type}`);
-        rel.enter().append('path').attr('class', r => `relation${r.rep === r.other ? ' resolved' : ''}`).attr('opacity', 0)
-            .merge(rel).attr('class', r => `relation${r.rep === r.other ? ' resolved' : ''}`)
-            .transition().duration(DURATION).attr('opacity', 1).attr('d', curve);
+        const data = items.map(r => {
+            const rep = m.visibleRep(r.other);
+            const [a, b] = r.direction === 'out' ? [sel, rep] : [rep, sel];
+            return { ...r, rep, geo: this.relationGeometry(a, b) };
+        }).filter(r => r.rep !== sel);
+        const keyOf = r => `${r.rel.from}|${r.rel.to}|${r.rel.type}`;
+        const cls = r => `relation ${r.direction}${r.rep === r.other ? ' resolved' : ''}`;
+        const rel = this.gRel.selectAll('path.relation').data(data, keyOf);
+        rel.enter().append('path').attr('opacity', 0)
+            .merge(rel).attr('class', cls).attr('marker-end', `url(#${this.markerId})`)
+            .transition().duration(DURATION).attr('opacity', 1).attr('d', r => r.geo.d);
         rel.exit().transition().duration(200).attr('opacity', 0).remove();
 
-        const lab = this.gRel.selectAll('text.relation-label').data(data, r => `${r.rel.from}|${r.rel.to}|${r.rel.type}`);
+        const lab = this.gRel.selectAll('text.relation-label').data(data, keyOf);
         lab.enter().append('text').attr('class', 'relation-label').attr('text-anchor', 'middle').attr('opacity', 0)
             .merge(lab)
             .text(r => (m.data.relationTypes[r.rel.type] || {}).label || r.rel.type)
             .transition().duration(DURATION).attr('opacity', 1)
-            .attr('x', r => (sel.px + r.rep.px) / 2 * 0.65 + (sel.px + r.rep.px) / 2 * 0.35 * 0.5)
-            .attr('y', r => (sel.py + r.rep.py) / 2 * 0.65 + (sel.py + r.rep.py) / 2 * 0.35 * 0.5 - 4);
+            .attr('x', r => r.geo.mx)
+            .attr('y', r => r.geo.my - 4);
         lab.exit().remove();
 
         const reps = new Set(data.map(r => r.rep.key));

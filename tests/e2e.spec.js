@@ -37,6 +37,23 @@ test('link profundo expande os ancestrais e desenha relações internormativas',
   await expect(page.locator('ul.relations')).toContainText('processa');
 });
 
+test('relações têm direção: setas chegam ao CP e saem dele para a CLT', async ({ page }) => {
+  await page.goto('/#/cp');
+  await expect(page.locator('#view-main path.relation[marker-end]')).toHaveCount(8);
+  await expect(page.locator('#view-main path.relation.in')).toHaveCount(7);
+  await expect(page.locator('#view-main path.relation.out')).toHaveCount(1);
+  await expect(page.locator('ul.relations')).toContainText('fundamento: arts. 337-E a 337-P do CP');
+});
+
+test('relação some antes da vigência dos dois nós', async ({ page }) => {
+  await page.goto('/#/cf/titulo-iii/cap-vii');
+  await expect(page.locator('#view-main path.relation')).toHaveCount(2);
+  await page.goto('/#/cf/titulo-iii/cap-vii?ano=1990');
+  await expect(page.locator('#tl-year')).toHaveText('1990');
+  await expect(page.locator('#view-main path.relation')).toHaveCount(0);
+  await expect(page.locator('ul.relations')).toHaveCount(0);
+});
+
 test('botão Relações oculta e reexibe as linhas, e a escolha persiste', async ({ page }) => {
   await page.goto('/#/cpc/parte-especial/livro-i');
   await expect(page.locator('#view-main path.relation').first()).toBeVisible();

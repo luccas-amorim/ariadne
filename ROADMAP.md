@@ -48,7 +48,8 @@ Há 27 relações. O formato comporta centenas. Frentes:
 - [ ] Relações **entre divisões**, não só entre diploma e divisão: por exemplo, CC Título IX (Responsabilidade Civil) → CDC Capítulo IV; CP Título I (crimes contra a pessoa) → Lei 11.340 quando mapeada.
 - [ ] Relações de **aplicação subsidiária** sistemáticas: CPC → CLT, CPC → CDC, CPC → ECA, CPC → Lei 9.099, Lei 9.784 → processos administrativos específicos.
 - [ ] Tipos novos, se necessários (ex.: "revoga parcialmente", "remete a"), definidos em `index.json → relationTypes` com descrição.
-- [ ] Mostrar na interface a **direção** da relação com uma seta discreta no fim do arco.
+- [x] Mostrar na interface a **direção** da relação com uma seta discreta no fim do arco.
+- [ ] Preencher `basis` nas 11 relações cuja nota não cita o dispositivo, e `status` depois de revisar cada uma.
 
 ## 5. Linha do tempo
 

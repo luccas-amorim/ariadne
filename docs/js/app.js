@@ -237,10 +237,10 @@ function relationsHtml(model, d) {
         ${items.map(r => {
             const t = types[r.rel.type] || { label: r.rel.type };
             const selfLabel = r.selfKey !== d.key ? `<span class="muted">${esc(nodeLabel(r.selfKey))}</span> ` : '';
-            const phrase = r.dir === 'out'
+            const phrase = r.direction === 'out'
                 ? `${selfLabel}<span class="rel-type">${esc(t.label)}</span> <a href="${hrefFor(r)}">${esc(nodeLabel(r.otherKey))}</a>`
                 : `<a href="${hrefFor(r)}">${esc(nodeLabel(r.otherKey))}</a> <span class="rel-type">${esc(t.label)}</span> ${selfLabel || 'este nó'}`;
-            return `<li>${phrase}${r.rel.note ? `<div class="muted text-xs mt-0.5">${esc(r.rel.note)}</div>` : ''}${!r.other ? '<div class="muted text-xs">Diploma oculto pelo filtro; o link o reexibe.</div>' : ''}</li>`;
+            return `<li>${phrase}${r.rel.note ? `<div class="muted text-xs mt-0.5">${esc(r.rel.note)}</div>` : ''}${r.rel.basis ? `<div class="rel-basis">fundamento: ${esc(r.rel.basis)}</div>` : ''}${!r.other ? '<div class="muted text-xs">Diploma oculto pelo filtro; o link o reexibe.</div>' : ''}</li>`;
         }).join('')}
     </ul>`;
 }

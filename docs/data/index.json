@@ -115,6 +115,7 @@
     "subsidiario": { "label": "aplicação subsidiária", "description": "A outra divisão se aplica nas lacunas desta." },
     "excepciona": { "label": "excepciona", "description": "Afasta ou modula a regra geral da outra divisão." },
     "insere": { "label": "insere em", "description": "Introduz dispositivos no corpo da outra divisão." },
-    "organiza": { "label": "organiza", "description": "Estrutura o órgão ou sistema previsto na outra divisão." }
+    "organiza": { "label": "organiza", "description": "Estrutura o órgão ou sistema previsto na outra divisão." },
+    "sucede": { "label": "sucede", "description": "O diploma substitui um antecessor que ocupava o mesmo lugar no ordenamento." }
   }
 }

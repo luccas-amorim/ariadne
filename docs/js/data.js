@@ -83,6 +83,39 @@ export function urnOf(data, key) {
     return { urn: fragment ? `${doc.urn}!${fragment}` : doc.urn, base: doc.urn, fragment };
 }
 
+/** Vigência de uma chave: { since, until } pelo ano do diploma e pelos since/until da divisão e dos ancestrais. */
+export function keySpan(data, key) {
+    const [docId, ...path] = key.split('/');
+    const doc = data.diplomas[docId];
+    if (!doc) return { since: null, until: null };
+    let since = doc.year || null, until = null, n = doc.root;
+    for (const seg of path) {
+        n = (n.children || []).find(c => c.id === seg);
+        if (!n) break;
+        if (n.since != null) since = Math.max(since || 0, n.since);
+        if (n.until != null) until = until == null ? n.until : Math.min(until, n.until);
+    }
+    return { since, until };
+}
+
+/**
+ * Vigência efetiva de uma relação: since/until explícitos, ou a interseção da vigência dos dois nós.
+ * until é exclusivo (a relação some no ano de until), como nas divisões.
+ */
+export function relationSpan(data, rel) {
+    const a = keySpan(data, rel.from), b = keySpan(data, rel.to);
+    const sinces = [a.since, b.since, rel.since].filter(v => v != null);
+    const untils = [a.until, b.until, rel.until].filter(v => v != null);
+    return { since: sinces.length ? Math.max(...sinces) : null, until: untils.length ? Math.min(...untils) : null };
+}
+
+/** A relação vale no ano Y? (Y null = hoje.) */
+export function relationActiveAt(data, rel, Y) {
+    if (Y == null) return rel.until == null || rel.until > new Date().getFullYear();
+    const s = relationSpan(data, rel);
+    return (s.since == null || s.since <= Y) && (s.until == null || Y < s.until);
+}
+
 /** Reconhece uma URN LexML, um IRI do Ariadne ou uma chave colados na busca. */
 export function parseIdentifier(q) {
     const s = String(q).trim();

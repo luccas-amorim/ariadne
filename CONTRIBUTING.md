@@ -90,12 +90,14 @@ O JSON Schema completo está em `docs/data/schema.json`; com a linha `$schema` n
 Cada relação liga duas divisões de **diplomas distintos**:
 
 ```json
-{ "from": "lep/titulo-v", "to": "cp/parte-geral/titulo-v", "type": "executa", "note": "A LEP executa as penas cominadas segundo o Título V do Código Penal." }
+{ "from": "eca/livro-ii/titulo-iii", "to": "cp/parte-geral/titulo-iii", "type": "excepciona", "note": "Menores de 18 anos são inimputáveis e sujeitos ao regime do ato infracional.", "basis": "art. 27 do CP" }
 ```
 
 * `from` e `to` são chaves `diploma/divisao/subdivisao`, exatamente como aparecem na URL.
-* `type` é uma chave de `relationTypes` em `index.json` (concretiza, regulamenta, processa, executa, subsidiario, excepciona, insere, organiza). Para propor um tipo novo, defina-o lá com descrição.
-* `note` cita o dispositivo que fundamenta a relação. Sem fundamento, sem relação.
+* A leitura é `from` → `type` → `to`: a seta da interface aponta para `to`.
+* `type` é uma chave de `relationTypes` em `index.json` (concretiza, regulamenta, processa, executa, subsidiario, excepciona, insere, organiza, sucede). Para propor um tipo novo, defina-o lá com descrição. `sucede` é reservado à ligação entre um diploma e seus `predecessors`.
+* `note` explica a relação; `basis` cita o dispositivo que a fundamenta (ex.: `art. 5º, LV, da CF`). Sem fundamento, sem relação.
+* Opcionais: `since` e `until` (anos) quando a relação começa ou termina em data diferente da vigência dos próprios nós, por exemplo quando uma lei posterior cria a remissão. `since` não pode ser anterior ao `year` dos dois diplomas. `status` (`rascunho` | `revisado`) segue a mesma revisão por pares dos diplomas.
 
 ## 5-A. Percursos guiados: `docs/data/tours.json`
 
