@@ -40,6 +40,7 @@
             <nav id="mode-nav" class="seg" aria-label="Vista">
                 <a id="mode-arvore" href="#/" aria-current="page">Árvore</a>
                 <a id="mode-grafo" href="#/grafo">Grafo</a>
+                <a id="mode-tempo" href="#/tempo">Linha do tempo</a>
             </nav>
             <button id="about-btn" class="btn btn-sm md:hidden">Sobre</button>
         </div>
@@ -69,7 +70,7 @@
                 <button id="seg-3d" type="button" aria-pressed="false" title="A mesma árvore em três dimensões">3D</button>
             </div>
             <span class="sep"></span>
-            <button id="btn-timeline" class="btn btn-sm" aria-pressed="false" title="Ver o ordenamento como era em cada ano (T)">Linha do tempo</button>
+            <button id="btn-timeline" class="btn btn-sm" aria-pressed="false" title="Ver a árvore como era em cada ano (T)">Vigência</button>
             <div class="relative">
                 <button id="btn-tours" class="btn btn-sm" aria-haspopup="true" aria-expanded="false" title="Percursos guiados pela legislação">Percursos</button>
                 <div id="tours-pop" class="pop hidden w-96 max-h-[70vh] overflow-y-auto p-2"></div>
@@ -98,6 +99,10 @@
         <div class="px-4 sm:px-6 py-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
             <div class="flex items-center gap-2">
                 <button id="tl-play" class="ctl" title="Reproduzir a história do ordenamento" aria-label="Reproduzir">▶</button>
+                <label class="sr-only" for="tl-speed">Velocidade</label>
+                <select id="tl-speed" class="text-xs py-1 px-1" title="Velocidade da reprodução">
+                    <option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option>
+                </select>
                 <span id="tl-year" class="text-lg font-bold strong tabular-nums w-14 text-center">hoje</span>
             </div>
             <div class="flex-1 min-w-0 flex items-center gap-2">
@@ -167,6 +172,30 @@
             </div>
         </div>
         <aside id="grafo-aside" aria-label="Resumo, tipos e matriz"></aside>
+    </section>
+
+    <!-- Vista Linha do tempo -->
+    <section id="tempo" class="hidden" aria-label="Linha do tempo">
+        <div id="tempo-main">
+            <div id="tempo-bar">
+                <span class="aula-title">Linha do tempo</span>
+                <span class="flex-1"></span>
+                <span class="muted text-sm">Comparar</span>
+                <label class="tempo-year"><span>A</span><input id="tempo-a" type="number" inputmode="numeric" aria-label="Ano A"></label>
+                <span aria-hidden="true">→</span>
+                <label class="tempo-year b"><span>B</span><input id="tempo-b" type="number" inputmode="numeric" aria-label="Ano B"></label>
+                <button id="tempo-play" type="button" class="btn btn-sm" title="Ver a árvore crescer a partir do ano A">▶ Reproduzir</button>
+            </div>
+            <div id="tempo-lanes"></div>
+            <div class="tempo-legend" aria-hidden="true">
+                <span><i class="lg-seg"></i>vigente</span>
+                <span><i class="lg-seg ghost"></i>antecessor</span>
+                <span><i class="lg-mark"></i>marco estrutural</span>
+                <span><i class="lg-window"></i>janela A → B (arraste as bordas)</span>
+                <span class="muted">Clique numa faixa para abrir a árvore daquele diploma no ano A.</span>
+            </div>
+        </div>
+        <aside id="tempo-aside" aria-label="Diff estrutural e genealogia" aria-live="polite"></aside>
     </section>
 
     <div id="workspace">

@@ -9,6 +9,7 @@ import { Trail, Theme, Fullscreen, svgSnapshot, downloadSvg, downloadPngFromSvg,
 import { Study } from './study.js';
 import { Aula } from './aula.js';
 import { GraphView } from './graph.js';
+import { TimelineView } from './timeline.js';
 
 const $ = id => document.getElementById(id);
 const el = {
@@ -24,8 +25,8 @@ const el = {
     toursBtn: $('btn-tours'), toursPop: $('tours-pop'), tourCard: $('tour-card'),
     about: $('about'), printFooter: $('print-footer'),
     treeContainer: $('tree-container'), fsBtn: $('ctl-fullscreen'), aulaBtn: $('btn-aula'),
-    aula: $('aula'), aulaFs: $('aula-fs'), grafo: $('grafo'),
-    modeArvore: $('mode-arvore'), modeGrafo: $('mode-grafo')
+    aula: $('aula'), aulaFs: $('aula-fs'), grafo: $('grafo'), tempo: $('tempo'), tlSpeed: $('tl-speed'),
+    modeNav: { arvore: $('mode-arvore'), grafo: $('mode-grafo'), tempo: $('mode-tempo') }
 };
 
 const state = {
@@ -36,11 +37,12 @@ const state = {
     showRelations: (() => { try { return localStorage.getItem('lex-tree:relations') !== '0'; } catch { return true; } })(),
     events: [], timelineOpen: false, playing: null,
     tour: null,      // { tour, step }
-    aula: null, aulaActive: false,
-    graph: null, graphActive: false,
+    view: null,      // vista fora da árvore ativa: 'aula' | 'grafo' | 'tempo' (ver VISTAS)
+    pendingPlay: false,
     tab: 'sintese'   // aba do painel (aba= na URL)
 };
 const trail = new Trail();
+const views = {};   // vistas fora da árvore: nome → { el, ctl }
 let study = null;
 
 // ==========================================
@@ -56,17 +58,23 @@ async function boot() {
         state.events = timelineEvents(state.data);
         initTimeline();
         renderToursPop();
-        state.graph = new GraphView({
-            data: state.data, palette: Theme.palette(), navigate: h => { location.hash = h; },
-            els: { stage: $('grafo-stage'), aside: $('grafo-aside'), count: $('grafo-count'), byDiploma: $('grafo-diploma'), byDivision: $('grafo-divisao') }
-        });
-        state.aula = new Aula({
-            data: state.data, makeRenderer, navigate: h => { location.hash = h; },
+        const navigate = h => { location.hash = h; };
+        views.aula = { el: el.aula, ctl: new Aula({
+            data: state.data, makeRenderer, navigate,
             els: {
                 view: $('aula-view'), count: $('aula-count'), seg2d: $('aula-2d'), seg3d: $('aula-3d'), show: $('aula-show'),
                 clear: $('aula-clear'), refit: $('aula-refit'), hint: $('aula-hint'), types: $('aula-types'), foot: $('aula-foot')
             }
-        });
+        }) };
+        views.grafo = { el: el.grafo, ctl: new GraphView({
+            data: state.data, palette: Theme.palette(), navigate,
+            els: { stage: $('grafo-stage'), aside: $('grafo-aside'), count: $('grafo-count'), byDiploma: $('grafo-diploma'), byDivision: $('grafo-divisao') }
+        }) };
+        views.tempo = { el: el.tempo, ctl: new TimelineView({
+            data: state.data, palette: Theme.palette(), navigate,
+            onPlay: year => { state.pendingPlay = true; location.hash = `#/?ano=${year}`; },
+            els: { lanes: $('tempo-lanes'), aside: $('tempo-aside'), a: $('tempo-a'), b: $('tempo-b'), play: $('tempo-play') }
+        }) };
         el.loading.remove();
         study = new Study({
             model: state.model, trail, container: el.panel,
@@ -136,13 +144,12 @@ function route() {
     const all = state.model.catalog.diplomas;
     const dq = view.diplomas.size !== all.length ? `?d=${[...view.diplomas].join(',')}` : '';
     el.aulaBtn.setAttribute('href', '#/aula' + dq);
-    el.modeArvore.setAttribute('href', '#/' + dq);
-    el.modeGrafo.setAttribute('href', '#/grafo' + dq);
-    setModeNav(parts[0] === 'grafo' ? 'grafo' : 'arvore');
-    if (parts[0] === 'aula') { if (state.graphActive) exitGraph(); enterAula(view, query); return; }
-    if (state.aulaActive) exitAula();
-    if (parts[0] === 'grafo') { enterGraph(view, query); return; }
-    if (state.graphActive) exitGraph();
+    el.modeNav.arvore.setAttribute('href', '#/' + dq);
+    el.modeNav.grafo.setAttribute('href', '#/grafo' + dq);
+    el.modeNav.tempo.setAttribute('href', '#/tempo' + dq);
+    setModeNav(parts[0]);
+    if (views[parts[0]]) { enterView(parts[0], view, query); return; }
+    if (state.view) exitView();
     if (parts[0] === 'compare') { enterCompare(query.get('a'), query.get('b')); return; }
     if (state.compare) exitCompare();
     if (parts[0] === 'mapa') { location.hash = '#/' + state.model.viewParams(view); return; }
@@ -153,6 +160,7 @@ function route() {
     let fresh = rendererChanged || rebuilt || !state.booted;
     if (rebuilt) renderFilter();
     syncTimelineUi();
+    if (state.pendingPlay) { state.pendingPlay = false; setTimeout(play, 400); }
 
     const target = model.resolvePath(parts);
     if (!target) { location.hash = model.rootHash(); return; }
@@ -345,7 +353,7 @@ function showPanel(d, model = activeModel()) {
     const noteHtml = m => m.note ? `<p class="panel-note">${esc(m.note)}</p>` : '';
     const full = (extra = {}) => ({ relations: relationsTab(model, d), history: historyTab(model, d), dados: dataTab(model, d), ...extra });
 
-    if (d.data.kind === 'center' && model.isFocus()) {
+    if (d.data.kind === 'center' && model.isFocus() && !d.data.meta.ghostOf) {
         const m = d.data.meta;
         setPanel({
             tags: [outlineTag('Foco'), tag(r.name, r.color), statusTag(m), natTag(m)],
@@ -439,7 +447,7 @@ function visibleTab(available) { return available.includes(state.tab) ? state.ta
 
 /** Mantém `aba=` na URL sem disparar nova rota. */
 function syncTabInUrl(tab) {
-    if (state.compare || state.aulaActive) return;
+    if (state.compare || state.view) return;
     const raw = location.hash || '#/';
     const qi = raw.indexOf('?');
     const q = new URLSearchParams(qi >= 0 ? raw.slice(qi + 1) : '');
@@ -689,8 +697,7 @@ el.themeBtn.addEventListener('click', () => Theme.toggle());
 Theme.onChange(p => {
     if (state.renderer) state.renderer.setPalette(p);
     if (state.compare) state.compare.panes.forEach(pn => pn.renderer.setPalette(p));
-    if (state.aula) state.aula.setPalette(p);
-    if (state.graph) state.graph.setPalette(p);
+    Object.values(views).forEach(v => v.ctl.setPalette(p));
     el.themeBtn.setAttribute('aria-label', p.name === 'dark' ? 'Tema claro' : 'Tema escuro');
     el.themeBtn.textContent = p.name === 'dark' ? '☀' : '☾';
 });
@@ -728,13 +735,10 @@ document.addEventListener('keydown', ev => {
     if (ev.target === el.search || ev.target.closest('dialog, input, select, textarea')) return;
     if (ev.key === 'F' && ev.shiftKey) { ev.preventDefault(); toggleFullscreen(); return; }
     if (ev.key === 'Escape' && Fullscreen.isPseudo()) { Fullscreen.exit(); return; }
-    if (state.graphActive) {
-        if (ev.key === 'Escape') state.graph.clearSelection();
-        return;
-    }
-    if (state.aulaActive) {
-        if (ev.key === 'Escape') state.aula.clearSelection();
-        else if (ev.key === 'x' || ev.key === 'X') state.aula.toggleShow();
+    if (state.view) {
+        const ctl = views[state.view].ctl;
+        if (ev.key === 'Escape') ctl.clearSelection();
+        else if (state.view === 'aula' && (ev.key === 'x' || ev.key === 'X')) ctl.toggleShow();
         return;
     }
     const model = activeModel(), d = state.selected;
@@ -961,10 +965,11 @@ function play() {
     let i = yearFromHash() == null ? 0 : Math.max(0, years.findIndex(y => y > yearFromHash()));
     if (i < 0 || i >= years.length) i = 0;
     el.tlPlay.textContent = '❚❚'; el.tlPlay.setAttribute('aria-label', 'Pausar');
+    // pausa em cada ano com evento; a velocidade divide a pausa
     const step = () => {
         if (i >= years.length) { setYear(null, { fromPlay: true }); stopPlay(); state.renderer.fit(); return; }
         setYear(years[i++], { fromPlay: true });
-        state.playing = setTimeout(step, 1400);
+        state.playing = setTimeout(step, 1400 / (+el.tlSpeed.value || 1));
     };
     step();
 }
@@ -974,6 +979,8 @@ el.tlRange.addEventListener('input', () => { el.tlYear.textContent = el.tlRange.
 el.tlRange.addEventListener('change', () => { const v = +el.tlRange.value; setYear(v >= currentYear ? null : v); });
 el.tlToday.addEventListener('click', () => setYear(null));
 el.tlPlay.addEventListener('click', play);
+try { const sp = localStorage.getItem('lex-tree:speed'); if (sp && el.tlSpeed.querySelector(`option[value="${sp}"]`)) el.tlSpeed.value = sp; } catch { /* ignore */ }
+el.tlSpeed.addEventListener('change', () => { try { localStorage.setItem('lex-tree:speed', el.tlSpeed.value); } catch { /* ignore */ } });
 
 /** Hash para uma chave diploma/divisao, garantindo que o diploma esteja no filtro e fora do foco. */
 function linkToKey(key, override = {}) {
@@ -1051,74 +1058,51 @@ function renderTourCard() {
 }
 
 // ==========================================
-// MODO AULA
-//   #/aula?m=3d&tipos=processa&sel=cp  ver aula.js
+// VISTAS FORA DA ÁRVORE
+//   #/aula?m=3d&tipos=processa&sel=cp                 Modo aula (aula.js)
+//   #/grafo?por=divisao&tipos=processa&sel=cp&par=cpc,cc  Grafo (graph.js)
+//   #/tempo?a=2016&b=2026&g=cpc                       Linha do tempo (timeline.js)
+// Cada controlador tem apply(view, query), destroy(), setPalette(p), fit() e clearSelection().
 // ==========================================
-function enterAula(view, query) {
-    syncFilterView(view);
-    if (!state.aulaActive) {
-        if (state.compare) exitCompare(false);
-        if (study && study.active) study.stop();
-        if (state.tour) endTour();
-        stopPlay();
-        document.body.classList.add('mode-aula');
-        el.aula.classList.remove('hidden');
-        state.aulaActive = true;
-    }
-    state.aula.apply(view, query);
-}
-function exitAula() {
-    if (Fullscreen.current() === el.aula) Fullscreen.exit();
-    state.aula.destroy();
-    document.body.classList.remove('mode-aula');
-    el.aula.classList.add('hidden');
-    state.aulaActive = false;
-}
-
-// ==========================================
-// VISTA GRAFO
-//   #/grafo?por=divisao&tipos=processa&sel=cp&par=cpc,cc  ver graph.js
-// ==========================================
-function setModeNav(mode) {
-    el.modeArvore.toggleAttribute('aria-current', mode === 'arvore');
-    el.modeGrafo.toggleAttribute('aria-current', mode === 'grafo');
-    if (mode === 'arvore') el.modeArvore.setAttribute('aria-current', 'page');
-    if (mode === 'grafo') el.modeGrafo.setAttribute('aria-current', 'page');
+function setModeNav(name) {
+    const active = el.modeNav[name] ? name : 'arvore';
+    Object.entries(el.modeNav).forEach(([k, a]) => { if (k === active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
 }
 /** O filtro "Diplomas" do cabeçalho segue a visão também nas vistas sem árvore. */
 function syncFilterView(view) { if (state.model.setView(view)) renderFilter(); }
-function enterGraph(view, query) {
+function enterView(name, view, query) {
     syncFilterView(view);
-    if (!state.graphActive) {
+    if (state.view !== name) {
+        if (state.view) exitView();
         if (state.compare) exitCompare(false);
         if (study && study.active) study.stop();
         if (state.tour) endTour();
         stopPlay();
-        document.body.classList.add('mode-grafo');
-        el.grafo.classList.remove('hidden');
-        state.graphActive = true;
+        document.body.classList.add(`mode-${name}`);
+        views[name].el.classList.remove('hidden');
+        state.view = name;
     }
-    state.graph.apply(view, query);
+    views[name].ctl.apply(view, query);
 }
-function exitGraph() {
-    if (Fullscreen.current() === el.grafo) Fullscreen.exit();
-    state.graph.destroy();
-    document.body.classList.remove('mode-grafo');
-    el.grafo.classList.add('hidden');
-    state.graphActive = false;
+function exitView() {
+    const v = views[state.view];
+    if (Fullscreen.current() === v.el) Fullscreen.exit();
+    v.ctl.destroy();
+    document.body.classList.remove(`mode-${state.view}`);
+    v.el.classList.add('hidden');
+    state.view = null;
 }
 
 // ==========================================
 // TELA CHEIA (Shift+F): a árvore, ou o palco inteiro com rodapé no Modo aula
 // ==========================================
-function toggleFullscreen() { Fullscreen.toggle(state.aulaActive ? el.aula : state.graphActive ? el.grafo : el.treeContainer); }
+function toggleFullscreen() { Fullscreen.toggle(state.view ? views[state.view].el : el.treeContainer); }
 Fullscreen.onChange(cur => {
     document.querySelectorAll('.fs-btn .fs-label').forEach(s => { s.textContent = cur ? 'Sair da tela cheia' : 'Tela cheia'; });
     document.querySelectorAll('.fs-btn').forEach(b => b.setAttribute('aria-pressed', String(!!cur)));
     // o ResizeObserver redimensiona; o enquadramento vem depois do novo tamanho
     setTimeout(() => {
-        if (state.aulaActive) state.aula.fit();
-        else if (state.graphActive) state.graph.fit();
+        if (state.view) views[state.view].ctl.fit();
         else if (state.compare) state.compare.panes.forEach(p => p.renderer.fit());
         else if (state.renderer) state.renderer.fit();
     }, 120);

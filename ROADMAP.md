@@ -8,7 +8,7 @@ Diplomas cuja estrutura foi mapeada mas ainda não conferida contra o texto ofic
 
 | Diploma | Arquivo | O que conferir em especial |
 |---|---|---|
-| CLT | `docs/data/clt.json` | Títulos com letra (IV-A, VI-A, VII-A), Capítulos do Título VIII agrupados (VI a VIII), faixas do Título X |
+| CLT | `docs/data/clt.json` | Títulos com letra (II-A, IV-A, VI-A, VII-A; o II-A foi incluído conferindo o Planalto), Capítulos do Título VIII agrupados (VI a VIII), faixas do Título X |
 | CDC | `docs/data/cdc.json` | Capítulo V do Título III (superendividamento, arts. 104-A a 104-C) |
 | ECA | `docs/data/eca.json` | Agrupamentos de Capítulos nos Títulos III e VI do Livro II; faixa do Título VI (até 224) |
 | CTN | `docs/data/ctn.json` | Faixas do Livro Primeiro, hoje em parte superadas pela CF; disposições finais |
@@ -57,8 +57,10 @@ Há 27 relações. O formato comporta centenas. Frentes:
 - [ ] Mais marcos estruturais (`history`) entre 1988 e 2000 e entre 2015 e hoje.
 - [ ] `since`/`until` em divisões revogadas ou renumeradas (ex.: arts. 202 a 223 da CLT).
 - [ ] Antecessores dos diplomas sem antecessor registrado (CTN: Lei 5.172 sucedeu normas esparsas; discutir se vale registrar).
-- [ ] Opção de **velocidade** da reprodução e de pausar em cada ano com evento.
-- [ ] Permitir que o foco em um diploma também obedeça ao ano (hoje o foco ignora antecessores).
+- [x] Opção de **velocidade** da reprodução e de pausar em cada ano com evento.
+- [x] Permitir que o foco em um diploma também obedeça ao ano.
+- [ ] Marcos (`history`) para as divisões incluídas que ainda não citam a norma no próprio nó, como o Capítulo III-A do Título X da CLT.
+- [ ] Retrato do grafo em cada ano (`graph-AAAA.json`) para análise longitudinal.
 
 ## 6. Glossário e sínteses
 
@@ -87,4 +89,4 @@ Há 27 relações. O formato comporta centenas. Frentes:
 
 ## Concluído
 
-Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia, painel lateral com abas, vista Grafo com matriz.
+Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia, painel lateral com abas, vista Grafo com matriz, Linha do tempo com diff e genealogia.

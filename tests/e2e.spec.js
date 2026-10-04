@@ -400,3 +400,52 @@ test('grafo por divisão e volta à árvore', async ({ page }) => {
   await expect(page.locator('#grafo')).toBeHidden();
   await expect(nodeByKey(page, 'cf')).toBeVisible();
 });
+
+// ---------- Linha do tempo ----------
+test('linha do tempo: faixas, diff entre dois anos e genealogia', async ({ page }) => {
+  await page.goto('/#/');
+  await page.click('#mode-tempo');
+  await expect(page).toHaveURL(/#\/tempo/);
+  await page.goto('/#/tempo?a=2016&b=2026');
+  await expect(page.locator('#tempo-lanes .tl-lane')).toHaveCount(12);
+  const added = page.locator('#tempo-aside [data-group="add"]');
+  // as inclusões registradas em history entre 2016 e 2026
+  await expect(added).toContainText('CLT › Título II-A');
+  await expect(added).toContainText('CC › Parte Especial › Livro III › Título XI');
+  await expect(added).toContainText('CDC › Título III › Cap. V');
+  await expect(added).toContainText('CP › Parte Especial › Título XII');
+  await expect(page.locator('#tempo-aside [data-group="chg"]')).toContainText('EC 132/2023');
+  await expect(page.locator('#tempo-aside [data-group="rem"]')).toContainText('Lei 8.666');
+  await expect(page.locator('#tempo-aside .gen')).toContainText('CPC/1939');
+  await expect(page.locator('#tempo-aside .gen')).toContainText('CPC/1973');
+  // trocar A atualiza a URL e o diff
+  await page.fill('#tempo-a', '2020');
+  await page.locator('#tempo-a').press('Enter');
+  await expect(page).toHaveURL(/a=2020&b=2026/);
+  await expect(added).not.toContainText('CLT › Título II-A');
+  // teclado move a borda da janela
+  await page.locator('.tl-handle[data-edge="a"]').focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect(page).toHaveURL(/a=2019&b=2026/);
+  await page.click('.tl-lane-label[data-g="cc"]');
+  await expect(page).toHaveURL(/g=cc/);
+  await expect(page.locator('#tempo-aside .gen')).toContainText('CC/1916');
+});
+
+test('clicar numa faixa abre a árvore em foco no ano A, e o foco obedece ao ano', async ({ page }) => {
+  await page.goto('/#/tempo?a=2000&b=2026');
+  await page.locator('.tl-track[data-doc="cpc"]').click({ position: { x: 20, y: 17 } });
+  await expect(page).toHaveURL(/#\/cpc\?foco=cpc&ano=2000/);
+  await expect(nodeByKey(page, 'cpc').locator('text.label')).toHaveText('CPC/1973');
+  await expect(page.locator('#content-panel h2')).toContainText('Código de Processo Civil');
+  await expect(page.locator('#tl-year')).toHaveText('2000');
+});
+
+test('reprodução tem velocidade', async ({ page }) => {
+  await page.goto('/#/');
+  await page.click('#btn-timeline');
+  await page.selectOption('#tl-speed', '2');
+  await page.reload();
+  await page.click('#btn-timeline');
+  await expect(page.locator('#tl-speed')).toHaveValue('2');
+});

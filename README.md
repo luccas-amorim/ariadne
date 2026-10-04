@@ -34,7 +34,8 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Expandir tudo.** Abre, nível a nível e de forma animada, todas as divisões a partir do nó selecionado. "Recolher" ou `Esc` volta ao início.
 * **Foco em um diploma.** Radial especializado, com o diploma no centro. **Comparar** põe dois diplomas lado a lado, cada um em seu radial.
 * **Diplomas.** Filtra quais códigos entram na árvore (todos, por padrão) e mostra ou oculta os em mapeamento.
-* **Linha do tempo.** Um controle por ano (ou `T`) mostra o ordenamento como era em cada data: os diplomas surgem no ano de promulgação, antes disso aparece o antecessor como fantasma (CC/1916, CPC/1973, Constituições de 1824 a 1967), e as divisões incluídas depois só aparecem no seu ano. O botão ▶ reproduz a história, marco a marco, com a árvore crescendo.
+* **Vigência.** Um controle por ano (botão "Vigência" ou `T`) mostra a árvore como era em cada data: os diplomas surgem no ano de promulgação, antes disso aparece o antecessor como fantasma (CC/1916, CPC/1973, Constituições de 1824 a 1967), e as divisões incluídas depois só aparecem no seu ano. O foco num diploma também obedece ao ano. O botão ▶ reproduz a história, parando em cada ano com evento, em 0,5×, 1× ou 2×.
+* **Linha do tempo.** No cabeçalho, uma faixa por diploma, com os antecessores pontilhados e os marcos estruturais como pontos. A janela A → B (arraste as bordas ou digite os anos) gera o diff estrutural: o que foi incluído, alterado e revogado ou substituído entre os dois anos, cada item levando ao nó. Clicar no nome de uma faixa mostra a genealogia do diploma (CPC/1939 → CPC/1973 → CPC/2015); clicar na faixa abre a árvore daquele diploma no ano A.
 * **Percursos guiados.** Sequências curadas de nós com uma frase de transição: uma compra defeituosa, do crime à execução da pena, uma demissão, um tributo, uma obra pública, a criança entre a família e o Estado. A câmera viaja e o painel acompanha. `N` e `P` avançam e voltam.
 * **Relações internormativas.** Linhas roxas ligam o nó selecionado ao que ele concretiza, regulamenta, processa ou executa em outro diploma. A seta aponta para o destino: quem é concretizado, regulamentado, processado. Na linha do tempo, uma relação só aparece nos anos em que os dois nós (e a própria relação, se tiver `since`/`until`) vigoram. Quando o destino está recolhido, a linha termina tracejada no nó visível mais próximo; o painel lista cada relação com o dispositivo que a fundamenta e leva à divisão exata. O botão "Relações" (ou `X`) liga e desliga as linhas.
 * **Grafo.** No cabeçalho, "Grafo" troca a árvore pelas relações: cada diploma é um círculo (tamanho pelo número de relações), cada par ligado é uma aresta com seta (espessura pela contagem). A posição segue a ordem dos ramos, sempre a mesma. Ao lado, o filtro por tipo e a matriz origem × destino; clicar numa célula lista as relações daquele par. "Por divisão" mostra as divisões que têm relação.
@@ -48,7 +49,7 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
 * **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `Shift+F` tela cheia, `L` abre a lista, `Esc` recolhe.
 * **Identificadores.** Cada diploma tem sua URN LexML e cada nó um endereço estável, `https://luccas-amorim.github.io/ariadne/id/<chave>`. Colar uma URN ou um desses endereços na busca leva direto ao nó.
-* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`, `#/aula?m=3d&tipos=processa,executa&sel=cp`, `#/cf/titulo-ii/cap-i?aba=relacoes`, `#/grafo?sel=cp&par=cpc,cc`, `#/grafo?por=divisao`.
+* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`, `#/aula?m=3d&tipos=processa,executa&sel=cp`, `#/cf/titulo-ii/cap-i?aba=relacoes`, `#/grafo?sel=cp&par=cpc,cc`, `#/grafo?por=divisao`, `#/tempo?a=2016&b=2026&g=cpc`.
 
 Para rodar localmente, sirva a pasta `docs/` por HTTP (abrir o arquivo direto bloqueia os módulos e os dados):
 
@@ -90,6 +91,7 @@ docs/
     study.js            modo estudo
     aula.js             Modo aula (todas as relações, filtro por tipo, isolamento)
     graph.js            vista Grafo (D3): nós por diploma ou divisão, matriz origem × destino
+    timeline.js         vista Linha do tempo: faixas, janela A → B, diff e genealogia
     app.js              roteamento, painel, controles, comparação, tela cheia, teclado
   data/                 ver "Dados abertos"
 scripts/validate.js     validação dos dados (node, sem dependências)

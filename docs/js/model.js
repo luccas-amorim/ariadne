@@ -71,7 +71,14 @@ export class TreeModel {
         const c = this.catalog, v = this.view, diplomas = this.data.diplomas;
         const Y = v.year == null ? null : v.year;
         let data;
-        if (v.focus) {
+        if (v.focus && Y != null && diplomas[v.focus].year > Y) {
+            // O foco obedece ao ano: antes da promulgação, o centro é o antecessor vigente.
+            const doc = diplomas[v.focus], p = predecessorAt(doc, Y);
+            const meta = p
+                ? { ...doc, title: p.title, shortTitle: p.shortTitle, norm: p.norm, year: p.from, ghostOf: doc, status: undefined, note: undefined, root: { ...doc.root, content: `${p.title}, vigente em ${Y}. A estrutura mapeada neste projeto é a de ${doc.title} (${doc.year}); a linha do tempo mostra a sucessão.`, children: undefined } }
+                : { ...doc, title: `${doc.title} (ainda não existia)`, shortTitle: '—', norm: `Ano ${Y}`, year: Y, ghostOf: doc, status: undefined, note: undefined, root: { ...doc.root, content: `Em ${Y}, ${doc.title} ainda não existia, e não há antecessor registrado.`, children: undefined } };
+            data = { kind: 'center', id: doc.id, meta };
+        } else if (v.focus) {
             const doc = diplomas[v.focus];
             const kids = this.divisions(doc.root, doc, Y);
             data = { kind: 'center', id: doc.id, meta: doc, children: kids.length ? kids : undefined };

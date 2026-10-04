@@ -187,6 +187,109 @@ export function parseIdentifier(q) {
     return null;
 }
 
+// ---------- tempo: antecessores, estrutura num ano e diferença entre dois anos ----------
+/** Antecessores como nós fantasma do grafo: chave `<diploma>-<ano inicial>`, sem arquivo próprio. */
+export function predecessorNodes(data) {
+    const out = [];
+    for (const doc of Object.values(data.diplomas)) {
+        (doc.predecessors || []).forEach(p => out.push({ key: `${doc.id}-${p.from}`, of: doc.id, title: p.title, shortTitle: p.shortTitle, norm: p.norm, since: p.from, until: p.to }));
+    }
+    return out;
+}
+
+/** Arestas `sucede`: cada diploma sucede o antecessor imediato, e cada antecessor o anterior a ele. */
+export function successionEdges(data) {
+    const out = [];
+    for (const doc of Object.values(data.diplomas)) {
+        const ps = doc.predecessors || [];
+        ps.forEach((p, i) => {
+            const next = ps[i + 1];
+            out.push({ from: next ? `${doc.id}-${next.from}` : doc.id, to: `${doc.id}-${p.from}`, type: 'sucede', since: p.to });
+        });
+    }
+    return out;
+}
+
+/** Chaves vigentes no ano Y: diplomas já promulgados e suas divisões, ou o antecessor vigente. */
+export function structureAt(data, Y) {
+    const keys = new Set();
+    for (const doc of Object.values(data.diplomas)) {
+        if (doc.year != null && doc.year <= Y) {
+            (function walk(n, path) {
+                if (path.length && ((n.since != null && n.since > Y) || (n.until != null && n.until <= Y))) return;
+                keys.add([doc.id, ...path].join('/'));
+                (n.children || []).forEach(c => walk(c, [...path, c.id]));
+            })(doc.root, []);
+        } else {
+            (doc.predecessors || []).forEach(p => { if (p.from <= Y && Y < p.to) keys.add(`${doc.id}-${p.from}`); });
+        }
+    }
+    return keys;
+}
+
+/**
+ * O que mudou na estrutura entre os anos a e b (a < b).
+ * added: divisões e diplomas que passaram a existir; removed: os que deixaram de existir
+ * (inclusive antecessores substituídos); changed: nós presentes nos dois anos com marco (history)
+ * entre a e b. Uma divisão nova dentro de outra também nova não é listada à parte.
+ * Cada item: { key, kind, label, name, year, norm, note, linkKey, linkYear }.
+ */
+export function diffStructure(data, a, b) {
+    if (a > b) [a, b] = [b, a];
+    const A = structureAt(data, a), B = structureAt(data, b);
+    const preds = new Map(predecessorNodes(data).map(p => [p.key, p]));
+    const parentOf = key => { const i = key.lastIndexOf('/'); return i > 0 ? key.slice(0, i) : null; };
+    const item = (key, year, extra = {}) => {
+        const p = preds.get(key);
+        if (p) {
+            const doc = data.diplomas[p.of];
+            return { key, kind: 'antecessor', label: p.shortTitle, name: p.title, year, norm: p.norm, note: '', linkKey: p.of, linkYear: Math.max(p.since, Math.min(year, p.until - 1)), doc, ...extra };
+        }
+        const doc = data.diplomas[key.split('/')[0]], n = dataNodeOf(data, key);
+        const isDoc = !key.includes('/');
+        return { key, kind: isDoc ? 'diploma' : 'division', label: keyLabel(data, key), name: isDoc ? doc.title : n.name, subtitle: isDoc ? doc.norm : n.subtitle, year, norm: '', note: '', linkKey: key, linkYear: year, doc, ...extra };
+    };
+    const added = [], removed = [], changed = [];
+    for (const key of B) {
+        if (A.has(key)) continue;
+        const parent = parentOf(key);
+        if (parent && B.has(parent) && !A.has(parent)) continue;
+        const p = preds.get(key);
+        if (p) { added.push(item(key, p.since, { norm: p.norm, note: 'Passa a vigorar.' })); continue; }
+        const n = dataNodeOf(data, key), doc = data.diplomas[key.split('/')[0]];
+        if (!parent) {
+            const replaced = [...A].map(k => preds.get(k)).find(x => x && x.of === doc.id);
+            added.push(item(key, doc.year, { norm: doc.norm, note: replaced ? `Substitui ${replaced.shortTitle}.` : 'Entra em vigor.' }));
+        } else {
+            // o marco pode estar na própria divisão ou no nó pai (ex.: "Inclusão do Capítulo II-A")
+            const h = (n.history || []).find(x => x.year === n.since) || (dataNodeOf(data, parent).history || []).find(x => x.year === n.since);
+            added.push(item(key, n.since, { norm: h ? h.norm : '', note: h && (n.history || []).includes(h) ? h.note : `${n.name} passa a existir.` }));
+        }
+    }
+    for (const key of A) {
+        if (B.has(key)) continue;
+        const parent = parentOf(key);
+        if (parent && A.has(parent) && !B.has(parent)) continue;
+        const p = preds.get(key);
+        if (p) {
+            const doc = data.diplomas[p.of];
+            const next = (doc.predecessors || []).find(x => x.from === p.until);
+            removed.push(item(key, p.until, { norm: next ? next.norm : doc.norm, note: `Substituído por ${next ? next.shortTitle : doc.shortTitle}.` }));
+            continue;
+        }
+        const n = dataNodeOf(data, key);
+        const h = (n.history || []).find(x => x.year === n.until);
+        removed.push(item(key, n.until, { norm: h ? h.norm : '', note: h ? h.note : `${n.name} deixa de existir.`, linkYear: n.until - 1 }));
+    }
+    for (const key of A) {
+        if (!B.has(key) || preds.has(key)) continue;
+        const n = dataNodeOf(data, key);
+        (n.history || []).filter(h => h.year > a && h.year <= b).forEach(h => changed.push(item(key, h.year, { norm: h.norm, note: h.note })));
+    }
+    const order = (x, y) => x.year - y.year || x.label.localeCompare(y.label);
+    return { a, b, added: added.sort(order), removed: removed.sort(order), changed: changed.sort(order) };
+}
+
 /** Índice plano de todos os nós de todos os diplomas, para busca e modo estudo. */
 export function buildSearchIndex(data) {
     const idx = [];
