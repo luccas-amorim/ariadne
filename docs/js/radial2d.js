@@ -103,9 +103,11 @@ export class Radial2D {
         textSel.selectAll('tspan').remove();
         textSel.text(null);
         const words = text.length > 13 ? text.split(' ') : [text];
-        words.forEach((w, i) => textSel.append('tspan').attr('x', 0).attr('dy', i === 0 ? 0 : '1.15em').text(w));
-        // sobe o bloco quando há duas linhas, para manter o conjunto centrado no círculo
-        textSel.attr('dy', words.length > 1 ? '1.05em' : '1.2em');
+        // O deslocamento vai no primeiro tspan: um dy no tspan substitui o dy do <text> pai.
+        // Com duas linhas o bloco sobe um pouco, para ficar centrado no círculo.
+        const first = words.length > 1 ? '1.05em' : '1.2em';
+        textSel.attr('dy', null);
+        words.forEach((w, i) => textSel.append('tspan').attr('x', 0).attr('dy', i === 0 ? first : '1.15em').text(w));
     }
 
     // ---------- renderização ----------
