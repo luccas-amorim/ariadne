@@ -342,6 +342,39 @@ export class TreeModel {
         return [...groups.values()];
     }
 
+    /**
+     * Grafo dirigido das relações vigentes, para a vista Grafo.
+     * Por diploma (padrão), os nós são os diplomas da árvore atual; por divisão, as chaves que
+     * aparecem em alguma relação. Arestas agregadas por par (origem, destino), com os tipos.
+     * @returns {{ nodes: Map<string, {key, d, inN, outN}>, edges: Array<{fromKey, toKey, n, types: string[], items}> }}
+     */
+    relationGraph({ types = null, byDivision = false, year = this.view.year } = {}) {
+        const nodes = new Map(), pairs = new Map();
+        const addNode = key => {
+            if (!nodes.has(key)) nodes.set(key, { key, d: this.byKey.get(key), inN: 0, outN: 0 });
+            return nodes.get(key);
+        };
+        if (!byDivision) {
+            this.nodes.filter(d => (d.data.kind === 'diploma' && !d.data.planned) || this.isCfCenter(d)).forEach(d => addNode(d.key));
+        }
+        for (const rel of this.data.relations) {
+            if (types && !types.has(rel.type)) continue;
+            if (!relationActiveAt(this.data, rel, year == null ? null : year)) continue;
+            const fromKey = byDivision ? rel.from : rel.from.split('/')[0];
+            const toKey = byDivision ? rel.to : rel.to.split('/')[0];
+            if (!this.byKey.has(fromKey) || !this.byKey.has(toKey)) continue;
+            if (!this.byKey.has(rel.from.split('/')[0]) || !this.byKey.has(rel.to.split('/')[0])) continue;
+            addNode(fromKey).outN++;
+            addNode(toKey).inN++;
+            const k = `${fromKey}|${toKey}`;
+            if (!pairs.has(k)) pairs.set(k, { fromKey, toKey, n: 0, types: [], items: [] });
+            const e = pairs.get(k);
+            e.n++; e.items.push(rel);
+            if (!e.types.includes(rel.type)) e.types.push(rel.type);
+        }
+        return { nodes, edges: [...pairs.values()] };
+    }
+
     /** Chaves ligadas a `key` pelos grupos (inclui a própria). */
     linkedKeys(groups, key) {
         const out = new Set(key ? [key] : []);

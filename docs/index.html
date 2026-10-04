@@ -37,6 +37,10 @@
                     <p class="text-xs muted hidden sm:block">Mapeamento visual da legislação brasileira</p>
                 </div>
             </a>
+            <nav id="mode-nav" class="seg" aria-label="Vista">
+                <a id="mode-arvore" href="#/" aria-current="page">Árvore</a>
+                <a id="mode-grafo" href="#/grafo">Grafo</a>
+            </nav>
             <button id="about-btn" class="btn btn-sm md:hidden">Sobre</button>
         </div>
 
@@ -140,6 +144,29 @@
             <div id="aula-types" role="group" aria-label="Tipos de relação"></div>
         </div>
         <section id="aula-foot" aria-live="polite"></section>
+    </section>
+
+    <!-- Vista Grafo -->
+    <section id="grafo" class="hidden" aria-label="Grafo das relações">
+        <div id="grafo-main">
+            <div id="grafo-bar">
+                <span class="aula-title">Grafo das relações</span>
+                <span id="grafo-count" class="muted"></span>
+                <span class="flex-1"></span>
+                <div class="seg" role="group" aria-label="Nós do grafo">
+                    <button id="grafo-diploma" type="button" aria-pressed="true">Por diploma</button>
+                    <button id="grafo-divisao" type="button" aria-pressed="false">Por divisão</button>
+                </div>
+            </div>
+            <div id="grafo-stage">
+                <div class="hint g-legend" aria-hidden="true">
+                    <div>Tamanho do círculo = relações (entrada + saída)</div>
+                    <div>Espessura da aresta = nº de relações entre o par</div>
+                    <div>Borda tracejada = direito processual</div>
+                </div>
+            </div>
+        </div>
+        <aside id="grafo-aside" aria-label="Resumo, tipos e matriz"></aside>
     </section>
 
     <div id="workspace">

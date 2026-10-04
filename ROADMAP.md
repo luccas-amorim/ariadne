@@ -45,6 +45,7 @@ Candidatos ainda fora do catálogo, para discussão em issue: Código Eleitoral,
 
 Há 27 relações. O formato comporta centenas. Frentes:
 
+- [ ] Lacunas que a matriz da vista Grafo mostra: nenhuma relação sai do CC para o CDC (responsabilidade civil é a candidata óbvia), nem chega à CTN.
 - [ ] Relações **entre divisões**, não só entre diploma e divisão: por exemplo, CC Título IX (Responsabilidade Civil) → CDC Capítulo IV; CP Título I (crimes contra a pessoa) → Lei 11.340 quando mapeada.
 - [ ] Relações de **aplicação subsidiária** sistemáticas: CPC → CLT, CPC → CDC, CPC → ECA, CPC → Lei 9.099, Lei 9.784 → processos administrativos específicos.
 - [ ] Tipos novos, se necessários (ex.: "revoga parcialmente", "remete a"), definidos em `index.json → relationTypes` com descrição.
@@ -86,4 +87,4 @@ Há 27 relações. O formato comporta centenas. Frentes:
 
 ## Concluído
 
-Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia.
+Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia, painel lateral com abas, vista Grafo com matriz.

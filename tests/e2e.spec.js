@@ -93,6 +93,7 @@ test('busca encontra um capítulo e navega até ele', async ({ page }) => {
 
 test('colar uma URN LexML ou um IRI na busca abre o nó', async ({ page }) => {
   await page.goto('/#/');
+  await expect(nodeByKey(page, 'cf')).toBeVisible();
   await page.fill('#search', 'urn:lex:br:federal:lei:2002-01-10;10406');
   await expect(page.locator('#search-results li')).toHaveCount(1);
   await page.locator('#search').press('Enter');
@@ -355,4 +356,47 @@ test('aba Dados mostra chave, URN e JSON-LD do nó', async ({ page }) => {
   await expect(page.locator('#node-jsonld')).toContainText('"isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral"');
   await expect(page.locator('#node-jsonld')).not.toContainText('sameAs');
   await expect(page.locator('#tabpanel-dados')).toContainText('o fragmento desta divisão ainda não foi conferido');
+});
+
+// ---------- Vista Grafo ----------
+test('grafo: diplomas como nós, matriz com 27 relações e coluna CF com 10', async ({ page }) => {
+  await page.goto('/#/');
+  await page.click('#mode-grafo');
+  await expect(page).toHaveURL(/#\/grafo$/);
+  await expect(page.locator('#mode-grafo')).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#grafo-stage g.g-node')).toHaveCount(12);
+  await expect(page.locator('#grafo-aside [data-total]')).toHaveText('27');
+  await expect(page.locator('#grafo-aside .mx-sum[data-col="cf"]')).toHaveText('10');
+  await expect(page.locator('#filter-count')).toHaveText('12');
+  // célula da matriz lista as relações do par
+  await page.click('#grafo-aside button[data-pair="cpc,cc"]');
+  await expect(page).toHaveURL(/par=cpc,cc/);
+  await expect(page.locator('#grafo-aside .rel-card')).toHaveCount(4);
+  await expect(page.locator('#grafo-stage path.g-edge.hl')).toHaveCount(1);
+});
+
+test('grafo: selecionar destaca as arestas do nó e o filtro por tipo recalcula', async ({ page }) => {
+  await page.goto('/#/grafo');
+  await page.locator('#grafo-stage g.g-node[data-key="cp"]').click();
+  await expect(page).toHaveURL(/sel=cp/);
+  await expect(page.locator('#grafo-aside')).toContainText('Recebe 7 · emite 1');
+  await expect(page.locator('#grafo-stage path.g-edge.hl')).toHaveCount(6);
+  await expect(page.locator('#grafo-stage path.g-edge.dim')).toHaveCount(14);
+  await page.locator('#grafo-aside input[data-type="processa"]').uncheck();
+  await expect(page).toHaveURL(/tipos=/);
+  await expect(page.locator('#grafo-aside [data-total]')).toHaveText('22');
+  await page.locator('body').press('Escape');
+  await expect(page).not.toHaveURL(/sel=/);
+});
+
+test('grafo por divisão e volta à árvore', async ({ page }) => {
+  await page.goto('/#/grafo');
+  await page.click('#grafo-divisao');
+  await expect(page).toHaveURL(/por=divisao/);
+  await expect.poll(() => page.locator('#grafo-stage g.g-node').count()).toBeGreaterThan(30);
+  await expect(page.locator('#grafo-stage g.g-node[data-key="cpc/parte-especial/livro-i"]')).toHaveCount(1);
+  await page.click('#mode-arvore');
+  await expect(page.locator('#tree-container')).toBeVisible();
+  await expect(page.locator('#grafo')).toBeHidden();
+  await expect(nodeByKey(page, 'cf')).toBeVisible();
 });
