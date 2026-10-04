@@ -29,6 +29,7 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 ## Como usar
 
 * **Mapa.** Clique em um ramo para ler sua definição e em um diploma para abrir suas Partes e Livros ali mesmo, conectadas ao resto. O número no canto do nó indica quantas divisões estão recolhidas.
+* **Painel do nó.** Fica à direita em telas largas e, no celular, numa folha que se expande até quase a tela toda. Tem quatro abas: **Síntese**; **Relações**, separando o que o nó recebe do que ele emite, cada cartão com o fundamento e um link para o outro nó; **Histórico**, com promulgação e marcos estruturais (clicar num ano abre a linha do tempo naquela data); e **Dados**, com chave, URN, IRI, vigência e o JSON-LD do nó, mais os botões "Copiar JSON-LD" e "Citar (ABNT)". A aba aberta fica na URL (`aba=relacoes`).
 * **2D ou 3D.** O mesmo grafo, com o mesmo layout radial. No 3D cada camada sobe um nível; arraste para orbitar, role para aproximar.
 * **Expandir tudo.** Abre, nível a nível e de forma animada, todas as divisões a partir do nó selecionado. "Recolher" ou `Esc` volta ao início.
 * **Foco em um diploma.** Radial especializado, com o diploma no centro. **Comparar** põe dois diplomas lado a lado, cada um em seu radial.
@@ -46,7 +47,7 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
 * **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `Shift+F` tela cheia, `L` abre a lista, `Esc` recolhe.
 * **Identificadores.** Cada diploma tem sua URN LexML e cada nó um endereço estável, `https://luccas-amorim.github.io/ariadne/id/<chave>`. Colar uma URN ou um desses endereços na busca leva direto ao nó.
-* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`, `#/aula?m=3d&tipos=processa,executa&sel=cp`.
+* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`, `#/aula?m=3d&tipos=processa,executa&sel=cp`, `#/cf/titulo-ii/cap-i?aba=relacoes`.
 
 Para rodar localmente, sirva a pasta `docs/` por HTTP (abrir o arquivo direto bloqueia os módulos e os dados):
 

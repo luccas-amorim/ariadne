@@ -142,6 +142,7 @@
         <section id="aula-foot" aria-live="polite"></section>
     </section>
 
+    <div id="workspace">
     <!-- Árvore -->
     <main id="tree-container" class="flex-1 relative overflow-hidden cursor-move">
         <div id="view-main"></div>
@@ -181,13 +182,20 @@
         <div id="loading" class="absolute inset-0 flex items-center justify-center muted text-sm">Carregando os diplomas…</div>
     </main>
 
-    <!-- Painel de leitura -->
-    <section id="reading-panel" class="surface border-t-ui overflow-y-auto z-10" style="box-shadow: 0 -10px 15px -3px rgba(0,0,0,.05)">
-        <div id="content-panel" class="fade max-w-3xl mx-auto px-5 sm:px-8 py-5 sm:py-6 flex flex-col items-center text-center">
-            <h2 class="text-xl sm:text-2xl font-bold strong">Mapa do ordenamento</h2>
-            <p class="text-xs sm:text-sm font-semibold mt-1 mb-3 tracking-widest uppercase" style="color:var(--text-faint)">Ponto de partida</p>
+    <!-- Painel do nó: lateral em telas largas, folha inferior no celular -->
+    <aside id="reading-panel" class="surface z-10" aria-label="Painel do nó">
+        <button id="panel-toggle" type="button" aria-expanded="false" aria-controls="content-panel" title="Expandir ou recolher o painel">
+            <span class="grip" aria-hidden="true"></span><span class="sr-only">Expandir o painel</span>
+        </button>
+        <p id="sr-announce" class="sr-only" aria-live="polite"></p>
+        <div id="content-panel" class="fade">
+            <div class="panel-head">
+                <h2 class="panel-title">Mapa do ordenamento</h2>
+                <p class="panel-subtitle">Ponto de partida</p>
+            </div>
         </div>
-    </section>
+    </aside>
+    </div>
 
     <!-- Sobre -->
     <dialog id="about" class="rounded-xl shadow-2xl p-0 w-[min(44rem,92vw)]">

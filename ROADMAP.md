@@ -69,9 +69,10 @@ Há 27 relações. O formato comporta centenas. Frentes:
 
 - [ ] **Navegação em árvores grandes**: minimapa ou "modo foco" que esmaece tudo fora do subtree selecionado quando há mais de ~150 nós visíveis.
 - [ ] 3D: trackpad com dois dedos movendo a câmera (hoje aproxima); rótulos com tamanho adaptado à distância.
-- [ ] Mobile: barra de ferramentas em menu compacto; painel de leitura como folha deslizante.
+- [ ] Mobile: barra de ferramentas em menu compacto. (O painel já é uma folha que se expande.)
+- [ ] Painel: gesto de arrastar a folha no celular (hoje é um botão) e formulário "Sugerir relação" que já sai no formato de `relations.json`.
 - [ ] Modo aula: escolher quais diplomas entram direto no palco (hoje segue o filtro "Diplomas" pela URL, `d=`).
-- [ ] Acessibilidade: anunciar mudanças de seleção em `aria-live`; foco visível nos nós SVG; contraste do tema escuro validado.
+- [ ] Acessibilidade: foco visível nos nós SVG; contraste do tema escuro validado. (A seleção já é anunciada em `aria-live`.)
 - [ ] Modo estudo com **repetição espaçada** sobre a trilha (revisar primeiro o que foi errado há mais tempo).
 - [ ] Compartilhar a trilha por link (hoje só por arquivo JSON).
 

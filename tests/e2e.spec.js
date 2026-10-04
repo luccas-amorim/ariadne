@@ -34,7 +34,7 @@ test('link profundo expande os ancestrais e desenha relações internormativas',
   await expect(nodeByKey(page, 'cpc/parte-especial/livro-i')).toBeVisible();
   await expect(page.locator('#content-panel h2')).toContainText('Livro I');
   await expect(page.locator('#view-main path.relation').first()).toBeVisible();
-  await expect(page.locator('ul.relations')).toContainText('processa');
+  await expect(page.locator('#tabpanel-relacoes')).toContainText('processa');
 });
 
 test('relações têm direção: setas chegam ao CP e saem dele para a CLT', async ({ page }) => {
@@ -42,7 +42,7 @@ test('relações têm direção: setas chegam ao CP e saem dele para a CLT', asy
   await expect(page.locator('#view-main path.relation[marker-end]')).toHaveCount(8);
   await expect(page.locator('#view-main path.relation.in')).toHaveCount(7);
   await expect(page.locator('#view-main path.relation.out')).toHaveCount(1);
-  await expect(page.locator('ul.relations')).toContainText('fundamento: arts. 337-E a 337-P do CP');
+  await expect(page.locator('#tabpanel-relacoes')).toContainText('fundamento: arts. 337-E a 337-P do CP');
 });
 
 test('relação some antes da vigência dos dois nós', async ({ page }) => {
@@ -51,7 +51,7 @@ test('relação some antes da vigência dos dois nós', async ({ page }) => {
   await page.goto('/#/cf/titulo-iii/cap-vii?ano=1990');
   await expect(page.locator('#tl-year')).toHaveText('1990');
   await expect(page.locator('#view-main path.relation')).toHaveCount(0);
-  await expect(page.locator('ul.relations')).toHaveCount(0);
+  await expect(page.locator('#tabpanel-relacoes .rel-card')).toHaveCount(0);
 });
 
 test('botão Relações oculta e reexibe as linhas, e a escolha persiste', async ({ page }) => {
@@ -132,10 +132,12 @@ test('modo estudo faz uma pergunta e registra erro na trilha', async ({ page }) 
 
 test('trilha pessoal marca o nó e persiste após recarregar', async ({ page }) => {
   await page.goto('/#/cc/parte-geral/livro-i');
-  await page.getByRole('link', { name: 'Marcar estudado' }).click();
-  await expect(page.getByRole('link', { name: '✓ Estudado' })).toBeVisible();
+  const studied = page.locator('#node-footer').getByRole('button', { name: 'Estudado' });
+  await expect(studied).toHaveAttribute('aria-pressed', 'false');
+  await studied.click();
+  await expect(studied).toHaveAttribute('aria-pressed', 'true');
   await page.reload();
-  await expect(page.getByRole('link', { name: '✓ Estudado' })).toBeVisible();
+  await expect(page.locator('#node-footer').getByRole('button', { name: 'Estudado' })).toHaveAttribute('aria-pressed', 'true');
   await expect(nodeByKey(page, 'cc/parte-geral/livro-i').locator('.trail-mark')).toBeVisible();
 });
 
@@ -291,4 +293,66 @@ test('tela cheia recusada cai na alternativa e Esc sai', async ({ page }) => {
   await expect(page.locator('#aula')).toHaveClass(/pseudo-fullscreen/);
   await page.locator('body').press('Shift+F');
   await expect(page.locator('#aula')).not.toHaveClass(/pseudo-fullscreen/);
+});
+
+// ---------- Painel do nó ----------
+test('painel lateral em telas largas e folha inferior no celular', async ({ page }) => {
+  await page.goto('/#/cc');
+  const panel = page.locator('#reading-panel');
+  await expect(panel).toBeVisible();
+  const box = await panel.boundingBox();
+  const tree = await page.locator('#tree-container').boundingBox();
+  expect(Math.round(box.width)).toBe(460);
+  expect(box.x).toBeGreaterThanOrEqual(tree.x + tree.width - 1);
+  await expect(page.locator('#panel-toggle')).toBeHidden();
+  await page.setViewportSize({ width: 390, height: 800 });
+  await expect(page.locator('#panel-toggle')).toBeVisible();
+  const before = (await panel.boundingBox()).height;
+  await page.click('#panel-toggle');
+  await expect(panel).toHaveClass(/expanded/);
+  await expect(page.locator('#panel-toggle')).toHaveAttribute('aria-expanded', 'true');
+  await expect.poll(async () => (await panel.boundingBox()).height).toBeGreaterThan(Math.max(before, 0.8 * 800));
+});
+
+test('abas do painel: relações em dois grupos, URL e teclado', async ({ page }) => {
+  await page.goto('/#/cf/titulo-ii/cap-i');
+  await expect(page.locator('#tab-sintese')).toHaveAttribute('aria-selected', 'true');
+  await page.click('#tab-relacoes');
+  await expect(page).toHaveURL(/aba=relacoes/);
+  await expect(page.locator('#tabpanel-relacoes')).toBeVisible();
+  await expect(page.locator('#tabpanel-relacoes')).toContainText('Recebe · 2');
+  await expect(page.locator('#tabpanel-relacoes')).toContainText('Emite · 0');
+  await expect(page.locator('#tabpanel-relacoes .rel-card')).toHaveCount(2);
+  // setas percorrem as abas sem mexer na árvore
+  await page.locator('#tab-relacoes').press('ArrowRight');
+  await expect(page.locator('#tab-historico')).toBeFocused();
+  await expect(page.locator('#tab-historico')).toHaveAttribute('aria-selected', 'true');
+  await expect(page).toHaveURL(/#\/cf\/titulo-ii\/cap-i\?aba=historico$/);
+  // a aba escolhida vale para o próximo nó e sobrevive ao recarregar
+  await page.reload();
+  await expect(page.locator('#tab-historico')).toHaveAttribute('aria-selected', 'true');
+  // cartão de relação leva ao outro nó
+  await page.click('#tab-relacoes');
+  await page.locator('#tabpanel-relacoes .rel-card').first().click();
+  await expect(page).toHaveURL(/#\/cpp\/livro-i\/titulo-ix/);
+  await expect(page.locator('#tab-relacoes')).toHaveAttribute('aria-selected', 'true');
+});
+
+test('histórico: clicar num ano liga a linha do tempo', async ({ page }) => {
+  await page.goto('/#/cdc/titulo-i?aba=historico');
+  await expect(page.locator('#tabpanel-historico')).toContainText('Lei 14.181/2021');
+  await page.locator('#tabpanel-historico .tl-year', { hasText: '2021' }).click();
+  await expect(page).toHaveURL(/ano=2021/);
+  await expect(page.locator('#tl-year')).toHaveText('2021');
+});
+
+test('aba Dados mostra chave, URN e JSON-LD do nó', async ({ page }) => {
+  await page.goto('/#/cc?aba=dados');
+  await expect(page.locator('#tabpanel-dados')).toContainText('urn:lex:br:federal:lei:2002-01-10;10406');
+  await expect(page.locator('#node-jsonld')).toContainText('"@id": "https://luccas-amorim.github.io/ariadne/id/cc"');
+  await expect(page.locator('#node-jsonld')).toContainText('"@type": "Legislation"');
+  await page.goto('/#/cc/parte-geral/livro-i?aba=dados');
+  await expect(page.locator('#node-jsonld')).toContainText('"isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral"');
+  await expect(page.locator('#node-jsonld')).not.toContainText('sameAs');
+  await expect(page.locator('#tabpanel-dados')).toContainText('o fragmento desta divisão ainda não foi conferido');
 });

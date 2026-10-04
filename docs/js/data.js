@@ -93,6 +93,57 @@ export function urnOf(data, key) {
     return { urn: fragment ? `${doc.urn}!${fragment}` : doc.urn, base: doc.urn, fragment };
 }
 
+// ---------- representação para máquinas (painel Dados e scripts/build-graph.js) ----------
+export const CONTEXT_URL = 'https://luccas-amorim.github.io/ariadne/data/context.jsonld';
+export const CONTENT_LICENSE = 'https://creativecommons.org/licenses/by/4.0/';
+
+/** Espécie da divisão pelo prefixo do id: Parte, Livro, Titulo, Capitulo, Secao ou Divisao. */
+export function divisionKind(id) {
+    const m = /^(parte|livro|titulo|cap|secao)\b/.exec(id);
+    return m ? { parte: 'Parte', livro: 'Livro', titulo: 'Titulo', cap: 'Capitulo', secao: 'Secao' }[m[1]] : 'Divisao';
+}
+
+/** Tipo do nó no vocabulário: schema:Legislation para diplomas, av:<espécie> para divisões. */
+export function nodeTypeOf(key) {
+    const path = key.split('/');
+    return path.length === 1 ? 'Legislation' : `av:${divisionKind(path[path.length - 1])}`;
+}
+
+/** Objeto JSON-LD de um nó (sem @context, que o chamador acrescenta). */
+export function nodeLd(data, key) {
+    const [docId, ...path] = key.split('/');
+    const doc = data.diplomas[docId];
+    const n = dataNodeOf(data, key);
+    if (!doc || !n) return null;
+    const span = keySpan(data, key), urn = urnOf(data, key);
+    const o = { '@id': iriOf(key), '@type': nodeTypeOf(key) };
+    if (!path.length) {
+        Object.assign(o, { name: doc.title, alternateName: doc.shortTitle, legislationIdentifier: doc.norm, url: doc.source });
+        if (doc.year) o.legislationDate = String(doc.year);
+        if (doc.status) o['av:status'] = doc.status;
+    } else {
+        Object.assign(o, { name: n.name, 'av:rotulo': n.label, 'av:faixa': n.subtitle, isPartOf: iriOf([docId, ...path.slice(0, -1)].join('/')) });
+    }
+    if (urn && (!path.length || urn.fragment)) o.sameAs = urn.urn;
+    if (span.since != null) o['av:desde'] = span.since;
+    if (span.until != null) o['av:ate'] = span.until;
+    return o;
+}
+
+const MESES_ABNT = ['jan.', 'fev.', 'mar.', 'abr.', 'maio', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+
+/** Referência no estilo ABNT (NBR 6023) do diploma ou da divisão, com data de acesso. */
+export function citeAbnt(data, key, date = new Date()) {
+    const [docId, ...path] = key.split('/');
+    const doc = data.diplomas[docId];
+    if (!doc) return '';
+    const n = path.length ? dataNodeOf(data, key) : null;
+    const title = /constitui/i.test(doc.norm) ? '' : ` ${doc.title}.`;
+    const part = n ? ` ${n.name} (${n.subtitle}).` : '';
+    const acesso = `${date.getDate()} ${MESES_ABNT[date.getMonth()]} ${date.getFullYear()}`;
+    return `BRASIL. ${doc.norm}.${title}${part} Disponível em: ${doc.source}. Acesso em: ${acesso}.`;
+}
+
 /** Vigência de uma chave: { since, until } pelo ano do diploma e pelos since/until da divisão e dos ancestrais. */
 export function keySpan(data, key) {
     const [docId, ...path] = key.split('/');

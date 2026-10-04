@@ -303,7 +303,11 @@ export class TreeModel {
      */
     relationsFor(d, { includeDescendants = false } = {}) {
         const keys = new Set([d.key]);
-        if (includeDescendants) (function walk(x) { (x.children || x._children || []).forEach(c => { keys.add(c.key); walk(c); }); })(d);
+        // No mapa, o centro é a Constituição: suas divisões ficam sob o ramo constitucional,
+        // e não sob o centro (que tem todos os nós como descendentes).
+        let scope = d;
+        if (d.data.kind === 'center' && !this.isFocus()) scope = (this.root.children || []).find(r => r.data.id === d.data.meta.ramo) || null;
+        if (includeDescendants && scope) (function walk(x) { (x.children || x._children || []).forEach(c => { keys.add(c.key); walk(c); }); })(scope);
         const out = [];
         for (const rel of this.activeRelations()) {
             let direction = null, otherKey = null;
