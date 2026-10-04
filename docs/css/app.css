@@ -310,6 +310,23 @@ body.mode-dados #toolbar-row, body.mode-dados #timeline-bar, body.mode-dados #wo
 .data-sig { font-size: 12px; color: var(--relation); word-break: break-word; }
 #dados .code-block { white-space: pre-wrap; word-break: break-all; }
 .data-card.kv { display: grid; grid-template-columns: 96px 1fr; }
+
+/* Camada de dispositivos (gerada) */
+.disp { display: flex; flex-direction: column; gap: .5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+.data-badge.gerado-warn { border-color: var(--review); color: color-mix(in srgb, var(--review) 75%, var(--text-strong)); margin-left: .5rem; vertical-align: middle; }
+.disp-warn { margin: 0; font-size: 13px; line-height: 1.5; padding: .6rem .75rem; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--review) 55%, var(--border)); background: color-mix(in srgb, var(--review) 10%, var(--surface)); }
+.disp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .15rem; font-size: 13px; }
+.disp-item { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem; padding: .25rem .4rem; border-radius: 6px; transition: background .3s; }
+.disp-item.flash { background: color-mix(in srgb, var(--relation) 18%, transparent); }
+.disp-paragrafo { padding-left: 1.4rem; }
+.disp-inciso { padding-left: 2.4rem; }
+.disp-alinea { padding-left: 3.4rem; }
+.disp-num { font-weight: 700; color: var(--text-strong); min-width: 5.5rem; }
+.disp-artigo .disp-num { font-family: ui-monospace, monospace; }
+.disp-urn { font: 11px ui-monospace, monospace; color: var(--text-faint); }
+.disp-refs { font-size: 12px; color: var(--text-muted); }
+.disp-ref { font: 600 11px ui-monospace, monospace; border: 1px solid var(--border-strong); border-radius: 4px; padding: 0 .3rem; background: var(--surface); color: var(--relation); cursor: pointer; }
+.disp-ref.out { color: var(--text-muted); cursor: default; }
 #grafo-main { flex: 1 1 auto; min-height: 0; min-width: 0; display: flex; flex-direction: column; }
 #grafo-bar { display: flex; align-items: center; gap: .75rem; padding: .5rem 1.25rem; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 70%, transparent); overflow-x: auto; }
 #grafo-bar > * { flex: 0 0 auto; }

@@ -45,6 +45,7 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Estudo.** Perguntas de múltipla escolha geradas da estrutura selecionada: síntese → divisão, divisão → diploma, divisão → faixa de artigos. Errou? O nó entra na sua trilha como "revisar". Dá para ocultar os rótulos da árvore durante o estudo.
 * **Trilha pessoal.** Marque divisões como estudadas ou para revisar; o progresso aparece por diploma. Fica só no seu navegador e pode ser exportada e importada em JSON.
 * **Glossário.** Termos recorrentes das sínteses ganham definição ao passar o mouse.
+* **Dispositivos (experimental).** No Título IX do Código Civil (responsabilidade civil), o painel oferece "Ver dispositivos": a lista de artigos, parágrafos e incisos, com a URN de cada um e as remissões explícitas entre eles. É gerada por script a partir do texto do Planalto, sem revisão humana, e a interface avisa isso. Não entra na árvore principal.
 * **Exportar.** SVG ou PNG do que está na tela, com título e licença; impressão limpa.
 * **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
 * **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `Shift+F` tela cheia, `L` abre a lista, `Esc` recolhe.
@@ -75,6 +76,7 @@ Os dados são JSON estáticos servidos junto com a página e podem ser consumido
 | `data/vocab.ttl` | Gerado: o vocabulário `av:`, com os tipos de relação e as espécies de divisão |
 | `data/edges.csv` | Gerado: `from,to,type,since,until,status,basis` |
 | `data/nodes.csv` | Gerado: `key,diploma,kind,label,name,subtitle,since,until,status,urn` |
+| `data/dispositivos/cc.json` | Experimental: artigos, parágrafos, incisos e alíneas do CC, arts. 927 a 954 (Título IX), com URN, remissões explícitas e hash de cada trecho, sem o texto. Status `gerado` |
 
 Cada diploma traz a URN LexML (`urn`), conferida no resolvedor do LexML. Cada nó tem o IRI `https://luccas-amorim.github.io/ariadne/id/<chave>` (ex.: `…/id/cc/parte-geral/livro-i`), que abre o nó na árvore. Fragmentos de URN por divisão (`lexml`) só entram quando conferidos; sem eles, a divisão usa a URN do diploma.
 
@@ -106,6 +108,7 @@ docs/
   data/                 ver "Dados abertos"
 scripts/validate.js     validação dos dados (node, sem dependências)
 scripts/build-graph.js  gera all.json, JSON-LD, Turtle e CSV (node, sem dependências)
+scripts/extract-dispositivos.js  camada experimental de dispositivos, a partir de um HTML do Planalto salvo localmente
 tests/e2e.spec.js       testes de interface (Playwright)
 .github/workflows/      validação dos dados e testes a cada PR
 ```

@@ -486,3 +486,21 @@ test('vista Dados e subgrafo .ttl do painel', async ({ page }) => {
   expect(text).toContain('a av:Relacao');
   expect(text).toContain('<https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii> av:concretiza');
 });
+
+// ---------- Camada de dispositivos (experimental) ----------
+test('dispositivos gerados aparecem na aba Dados, com aviso, fora da árvore', async ({ page }) => {
+  await page.goto('/#/cc/parte-especial/livro-i/titulo-ix');
+  const action = page.getByRole('button', { name: /Ver dispositivos \(47, gerados\)/ });
+  await expect(action).toBeVisible();
+  await action.click();
+  await expect(page.locator('#tab-dados')).toHaveAttribute('aria-selected', 'true');
+  await expect(page.locator('#dispositivos .disp-warn')).toContainText('sem revisão humana');
+  await expect(page.locator('#dispositivos .disp-item')).toHaveCount(47);
+  await expect(page.locator('#disp-cc_art-927')).toContainText('art. 186');
+  await page.locator('#disp-cc_art-933 .disp-ref').first().click();
+  await expect(page.locator('#disp-cc_art-932_inc-i')).toHaveClass(/flash/);
+  // não entra na árvore principal
+  await expect(page.locator('#view-main g.node[data-key^="cc/art-"]')).toHaveCount(0);
+  await page.goto('/#/cc/parte-geral?aba=dados');
+  await expect(page.locator('#dispositivos')).toHaveCount(0);
+});

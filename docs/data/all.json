@@ -55,6 +55,9 @@
       "l9784",
       "lep"
     ],
+    "dispositivos": [
+      "cc"
+    ],
     "planned": [
       {
         "id": "lindb",

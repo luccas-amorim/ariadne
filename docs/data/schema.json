@@ -25,8 +25,8 @@
     },
     "status": {
       "type": "string",
-      "enum": ["rascunho", "revisado"],
-      "description": "rascunho = estrutura ainda não conferida contra o texto oficial; revisado = conferida por ao menos um revisor além do autor."
+      "enum": ["rascunho", "revisado", "gerado"],
+      "description": "rascunho = estrutura ainda não conferida contra o texto oficial; revisado = conferida por ao menos um revisor além do autor; gerado = produzido por script, sem revisão humana (só na camada de dispositivos)."
     },
     "historyEntry": {
       "type": "object",
@@ -178,6 +178,11 @@
           "items": { "$ref": "#/definitions/diplomaMeta" },
           "description": "Diplomas previstos no roadmap. Aparecem esmaecidos no mapa até ganharem arquivo próprio."
         },
+        "dispositivos": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/id" },
+          "description": "Diplomas com camada experimental de dispositivos em dispositivos/<id>.json."
+        },
         "relationTypes": {
           "type": "object",
           "additionalProperties": {
@@ -213,6 +218,37 @@
               "since": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a relação passou a valer, quando posterior aos próprios nós. Não pode ser anterior ao year dos dois diplomas." },
               "until": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a relação deixou de valer. A linha do tempo a oculta a partir daí." },
               "status": { "$ref": "#/definitions/status" }
+            }
+          }
+        }
+      }
+    },
+    "dispositivos": {
+      "type": "object",
+      "description": "Camada experimental (dispositivos/<id>.json), gerada por scripts/extract-dispositivos.js. Não entra na árvore principal e não guarda o texto da lei: só estrutura, URN, remissões explícitas e o hash de cada trecho.",
+      "required": ["diploma", "status", "source", "scope", "dispositivos"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "description": { "type": "string" },
+        "diploma": { "$ref": "#/definitions/id" },
+        "status": { "const": "gerado" },
+        "source": { "type": "string", "pattern": "^https://" },
+        "scope": { "type": "array", "items": { "$ref": "#/definitions/nodeKey" }, "description": "Divisões da árvore de que os dispositivos descendem." },
+        "range": { "type": "string" },
+        "dispositivos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["key", "parent", "kind", "num", "urn", "remete", "hash"],
+            "additionalProperties": false,
+            "properties": {
+              "key": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*/art-[0-9a-z-]+(/[a-z0-9-]+)*$", "description": "Ex.: cc/art-927/par-unico." },
+              "parent": { "type": "string", "description": "Divisão da árvore (para artigos) ou dispositivo pai." },
+              "kind": { "enum": ["artigo", "paragrafo", "inciso", "alinea"] },
+              "num": { "type": "string" },
+              "urn": { "type": "string", "pattern": "^urn:lex:br:.+!.+$" },
+              "remete": { "type": "array", "items": { "type": "string" }, "description": "Remissões explícitas a dispositivos do mesmo diploma, extraídas por regex." },
+              "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{16}$", "description": "Prefixo do SHA-256 do trecho, sem as notas editoriais; muda quando a redação muda." }
             }
           }
         }

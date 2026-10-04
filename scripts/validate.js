@@ -17,7 +17,9 @@ const DATA_DIR = path.join(__dirname, '..', 'docs', 'data');
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*(\/[a-z0-9]+(-[a-z0-9]+)*)*$/;
 const NATUREZAS = new Set(['material', 'processual']);
-const STATUS = new Set(['rascunho', 'revisado']);
+const STATUS = new Set(['rascunho', 'revisado']);   // 'gerado' só vale na camada de dispositivos
+const DISP_KINDS = new Set(['artigo', 'paragrafo', 'inciso', 'alinea']);
+const DISP_KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*\/art-[0-9a-z-]+(\/[a-z0-9-]+)*$/;
 const URN_RE = /^urn:lex:br:[a-z0-9.;:_-]+$/;
 const URN_DATE_RE = /:(\d{4})-\d{2}-\d{2};/;
 const LEXML_FRAG_RE = /^[a-z0-9_.-]+$/;
@@ -234,6 +236,39 @@ function main() {
     }
   }
 
+  // Camada experimental de dispositivos
+  let dispCount = 0;
+  for (const id of catalog.dispositivos || []) {
+    const file = `dispositivos/${id}.json`;
+    if (!mapped.has(id)) { err('index.json', `dispositivos: "${id}" não é um diploma mapeado`); continue; }
+    const d = readJson(file);
+    if (!d) continue;
+    for (const k of Object.keys(d)) if (!['$schema', 'description', 'diploma', 'status', 'source', 'scope', 'range', 'dispositivos'].includes(k)) err(file, `campo não previsto: ${k}`);
+    if (d.diploma !== id) err(file, `diploma "${d.diploma}" diferente do nome do arquivo`);
+    if (d.status !== 'gerado') err(file, 'status deve ser "gerado"');
+    if (!Array.isArray(d.scope) || !d.scope.length) err(file, 'scope deve listar as divisões cobertas');
+    else d.scope.forEach(k => { if (!keys.has(k)) err(file, `scope aponta para nó inexistente: ${k}`); });
+    if (!Array.isArray(d.dispositivos) || !d.dispositivos.length) { err(file, 'dispositivos deve ser um array não vazio'); continue; }
+    const seen = new Set();
+    const urnBase = (readJson(`${id}.json`) || {}).urn;
+    d.dispositivos.forEach((x, i) => {
+      const where = `dispositivos[${i}] ${x.key || '?'}`;
+      for (const k of ['key', 'parent', 'kind', 'num', 'urn', 'hash']) if (typeof x[k] !== 'string' || !x[k]) err(file, `${where}: campo ausente: ${k}`);
+      for (const k of Object.keys(x)) if (!['key', 'parent', 'kind', 'num', 'urn', 'remete', 'hash'].includes(k)) err(file, `${where}: campo não previsto: ${k}`);
+      if (x.key && !DISP_KEY_RE.test(x.key)) err(file, `${where}: chave fora do padrão diploma/art-N/...`);
+      if (x.key && !x.key.startsWith(id + '/')) err(file, `${where}: chave de outro diploma`);
+      if (seen.has(x.key)) err(file, `${where}: chave duplicada`);
+      if (x.parent && !seen.has(x.parent) && !d.scope.includes(x.parent)) err(file, `${where}: pai desconhecido (${x.parent}); deve vir antes ou estar em scope`);
+      seen.add(x.key);
+      if (x.kind && !DISP_KINDS.has(x.kind)) err(file, `${where}: kind desconhecido: ${x.kind}`);
+      if (x.urn && urnBase && !x.urn.startsWith(urnBase + '!')) err(file, `${where}: urn não começa pela URN do diploma`);
+      if (x.hash && !/^sha256:[0-9a-f]{16}$/.test(x.hash)) err(file, `${where}: hash fora do padrão sha256:<16 hex>`);
+      if (!Array.isArray(x.remete)) err(file, `${where}: remete deve ser um array`);
+      else x.remete.forEach(r => { if (!DISP_KEY_RE.test(r)) err(file, `${where}: remissão fora do padrão: ${r}`); });
+    });
+    dispCount += d.dispositivos.length;
+  }
+
   // Glossário
   let termCount = 0;
   const glossary = readJson('glossary.json');
@@ -283,7 +318,7 @@ function main() {
     }
   }
 
-  finish(summary, { relCount, termCount, tourCount });
+  finish(summary, { relCount, termCount, tourCount, dispCount });
 }
 
 function finish(summary = [], extra = {}) {
@@ -292,7 +327,7 @@ function finish(summary = [], extra = {}) {
     for (const s of summary) {
       console.log(`  ${s.id.padEnd(7)} ${String(s.nodes).padStart(3)} nós, profundidade ${s.depth}, ${String(s.history).padStart(2)} marcos  [${s.ramo}/${s.natureza}]  ${s.status}`);
     }
-    console.log(`Relações internormativas: ${extra.relCount || 0}   Termos do glossário: ${extra.termCount || 0}   Percursos: ${extra.tourCount || 0}`);
+    console.log(`Relações internormativas: ${extra.relCount || 0}   Termos do glossário: ${extra.termCount || 0}   Percursos: ${extra.tourCount || 0}   Dispositivos (gerados): ${extra.dispCount || 0}`);
   }
   for (const w of warnings) console.warn(`aviso  ${w}`);
   for (const e of errors) console.error(`ERRO   ${e}`);

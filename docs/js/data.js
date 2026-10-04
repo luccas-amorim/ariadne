@@ -14,11 +14,13 @@ async function fetchJson(path) {
 /** Carrega catálogo, diplomas, relações e glossário. */
 export async function loadAll(base = 'data/') {
     const catalog = await fetchJson(`${base}index.json`);
-    const [docs, relations, glossary, tours] = await Promise.all([
+    const [docs, relations, glossary, tours, disp] = await Promise.all([
         Promise.all(catalog.diplomas.map(id => fetchJson(`${base}${id}.json`))),
         fetchJson(`${base}relations.json`).catch(() => ({ relations: [] })),
         fetchJson(`${base}glossary.json`).catch(() => ({ terms: [] })),
-        fetchJson(`${base}tours.json`).catch(() => ({ tours: [] }))
+        fetchJson(`${base}tours.json`).catch(() => ({ tours: [] })),
+        // camada experimental: falhar aqui não impede a árvore de abrir
+        Promise.all((catalog.dispositivos || []).map(id => fetchJson(`${base}dispositivos/${id}.json`).catch(() => null)))
     ]);
     const diplomas = {}, ramos = {};
     docs.forEach(d => { diplomas[d.id] = d; });
@@ -28,7 +30,8 @@ export async function loadAll(base = 'data/') {
         relations: relations.relations || [],
         relationTypes: catalog.relationTypes || {},
         glossary: glossary.terms || [],
-        tours: tours.tours || []
+        tours: tours.tours || [],
+        dispositivos: Object.fromEntries(disp.filter(Boolean).map(d => [d.diploma, d]))
     };
 }
 
@@ -175,6 +178,12 @@ export function relationActiveAt(data, rel, Y) {
     if (Y == null) return rel.until == null || rel.until > new Date().getFullYear();
     const s = relationSpan(data, rel);
     return (s.since == null || s.since <= Y) && (s.until == null || Y < s.until);
+}
+
+/** Camada de dispositivos que cobre a chave (a própria divisão em `scope`), ou null. */
+export function dispositivosFor(data, key) {
+    const layer = (data.dispositivos || {})[key.split('/')[0]];
+    return layer && layer.scope.includes(key) ? layer : null;
 }
 
 /** Reconhece uma URN LexML, um IRI do Ariadne ou uma chave colados na busca. */

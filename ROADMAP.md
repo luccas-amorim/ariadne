@@ -87,6 +87,14 @@ Há 27 relações. O formato comporta centenas. Frentes:
 - [x] Publicar um `data/all.json` consolidado para consumo externo em uma requisição (com JSON-LD, Turtle e CSV, gerados e conferidos no CI).
 - [ ] Fragmentos LexML por divisão (campo `lexml`, ex.: `art5`), conferidos no texto marcado do LexML. Hoje toda divisão usa a URN do diploma.
 
+## 9. Camada de dispositivos (experimental)
+
+Prova de conceito no Código Civil, Título IX (arts. 927 a 954): `docs/data/dispositivos/cc.json`, gerado por `scripts/extract-dispositivos.js` a partir de um HTML do Planalto salvo localmente. Não faz parte do núcleo e não muda a promessa de envelhecer devagar.
+
+- [ ] **Decisão do autor antes de expandir:** manter o script local (rodado à mão, com o diff revisado no PR) ou automatizar com revisão (CI semanal que baixa o texto, roda o script e abre um PR quando algum hash mudar).
+- [ ] Conferir os fragmentos de URN gerados (`art927_par1u`, `art932_cpt_inc1`…) contra o padrão do LexML.
+- [ ] Remissões a outros diplomas ("art. 14 do CDC"), hoje ignoradas pelo extrator.
+
 ## Fora do escopo por ora
 
 Ideias registradas na vista Dados como proposta. Todas leriam os mesmos arquivos estáticos, sem backend próprio:
@@ -97,4 +105,4 @@ Ideias registradas na vista Dados como proposta. Todas leriam os mesmos arquivos
 
 ## Concluído
 
-Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia, painel lateral com abas, vista Grafo com matriz, Linha do tempo com diff e genealogia.
+Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia, painel lateral com abas, vista Grafo com matriz, Linha do tempo com diff e genealogia, camada de dados (JSON-LD, Turtle, CSV) e prova de conceito da camada de dispositivos.

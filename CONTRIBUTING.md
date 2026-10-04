@@ -103,6 +103,17 @@ Cada relação liga duas divisões de **diplomas distintos**:
 
 Um percurso é uma sequência de 5 a 10 passos, cada um com uma `key` (como nas relações) e um `text` de uma a três frases que explica por que se vai daquele nó ao próximo. Escreva como quem conduz uma aula: o texto do passo fala do nó em que se está e prepara o seguinte. Percursos novos entram com `"status": "rascunho"` e seguem a mesma revisão por pares dos diplomas.
 
+## 5-B. Camada de dispositivos (experimental)
+
+`docs/data/dispositivos/<id>.json` desce abaixo dos Capítulos, até artigo, parágrafo, inciso e alínea, só numa faixa de artigos e só como ponteiros: chave, pai, URN, remissões explícitas (`remete`) e o hash de cada trecho. Não guarda o texto da lei e não entra na árvore. O arquivo é gerado, nunca editado à mão, e leva `"status": "gerado"`:
+
+```bash
+# baixe antes, à mão, o texto compilado do Planalto (o script não usa a rede)
+node scripts/extract-dispositivos.js l10406compilada.htm --diploma cc --de 927 --ate 954 --pai cc/parte-especial/livro-i/titulo-ix
+```
+
+Quando a redação de um dispositivo muda, o hash muda: rodar o script de novo e comparar o diff mostra o que mudou. Hoje só existe a prova de conceito do Título IX do Código Civil; expandir depende de uma decisão do projeto (ver ROADMAP).
+
 ## 6. Revisão por pares
 
 Mudanças em `docs/data/` seguem o checklist do template de pull request: fonte, estrutura conferida, faixas sem lacunas, sínteses no estilo, classificação justificada, validação passando. Um diploma só sai de `rascunho` para `revisado` quando um segundo revisor confirmar a estrutura no PR, item a item, e disser isso no comentário.

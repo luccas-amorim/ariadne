@@ -39,6 +39,7 @@
     }
   ],
   "diplomas": ["cf", "cc", "cpc", "cp", "cpp", "clt", "cdc", "eca", "ctn", "l14133", "l9784", "lep"],
+  "dispositivos": ["cc"],
   "planned": [
     {
       "id": "lindb",

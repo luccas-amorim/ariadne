@@ -1,0 +1,462 @@
+{
+  "$schema": "../schema.json#/definitions/dispositivos",
+  "description": "Camada experimental, gerada por scripts/extract-dispositivos.js a partir do texto compilado do Planalto. Sem o texto da lei: só a estrutura, a URN, as remissões explícitas e o hash de cada trecho (sem as notas editoriais). Os fragmentos de URN seguem o padrão do LexML e não foram conferidos um a um.",
+  "diploma": "cc",
+  "status": "gerado",
+  "source": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+  "scope": [
+    "cc/parte-especial/livro-i/titulo-ix"
+  ],
+  "range": "Arts. 927 a 954",
+  "dispositivos": [
+    {
+      "key": "cc/art-927",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "927",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art927",
+      "remete": [
+        "cc/art-186",
+        "cc/art-187"
+      ],
+      "hash": "sha256:fe08ace89eaa9c3e"
+    },
+    {
+      "key": "cc/art-927/par-unico",
+      "parent": "cc/art-927",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art927_par1u",
+      "remete": [],
+      "hash": "sha256:ef976aeb0da9069d"
+    },
+    {
+      "key": "cc/art-928",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "928",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art928",
+      "remete": [],
+      "hash": "sha256:089356826a932390"
+    },
+    {
+      "key": "cc/art-928/par-unico",
+      "parent": "cc/art-928",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art928_par1u",
+      "remete": [],
+      "hash": "sha256:088fab67bbc05af9"
+    },
+    {
+      "key": "cc/art-929",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "929",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art929",
+      "remete": [
+        "cc/art-188/inc-ii"
+      ],
+      "hash": "sha256:673867a3289491e5"
+    },
+    {
+      "key": "cc/art-930",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "930",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art930",
+      "remete": [
+        "cc/art-188/inc-ii"
+      ],
+      "hash": "sha256:25150dcdd0df917d"
+    },
+    {
+      "key": "cc/art-930/par-unico",
+      "parent": "cc/art-930",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art930_par1u",
+      "remete": [
+        "cc/art-188/inc-i"
+      ],
+      "hash": "sha256:66cdedb48c27db79"
+    },
+    {
+      "key": "cc/art-931",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "931",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art931",
+      "remete": [],
+      "hash": "sha256:ba6b101237e99ba3"
+    },
+    {
+      "key": "cc/art-932",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "932",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art932",
+      "remete": [],
+      "hash": "sha256:4ff6e6819bda5966"
+    },
+    {
+      "key": "cc/art-932/inc-i",
+      "parent": "cc/art-932",
+      "kind": "inciso",
+      "num": "I",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art932_cpt_inc1",
+      "remete": [],
+      "hash": "sha256:66fa55592013a2b9"
+    },
+    {
+      "key": "cc/art-932/inc-ii",
+      "parent": "cc/art-932",
+      "kind": "inciso",
+      "num": "II",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art932_cpt_inc2",
+      "remete": [],
+      "hash": "sha256:ced53ad1829a2316"
+    },
+    {
+      "key": "cc/art-932/inc-iii",
+      "parent": "cc/art-932",
+      "kind": "inciso",
+      "num": "III",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art932_cpt_inc3",
+      "remete": [],
+      "hash": "sha256:8f2bb2159dd340b5"
+    },
+    {
+      "key": "cc/art-932/inc-iv",
+      "parent": "cc/art-932",
+      "kind": "inciso",
+      "num": "IV",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art932_cpt_inc4",
+      "remete": [],
+      "hash": "sha256:f0ead363af57911f"
+    },
+    {
+      "key": "cc/art-932/inc-v",
+      "parent": "cc/art-932",
+      "kind": "inciso",
+      "num": "V",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art932_cpt_inc5",
+      "remete": [],
+      "hash": "sha256:ceab000434b95e13"
+    },
+    {
+      "key": "cc/art-933",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "933",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art933",
+      "remete": [
+        "cc/art-932/inc-i",
+        "cc/art-932/inc-ii",
+        "cc/art-932/inc-iii",
+        "cc/art-932/inc-iv",
+        "cc/art-932/inc-v"
+      ],
+      "hash": "sha256:88ee3c8dcb65f88a"
+    },
+    {
+      "key": "cc/art-934",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "934",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art934",
+      "remete": [],
+      "hash": "sha256:e1bc5128ca66e46b"
+    },
+    {
+      "key": "cc/art-935",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "935",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art935",
+      "remete": [],
+      "hash": "sha256:fb037897a6da0d4b"
+    },
+    {
+      "key": "cc/art-936",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "936",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art936",
+      "remete": [],
+      "hash": "sha256:4ba8f4ce41acfc8e"
+    },
+    {
+      "key": "cc/art-937",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "937",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art937",
+      "remete": [],
+      "hash": "sha256:426c0c658e1fa212"
+    },
+    {
+      "key": "cc/art-938",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "938",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art938",
+      "remete": [],
+      "hash": "sha256:3e96bf8a35a17cf9"
+    },
+    {
+      "key": "cc/art-939",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "939",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art939",
+      "remete": [],
+      "hash": "sha256:9ad534bfb4c24945"
+    },
+    {
+      "key": "cc/art-940",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "940",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art940",
+      "remete": [],
+      "hash": "sha256:aeda42f4c3438565"
+    },
+    {
+      "key": "cc/art-941",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "941",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art941",
+      "remete": [
+        "cc/art-939",
+        "cc/art-940"
+      ],
+      "hash": "sha256:611220d0eeee8455"
+    },
+    {
+      "key": "cc/art-942",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "942",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art942",
+      "remete": [],
+      "hash": "sha256:82b2ad796276d51d"
+    },
+    {
+      "key": "cc/art-942/par-unico",
+      "parent": "cc/art-942",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art942_par1u",
+      "remete": [
+        "cc/art-932"
+      ],
+      "hash": "sha256:759834fcae3ef614"
+    },
+    {
+      "key": "cc/art-943",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "943",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art943",
+      "remete": [],
+      "hash": "sha256:0e74c58c7c2930d8"
+    },
+    {
+      "key": "cc/art-944",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "944",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art944",
+      "remete": [],
+      "hash": "sha256:74378bcb83114400"
+    },
+    {
+      "key": "cc/art-944/par-unico",
+      "parent": "cc/art-944",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art944_par1u",
+      "remete": [],
+      "hash": "sha256:e13985bafdfc96d0"
+    },
+    {
+      "key": "cc/art-945",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "945",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art945",
+      "remete": [],
+      "hash": "sha256:b37c6097fd75c3a7"
+    },
+    {
+      "key": "cc/art-946",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "946",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art946",
+      "remete": [],
+      "hash": "sha256:397bab6ad580e55e"
+    },
+    {
+      "key": "cc/art-947",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "947",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art947",
+      "remete": [],
+      "hash": "sha256:f529105250189944"
+    },
+    {
+      "key": "cc/art-948",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "948",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art948",
+      "remete": [],
+      "hash": "sha256:57ca70ba85cc2e1a"
+    },
+    {
+      "key": "cc/art-948/inc-i",
+      "parent": "cc/art-948",
+      "kind": "inciso",
+      "num": "I",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art948_cpt_inc1",
+      "remete": [],
+      "hash": "sha256:9fbc84e3b407faa0"
+    },
+    {
+      "key": "cc/art-948/inc-ii",
+      "parent": "cc/art-948",
+      "kind": "inciso",
+      "num": "II",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art948_cpt_inc2",
+      "remete": [],
+      "hash": "sha256:14fc849af0a3e5df"
+    },
+    {
+      "key": "cc/art-949",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "949",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art949",
+      "remete": [],
+      "hash": "sha256:60340cf65cf08f55"
+    },
+    {
+      "key": "cc/art-950",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "950",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art950",
+      "remete": [],
+      "hash": "sha256:d04f8d8355e2bc0d"
+    },
+    {
+      "key": "cc/art-950/par-unico",
+      "parent": "cc/art-950",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art950_par1u",
+      "remete": [],
+      "hash": "sha256:af964d146c2f8252"
+    },
+    {
+      "key": "cc/art-951",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "951",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art951",
+      "remete": [
+        "cc/art-948",
+        "cc/art-949",
+        "cc/art-950"
+      ],
+      "hash": "sha256:f6b9be064a3165f1"
+    },
+    {
+      "key": "cc/art-952",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "952",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art952",
+      "remete": [],
+      "hash": "sha256:f477a549c179ba77"
+    },
+    {
+      "key": "cc/art-952/par-unico",
+      "parent": "cc/art-952",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art952_par1u",
+      "remete": [],
+      "hash": "sha256:8fb52e16c99b2da8"
+    },
+    {
+      "key": "cc/art-953",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "953",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art953",
+      "remete": [],
+      "hash": "sha256:3c305a3b2d0c4a80"
+    },
+    {
+      "key": "cc/art-953/par-unico",
+      "parent": "cc/art-953",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art953_par1u",
+      "remete": [],
+      "hash": "sha256:ecf5f957fbf84b96"
+    },
+    {
+      "key": "cc/art-954",
+      "parent": "cc/parte-especial/livro-i/titulo-ix",
+      "kind": "artigo",
+      "num": "954",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art954",
+      "remete": [
+        "cc/art-953/par-unico"
+      ],
+      "hash": "sha256:e7caeb01b7da817d"
+    },
+    {
+      "key": "cc/art-954/par-unico",
+      "parent": "cc/art-954",
+      "kind": "paragrafo",
+      "num": "único",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art954_par1u",
+      "remete": [],
+      "hash": "sha256:8ee8aaa736bdb10a"
+    },
+    {
+      "key": "cc/art-954/par-unico/inc-i",
+      "parent": "cc/art-954/par-unico",
+      "kind": "inciso",
+      "num": "I",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art954_par1u_inc1",
+      "remete": [],
+      "hash": "sha256:c4aa20e3a8496e50"
+    },
+    {
+      "key": "cc/art-954/par-unico/inc-ii",
+      "parent": "cc/art-954/par-unico",
+      "kind": "inciso",
+      "num": "II",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art954_par1u_inc2",
+      "remete": [],
+      "hash": "sha256:72a1df8bc8e9ccfe"
+    },
+    {
+      "key": "cc/art-954/par-unico/inc-iii",
+      "parent": "cc/art-954/par-unico",
+      "kind": "inciso",
+      "num": "III",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406!art954_par1u_inc3",
+      "remete": [],
+      "hash": "sha256:1509d368cda0dca8"
+    }
+  ]
+}

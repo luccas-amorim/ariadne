@@ -1,7 +1,7 @@
 // Orquestração: roteamento por hash, painel de leitura, trilha de navegação, filtros,
 // alternância 2D/3D, comparação lado a lado, modo estudo, trilha pessoal, exportação,
 // lista acessível, teclado e tema.
-import { loadAll, buildSearchIndex, search, parseIdentifier, glossaryHighlight, timelineEvents, esc, sleep, keyLabel, urnOf, keySpan, iriOf, nodeLd, nodeTypeOf, citeAbnt, CONTEXT_URL } from './data.js';
+import { loadAll, buildSearchIndex, search, parseIdentifier, glossaryHighlight, timelineEvents, esc, sleep, keyLabel, urnOf, keySpan, iriOf, nodeLd, nodeTypeOf, citeAbnt, dispositivosFor, CONTEXT_URL } from './data.js';
 import { TreeModel } from './model.js';
 import { Radial2D } from './radial2d.js';
 import { Tree3D } from './tree3d.js';
@@ -331,12 +331,35 @@ function dataTab(model, d) {
                 <dt>vigência</dt><dd><code>${span.since || '?'} → ${span.until || 'hoje'}</code></dd>
             </dl>
             <pre class="code-block" id="node-jsonld">${esc(json)}</pre>
+            ${dispositivosHtml(data, key)}
             <div class="panel-actions">
                 <button type="button" class="btn btn-sm" data-copy="jsonld">Copiar JSON-LD</button>
                 <button type="button" class="btn btn-sm" data-copy="abnt">Citar (ABNT)</button>
                 <button type="button" class="btn btn-sm" data-ttl="1" title="Este nó, as divisões abaixo dele e as relações que tocam nelas, em Turtle">Subgrafo .ttl</button>
             </div>`
     };
+}
+
+/** Camada experimental: os dispositivos gerados da divisão, sem o texto da lei. */
+function dispositivosHtml(data, key) {
+    const layer = dispositivosFor(data, key);
+    if (!layer) return '';
+    const label = x => ({ artigo: `art. ${x.num}`, paragrafo: x.num === 'único' ? 'parágrafo único' : `§ ${x.num}`, inciso: `inciso ${x.num}`, alinea: `alínea ${x.num})` })[x.kind];
+    const refLabel = k => k.split('/').slice(1).map(s => s.replace(/^art-/, 'art. ').replace(/^par-unico$/, 'par. único').replace(/^par-/, '§ ').replace(/^inc-/, 'inc. ').replace(/^ali-/, 'al. ').toUpperCase().replace(/^ART\. /, 'art. ').replace(/^PAR\. ÚNICO/, 'par. único').replace(/^INC\. /, 'inc. ').replace(/^AL\. /, 'al. ').replace(/^§ /, '§ ')).join(', ');
+    const own = new Set(layer.dispositivos.map(x => x.key));
+    const items = layer.dispositivos.map(x => `
+        <li class="disp-item disp-${x.kind}" id="disp-${esc(x.key.replace(/\//g, '_'))}">
+            <span class="disp-num">${esc(label(x))}</span>
+            <code class="disp-urn" title="URN gerada, não conferida">${esc(x.urn.split('!')[1])}</code>
+            ${x.remete.length ? `<span class="disp-refs">remete a ${x.remete.map(r => own.has(r)
+                ? `<button type="button" class="disp-ref" data-target="disp-${esc(r.replace(/\//g, '_'))}">${esc(refLabel(r))}</button>`
+                : `<span class="disp-ref out">${esc(refLabel(r))}</span>`).join(' ')}</span>` : ''}
+        </li>`).join('');
+    return `<section class="disp" id="dispositivos" aria-labelledby="disp-title">
+            <div class="g-head" id="disp-title">Dispositivos · ${layer.dispositivos.length} <span class="data-badge gerado-warn">gerado</span></div>
+            <p class="disp-warn">Gerado por script a partir do texto compilado do Planalto (${esc(layer.range || '')}), sem revisão humana. Guarda a estrutura, a URN, as remissões explícitas e um hash de cada trecho, não o texto. Confira sempre no <a href="${esc(layer.source)}" target="_blank" rel="noopener">texto oficial</a>.</p>
+            <ol class="disp-list">${items}</ol>
+        </section>`;
 }
 
 function trailActions(key) {
@@ -436,11 +459,18 @@ function showPanel(d, model = activeModel()) {
         const focusAction = state.compare ? null : model.isFocus()
             ? action('Ver no mapa completo', model.hashForNode(d, { focus: null }))
             : action(`Focar em ${doc.shortTitle}`, model.hashForNode(d, { focus: doc.id }));
+        const layer = dispositivosFor(model.data, d.key);
+        const dispAction = layer ? action(`Ver dispositivos (${layer.dispositivos.length}, gerados)`, null, false, () => {
+            const tab = el.panel.querySelector('#tab-dados');
+            if (tab) tab.click();
+            const box = el.panel.querySelector('#dispositivos');
+            if (box) box.scrollIntoView({ block: 'start' });
+        }) : null;
         setPanel({
             tags: [tag(r.name, r.color), statusTag(doc), n.revoked ? tag('Revogado', '#991b1b') : '', yearTag(model)],
             title: n.name, subtitle: `${n.subtitle} · ${keyLabel(model.data, parentKey)}`,
             html: gloss(n.content).replace(/\n/g, '<br>'),
-            actions: [...(focusAction ? [focusAction] : []), ...common],
+            actions: [...(focusAction ? [focusAction] : []), ...(dispAction ? [dispAction] : []), ...common],
             footer: [link('Texto no Planalto', doc.source, true), ...trailActions(d.key), ...copy],
             ...full()
         });
@@ -499,6 +529,10 @@ function setPanel({ tags, title, subtitle, html, extra = '', actions = [], foote
                 copyText(text, b.dataset.copy === 'jsonld' ? 'JSON-LD copiado' : 'Referência copiada');
             }));
         }
+        el.panel.querySelectorAll('.disp-ref[data-target]').forEach(b => b.addEventListener('click', () => {
+            const t = el.panel.querySelector(`#${CSS.escape(b.dataset.target)}`);
+            if (t) { t.scrollIntoView({ block: 'center' }); t.classList.add('flash'); setTimeout(() => t.classList.remove('flash'), 1200); }
+        }));
         el.panel.querySelectorAll('[data-ttl]').forEach(b => b.addEventListener('click', () => {
             downloadText(subgraphTurtle(activeModel().data, dados.key), `ariadne-${dados.key.replace(/\//g, '_')}.ttl`, 'text/turtle');
         }));
