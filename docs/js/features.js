@@ -84,6 +84,34 @@ export function mix(hex, t, base = '#ffffff') {
     return `rgb(${f(r1, r2)},${f(g1, g2)},${f(b1, b2)})`;
 }
 
+// ---------- Tela cheia ----------
+// Fullscreen API quando existe e é aceita; senão (iframes, iOS, recusa) a classe
+// .pseudo-fullscreen fixa o elemento sobre a página. Esc sai das duas.
+const fsListeners = new Set();
+const fsEmit = () => fsListeners.forEach(fn => fn(Fullscreen.current()));
+
+export const Fullscreen = {
+    current() { return document.fullscreenElement || document.querySelector('.pseudo-fullscreen'); },
+    isPseudo() { return !document.fullscreenElement && !!document.querySelector('.pseudo-fullscreen'); },
+    async enter(el) {
+        try {
+            if (!el.requestFullscreen) throw new Error('Fullscreen API indisponível');
+            await el.requestFullscreen();
+        } catch {
+            el.classList.add('pseudo-fullscreen');
+            fsEmit();
+        }
+    },
+    exit() {
+        if (document.fullscreenElement) { document.exitFullscreen().catch(() => {}); return; }
+        const p = document.querySelector('.pseudo-fullscreen');
+        if (p) { p.classList.remove('pseudo-fullscreen'); fsEmit(); }
+    },
+    toggle(el) { if (this.current()) this.exit(); else this.enter(el); },
+    onChange(fn) { fsListeners.add(fn); return () => fsListeners.delete(fn); }
+};
+document.addEventListener('fullscreenchange', fsEmit);
+
 // ---------- Exportação ----------
 function download(href, filename) {
     const a = document.createElement('a');

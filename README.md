@@ -36,15 +36,17 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Linha do tempo.** Um controle por ano (ou `T`) mostra o ordenamento como era em cada data: os diplomas surgem no ano de promulgação, antes disso aparece o antecessor como fantasma (CC/1916, CPC/1973, Constituições de 1824 a 1967), e as divisões incluídas depois só aparecem no seu ano. O botão ▶ reproduz a história, marco a marco, com a árvore crescendo.
 * **Percursos guiados.** Sequências curadas de nós com uma frase de transição: uma compra defeituosa, do crime à execução da pena, uma demissão, um tributo, uma obra pública, a criança entre a família e o Estado. A câmera viaja e o painel acompanha. `N` e `P` avançam e voltam.
 * **Relações internormativas.** Linhas roxas ligam o nó selecionado ao que ele concretiza, regulamenta, processa ou executa em outro diploma. A seta aponta para o destino: quem é concretizado, regulamentado, processado. Na linha do tempo, uma relação só aparece nos anos em que os dois nós (e a própria relação, se tiver `since`/`until`) vigoram. Quando o destino está recolhido, a linha termina tracejada no nó visível mais próximo; o painel lista cada relação com o dispositivo que a fundamenta e leva à divisão exata. O botão "Relações" (ou `X`) liga e desliga as linhas.
+* **Modo aula.** Uma vista limpa para projetar: a Constituição, os ramos e todos os diplomas, com todas as relações cruzadas ao mesmo tempo. Uma chave liga e desliga as relações, e os botões no rodapé do palco filtram por tipo (só "processa", por exemplo). Clicar num diploma isola as relações dele e lista cada uma, com o fundamento, no rodapé. Funciona em 2D e em 3D; no 3D as relações viram arcos acima das camadas e a cena gira devagar até o primeiro toque.
+* **Tela cheia.** O botão "Tela cheia" (ou `Shift+F`) projeta a árvore, ou o palco inteiro no Modo aula. Onde o navegador não permite, a página ocupa a janela toda; `Esc` sai.
 * **Trackpad e mouse.** No 2D, dois dedos movem a tela e a pinça aproxima; a roda do mouse continua aproximando. No 3D, arraste orbita e a roda aproxima.
 * **Estudo.** Perguntas de múltipla escolha geradas da estrutura selecionada: síntese → divisão, divisão → diploma, divisão → faixa de artigos. Errou? O nó entra na sua trilha como "revisar". Dá para ocultar os rótulos da árvore durante o estudo.
 * **Trilha pessoal.** Marque divisões como estudadas ou para revisar; o progresso aparece por diploma. Fica só no seu navegador e pode ser exportada e importada em JSON.
 * **Glossário.** Termos recorrentes das sínteses ganham definição ao passar o mouse.
 * **Exportar.** SVG ou PNG do que está na tela, com título e licença; impressão limpa.
 * **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
-* **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `L` abre a lista, `Esc` recolhe.
+* **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `Shift+F` tela cheia, `L` abre a lista, `Esc` recolhe.
 * **Identificadores.** Cada diploma tem sua URN LexML e cada nó um endereço estável, `https://luccas-amorim.github.io/ariadne/id/<chave>`. Colar uma URN ou um desses endereços na busca leva direto ao nó.
-* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`.
+* **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`, `#/aula?m=3d&tipos=processa,executa&sel=cp`.
 
 Para rodar localmente, sirva a pasta `docs/` por HTTP (abrir o arquivo direto bloqueia os módulos e os dados):
 
@@ -84,7 +86,8 @@ docs/
     tree3d.js           renderizador WebGL (Three.js, carregado sob demanda)
     features.js         trilha, tema, exportação, lista acessível
     study.js            modo estudo
-    app.js              roteamento, painel, controles, comparação, teclado
+    aula.js             Modo aula (todas as relações, filtro por tipo, isolamento)
+    app.js              roteamento, painel, controles, comparação, tela cheia, teclado
   data/                 ver "Dados abertos"
 scripts/validate.js     validação dos dados (node, sem dependências)
 tests/e2e.spec.js       testes de interface (Playwright)

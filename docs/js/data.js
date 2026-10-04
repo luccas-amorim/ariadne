@@ -70,6 +70,16 @@ export function dataNodeOf(data, key) {
     return n;
 }
 
+/** Rótulo legível de uma chave: 'CPP › Livro I › Título IX'. */
+export function keyLabel(data, key) {
+    const [docId, ...path] = key.split('/');
+    const doc = data.diplomas[docId];
+    if (!doc) return key;
+    let n = doc.root; const labels = [];
+    for (const seg of path) { n = (n.children || []).find(c => c.id === seg); if (!n) break; labels.push(n.label); }
+    return `${doc.shortTitle}${labels.length ? ' › ' + labels.join(' › ') : ''}`;
+}
+
 /**
  * URN LexML de uma chave. Sem fragmento verificado (campo `lexml` do nó),
  * devolve a URN do diploma e fragment = null. Nunca inventa fragmentos.

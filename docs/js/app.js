@@ -5,8 +5,9 @@ import { loadAll, buildSearchIndex, search, parseIdentifier, glossaryHighlight, 
 import { TreeModel } from './model.js';
 import { Radial2D } from './radial2d.js';
 import { Tree3D } from './tree3d.js';
-import { Trail, Theme, svgSnapshot, downloadSvg, downloadPngFromSvg, downloadDataUrl, downloadText, renderOutline } from './features.js';
+import { Trail, Theme, Fullscreen, svgSnapshot, downloadSvg, downloadPngFromSvg, downloadDataUrl, downloadText, renderOutline } from './features.js';
 import { Study } from './study.js';
+import { Aula } from './aula.js';
 
 const $ = id => document.getElementById(id);
 const el = {
@@ -20,7 +21,9 @@ const el = {
     compareBar: $('compare-bar'), compareA: $('compare-a'), compareB: $('compare-b'),
     timelineBtn: $('btn-timeline'), timelineBar: $('timeline-bar'), tlPlay: $('tl-play'), tlYear: $('tl-year'), tlRange: $('tl-range'), tlTicks: $('tl-ticks'), tlToday: $('tl-today'), tlEvents: $('tl-events'), tlMin: $('tl-min'),
     toursBtn: $('btn-tours'), toursPop: $('tours-pop'), tourCard: $('tour-card'),
-    about: $('about'), printFooter: $('print-footer')
+    about: $('about'), printFooter: $('print-footer'),
+    treeContainer: $('tree-container'), fsBtn: $('ctl-fullscreen'), aulaBtn: $('btn-aula'),
+    aula: $('aula'), aulaFs: $('aula-fs')
 };
 
 const state = {
@@ -30,7 +33,8 @@ const state = {
     outlineOpen: false,
     showRelations: (() => { try { return localStorage.getItem('lex-tree:relations') !== '0'; } catch { return true; } })(),
     events: [], timelineOpen: false, playing: null,
-    tour: null       // { tour, step }
+    tour: null,      // { tour, step }
+    aula: null, aulaActive: false
 };
 const trail = new Trail();
 let study = null;
@@ -48,6 +52,13 @@ async function boot() {
         state.events = timelineEvents(state.data);
         initTimeline();
         renderToursPop();
+        state.aula = new Aula({
+            data: state.data, makeRenderer, navigate: h => { location.hash = h; },
+            els: {
+                view: $('aula-view'), count: $('aula-count'), seg2d: $('aula-2d'), seg3d: $('aula-3d'), show: $('aula-show'),
+                clear: $('aula-clear'), refit: $('aula-refit'), hint: $('aula-hint'), types: $('aula-types'), foot: $('aula-foot')
+            }
+        });
         el.loading.remove();
         study = new Study({
             model: state.model, trail, container: el.panel,
@@ -74,8 +85,8 @@ const trailProvider = key => trail.get(key);
 // ==========================================
 // RENDERIZADOR PRINCIPAL (2D ↔ 3D)
 // ==========================================
-function makeRenderer(mode, container, model) {
-    const opts = { onSelect: d => clickNode(d, model), palette: Theme.palette(), trailProvider };
+function makeRenderer(mode, container, model, extra = {}) {
+    const opts = { onSelect: d => clickNode(d, model), palette: Theme.palette(), trailProvider, ...extra };
     const r = mode === '3d' ? new Tree3D(container, model, opts) : new Radial2D(container, model, opts);
     r.setShowRelations(state.showRelations);
     return r;
@@ -111,6 +122,10 @@ function route() {
     closePopovers();
     const { parts, view, query } = state.model.parseHash(location.hash);
 
+    const all = state.model.catalog.diplomas;
+    el.aulaBtn.setAttribute('href', '#/aula' + (view.diplomas.size !== all.length ? `?d=${[...view.diplomas].join(',')}` : ''));
+    if (parts[0] === 'aula') { enterAula(view, query); return; }
+    if (state.aulaActive) exitAula();
     if (parts[0] === 'compare') { enterCompare(query.get('a'), query.get('b')); return; }
     if (state.compare) exitCompare();
     if (parts[0] === 'mapa') { location.hash = '#/' + state.model.viewParams(view); return; }
@@ -523,6 +538,7 @@ el.themeBtn.addEventListener('click', () => Theme.toggle());
 Theme.onChange(p => {
     if (state.renderer) state.renderer.setPalette(p);
     if (state.compare) state.compare.panes.forEach(pn => pn.renderer.setPalette(p));
+    if (state.aula) state.aula.setPalette(p);
     el.themeBtn.setAttribute('aria-label', p.name === 'dark' ? 'Tema claro' : 'Tema escuro');
     el.themeBtn.textContent = p.name === 'dark' ? '☀' : '☾';
 });
@@ -543,12 +559,21 @@ el.collapse.addEventListener('click', () => {
     const h = state.model.rootHash();
     if (location.hash === h || (h === '#/' && location.hash === '')) route(); else location.hash = h;
 });
+el.fsBtn.addEventListener('click', () => toggleFullscreen());
+el.aulaFs.addEventListener('click', () => toggleFullscreen());
 $('ctl-fit').addEventListener('click', () => { if (state.compare) state.compare.panes.forEach(p => p.renderer.fit()); else activeRenderer().fit(); });
 $('ctl-in').addEventListener('click', () => activeRenderer().zoomBy(1.4));
 $('ctl-out').addEventListener('click', () => activeRenderer().zoomBy(1 / 1.4));
 
 document.addEventListener('keydown', ev => {
     if (ev.target === el.search || ev.target.closest('dialog, input, select, textarea')) return;
+    if (ev.key === 'F' && ev.shiftKey) { ev.preventDefault(); toggleFullscreen(); return; }
+    if (ev.key === 'Escape' && Fullscreen.isPseudo()) { Fullscreen.exit(); return; }
+    if (state.aulaActive) {
+        if (ev.key === 'Escape') state.aula.clearSelection();
+        else if (ev.key === 'x' || ev.key === 'X') state.aula.toggleShow();
+        return;
+    }
     const model = activeModel(), d = state.selected;
     if (ev.key === '/') { ev.preventDefault(); el.search.focus(); return; }
     if (ev.key === 'Escape') { closePopovers(); el.collapse.click(); return; }
@@ -861,6 +886,45 @@ function renderTourCard() {
     $('tour-next').addEventListener('click', () => tourGo(step + 1));
     $('tour-close').addEventListener('click', endTour);
 }
+
+// ==========================================
+// MODO AULA
+//   #/aula?m=3d&tipos=processa&sel=cp  ver aula.js
+// ==========================================
+function enterAula(view, query) {
+    if (!state.aulaActive) {
+        if (state.compare) exitCompare(false);
+        if (study && study.active) study.stop();
+        if (state.tour) endTour();
+        stopPlay();
+        document.body.classList.add('mode-aula');
+        el.aula.classList.remove('hidden');
+        state.aulaActive = true;
+    }
+    state.aula.apply(view, query);
+}
+function exitAula() {
+    if (Fullscreen.current() === el.aula) Fullscreen.exit();
+    state.aula.destroy();
+    document.body.classList.remove('mode-aula');
+    el.aula.classList.add('hidden');
+    state.aulaActive = false;
+}
+
+// ==========================================
+// TELA CHEIA (Shift+F): a árvore, ou o palco inteiro com rodapé no Modo aula
+// ==========================================
+function toggleFullscreen() { Fullscreen.toggle(state.aulaActive ? el.aula : el.treeContainer); }
+Fullscreen.onChange(cur => {
+    document.querySelectorAll('.fs-btn .fs-label').forEach(s => { s.textContent = cur ? 'Sair da tela cheia' : 'Tela cheia'; });
+    document.querySelectorAll('.fs-btn').forEach(b => b.setAttribute('aria-pressed', String(!!cur)));
+    // o ResizeObserver redimensiona; o enquadramento vem depois do novo tamanho
+    setTimeout(() => {
+        if (state.aulaActive) state.aula.fit();
+        else if (state.compare) state.compare.panes.forEach(p => p.renderer.fit());
+        else if (state.renderer) state.renderer.fit();
+    }, 120);
+});
 
 // ==========================================
 // SOBRE

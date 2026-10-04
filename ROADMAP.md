@@ -70,6 +70,7 @@ Há 27 relações. O formato comporta centenas. Frentes:
 - [ ] **Navegação em árvores grandes**: minimapa ou "modo foco" que esmaece tudo fora do subtree selecionado quando há mais de ~150 nós visíveis.
 - [ ] 3D: trackpad com dois dedos movendo a câmera (hoje aproxima); rótulos com tamanho adaptado à distância.
 - [ ] Mobile: barra de ferramentas em menu compacto; painel de leitura como folha deslizante.
+- [ ] Modo aula: escolher quais diplomas entram direto no palco (hoje segue o filtro "Diplomas" pela URL, `d=`).
 - [ ] Acessibilidade: anunciar mudanças de seleção em `aria-live`; foco visível nos nós SVG; contraste do tema escuro validado.
 - [ ] Modo estudo com **repetição espaçada** sobre a trilha (revisar primeiro o que foi errado há mais tempo).
 - [ ] Compartilhar a trilha por link (hoje só por arquivo JSON).
@@ -84,4 +85,4 @@ Há 27 relações. O formato comporta centenas. Frentes:
 
 ## Concluído
 
-Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó.
+Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó, relações com direção e vigência, Modo aula em 2D e 3D, tela cheia.

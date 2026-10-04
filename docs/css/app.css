@@ -171,6 +171,63 @@ input[type="checkbox"] { accent-color: var(--text-strong); }
 #tours-pop .tour-item b { color: var(--text-strong); }
 @media (max-width: 639px) { #tour-card { bottom: 5.5rem; } }
 
+/* Tela cheia: alternativa quando a Fullscreen API não existe ou é recusada */
+.pseudo-fullscreen { position: fixed !important; inset: 0; z-index: 100; width: 100vw !important; height: 100vh !important; background: var(--bg); }
+#tree-container:fullscreen { background: var(--bg); }
+.fs-btn { gap: .4rem; }
+
+/* Modo aula */
+#aula { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: var(--bg); }
+#aula.hidden { display: none; }
+body.mode-aula > header, body.mode-aula #toolbar-row, body.mode-aula #timeline-bar, body.mode-aula #tree-container, body.mode-aula #reading-panel { display: none !important; }
+#aula-bar { display: flex; align-items: center; gap: .75rem; padding: .6rem 1.25rem; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); overflow-x: auto; }
+#aula-bar > * { flex: 0 0 auto; }
+#aula-bar .flex-1 { flex: 1 1 auto; }
+#aula-bar .sep { width: 1px; height: 1.25rem; background: var(--border-strong); }
+.aula-brand { display: inline-flex; align-items: center; gap: .5rem; font-size: 1.1rem; font-weight: 700; color: var(--text-strong); text-decoration: none; }
+.aula-title { font-size: .95rem; font-weight: 600; color: var(--text-strong); }
+#aula-count { font-size: .8rem; }
+.switch { gap: .5rem; }
+.switch .track { width: 30px; height: 18px; border-radius: 999px; background: var(--border-strong); position: relative; display: inline-block; transition: background .2s; }
+.switch .knob { position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: left .2s; }
+.switch[aria-checked="true"] .track { background: var(--relation); }
+.switch[aria-checked="true"] .knob { left: 14px; }
+#aula-stage { flex: 1 1 auto; min-height: 0; position: relative; }
+#aula-view { position: absolute; inset: 0; }
+#aula-hint { position: absolute; top: .9rem; left: .9rem; max-width: 20rem; font-size: .8rem; line-height: 1.45; color: var(--text); pointer-events: none; }
+#aula-types { position: absolute; left: .9rem; right: .9rem; bottom: .9rem; display: flex; flex-wrap: wrap; gap: .4rem; pointer-events: none; }
+.type-chip { pointer-events: auto; display: inline-flex; align-items: center; gap: .4rem; font-size: 13px; font-weight: 600; border-radius: 999px; padding: .3rem .75rem; cursor: pointer; background: var(--surface); color: var(--text-muted); border: 1px solid var(--border-strong); }
+.type-chip span { font-size: 11px; opacity: .8; font-variant-numeric: tabular-nums; }
+.type-chip[aria-pressed="true"] { background: var(--relation); border-color: var(--relation); color: var(--accent-text); }
+#aula-foot { flex: 0 0 auto; height: 190px; box-sizing: border-box; padding: 1rem 1.25rem; background: var(--surface); border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; overflow: hidden; }
+.aula-foot-head { display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; }
+.aula-foot-title { font-size: 1.4rem; font-weight: 700; color: var(--text-strong); }
+.aula-foot-text { font-size: .95rem; line-height: 1.5; max-width: 56rem; margin: 0; }
+.aula-legend { display: flex; flex-wrap: wrap; gap: 1rem; font-size: .8rem; color: var(--text-muted); }
+.aula-legend span { display: inline-flex; align-items: center; gap: .4rem; }
+.aula-legend .lg-box { width: 22px; height: 12px; border-radius: 3px; border: 2px solid var(--text-muted); }
+.aula-legend .lg-box.dashed { border-style: dashed; }
+.aula-legend .lg-rel { width: 22px; border-top: 3px solid var(--relation); }
+.aula-cards { display: flex; gap: .6rem; overflow-x: auto; padding-bottom: .25rem; min-height: 0; flex: 1 1 auto; align-items: stretch; }
+.aula-card { flex: 0 0 320px; border: 1px solid var(--border); border-radius: 8px; padding: .6rem .75rem; display: flex; flex-direction: column; gap: .25rem; overflow: auto; }
+.aula-card-head { font-size: 13px; font-weight: 600; color: var(--text-strong); }
+.aula-card-head .rel-type { color: var(--relation); }
+.aula-card-note { font-size: 13px; line-height: 1.45; }
+@media (max-width: 767px) { #aula-foot { height: 150px; } .aula-foot-title { font-size: 1.1rem; } .aula-card { flex-basis: 260px; } }
+
+/* Renderizadores no Modo aula: galhos em segundo plano, rótulos maiores, sem badges nem trilha */
+.lecture .link.l1 { stroke-width: 3px; stroke-opacity: .4; }
+.lecture .link.l2 { stroke-width: 2px; stroke-opacity: .35; }
+.lecture.has-sel .link.l1 { stroke-opacity: .15; }
+.lecture.has-sel .link.l2 { stroke-opacity: .12; }
+.lecture .relation { filter: none; }
+.lecture .node.ramo { cursor: default; }
+.lecture .node.ramo text.label { font-size: 13px !important; }
+.lecture .node.diploma text.label { font-size: 12px !important; }
+.lecture .node.center text.label { font-size: 16px !important; }
+.lecture .relation-label { font-size: 12px; }
+.lecture .node .badge, .lecture .node .trail-mark { display: none !important; }
+
 /* Diálogo */
 dialog { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
 dialog::backdrop { background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px); }
@@ -188,6 +245,8 @@ dialog::backdrop { background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px)
 @media print {
     body { height: auto; overflow: visible; display: block; background: #fff; color: #000; }
     header, #toolbar-row, #legend, .hint, #controls, #outline, #search-results, dialog { display: none !important; }
+    #aula-bar, #aula-types, #aula-hint { display: none !important; }
+    #aula-stage { height: 60vh; }
     #breadcrumb { border: 0; padding: 0 0 .5rem; font-size: 11pt; }
     #tree-container { position: static; height: 60vh; page-break-inside: avoid; background: #fff; }
     #view-main, #view-compare { position: static; height: 60vh; }

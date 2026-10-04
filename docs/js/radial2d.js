@@ -17,6 +17,10 @@ export class Radial2D {
         this.userZoomed = false;
         this.hideLabels = false;
         this.showRelations = true;
+        this.relationMode = 'selected';   // 'selected': só as do nó selecionado; 'all': todas, agregadas (Modo aula)
+        this.relationTypes = null;        // filtro por tipo no modo 'all' (null = todos)
+        this.lecture = null;              // estado calculado do modo 'all': { groups, selKey, linked }
+        this.fitInsets = { top: 0, right: 0, bottom: 0, left: 0 };
 
         this.svg = d3.select(container).append('svg').attr('width', '100%').attr('height', '100%').attr('role', 'img').attr('aria-label', 'Árvore radial da legislação');
         this.g = this.svg.append('g');
@@ -70,7 +74,14 @@ export class Radial2D {
     setPalette(p) { this.palette = p; if (this.model.root) this.update(this.selected || this.model.root); }
     setTrailProvider(fn) { this.trailProvider = fn; }
     setHideLabels(b) { this.hideLabels = b; this.container.classList.toggle('hide-labels', b); }
-    setShowRelations(b) { this.showRelations = b; if (this.model.root) this.drawRelations(); }
+    setShowRelations(b) { this.showRelations = b; if (this.model.root) this.update(this.selected || this.model.root); }
+    /** 'selected' (padrão) ou 'all' (Modo aula: todas as relações, agregadas por par de diplomas e tipo). */
+    setRelationMode(mode, { types = null } = {}) {
+        this.relationMode = mode;
+        this.relationTypes = types;
+        this.container.classList.toggle('lecture', mode === 'all');
+    }
+    setFitInsets(insets) { this.fitInsets = { ...this.fitInsets, ...insets }; }
     reset() { this.gLinks.selectAll('*').remove(); this.gRel.selectAll('*').remove(); this.gNodes.selectAll('*').remove(); }
     destroy() {
         this.ro.disconnect();
@@ -118,11 +129,25 @@ export class Radial2D {
         words.forEach((w, i) => textSel.append('tspan').attr('x', 0).attr('dy', i === 0 ? first : '1.15em').text(w));
     }
 
+    // ---------- Modo aula ----------
+    /** Grupos de relações e nós ligados ao selecionado, quando o modo é 'all'. */
+    computeLecture() {
+        if (this.relationMode !== 'all') return null;
+        return this.model.lectureState(this.selected, { types: this.relationTypes, show: this.showRelations });
+    }
+    nodeOpacity(d) {
+        const L = this.lecture;
+        if (!L || !L.selKey) return 1;
+        return L.linked.has(d.key) ? 1 : 0.25;
+    }
+
     // ---------- renderização ----------
     update(source) {
         const m = this.model, p = this.palette;
         const root = m.root;
         m.layout();
+        this.lecture = this.computeLecture();
+        this.container.classList.toggle('has-sel', !!(this.lecture && this.lecture.selKey));
         const nodes = root.descendants();
         const links = root.links();
         const s0 = { x: source.x0, y: source.y0 };
@@ -200,7 +225,7 @@ export class Radial2D {
                 self.setCenterSub(sel.select('text.sub'), d);
             }
         });
-        merged.transition().duration(DURATION).attr('opacity', 1).attr('transform', d => `translate(${d.px},${d.py})`);
+        merged.transition().duration(DURATION).attr('opacity', d => this.nodeOpacity(d)).attr('transform', d => `translate(${d.px},${d.py})`);
         merged.select('.box').transition().duration(DURATION)
             .style('fill', d => this.fillOf(d))
             .style('stroke', d => this.strokeOf(d))
@@ -231,16 +256,62 @@ export class Radial2D {
         return Math.min(w / Math.max(Math.abs(ux), 1e-6), h / Math.max(Math.abs(uy), 1e-6));
     }
 
-    /** Arco dirigido de `a` para `b`, puxado para o centro, aparado nas bordas dos dois nós. */
-    relationGeometry(a, b) {
-        const cx = (a.px + b.px) / 2 * 0.35, cy = (a.py + b.py) / 2 * 0.35;
+    /**
+     * Arco dirigido de `a` para `b`, puxado para o centro (pull = fração do ponto médio que sobra),
+     * aparado nas bordas dos dois nós. (mx, my) é o ponto da curva em t, para o rótulo.
+     */
+    relationGeometry(a, b, { pull = 0.35, t = 0.5 } = {}) {
+        const cx = (a.px + b.px) / 2 * pull, cy = (a.py + b.py) / 2 * pull;
         let ux = cx - a.px, uy = cy - a.py, l = Math.hypot(ux, uy) || 1; ux /= l; uy /= l;
         const so = this.borderOffset(a, ux, uy, 2);
         const sx = a.px + ux * so, sy = a.py + uy * so;
         let vx = b.px - cx, vy = b.py - cy, k = Math.hypot(vx, vy) || 1; vx /= k; vy /= k;
         const eo = this.borderOffset(b, vx, vy, 7);
         const ex = b.px - vx * eo, ey = b.py - vy * eo;
-        return { d: `M ${sx} ${sy} Q ${cx} ${cy} ${ex} ${ey}`, mx: 0.25 * sx + 0.5 * cx + 0.25 * ex, my: 0.25 * sy + 0.5 * cy + 0.25 * ey };
+        const q = (s0, c, e) => (1 - t) * (1 - t) * s0 + 2 * t * (1 - t) * c + t * t * e;
+        return { d: `M ${sx} ${sy} Q ${cx} ${cy} ${ex} ${ey}`, mx: q(sx, cx, ex), my: q(sy, cy, ey) };
+    }
+
+    /**
+     * Modo aula: todas as relações vigentes, uma linha por (origem, destino, tipo), ligadas ao
+     * diploma visível. Espessura pela contagem. Com um diploma selecionado, as linhas dele
+     * ganham destaque e rótulo e as demais quase somem.
+     */
+    drawAllRelations() {
+        const m = this.model, p = this.palette, L = this.lecture, selKey = L.selKey;
+        this.gNodes.selectAll('.rel-ring').style('display', 'none');
+        this.g.select('.relation-arrow').attr('fill', p.relation);
+        const pairSeen = {};
+        const data = L.groups.map(g => {
+            const a = m.visibleRep(m.byKey.get(g.fromKey)), b = m.visibleRep(m.byKey.get(g.toKey));
+            const pk = `${g.fromKey}|${g.toKey}`, i = pairSeen[pk] = (pairSeen[pk] || 0) + 1;
+            const hl = !!selKey && (g.fromKey === selKey || g.toKey === selKey);
+            const direction = !hl ? '' : g.fromKey === selKey ? 'out' : 'in';
+            // rótulo perto do outro diploma, e mais para o meio a cada tipo a mais no mesmo par
+            const t = !hl ? 0.5 : direction === 'out' ? 0.7 - (i - 1) * 0.2 : 0.3 + (i - 1) * 0.2;
+            const geo = this.relationGeometry(a, b, { pull: 0.3 + (i - 1) * 0.28, t });
+            return { g, i, hl, direction, geo, key: `${g.fromKey}|${g.toKey}|${g.type}` };
+        });
+        const opacity = r => !selKey ? 0.6 : r.hl ? 0.95 : 0.06;
+        const rel = this.gRel.selectAll('path.relation').data(data, r => r.key);
+        rel.enter().append('path').attr('opacity', 0)
+            .merge(rel)
+            .attr('class', r => `relation resolved group${r.hl ? ' hl ' + r.direction : ''}`)
+            .attr('data-type', r => r.g.type).attr('data-n', r => r.g.n)
+            .attr('marker-end', `url(#${this.markerId})`)
+            .style('stroke-width', r => `${1.8 + r.g.n * 1.1}px`)
+            .transition().duration(DURATION).attr('opacity', opacity).attr('d', r => r.geo.d);
+        rel.exit().transition().duration(200).attr('opacity', 0).remove();
+
+        const labeled = data.filter(r => r.hl);
+        const lab = this.gRel.selectAll('text.relation-label').data(labeled, r => r.key);
+        lab.enter().append('text').attr('class', 'relation-label').attr('text-anchor', 'middle').attr('opacity', 0)
+            .merge(lab)
+            .text(r => ((m.data.relationTypes[r.g.type] || {}).label || r.g.type) + (r.g.n > 1 ? ` ×${r.g.n}` : ''))
+            .transition().duration(DURATION).attr('opacity', 1)
+            .attr('x', r => r.geo.mx)
+            .attr('y', r => r.geo.my - 4);
+        lab.exit().remove();
     }
 
     /**
@@ -248,6 +319,7 @@ export class Radial2D {
      * O arco vai da origem ao destino da relação, com seta no destino.
      */
     drawRelations() {
+        if (this.lecture) { this.drawAllRelations(); return; }
         const m = this.model, p = this.palette, sel = this.selected;
         this.gNodes.selectAll('.rel-ring').style('display', 'none');
         this.g.select('.relation-arrow').attr('fill', p.relation);
@@ -283,8 +355,10 @@ export class Radial2D {
         if (!this.svg.node().isConnected || this.width() < 10 || this.height() < 10) return;
         const b = this.model.visibleBounds();
         const bw = b.x1 - b.x0, bh = b.y1 - b.y0;
-        const k = Math.max(0.06, Math.min(1.15, (this.width() - 24) / bw, (this.height() - 24) / bh));
-        const t = d3.zoomIdentity.translate(this.width() / 2 - k * (b.x0 + b.x1) / 2, this.height() / 2 - k * (b.y0 + b.y1) / 2).scale(k);
+        const ins = this.fitInsets;
+        const W = this.width() - ins.left - ins.right, H = this.height() - ins.top - ins.bottom;
+        const k = Math.max(0.06, Math.min(1.15, (W - 24) / bw, (H - 24) / bh));
+        const t = d3.zoomIdentity.translate(ins.left + W / 2 - k * (b.x0 + b.x1) / 2, ins.top + H / 2 - k * (b.y0 + b.y1) / 2).scale(k);
         (animate ? this.svg.transition().duration(DURATION + 150) : this.svg).call(this.zoom.transform, t);
         this.userZoomed = false;
     }

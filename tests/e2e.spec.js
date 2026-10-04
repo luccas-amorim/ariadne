@@ -217,3 +217,78 @@ test('modo 3D cria um canvas WebGL quando suportado', async ({ page }) => {
   await expect(page.locator('#view-main canvas')).toBeVisible({ timeout: 20000 });
   await expect(page.locator('#seg-3d')).toHaveAttribute('aria-pressed', 'true');
 });
+
+// ---------- Modo aula e tela cheia ----------
+const aulaNode = (page, key) => page.locator(`#aula-view g.node[data-key="${key}"]`);
+
+test('modo aula mostra todas as relações agregadas e filtra por tipo', async ({ page }) => {
+  await page.goto('/#/aula');
+  await expect(page.locator('#aula')).toBeVisible();
+  await expect(page.locator('#tree-container')).toBeHidden();
+  await expect(page.locator('#aula-count')).toHaveText('12 diplomas · 27 de 27 relações visíveis');
+  await page.goto('/#/aula?tipos=processa');
+  await expect(page.locator('#aula-count')).toContainText('5 de 27');
+  // cpc → cc (×4) e cpp → cp: duas linhas, espessura pela contagem
+  await expect(page.locator('#aula-view path.relation')).toHaveCount(2);
+  await expect(page.locator('#aula-view path.relation[data-n="4"]')).toHaveCount(1);
+  await page.click('#aula-types button[data-type="executa"]');
+  await expect(page).toHaveURL(/tipos=processa,executa/);
+  await expect(page.locator('#aula-count')).toContainText('7 de 27');
+  await page.click('#aula-show');
+  await expect(page).toHaveURL(/rel=0/);
+  await expect(page.locator('#aula-view path.relation')).toHaveCount(0);
+  await expect(page.locator('#aula-count')).toContainText('0 de 27');
+});
+
+test('modo aula: clicar num diploma isola suas relações', async ({ page }) => {
+  await page.goto('/#/aula');
+  await aulaNode(page, 'cp').click();
+  await expect(page).toHaveURL(/sel=cp/);
+  await expect(page.locator('#aula-foot')).toContainText('recebe 7 · emite 1');
+  await expect(page.locator('#aula-foot .aula-card')).toHaveCount(8);
+  await expect(page.locator('#aula-view path.relation.hl')).toHaveCount(7);
+  await expect(aulaNode(page, 'cc')).toHaveAttribute('opacity', '0.25');
+  await expect(aulaNode(page, 'cpp')).toHaveAttribute('opacity', '1');
+  await aulaNode(page, 'cp').click();
+  await expect(page).not.toHaveURL(/sel=/);
+  await expect(page.locator('#aula-foot')).toContainText('Mapa do ordenamento');
+  await aulaNode(page, 'cdc').click();
+  await page.locator('body').press('Escape');
+  await expect(page).not.toHaveURL(/sel=/);
+});
+
+test('modo aula: trocar 2D e 3D preserva seleção e tipos', async ({ page }) => {
+  await page.goto('/#/aula?tipos=processa,executa&sel=cp');
+  await expect(page.locator('#aula-foot')).toContainText('recebe 3 · emite 0');
+  await page.click('#aula-3d');
+  await expect(page).toHaveURL(/m=3d/);
+  await expect(page).toHaveURL(/tipos=processa,executa/);
+  await expect(page).toHaveURL(/sel=cp/);
+  await expect(page.locator('#aula-foot')).toContainText('recebe 3 · emite 0');
+  await page.click('#aula-2d');
+  await expect(page).not.toHaveURL(/m=3d/);
+  await expect(page).toHaveURL(/sel=cp/);
+  await expect(aulaNode(page, 'cp')).toBeVisible();
+  await page.goto('/#/aula?m=3d&tipos=processa');
+  await expect(page.locator('#aula-count')).toContainText('5 de 27');
+  await expect(page.locator('#aula-3d')).toHaveAttribute('aria-pressed', 'true');
+  await page.click('.aula-brand');
+  await expect(page.locator('#tree-container')).toBeVisible();
+  await expect(page.locator('#aula')).toBeHidden();
+});
+
+test('tela cheia recusada cai na alternativa e Esc sai', async ({ page }) => {
+  await page.addInitScript(() => { Element.prototype.requestFullscreen = () => Promise.reject(new Error('negado')); });
+  await page.goto('/#/cc');
+  await page.locator('body').press('Shift+F');
+  await expect(page.locator('#tree-container')).toHaveClass(/pseudo-fullscreen/);
+  await expect(page.locator('#ctl-fullscreen')).toContainText('Sair da tela cheia');
+  await page.locator('body').press('Escape');
+  await expect(page.locator('#tree-container')).not.toHaveClass(/pseudo-fullscreen/);
+  await expect(page).toHaveURL(/#\/cc$/); // Esc saiu da tela cheia sem recolher a árvore
+  await page.goto('/#/aula');
+  await page.click('#aula-fs');
+  await expect(page.locator('#aula')).toHaveClass(/pseudo-fullscreen/);
+  await page.locator('body').press('Shift+F');
+  await expect(page.locator('#aula')).not.toHaveClass(/pseudo-fullscreen/);
+});

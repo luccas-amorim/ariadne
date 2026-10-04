@@ -345,5 +345,15 @@ export class TreeModel {
         return out;
     }
 
+    /**
+     * Estado do Modo aula para um nó selecionado: grupos visíveis, chave do diploma em foco
+     * (só diplomas e o centro isolam) e o conjunto de nós ligados a ele.
+     */
+    lectureState(selected, { types = null, show = true } = {}) {
+        const groups = show ? this.allRelations({ types }) : [];
+        const selKey = selected && (selected.data.kind === 'diploma' || selected.data.kind === 'center') ? selected.key : null;
+        return { groups, selKey, linked: this.linkedKeys(groups, selKey) };
+    }
+
     nodeByKey(key) { return this.byKey.get(key) || null; }
 }
