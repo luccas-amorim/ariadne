@@ -54,6 +54,45 @@ export function timelineEvents(data) {
     return ev.sort((a, b) => a.year - b.year || order[a.kind] - order[b.kind] || a.text.localeCompare(b.text));
 }
 
+// ---------- identificadores públicos ----------
+export const IRI_BASE = 'https://luccas-amorim.github.io/ariadne/id/';
+
+/** IRI estável do Ariadne para uma chave (diploma/divisao/...). */
+export function iriOf(key) { return IRI_BASE + key; }
+
+/** Nó de dados (o objeto do JSON) de uma chave, ou null. */
+export function dataNodeOf(data, key) {
+    const [docId, ...path] = key.split('/');
+    const doc = data.diplomas[docId];
+    if (!doc) return null;
+    let n = doc.root;
+    for (const seg of path) { n = (n.children || []).find(c => c.id === seg); if (!n) return null; }
+    return n;
+}
+
+/**
+ * URN LexML de uma chave. Sem fragmento verificado (campo `lexml` do nó),
+ * devolve a URN do diploma e fragment = null. Nunca inventa fragmentos.
+ * Retorna { urn, base, fragment } ou null se o diploma não tiver URN.
+ */
+export function urnOf(data, key) {
+    const doc = data.diplomas[key.split('/')[0]];
+    if (!doc || !doc.urn) return null;
+    const n = dataNodeOf(data, key);
+    const fragment = n && n !== doc.root && n.lexml ? n.lexml : null;
+    return { urn: fragment ? `${doc.urn}!${fragment}` : doc.urn, base: doc.urn, fragment };
+}
+
+/** Reconhece uma URN LexML, um IRI do Ariadne ou uma chave colados na busca. */
+export function parseIdentifier(q) {
+    const s = String(q).trim();
+    let m = /^urn:lex:br:[^\s!]+(?:![^\s]*)?$/i.exec(s);
+    if (m) { const [base, fragment] = s.split('!'); return { kind: 'urn', base: base.toLowerCase(), fragment: fragment || null }; }
+    m = /^(?:https?:\/\/)?luccas-amorim\.github\.io\/ariadne\/(?:id\/|#\/)([a-z0-9/-]+?)\/?(?:[?#].*)?$/i.exec(s);
+    if (m) return { kind: 'key', key: m[1].toLowerCase() };
+    return null;
+}
+
 /** Índice plano de todos os nós de todos os diplomas, para busca e modo estudo. */
 export function buildSearchIndex(data) {
     const idx = [];
@@ -66,7 +105,19 @@ export function buildSearchIndex(data) {
     return idx;
 }
 
+/** Entrada do índice para uma URN ou IRI, ou null. Fragmento desconhecido cai no diploma. */
+export function resolveIdentifier(index, q) {
+    const id = parseIdentifier(q);
+    if (!id) return null;
+    if (id.kind === 'key') return index.find(e => e.key === id.key) || null;
+    const inDoc = index.filter(e => (e.diploma.urn || '').toLowerCase() === id.base);
+    if (!inDoc.length) return null;
+    return (id.fragment && inDoc.find(e => e.path.length && e.node.lexml === id.fragment)) || inDoc.find(e => !e.path.length);
+}
+
 export function search(index, q, limit = 12) {
+    const byId = resolveIdentifier(index, q);
+    if (byId) return [byId];
     const terms = norm(q).split(/\s+/).filter(t => t.length > 1);
     if (!terms.length) return [];
     return index

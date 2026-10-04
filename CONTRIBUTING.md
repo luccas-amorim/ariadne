@@ -18,6 +18,7 @@ A contribuição mais valiosa é **mapear ou revisar um diploma**. Isso não exi
   "title": "Consolidação das Leis do Trabalho",
   "shortTitle": "CLT",
   "norm": "Decreto-Lei nº 5.452, de 1º de maio de 1943",
+  "urn": "urn:lex:br:federal:decreto.lei:1943-05-01;5452",
   "ramo": "social",
   "natureza": "material",
   "status": "rascunho",
@@ -57,9 +58,12 @@ Campos de cada nó:
 | `history` | opcional: marcos estruturais `{year, norm, note}` | inclusão, renomeação, revogação |
 | `since` / `until` | opcional: ano em que a divisão passou ou deixou de existir; a linha do tempo obedece | `2017` |
 | `revoked` | opcional: `true` se a divisão inteira foi revogada | |
+| `lexml` | opcional: fragmento LexML da divisão, só se conferido no texto marcado do LexML | `art5` |
+| `children` | filhos; omita o campo se não houver | |
 
 No cabeçalho do diploma, `predecessors` lista os diplomas que ocuparam o mesmo lugar antes dele, com `title`, `shortTitle`, `norm`, `from` e `to`. A linha do tempo os mostra como fantasmas nos anos em que vigeram.
-| `children` | filhos; omita o campo se não houver | |
+
+No cabeçalho, `urn` é a URN LexML do diploma. Confira antes de enviar: `https://www.lexml.gov.br/urn/<urn>` precisa abrir o diploma certo (uma URN inexistente mostra "urn não encontrada"). O validador avisa quando falta e confere se a data da URN bate com `year`.
 
 `ramo` aceita `constitucional`, `privado`, `publico`, `social`, `penal`. `natureza` aceita `material` ou `processual`. `status` começa em `rascunho`.
 

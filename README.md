@@ -43,6 +43,7 @@ Diplomas marcados como **rascunho** tiveram a estrutura mapeada, mas ainda não 
 * **Exportar.** SVG ou PNG do que está na tela, com título e licença; impressão limpa.
 * **Lista.** A árvore inteira em lista navegável por teclado e leitor de tela.
 * **Teclado.** `/` busca, `←↑↓→` navegam, `Enter` expande, `E` e `R` marcam a trilha, `X` alterna as relações, `F` ajusta à tela, `L` abre a lista, `Esc` recolhe.
+* **Identificadores.** Cada diploma tem sua URN LexML e cada nó um endereço estável, `https://luccas-amorim.github.io/ariadne/id/<chave>`. Colar uma URN ou um desses endereços na busca leva direto ao nó.
 * **Links diretos.** A URL guarda nó, foco, filtro, ano e dimensão: `#/cc/parte-especial/livro-i`, `#/cc?foco=cc`, `#/?d=cc,cp&m=3d`, `#/?ano=1975`, `#/compare?a=cc&b=cpc`.
 
 Para rodar localmente, sirva a pasta `docs/` por HTTP (abrir o arquivo direto bloqueia os módulos e os dados):
@@ -63,6 +64,8 @@ Os dados são JSON estáticos servidos junto com a página e podem ser consumido
 | `data/glossary.json` | Termos e definições |
 | `data/tours.json` | Percursos guiados: sequências de nós com texto de transição |
 | `data/schema.json` | JSON Schema de todos os formatos |
+
+Cada diploma traz a URN LexML (`urn`), conferida no resolvedor do LexML. Cada nó tem o IRI `https://luccas-amorim.github.io/ariadne/id/<chave>` (ex.: `…/id/cc/parte-geral/livro-i`), que abre o nó na árvore. Fragmentos de URN por divisão (`lexml`) só entram quando conferidos; sem eles, a divisão usa a URN do diploma.
 
 URL base: `https://luccas-amorim.github.io/ariadne/data/`. Licença do conteúdo: CC BY 4.0 (veja abaixo). O GitHub Pages responde com CORS liberado para leitura.
 

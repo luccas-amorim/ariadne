@@ -51,6 +51,7 @@
         "revoked": { "type": "boolean", "description": "true quando a divisão inteira foi revogada e permanece no mapa apenas por referência histórica." },
         "since": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a divisão passou a existir, quando posterior ao diploma. A linha do tempo só a mostra a partir daí." },
         "until": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a divisão deixou de existir. A linha do tempo a oculta a partir daí." },
+        "lexml": { "type": "string", "pattern": "^[a-z0-9_.-]+$", "description": "Fragmento LexML da divisão (o que vem depois de '!' na URN), só quando conferido no texto marcado do LexML. Ex.: 'art5'. Sem fragmento verificado, omita: a divisão usa a URN do diploma." },
         "history": {
           "type": "array",
           "minItems": 1,
@@ -73,6 +74,7 @@
         "title": { "type": "string", "minLength": 3 },
         "shortTitle": { "type": "string", "minLength": 1, "maxLength": 14 },
         "norm": { "type": "string", "description": "Espécie, número e data do ato normativo." },
+        "urn": { "type": "string", "pattern": "^urn:lex:br:", "description": "URN LexML do diploma, conferida no resolvedor (https://www.lexml.gov.br/urn/<urn>). Ex.: 'urn:lex:br:federal:lei:2002-01-10;10406'." },
         "ramo": { "$ref": "#/definitions/ramo" },
         "natureza": { "$ref": "#/definitions/natureza" },
         "status": { "$ref": "#/definitions/status" },

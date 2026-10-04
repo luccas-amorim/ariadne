@@ -79,7 +79,8 @@ Há 27 relações. O formato comporta centenas. Frentes:
 - [ ] Testes de interface no modo 3D além do smoke test atual (clique em nó, relações).
 - [ ] Verificação automática de links do Planalto (`source`) no CI, semanal.
 - [ ] Publicar um `data/all.json` consolidado para consumo externo em uma requisição.
+- [ ] Fragmentos LexML por divisão (campo `lexml`, ex.: `art5`), conferidos no texto marcado do LexML. Hoje toda divisão usa a URN do diploma.
 
 ## Concluído
 
-Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0.
+Para referência do que já existe: árvore unificada com a Constituição ao centro, expansão no lugar, foco por diploma, filtro, 2D e 3D sobre o mesmo modelo, relações internormativas com liga/desliga, linha do tempo com antecessores, percursos guiados, modo estudo, trilha pessoal, comparação lado a lado, glossário, marcos estruturais, exportação SVG/PNG, impressão, lista acessível, teclado, tema escuro, validador de dados, testes Playwright, licença dupla MIT + CC BY 4.0, URN LexML por diploma e IRI estável por nó.

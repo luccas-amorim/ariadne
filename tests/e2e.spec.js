@@ -74,6 +74,24 @@ test('busca encontra um capítulo e navega até ele', async ({ page }) => {
   await expect(page.locator('#content-panel h2')).toContainText('Política Urbana');
 });
 
+test('colar uma URN LexML ou um IRI na busca abre o nó', async ({ page }) => {
+  await page.goto('/#/');
+  await page.fill('#search', 'urn:lex:br:federal:lei:2002-01-10;10406');
+  await expect(page.locator('#search-results li')).toHaveCount(1);
+  await page.locator('#search').press('Enter');
+  await expect(page).toHaveURL(/#\/cc$/);
+  await expect(page.locator('#content-panel h2')).toHaveText('Código Civil');
+  // fragmento sem correspondência verificada cai no diploma
+  await page.fill('#search', 'urn:lex:br:federal:decreto.lei:1940-12-07;2848!art121');
+  await page.locator('#search').press('Enter');
+  await expect(page).toHaveURL(/#\/cp$/);
+  await page.fill('#search', 'https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i');
+  await page.locator('#search').press('Enter');
+  await expect(page).toHaveURL(/#\/cc\/parte-geral\/livro-i$/);
+  await page.fill('#search', 'urn:lex:br:federal:lei:1999-01-30;99999');
+  await expect(page.locator('#search-results')).toContainText('Identificador não encontrado');
+});
+
 test('expandir tudo abre todas as divisões e recolher volta ao início', async ({ page }) => {
   await page.goto('/#/cp');
   await page.click('#ctl-grow');

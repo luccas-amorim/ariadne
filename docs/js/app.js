@@ -1,7 +1,7 @@
 // Orquestração: roteamento por hash, painel de leitura, trilha de navegação, filtros,
 // alternância 2D/3D, comparação lado a lado, modo estudo, trilha pessoal, exportação,
 // lista acessível, teclado e tema.
-import { loadAll, buildSearchIndex, search, glossaryHighlight, timelineEvents, esc, sleep } from './data.js';
+import { loadAll, buildSearchIndex, search, parseIdentifier, glossaryHighlight, timelineEvents, esc, sleep } from './data.js';
 import { TreeModel } from './model.js';
 import { Radial2D } from './radial2d.js';
 import { Tree3D } from './tree3d.js';
@@ -470,7 +470,11 @@ document.addEventListener('click', ev => { if (!ev.target.closest('.pop, [aria-h
 // ==========================================
 function renderResults(list, q) {
     const model = state.model;
-    if (!list.length) { el.results.innerHTML = q.trim().length > 1 ? '<li class="px-4 py-3 muted">Nada encontrado.</li>' : ''; return; }
+    if (!list.length) {
+        const msg = parseIdentifier(q) ? 'Identificador não encontrado entre os diplomas mapeados.' : 'Nada encontrado.';
+        el.results.innerHTML = q.trim().length > 1 ? `<li class="px-4 py-3 muted">${msg}</li>` : '';
+        return;
+    }
     el.results.innerHTML = list.map(e => {
         const r = model.data.ramos[e.diploma.ramo];
         const href = '#/' + [e.diploma.id, ...e.path].join('/') + model.viewParams({

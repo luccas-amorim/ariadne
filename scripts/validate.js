@@ -7,7 +7,7 @@
  * Verifica: campos obrigatórios, tipos, ids em kebab-case e únicos entre
  * irmãos, ramo/natureza/status válidos, coerência entre catálogo e arquivos,
  * fonte oficial em https, ausência de colisão entre mapeados e planejados,
- * relações internormativas apontando para nós existentes e glossário.
+ * relações internormativas apontando para nós existentes, URN LexML e glossário.
  * Sai com código 1 se houver qualquer erro.
  */
 const fs = require('fs');
@@ -18,8 +18,11 @@ const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*(\/[a-z0-9]+(-[a-z0-9]+)*)*$/;
 const NATUREZAS = new Set(['material', 'processual']);
 const STATUS = new Set(['rascunho', 'revisado']);
-const NODE_KEYS = new Set(['id', 'name', 'label', 'subtitle', 'content', 'children', 'history', 'revoked', 'since', 'until']);
-const META_KEYS = new Set(['$schema', 'id', 'title', 'shortTitle', 'norm', 'ramo', 'natureza', 'status', 'source', 'year', 'note', 'root', 'predecessors']);
+const URN_RE = /^urn:lex:br:[a-z0-9.;:_-]+$/;
+const URN_DATE_RE = /:(\d{4})-\d{2}-\d{2};/;
+const LEXML_FRAG_RE = /^[a-z0-9_.-]+$/;
+const NODE_KEYS = new Set(['id', 'name', 'label', 'subtitle', 'content', 'children', 'history', 'revoked', 'since', 'until', 'lexml']);
+const META_KEYS = new Set(['$schema', 'id', 'title', 'shortTitle', 'norm', 'urn', 'ramo', 'natureza', 'status', 'source', 'year', 'note', 'root', 'predecessors']);
 
 const errors = [];
 const warnings = [];
@@ -55,6 +58,13 @@ function checkMeta(file, meta, ramos, { requireYear }) {
   if (meta.source && !/^https:\/\//.test(meta.source)) err(file, `source deve ser URL https: ${meta.source}`);
   if (meta.source && !/planalto\.gov\.br/.test(meta.source)) warn(file, `source fora do Planalto: ${meta.source}`);
   if (requireYear && typeof meta.year !== 'number') warn(file, 'campo year ausente');
+  if (meta.urn !== undefined) {
+    if (typeof meta.urn !== 'string' || !URN_RE.test(meta.urn)) err(file, `urn fora do padrão urn:lex:br:…: ${meta.urn}`);
+    else {
+      const m = URN_DATE_RE.exec(meta.urn);
+      if (m && typeof meta.year === 'number' && +m[1] !== meta.year) err(file, `a data da urn (${m[1]}) não bate com year (${meta.year})`);
+    }
+  } else if (requireYear) warn(file, 'campo urn ausente (URN LexML do diploma)');
   if (meta.predecessors !== undefined) {
     if (!Array.isArray(meta.predecessors) || !meta.predecessors.length) err(file, 'predecessors deve ser um array não vazio');
     else {
@@ -100,6 +110,7 @@ function checkNode(file, node, trail, stats, keys, docId) {
   if (node.label && node.label.length > 28) err(file, `${where}: label com mais de 28 caracteres: "${node.label}"`);
   if (node.content && node.content.length < 20) err(file, `${where}: content curto demais (mínimo 20 caracteres)`);
   if (node.revoked !== undefined && typeof node.revoked !== 'boolean') err(file, `${where}: revoked deve ser booleano`);
+  if (node.lexml !== undefined && (typeof node.lexml !== 'string' || !LEXML_FRAG_RE.test(node.lexml))) err(file, `${where}: lexml deve ser um fragmento como "art5": ${node.lexml}`);
   for (const k of ['since', 'until']) if (node[k] !== undefined && (typeof node[k] !== 'number' || node[k] < 1800)) err(file, `${where}: ${k} deve ser um ano`);
   if (typeof node.since === 'number' && typeof node.until === 'number' && node.until <= node.since) err(file, `${where}: until deve ser maior que since`);
   if (typeof node.since === 'number' && typeof stats.docYear === 'number' && node.since <= stats.docYear) err(file, `${where}: since (${node.since}) não é posterior ao ano do diploma (${stats.docYear}); omita o campo`);
