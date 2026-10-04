@@ -19,6 +19,7 @@ A macroestrutura da legislação brasileira em árvores interativas, publicada p
 
 ```bash
 node scripts/validate.js                      # valida docs/data/*.json
+node scripts/build-graph.js                   # regenera all.json, JSON-LD, Turtle e CSV (--check só confere)
 python3 -m http.server --directory docs 8080  # serve a página (no Windows: python)
 npm install && npm run test:install           # uma vez
 npm test                                      # testes de interface (Playwright)

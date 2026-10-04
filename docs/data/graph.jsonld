@@ -1,0 +1,4446 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "av": "https://luccas-amorim.github.io/ariadne/vocab#",
+    "ar": "https://luccas-amorim.github.io/ariadne/id/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Legislation": "schema:Legislation",
+    "license": {
+      "@id": "schema:license",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@language": "pt"
+    },
+    "alternateName": {
+      "@id": "schema:alternateName"
+    },
+    "legislationIdentifier": {
+      "@id": "schema:legislationIdentifier",
+      "@language": "pt"
+    },
+    "legislationDate": {
+      "@id": "schema:legislationDate"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+    "isPartOf": {
+      "@id": "schema:isPartOf",
+      "@type": "@id"
+    },
+    "av:rotulo": {
+      "@id": "av:rotulo",
+      "@language": "pt"
+    },
+    "av:faixa": {
+      "@id": "av:faixa",
+      "@language": "pt"
+    },
+    "av:status": {
+      "@id": "av:status"
+    },
+    "av:desde": {
+      "@id": "av:desde",
+      "@type": "xsd:integer"
+    },
+    "av:ate": {
+      "@id": "av:ate",
+      "@type": "xsd:integer"
+    },
+    "av:origem": {
+      "@id": "av:origem",
+      "@type": "@id"
+    },
+    "av:tipo": {
+      "@id": "av:tipo",
+      "@type": "@id"
+    },
+    "av:destino": {
+      "@id": "av:destino",
+      "@type": "@id"
+    },
+    "av:nota": {
+      "@id": "av:nota",
+      "@language": "pt"
+    },
+    "av:fundamento": {
+      "@id": "av:fundamento",
+      "@language": "pt"
+    },
+    "concretiza": {
+      "@id": "av:concretiza",
+      "@type": "@id"
+    },
+    "regulamenta": {
+      "@id": "av:regulamenta",
+      "@type": "@id"
+    },
+    "processa": {
+      "@id": "av:processa",
+      "@type": "@id"
+    },
+    "executa": {
+      "@id": "av:executa",
+      "@type": "@id"
+    },
+    "subsidiario": {
+      "@id": "av:subsidiario",
+      "@type": "@id"
+    },
+    "excepciona": {
+      "@id": "av:excepciona",
+      "@type": "@id"
+    },
+    "insere": {
+      "@id": "av:insere",
+      "@type": "@id"
+    },
+    "organiza": {
+      "@id": "av:organiza",
+      "@type": "@id"
+    },
+    "sucede": {
+      "@id": "av:sucede",
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/data/graph.jsonld",
+      "@type": "schema:Dataset",
+      "name": "Ariadne: estrutura da legislação brasileira e relações internormativas",
+      "license": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "@type": "Legislation",
+      "name": "Constituição Federal",
+      "alternateName": "CF/88",
+      "legislationIdentifier": "Constituição da República Federativa do Brasil de 1988",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "legislationDate": "1988",
+      "av:status": "revisado",
+      "sameAs": "urn:lex:br:federal:constituicao:1988-10-05;1988",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Princípios Fundamentais",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 4º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Direitos e Garantias Fundamentais",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 5º a 17",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Individuais e Coletivos",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Art. 5º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Direitos Sociais",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 6º a 11",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Nacionalidade",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 12 e 13",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Direitos Políticos",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 14 a 16",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Partidos Políticos",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Art. 17",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Organização do Estado",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 18 a 43",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Org. Político-Administrativa",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 18 e 19",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da União",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 20 a 24",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Dos Estados Federados",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 25 a 28",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Dos Municípios",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 29 a 31",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-v-e-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V e VI - DF, Territórios e Intervenção",
+      "av:rotulo": "Cap. V e VI",
+      "av:faixa": "Arts. 32 a 36",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VII - Administração Pública",
+      "av:rotulo": "Cap. VII",
+      "av:faixa": "Arts. 37 a 43",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Organização dos Poderes",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 44 a 135",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Poder Legislativo",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 44 a 75",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Poder Executivo",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 76 a 91",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Poder Judiciário",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 92 a 126",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Funções Essenciais à Justiça",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 127 a 135",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Defesa do Estado e das Instituições",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 136 a 144",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Estado de Defesa e Sítio",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 136 a 141",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Forças Armadas",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 142 e 143",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Da Segurança Pública",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Art. 144",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-v",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Tributação e Orçamento",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 145 a 169",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Sistema Tributário Nacional",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 145 a 162",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Finanças Públicas",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 163 a 169",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Ordem Econômica e Financeira",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 170 a 192",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Princípios Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 170 a 181",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Política Urbana",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 182 e 183",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Política Agrícola e Fundiária",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 184 a 191",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Sistema Financeiro Nacional",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Art. 192",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Da Ordem Social",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 193 a 232",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii/cap-i-e-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I e II - Base e Seguridade Social",
+      "av:rotulo": "Cap. I e II",
+      "av:faixa": "Arts. 193 a 204",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Educação, Cultura e Desporto",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 205 a 217",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii/cap-iv-viii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos IV a VIII - Diversos",
+      "av:rotulo": "Cap. IV-VIII",
+      "av:faixa": "Arts. 218 a 232",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Disposições Gerais",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 233 a 250",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf/adct",
+      "@type": "av:Divisao",
+      "name": "ADCT",
+      "av:rotulo": "ADCT",
+      "av:faixa": "Ato das Disposições",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc",
+      "@type": "Legislation",
+      "name": "Código Civil",
+      "alternateName": "CC",
+      "legislationIdentifier": "Lei nº 10.406, de 10 de janeiro de 2002",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+      "legislationDate": "2002",
+      "av:status": "revisado",
+      "sameAs": "urn:lex:br:federal:lei:2002-01-10;10406",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral",
+      "@type": "av:Parte",
+      "name": "Parte Geral",
+      "av:rotulo": "Parte Geral",
+      "av:faixa": "Arts. 1º a 232",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i",
+      "@type": "av:Livro",
+      "name": "Livro I - Das Pessoas",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 1º a 78",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Das Pessoas Naturais",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 39",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Das Pessoas Jurídicas",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 40 a 69",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Do Domicílio",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 70 a 78",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii",
+      "@type": "av:Livro",
+      "name": "Livro II - Dos Bens",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 79 a 103",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Diferentes Classes de Bens",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 79 a 91",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Bens Reciprocamente Considerados",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 92 a 97",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Dos Bens Públicos",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 98 a 103",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii",
+      "@type": "av:Livro",
+      "name": "Livro III - Dos Fatos Jurídicos",
+      "av:rotulo": "Livro III",
+      "av:faixa": "Arts. 104 a 232",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Do Negócio Jurídico",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 104 a 184",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Dos Atos Jurídicos Lícitos",
+      "av:rotulo": "Título II",
+      "av:faixa": "Art. 185",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Dos Atos Ilícitos",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 186 a 188",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Prescrição e Decadência",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 189 a 211",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Da Prova",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 212 a 232",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-geral/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial",
+      "@type": "av:Parte",
+      "name": "Parte Especial",
+      "av:rotulo": "Parte Especial",
+      "av:faixa": "Arts. 233 a 2.027",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "@type": "av:Livro",
+      "name": "Livro I - Direito das Obrigações",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 233 a 965",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Modalidades das Obrigações",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 233 a 285",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Transmissão das Obrigações",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 286 a 303",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Adimplemento e Extinção",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 304 a 388",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Inadimplemento",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 389 a 420",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Contratos em Geral",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 421 a 480",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Várias Espécies de Contrato",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 481 a 853",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Atos Unilaterais",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 854 a 886",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Títulos de Crédito",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 887 a 926",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Responsabilidade Civil",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 927 a 954",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-x",
+      "@type": "av:Titulo",
+      "name": "Título X - Preferências e Privilégios",
+      "av:rotulo": "Título X",
+      "av:faixa": "Arts. 955 a 965",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "@type": "av:Livro",
+      "name": "Livro II - Direito de Empresa",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 966 a 1.195",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Do Empresário",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 966 a 980",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Da Sociedade",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 981 a 1.141",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Do Estabelecimento",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 1.142 a 1.149",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Institutos Complementares",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 1.150 a 1.195",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "@type": "av:Livro",
+      "name": "Livro III - Direito das Coisas",
+      "av:rotulo": "Livro III",
+      "av:faixa": "Arts. 1.196 a 1.510-E",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Da Posse",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1.196 a 1.224",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Dos Direitos Reais",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 1.225 a 1.227",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Propriedade",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 1.228 a 1.368",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Da Superfície",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 1.369 a 1.377",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Das Servidões",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 1.378 a 1.389",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Do Usufruto",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 1.390 a 1.411",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Do Uso",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 1.412 a 1.413",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Da Habitação",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 1.414 a 1.416",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Promitente Comprador",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 1.417 a 1.418",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-x",
+      "@type": "av:Titulo",
+      "name": "Título X - Penhor, Hipoteca e Anticrese",
+      "av:rotulo": "Título X",
+      "av:faixa": "Arts. 1.419 a 1.510",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii/titulo-xi",
+      "@type": "av:Titulo",
+      "name": "Título XI - Do Direito de Laje",
+      "av:rotulo": "Título XI",
+      "av:faixa": "Arts. 1.510-A a 1.510-E",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iii",
+      "av:desde": 2017
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "@type": "av:Livro",
+      "name": "Livro IV - Direito de Família",
+      "av:rotulo": "Livro IV",
+      "av:faixa": "Arts. 1.511 a 1.783",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Do Direito Pessoal",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1.511 a 1.638",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Do Direito Patrimonial",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 1.639 a 1.722",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da União Estável",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 1.723 a 1.727",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Tutela e Curatela",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 1.728 a 1.783",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v",
+      "@type": "av:Livro",
+      "name": "Livro V - Direito das Sucessões",
+      "av:rotulo": "Livro V",
+      "av:faixa": "Arts. 1.784 a 2.027",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Da Sucessão em Geral",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1.784 a 1.828",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Da Sucessão Legítima",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 1.829 a 1.856",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Sucessão Testamentária",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 1.857 a 1.990",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Inventário e Partilha",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 1.991 a 2.027",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/livro-comp",
+      "@type": "av:Livro",
+      "name": "Livro Complementar",
+      "av:rotulo": "Livro Comp.",
+      "av:faixa": "Arts. 2.028 a 2.046",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cc",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "@type": "Legislation",
+      "name": "Código de Processo Civil",
+      "alternateName": "CPC",
+      "legislationIdentifier": "Lei nº 13.105, de 16 de março de 2015",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+      "legislationDate": "2015",
+      "av:status": "revisado",
+      "sameAs": "urn:lex:br:federal:lei:2015-03-16;13105",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "@type": "av:Parte",
+      "name": "Parte Geral",
+      "av:rotulo": "Parte Geral",
+      "av:faixa": "Arts. 1º a 317",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-i",
+      "@type": "av:Livro",
+      "name": "Livro I - Normas Processuais Civis",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 1º a 15",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-i/tit-unico",
+      "@type": "av:Divisao",
+      "name": "Título Único",
+      "av:rotulo": "Tít. Único",
+      "av:faixa": "Arts. 1º a 15",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-i",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii",
+      "@type": "av:Livro",
+      "name": "Livro II - Função Jurisdicional",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 16 a 69",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Jurisdição e Ação",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 16 a 20",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Limites da Jurisdição e Cooperação",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 21 a 41",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Competência Interna",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 42 a 69",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "@type": "av:Livro",
+      "name": "Livro III - Sujeitos do Processo",
+      "av:rotulo": "Livro III",
+      "av:faixa": "Arts. 70 a 187",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Partes e Procuradores",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 70 a 112",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Do Litisconsórcio",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 113 a 118",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Intervenção de Terceiros",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 119 a 138",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Juiz e Auxiliares",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 139 a 175",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Do Ministério Público",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 176 a 181",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Da Advocacia Pública",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 182 a 184",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Da Defensoria Pública",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 185 a 187",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv",
+      "@type": "av:Livro",
+      "name": "Livro IV - Atos Processuais",
+      "av:rotulo": "Livro IV",
+      "av:faixa": "Arts. 188 a 293",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Forma, Tempo e Lugar",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 188 a 235",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Da Comunicação",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 236 a 275",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Das Nulidades",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 276 a 283",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Distribuição e Registro",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 284 a 290",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Do Valor da Causa",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 291 a 293",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-iv",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v",
+      "@type": "av:Livro",
+      "name": "Livro V - Tutela Provisória",
+      "av:rotulo": "Livro V",
+      "av:faixa": "Arts. 294 a 311",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Disposições Gerais",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 294 a 299",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Tutela de Urgência",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 300 a 310",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Tutela da Evidência",
+      "av:rotulo": "Título III",
+      "av:faixa": "Art. 311",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-v",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi",
+      "@type": "av:Livro",
+      "name": "Livro VI - Formação e Extinção",
+      "av:rotulo": "Livro VI",
+      "av:faixa": "Arts. 312 a 317",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Da Formação",
+      "av:rotulo": "Título I",
+      "av:faixa": "Art. 312",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Da Suspensão",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 313 a 315",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Extinção",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 316 a 317",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-geral/livro-vi",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial",
+      "@type": "av:Parte",
+      "name": "Parte Especial",
+      "av:rotulo": "Parte Especial",
+      "av:faixa": "Arts. 318 a 1.044",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i",
+      "@type": "av:Livro",
+      "name": "Livro I - Conhecimento e Cumprimento",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 318 a 770",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Procedimento Comum",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 318 a 512",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Cumprimento de Sentença",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 513 a 538",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Procedimentos Especiais",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 539 a 770",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "@type": "av:Livro",
+      "name": "Livro II - Processo de Execução",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 771 a 925",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Execução em Geral",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 771 a 796",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Espécies de Execução",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 797 a 913",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Embargos à Execução",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 914 a 920",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Suspensão e Extinção",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 921 a 925",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-iii",
+      "@type": "av:Livro",
+      "name": "Livro III - Processos nos Tribunais",
+      "av:rotulo": "Livro III",
+      "av:faixa": "Arts. 926 a 1.044",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-iii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Ordem dos Processos e Competência Originária",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 926 a 993",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-iii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Dos Recursos",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 994 a 1.044",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-iii",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/livro-comp",
+      "@type": "av:Livro",
+      "name": "Livro Complementar",
+      "av:rotulo": "Livro Comp.",
+      "av:faixa": "Arts. 1.045 a 1.072",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp",
+      "@type": "Legislation",
+      "name": "Código Penal",
+      "alternateName": "CP",
+      "legislationIdentifier": "Decreto-Lei nº 2.848, de 7 de dezembro de 1940",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
+      "legislationDate": "1940",
+      "av:status": "revisado",
+      "sameAs": "urn:lex:br:federal:decreto.lei:1940-12-07;2848",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "@type": "av:Parte",
+      "name": "Parte Geral",
+      "av:rotulo": "Parte Geral",
+      "av:faixa": "Arts. 1º a 120",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Da Aplicação da Lei Penal",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 12",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Do Crime",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 13 a 25",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Imputabilidade Penal",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 26 a 28",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Do Concurso de Pessoas",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 29 a 31",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Das Penas",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 32 a 95",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Das Medidas de Segurança",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 96 a 99",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Da Ação Penal",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 100 a 106",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Extinção da Punibilidade",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 107 a 120",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "@type": "av:Parte",
+      "name": "Parte Especial",
+      "av:rotulo": "Parte Especial",
+      "av:faixa": "Arts. 121 a 359-U",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Crimes Contra a Pessoa",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 121 a 154-B",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Crimes Contra o Patrimônio",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 155 a 183",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Crimes Contra a Propriedade Imaterial",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 184 a 196",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Crimes Contra a Organização do Trabalho",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 197 a 207",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Crimes Contra Sentimento Religioso e Mortos",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 208 a 212",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Crimes Contra a Dignidade Sexual",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 213 a 234-C",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Crimes Contra a Família",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 235 a 249",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Crimes Contra a Incolumidade Pública",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 250 a 285",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Crimes Contra a Paz Pública",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 286 a 288-A",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-x",
+      "@type": "av:Titulo",
+      "name": "Título X - Crimes Contra a Fé Pública",
+      "av:rotulo": "Título X",
+      "av:faixa": "Arts. 289 a 311-A",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-xi",
+      "@type": "av:Titulo",
+      "name": "Título XI - Crimes Contra a Administração Pública",
+      "av:rotulo": "Título XI",
+      "av:faixa": "Arts. 312 a 359-H",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-xii",
+      "@type": "av:Titulo",
+      "name": "Título XII - Crimes Contra o Estado Democrático de Direito",
+      "av:rotulo": "Título XII",
+      "av:faixa": "Arts. 359-I a 359-U",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/disposicoes-f",
+      "@type": "av:Divisao",
+      "name": "Disposições Finais",
+      "av:rotulo": "Disposições F.",
+      "av:faixa": "Arts. 360 e 361",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cp",
+      "av:desde": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "@type": "Legislation",
+      "name": "Código de Processo Penal",
+      "alternateName": "CPP",
+      "legislationIdentifier": "Decreto-Lei nº 3.689, de 3 de outubro de 1941",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm",
+      "legislationDate": "1941",
+      "av:status": "revisado",
+      "sameAs": "urn:lex:br:federal:decreto.lei:1941-10-03;3689",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "@type": "av:Livro",
+      "name": "Livro I - Do Processo em Geral",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 1º a 393",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Disposições Preliminares",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 3º-F",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Do Inquérito Policial",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 4º a 23",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Ação Penal",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 24 a 62",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Da Ação Civil",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 63 a 68",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Da Competência",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 69 a 91",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Questões e Processos Incidentes",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 92 a 154",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Da Prova",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 155 a 250",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Sujeitos do Processo",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 251 a 281",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Prisão, Medidas Cautelares e Liberdade",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 282 a 350",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-x",
+      "@type": "av:Titulo",
+      "name": "Título X - Das Citações e Intimações",
+      "av:rotulo": "Título X",
+      "av:faixa": "Arts. 351 a 372",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-xi",
+      "@type": "av:Titulo",
+      "name": "Título XI - Aplicação Provisória",
+      "av:rotulo": "Título XI",
+      "av:faixa": "Arts. 373 a 380",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-xii",
+      "@type": "av:Titulo",
+      "name": "Título XII - Da Sentença",
+      "av:rotulo": "Título XII",
+      "av:faixa": "Arts. 381 a 393",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii",
+      "@type": "av:Livro",
+      "name": "Livro II - Dos Processos em Espécie",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 394 a 562",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Do Processo Comum",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 394 a 497",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Dos Processos Especiais",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 503 a 548",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Processos em Tribunais",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 556 a 562",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iii",
+      "@type": "av:Livro",
+      "name": "Livro III - Das Nulidades e dos Recursos",
+      "av:rotulo": "Livro III",
+      "av:faixa": "Arts. 563 a 667",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Das Nulidades",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 563 a 573",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iii",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Dos Recursos em Geral",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 574 a 667",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iii",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "@type": "av:Livro",
+      "name": "Livro IV - Da Execução",
+      "av:rotulo": "Livro IV",
+      "av:faixa": "Arts. 668 a 779",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Disposições Gerais",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 668 a 673",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Execução das Penas em Espécie",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 674 a 709",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Dos Incidentes da Execução",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 710 a 733",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Graça, Indulto e Anistia",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 734 a 750",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Execução das Medidas de Segurança",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 751 a 779",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-v",
+      "@type": "av:Livro",
+      "name": "Livro V - Relações Jurisdicionais",
+      "av:rotulo": "Livro V",
+      "av:faixa": "Arts. 780 a 790",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-vi",
+      "@type": "av:Livro",
+      "name": "Livro VI - Disposições Gerais",
+      "av:rotulo": "Livro VI",
+      "av:faixa": "Arts. 791 a 811",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "@type": "Legislation",
+      "name": "Consolidação das Leis do Trabalho",
+      "alternateName": "CLT",
+      "legislationIdentifier": "Decreto-Lei nº 5.452, de 1º de maio de 1943",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm",
+      "legislationDate": "1943",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:decreto.lei:1943-05-01;5452",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Introdução",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 12",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Das Normas Gerais de Tutela do Trabalho",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 13 a 223",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Da Identificação Profissional",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 13 a 56",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da Duração do Trabalho",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 57 a 75",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii/cap-ii-a",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II-A - Do Teletrabalho",
+      "av:rotulo": "Cap. II-A",
+      "av:faixa": "Arts. 75-A a 75-F",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:desde": 2017
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Do Salário Mínimo",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 76 a 128",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Das Férias Anuais",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 129 a 153",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Da Segurança e da Medicina do Trabalho",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 154 a 201",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii-a",
+      "@type": "av:Titulo",
+      "name": "Título II-A - Do Dano Extrapatrimonial",
+      "av:rotulo": "Título II-A",
+      "av:faixa": "Arts. 223-A a 223-G",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 2017
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Das Normas Especiais de Tutela do Trabalho",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 224 a 441",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Especiais sobre Duração e Condições de Trabalho",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 224 a 351",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da Nacionalização do Trabalho",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 352 a 371",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Da Proteção do Trabalho da Mulher",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 372 a 401-B",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Da Proteção do Trabalho do Menor",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 402 a 441",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Do Contrato Individual do Trabalho",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 442 a 510",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 442 a 456",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da Remuneração",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 457 a 467",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Da Alteração",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 468 a 470",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Da Suspensão e da Interrupção",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 471 a 476-A",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Da Rescisão",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 477 a 486",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VI - Do Aviso Prévio",
+      "av:rotulo": "Cap. VI",
+      "av:faixa": "Arts. 487 a 491",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VII - Da Estabilidade",
+      "av:rotulo": "Cap. VII",
+      "av:faixa": "Arts. 492 a 500",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-viii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VIII - Da Força Maior",
+      "av:rotulo": "Cap. VIII",
+      "av:faixa": "Arts. 501 a 504",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv/cap-ix",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IX - Disposições Especiais",
+      "av:rotulo": "Cap. IX",
+      "av:faixa": "Arts. 505 a 510",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-iv-a",
+      "@type": "av:Titulo",
+      "name": "Título IV-A - Da Representação dos Empregados",
+      "av:rotulo": "Título IV-A",
+      "av:faixa": "Arts. 510-A a 510-E",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 2017
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Da Organização Sindical",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 511 a 610",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Da Instituição Sindical",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 511 a 569",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Do Enquadramento Sindical",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 570 a 577",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Da Contribuição Sindical",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 578 a 610",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-v",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Convenções Coletivas de Trabalho",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 611 a 625",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-vi-a",
+      "@type": "av:Titulo",
+      "name": "Título VI-A - Das Comissões de Conciliação Prévia",
+      "av:rotulo": "Título VI-A",
+      "av:faixa": "Arts. 625-A a 625-H",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 2000
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Do Processo de Multas Administrativas",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 626 a 642",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-vii-a",
+      "@type": "av:Titulo",
+      "name": "Título VII-A - Da Prova de Inexistência de Débitos Trabalhistas",
+      "av:rotulo": "Título VII-A",
+      "av:faixa": "Art. 642-A",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 2011
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Da Justiça do Trabalho",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 643 a 735",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Introdução",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 643 a 646",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Varas do Trabalho",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 647 a 667",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Dos Juízos de Direito",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 668 a 669",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Dos Tribunais Regionais do Trabalho",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 670 a 689",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Do Tribunal Superior do Trabalho",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 690 a 709",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii/cap-vi-viii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos VI a VIII - Serviços Auxiliares, Penalidades e Disposições Gerais",
+      "av:rotulo": "Caps. VI-VIII",
+      "av:faixa": "Arts. 710 a 735",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Do Ministério Público do Trabalho",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 736 a 762",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "@type": "av:Titulo",
+      "name": "Título X - Do Processo Judiciário do Trabalho",
+      "av:rotulo": "Título X",
+      "av:faixa": "Arts. 763 a 910",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Preliminares",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 763 a 769",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Do Processo em Geral",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 770 a 836",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Dos Dissídios Individuais",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 837 a 855",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-iii-a",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III-A - Homologação de Acordo Extrajudicial",
+      "av:rotulo": "Cap. III-A",
+      "av:faixa": "Arts. 855-B a 855-E",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 2017
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Dos Dissídios Coletivos",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 856 a 875",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Da Execução",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 876 a 892",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VI - Dos Recursos",
+      "av:rotulo": "Cap. VI",
+      "av:faixa": "Arts. 893 a 902",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x/cap-vii-viii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos VII e VIII - Penalidades e Disposições Finais",
+      "av:rotulo": "Caps. VII-VIII",
+      "av:faixa": "Arts. 903 a 910",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-xi",
+      "@type": "av:Titulo",
+      "name": "Título XI - Disposições Finais e Transitórias",
+      "av:rotulo": "Título XI",
+      "av:faixa": "Arts. 911 a 922",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:desde": 1943
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "@type": "Legislation",
+      "name": "Código de Defesa do Consumidor",
+      "alternateName": "CDC",
+      "legislationIdentifier": "Lei nº 8.078, de 11 de setembro de 1990",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "legislationDate": "1990",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:lei:1990-09-11;8078",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Dos Direitos do Consumidor",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 60",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 1º a 3º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da Política Nacional de Relações de Consumo",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 4º e 5º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Dos Direitos Básicos do Consumidor",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 6º e 7º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Da Qualidade de Produtos e Serviços, da Prevenção e da Reparação dos Danos",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 8º a 28",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Das Práticas Comerciais",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 29 a 45",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VI - Da Proteção Contratual",
+      "av:rotulo": "Cap. VI",
+      "av:faixa": "Arts. 46 a 54-G",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i/cap-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VII - Das Sanções Administrativas",
+      "av:rotulo": "Cap. VII",
+      "av:faixa": "Arts. 55 a 60",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Das Infrações Penais",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 61 a 80",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Defesa do Consumidor em Juízo",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 81 a 104-C",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 81 a 90",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Ações Coletivas para a Defesa de Interesses Individuais Homogêneos",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 91 a 100",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Das Ações de Responsabilidade do Fornecedor de Produtos e Serviços",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 101 e 102",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Da Coisa Julgada",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 103 e 104",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Da Conciliação no Superendividamento",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 104-A a 104-C",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Do Sistema Nacional de Defesa do Consumidor",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 105 e 106",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Da Convenção Coletiva de Consumo",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 107 e 108",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Disposições Finais",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 109 a 119",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/cdc",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca",
+      "@type": "Legislation",
+      "name": "Estatuto da Criança e do Adolescente",
+      "alternateName": "ECA",
+      "legislationIdentifier": "Lei nº 8.069, de 13 de julho de 1990",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8069.htm",
+      "legislationDate": "1990",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:lei:1990-07-13;8069",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i",
+      "@type": "av:Livro",
+      "name": "Livro I - Parte Geral",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 1º a 85",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Das Disposições Preliminares",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 6º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Dos Direitos Fundamentais",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 7º a 69",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Do Direito à Vida e à Saúde",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 7º a 14",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Do Direito à Liberdade, ao Respeito e à Dignidade",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 15 a 18-B",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Do Direito à Convivência Familiar e Comunitária",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 19 a 52-D",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Do Direito à Educação, à Cultura, ao Esporte e ao Lazer",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 53 a 59",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Do Direito à Profissionalização e à Proteção no Trabalho",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 60 a 69",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Prevenção",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 70 a 85",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 70 a 73",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da Prevenção Especial",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 74 a 85",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "@type": "av:Livro",
+      "name": "Livro II - Parte Especial",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 86 a 258-F",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Da Política de Atendimento",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 86 a 97",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Das Medidas de Proteção",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 98 a 102",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Da Prática de Ato Infracional",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 103 a 128",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii/cap-i-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos I a III - Disposições Gerais, Direitos Individuais e Garantias Processuais",
+      "av:rotulo": "Caps. I-III",
+      "av:faixa": "Arts. 103 a 111",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Das Medidas Socioeducativas",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 112 a 125",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Da Remissão",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 126 a 128",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Das Medidas Pertinentes aos Pais ou Responsável",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 129 e 130",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Do Conselho Tutelar",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 131 a 140",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Do Acesso à Justiça",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 141 a 224",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi/cap-i-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos I e II - Disposições Gerais e Justiça da Infância e da Juventude",
+      "av:rotulo": "Caps. I-II",
+      "av:faixa": "Arts. 141 a 151",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Dos Procedimentos",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 152 a 197-F",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Dos Recursos",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 198 a 199-E",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi/cap-v-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulos V e VI - Do Ministério Público e do Advogado",
+      "av:rotulo": "Caps. V-VI",
+      "av:faixa": "Arts. 200 a 207",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi/cap-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VII - Da Proteção Judicial dos Interesses Individuais, Difusos e Coletivos",
+      "av:rotulo": "Cap. VII",
+      "av:faixa": "Arts. 208 a 224",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vi",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Dos Crimes e das Infrações Administrativas",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 225 a 258-F",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Dos Crimes",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 225 a 244-B",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Infrações Administrativas",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 245 a 258-F",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-vii",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/disposicoes-finais",
+      "@type": "av:Divisao",
+      "name": "Disposições Finais e Transitórias",
+      "av:rotulo": "Disp. Finais",
+      "av:faixa": "Arts. 259 a 267",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/eca",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn",
+      "@type": "Legislation",
+      "name": "Código Tributário Nacional",
+      "alternateName": "CTN",
+      "legislationIdentifier": "Lei nº 5.172, de 25 de outubro de 1966",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm",
+      "legislationDate": "1966",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:lei:1966-10-25;5172",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "@type": "av:Livro",
+      "name": "Livro Primeiro - Sistema Tributário Nacional",
+      "av:rotulo": "Livro I",
+      "av:faixa": "Arts. 1º a 95",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Disposições Gerais",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 5º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Competência Tributária",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 6º a 15",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-ii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 6º a 8º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-ii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Limitações da Competência Tributária",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 9º a 15",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Impostos",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 16 a 76",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 16 a 18",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Impostos sobre o Comércio Exterior",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 19 a 28",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Impostos sobre o Patrimônio e a Renda",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 29 a 45",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Impostos sobre a Produção e a Circulação",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 46 a 73",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Impostos Especiais",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 74 a 76",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Taxas",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 77 a 80",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Contribuição de Melhoria",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 81 e 82",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Distribuições de Receitas Tributárias",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 83 a 95",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo",
+      "@type": "av:Livro",
+      "name": "Livro Segundo - Normas Gerais de Direito Tributário",
+      "av:rotulo": "Livro II",
+      "av:faixa": "Arts. 96 a 218",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Legislação Tributária",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 96 a 112",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 96 a 100",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Vigência da Legislação Tributária",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 101 a 104",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Aplicação da Legislação Tributária",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 105 e 106",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Interpretação e Integração da Legislação Tributária",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 107 a 112",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-i",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Obrigação Tributária",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 113 a 138",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Art. 113",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Fato Gerador",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 114 a 118",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Sujeito Ativo",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 119 e 120",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Sujeito Passivo",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 121 a 127",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Responsabilidade Tributária",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 128 a 138",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-ii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Crédito Tributário",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 139 a 193",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 139 a 141",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Constituição de Crédito Tributário",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 142 a 150",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Suspensão do Crédito Tributário",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 151 a 155-A",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Extinção do Crédito Tributário",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 156 a 174",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Exclusão de Crédito Tributário",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 175 a 182",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii/cap-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VI - Garantias e Privilégios do Crédito Tributário",
+      "av:rotulo": "Cap. VI",
+      "av:faixa": "Arts. 183 a 193",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iii",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Administração Tributária",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 194 a 208",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Fiscalização",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 194 a 200",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Dívida Ativa",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 201 a 204",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Certidões Negativas",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 205 a 208",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/titulo-iv",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo/disposicoes-finais",
+      "@type": "av:Divisao",
+      "name": "Disposições Finais e Transitórias",
+      "av:rotulo": "Disp. Finais",
+      "av:faixa": "Arts. 209 a 218",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-segundo",
+      "av:desde": 1966
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "@type": "Legislation",
+      "name": "Lei de Licitações e Contratos Administrativos",
+      "alternateName": "Lei 14.133",
+      "legislationIdentifier": "Lei nº 14.133, de 1º de abril de 2021",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm",
+      "legislationDate": "2021",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:lei:2021-04-01;14133",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Disposições Preliminares",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 10",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Do Âmbito de Aplicação desta Lei",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 1º a 4º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Dos Princípios",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Art. 5º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Das Definições",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Art. 6º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Dos Agentes Públicos",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 7º a 10",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-i",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Das Licitações",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 11 a 88",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/processo-licitatorio",
+      "@type": "av:Divisao",
+      "name": "Do Processo Licitatório",
+      "av:rotulo": "Processo",
+      "av:faixa": "Arts. 11 a 17",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/fase-preparatoria",
+      "@type": "av:Divisao",
+      "name": "Da Fase Preparatória",
+      "av:rotulo": "Fase prep.",
+      "av:faixa": "Arts. 18 a 27",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/modalidades",
+      "@type": "av:Divisao",
+      "name": "Das Modalidades de Licitação",
+      "av:rotulo": "Modalidades",
+      "av:faixa": "Arts. 28 a 32",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/criterios-julgamento",
+      "@type": "av:Divisao",
+      "name": "Dos Critérios de Julgamento",
+      "av:rotulo": "Julgamento",
+      "av:faixa": "Arts. 33 a 39",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/disposicoes-setoriais",
+      "@type": "av:Divisao",
+      "name": "Das Disposições Setoriais",
+      "av:rotulo": "Setoriais",
+      "av:faixa": "Arts. 40 a 52",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/edital-propostas",
+      "@type": "av:Divisao",
+      "name": "Da Divulgação do Edital, das Propostas e dos Lances",
+      "av:rotulo": "Edital e lances",
+      "av:faixa": "Arts. 53 a 61",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/habilitacao",
+      "@type": "av:Divisao",
+      "name": "Da Habilitação",
+      "av:rotulo": "Habilitação",
+      "av:faixa": "Arts. 62 a 70",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/encerramento",
+      "@type": "av:Divisao",
+      "name": "Do Encerramento da Licitação",
+      "av:rotulo": "Encerramento",
+      "av:faixa": "Art. 71",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/contratacao-direta",
+      "@type": "av:Divisao",
+      "name": "Da Contratação Direta",
+      "av:rotulo": "Contr. direta",
+      "av:faixa": "Arts. 72 a 75",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/alienacoes",
+      "@type": "av:Divisao",
+      "name": "Das Alienações",
+      "av:rotulo": "Alienações",
+      "av:faixa": "Art. 76",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii/instrumentos-auxiliares",
+      "@type": "av:Divisao",
+      "name": "Dos Instrumentos Auxiliares",
+      "av:rotulo": "Instr. auxiliares",
+      "av:faixa": "Arts. 77 a 88",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-ii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Dos Contratos Administrativos",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 89 a 154",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Da Formalização dos Contratos",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 89 a 95",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Garantias",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 96 a 102",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-iii-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulos III e IV - Alocação de Riscos e Prerrogativas da Administração",
+      "av:rotulo": "Caps. III-IV",
+      "av:faixa": "Arts. 103 e 104",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulo V - Da Duração dos Contratos",
+      "av:rotulo": "Cap. V",
+      "av:faixa": "Arts. 105 a 114",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VI - Da Execução dos Contratos",
+      "av:rotulo": "Cap. VI",
+      "av:faixa": "Arts. 115 a 123",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VII - Da Alteração dos Contratos e dos Preços",
+      "av:rotulo": "Cap. VII",
+      "av:faixa": "Arts. 124 a 136",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-viii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VIII - Das Hipóteses de Extinção dos Contratos",
+      "av:rotulo": "Cap. VIII",
+      "av:faixa": "Arts. 137 a 139",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-ix-x",
+      "@type": "av:Capitulo",
+      "name": "Capítulos IX e X - Recebimento do Objeto e Pagamento",
+      "av:rotulo": "Caps. IX-X",
+      "av:faixa": "Arts. 140 a 146",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-xi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo XI - Da Nulidade dos Contratos",
+      "av:rotulo": "Cap. XI",
+      "av:faixa": "Arts. 147 a 150",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii/cap-xii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo XII - Dos Meios Alternativos de Resolução de Controvérsias",
+      "av:rotulo": "Cap. XII",
+      "av:faixa": "Arts. 151 a 154",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iii",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Das Irregularidades",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 155 a 173",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Das Infrações e Sanções Administrativas",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 155 a 163",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Impugnações, dos Pedidos de Esclarecimento e dos Recursos",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 164 a 168",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Do Controle das Contratações",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 169 a 173",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Disposições Gerais",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 174 a 194",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v/pncp",
+      "@type": "av:Divisao",
+      "name": "Do Portal Nacional de Contratações Públicas",
+      "av:rotulo": "PNCP",
+      "av:faixa": "Arts. 174 a 176",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v/alteracoes",
+      "@type": "av:Divisao",
+      "name": "Das Alterações Legislativas",
+      "av:rotulo": "Alterações",
+      "av:faixa": "Arts. 177 a 178",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v/transitorias",
+      "@type": "av:Divisao",
+      "name": "Disposições Transitórias e Finais",
+      "av:rotulo": "Transitórias",
+      "av:faixa": "Arts. 179 a 194",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "@type": "Legislation",
+      "name": "Lei do Processo Administrativo Federal",
+      "alternateName": "Lei 9.784",
+      "legislationIdentifier": "Lei nº 9.784, de 29 de janeiro de 1999",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm",
+      "legislationDate": "1999",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:lei:1999-01-29;9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Das Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 1º e 2º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-ii-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos II e III - Dos Direitos e dos Deveres dos Administrados",
+      "av:rotulo": "Caps. II-III",
+      "av:faixa": "Arts. 3º e 4º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-iv-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulos IV e V - Do Início do Processo e dos Interessados",
+      "av:rotulo": "Caps. IV-V",
+      "av:faixa": "Arts. 5º a 10",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-vi",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VI - Da Competência",
+      "av:rotulo": "Cap. VI",
+      "av:faixa": "Arts. 11 a 17",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo VII - Dos Impedimentos e da Suspeição",
+      "av:rotulo": "Cap. VII",
+      "av:faixa": "Arts. 18 a 21",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-viii-ix",
+      "@type": "av:Capitulo",
+      "name": "Capítulos VIII e IX - Da Forma, Tempo e Lugar dos Atos e da Comunicação",
+      "av:rotulo": "Caps. VIII-IX",
+      "av:faixa": "Arts. 22 a 28",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-x",
+      "@type": "av:Capitulo",
+      "name": "Capítulo X - Da Instrução",
+      "av:rotulo": "Cap. X",
+      "av:faixa": "Arts. 29 a 47",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-xi-xii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos XI e XII - Do Dever de Decidir e da Motivação",
+      "av:rotulo": "Caps. XI-XII",
+      "av:faixa": "Arts. 48 a 50",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-xiii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo XIII - Da Desistência e Outros Casos de Extinção do Processo",
+      "av:rotulo": "Cap. XIII",
+      "av:faixa": "Arts. 51 e 52",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-xiv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo XIV - Da Anulação, Revogação e Convalidação",
+      "av:rotulo": "Cap. XIV",
+      "av:faixa": "Arts. 53 a 55",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-xv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo XV - Do Recurso Administrativo e da Revisão",
+      "av:rotulo": "Cap. XV",
+      "av:faixa": "Arts. 56 a 65",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-xvi-xvii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos XVI e XVII - Dos Prazos e das Sanções",
+      "av:rotulo": "Caps. XVI-XVII",
+      "av:faixa": "Arts. 66 a 68",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784/cap-xviii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo XVIII - Das Disposições Finais",
+      "av:rotulo": "Cap. XVIII",
+      "av:faixa": "Arts. 69 a 70",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "@type": "Legislation",
+      "name": "Lei de Execução Penal",
+      "alternateName": "LEP",
+      "legislationIdentifier": "Lei nº 7.210, de 11 de julho de 1984",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l7210.htm",
+      "legislationDate": "1984",
+      "av:status": "rascunho",
+      "sameAs": "urn:lex:br:federal:lei:1984-07-11;7210",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-i",
+      "@type": "av:Titulo",
+      "name": "Título I - Do Objeto e da Aplicação da Lei de Execução Penal",
+      "av:rotulo": "Título I",
+      "av:faixa": "Arts. 1º a 4º",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii",
+      "@type": "av:Titulo",
+      "name": "Título II - Do Condenado e do Internado",
+      "av:rotulo": "Título II",
+      "av:faixa": "Arts. 5º a 60",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Da Classificação",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 5º a 9º-A",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Da Assistência",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 10 a 27",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Do Trabalho",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 28 a 37",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Dos Deveres, dos Direitos e da Disciplina",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 38 a 60",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii",
+      "@type": "av:Titulo",
+      "name": "Título III - Dos Órgãos da Execução Penal",
+      "av:rotulo": "Título III",
+      "av:faixa": "Arts. 61 a 81-B",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii/cap-i-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos I e II - Disposições Gerais e Conselho Nacional de Política Criminal e Penitenciária",
+      "av:rotulo": "Caps. I-II",
+      "av:faixa": "Arts. 61 a 64",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Do Juízo da Execução",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 65 e 66",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii/cap-iv-v",
+      "@type": "av:Capitulo",
+      "name": "Capítulos IV e V - Do Ministério Público e do Conselho Penitenciário",
+      "av:rotulo": "Caps. IV-V",
+      "av:faixa": "Arts. 67 a 70",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii/cap-vi-ix",
+      "@type": "av:Capitulo",
+      "name": "Capítulos VI a IX - Departamentos Penitenciários, Patronato, Conselho da Comunidade e Defensoria Pública",
+      "av:rotulo": "Caps. VI-IX",
+      "av:faixa": "Arts. 71 a 81-B",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv",
+      "@type": "av:Titulo",
+      "name": "Título IV - Dos Estabelecimentos Penais",
+      "av:rotulo": "Título IV",
+      "av:faixa": "Arts. 82 a 104",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Disposições Gerais",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 82 a 86",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv/cap-ii-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulos II a IV - Penitenciária, Colônia e Casa do Albergado",
+      "av:rotulo": "Caps. II-IV",
+      "av:faixa": "Arts. 87 a 95",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv/cap-v-vii",
+      "@type": "av:Capitulo",
+      "name": "Capítulos V a VII - Centro de Observação, Hospital de Custódia e Cadeia Pública",
+      "av:rotulo": "Caps. V-VII",
+      "av:faixa": "Arts. 96 a 104",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-iv",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "@type": "av:Titulo",
+      "name": "Título V - Da Execução das Penas em Espécie",
+      "av:rotulo": "Título V",
+      "av:faixa": "Arts. 105 a 170",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Das Penas Privativas de Liberdade",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 105 a 146-D",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Das Penas Restritivas de Direitos",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 147 a 155",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Da Suspensão Condicional",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 156 a 163",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v/cap-iv",
+      "@type": "av:Capitulo",
+      "name": "Capítulo IV - Da Pena de Multa",
+      "av:rotulo": "Cap. IV",
+      "av:faixa": "Arts. 164 a 170",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vi",
+      "@type": "av:Titulo",
+      "name": "Título VI - Da Execução das Medidas de Segurança",
+      "av:rotulo": "Título VI",
+      "av:faixa": "Arts. 171 a 179",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii",
+      "@type": "av:Titulo",
+      "name": "Título VII - Dos Incidentes de Execução",
+      "av:rotulo": "Título VII",
+      "av:faixa": "Arts. 180 a 193",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii/cap-i",
+      "@type": "av:Capitulo",
+      "name": "Capítulo I - Das Conversões",
+      "av:rotulo": "Cap. I",
+      "av:faixa": "Arts. 180 a 184",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii/cap-ii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo II - Do Excesso ou Desvio",
+      "av:rotulo": "Cap. II",
+      "av:faixa": "Arts. 185 e 186",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii/cap-iii",
+      "@type": "av:Capitulo",
+      "name": "Capítulo III - Da Anistia e do Indulto",
+      "av:rotulo": "Cap. III",
+      "av:faixa": "Arts. 187 a 193",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vii",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-viii",
+      "@type": "av:Titulo",
+      "name": "Título VIII - Do Procedimento Judicial",
+      "av:rotulo": "Título VIII",
+      "av:faixa": "Arts. 194 a 197",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-ix",
+      "@type": "av:Titulo",
+      "name": "Título IX - Das Disposições Finais e Transitórias",
+      "av:rotulo": "Título IX",
+      "av:faixa": "Arts. 198 a 204",
+      "isPartOf": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1824",
+      "@type": "Legislation",
+      "name": "Constituição Política do Império do Brasil",
+      "alternateName": "CF/1824",
+      "legislationIdentifier": "Carta outorgada em 25 de março de 1824",
+      "av:desde": 1824,
+      "av:ate": 1891
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1891",
+      "@type": "Legislation",
+      "name": "Constituição da República dos Estados Unidos do Brasil de 1891",
+      "alternateName": "CF/1891",
+      "legislationIdentifier": "Promulgada em 24 de fevereiro de 1891",
+      "av:desde": 1891,
+      "av:ate": 1934
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1934",
+      "@type": "Legislation",
+      "name": "Constituição de 1934",
+      "alternateName": "CF/1934",
+      "legislationIdentifier": "Promulgada em 16 de julho de 1934",
+      "av:desde": 1934,
+      "av:ate": 1937
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1937",
+      "@type": "Legislation",
+      "name": "Constituição de 1937 (Estado Novo)",
+      "alternateName": "CF/1937",
+      "legislationIdentifier": "Outorgada em 10 de novembro de 1937",
+      "av:desde": 1937,
+      "av:ate": 1946
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1946",
+      "@type": "Legislation",
+      "name": "Constituição de 1946",
+      "alternateName": "CF/1946",
+      "legislationIdentifier": "Promulgada em 18 de setembro de 1946",
+      "av:desde": 1946,
+      "av:ate": 1967
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1967",
+      "@type": "Legislation",
+      "name": "Constituição de 1967, com a Emenda nº 1 de 1969",
+      "alternateName": "CF/1967",
+      "legislationIdentifier": "Promulgada em 24 de janeiro de 1967; EC 1 de 17 de outubro de 1969",
+      "av:desde": 1967,
+      "av:ate": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc-1916",
+      "@type": "Legislation",
+      "name": "Código Civil de 1916",
+      "alternateName": "CC/1916",
+      "legislationIdentifier": "Lei nº 3.071, de 1º de janeiro de 1916",
+      "av:desde": 1916,
+      "av:ate": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc-1939",
+      "@type": "Legislation",
+      "name": "Código de Processo Civil de 1939",
+      "alternateName": "CPC/1939",
+      "legislationIdentifier": "Decreto-Lei nº 1.608, de 18 de setembro de 1939",
+      "av:desde": 1939,
+      "av:ate": 1973
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc-1973",
+      "@type": "Legislation",
+      "name": "Código de Processo Civil de 1973 (Código Buzaid)",
+      "alternateName": "CPC/1973",
+      "legislationIdentifier": "Lei nº 5.869, de 11 de janeiro de 1973",
+      "av:desde": 1973,
+      "av:ate": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp-1830",
+      "@type": "Legislation",
+      "name": "Código Criminal do Império",
+      "alternateName": "CCrim/1830",
+      "legislationIdentifier": "Lei de 16 de dezembro de 1830",
+      "av:desde": 1830,
+      "av:ate": 1890
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp-1890",
+      "@type": "Legislation",
+      "name": "Código Penal de 1890",
+      "alternateName": "CP/1890",
+      "legislationIdentifier": "Decreto nº 847, de 11 de outubro de 1890",
+      "av:desde": 1890,
+      "av:ate": 1940
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp-1832",
+      "@type": "Legislation",
+      "name": "Código de Processo Criminal do Império e códigos estaduais da República",
+      "alternateName": "CPCrim/1832",
+      "legislationIdentifier": "Lei de 29 de novembro de 1832; na República Velha, códigos de processo estaduais",
+      "av:desde": 1832,
+      "av:ate": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca-1927",
+      "@type": "Legislation",
+      "name": "Código de Menores de 1927 (Código Mello Mattos)",
+      "alternateName": "CMen/1927",
+      "legislationIdentifier": "Decreto nº 17.943-A, de 12 de outubro de 1927",
+      "av:desde": 1927,
+      "av:ate": 1979
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca-1979",
+      "@type": "Legislation",
+      "name": "Código de Menores de 1979",
+      "alternateName": "CMen/1979",
+      "legislationIdentifier": "Lei nº 6.697, de 10 de outubro de 1979",
+      "av:desde": 1979,
+      "av:ate": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133-1986",
+      "@type": "Legislation",
+      "name": "Estatuto das Licitações de 1986",
+      "alternateName": "DL 2.300",
+      "legislationIdentifier": "Decreto-Lei nº 2.300, de 21 de novembro de 1986",
+      "av:desde": 1986,
+      "av:ate": 1993
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133-1993",
+      "@type": "Legislation",
+      "name": "Lei de Licitações de 1993",
+      "alternateName": "Lei 8.666",
+      "legislationIdentifier": "Lei nº 8.666, de 21 de junho de 1993",
+      "av:desde": 1993,
+      "av:ate": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep-1941",
+      "@type": "Legislation",
+      "name": "Execução penal pelo Livro IV do Código de Processo Penal",
+      "alternateName": "CPP, Livro IV",
+      "legislationIdentifier": "Decreto-Lei nº 3.689/1941, arts. 668 a 779",
+      "av:desde": 1941,
+      "av:ate": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i",
+      "processa": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-iii",
+      "processa": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-iii",
+      "processa": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "processa": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-viii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii",
+      "processa": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-iii",
+      "regulamenta": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-vii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "executa": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-v"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vi",
+      "executa": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-vi"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "excepciona": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-ix",
+      "concretiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-i"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "regulamenta": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi/cap-i"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "concretiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-ii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "organiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv/cap-iii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "subsidiario": "https://luccas-amorim.github.io/ariadne/id/cpc"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "concretiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-i"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "subsidiario": "https://luccas-amorim.github.io/ariadne/id/cpc"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-ii",
+      "subsidiario": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "concretiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii/cap-iv-viii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii",
+      "excepciona": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-iii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-iii",
+      "regulamenta": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "regulamenta": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-vii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v/alteracoes",
+      "insere": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-xi"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "concretiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-i"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "regulamenta": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-vii"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv/cap-ii",
+      "subsidiario": "https://luccas-amorim.github.io/ariadne/id/l9784"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "concretiza": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-i"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-iv",
+      "regulamenta": "https://luccas-amorim.github.io/ariadne/id/clt"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1891",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cf-1824"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1934",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cf-1891"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1937",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cf-1934"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1946",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cf-1937"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf-1967",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cf-1946"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cf",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cf-1967"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cc",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cc-1916"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc-1973",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cpc-1939"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cpc-1973"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp-1890",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cp-1830"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cp",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cp-1890"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/cpp",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/cpp-1832"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca-1979",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/eca-1927"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/eca",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/eca-1979"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133-1993",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/l14133-1986"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/l14133-1993"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "sucede": "https://luccas-amorim.github.io/ariadne/id/lep-1941"
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpc.parte-especial.livro-i~processa~cc.parte-especial.livro-i",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#processa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i",
+      "av:nota": "O procedimento comum e o cumprimento de sentença são a via judicial típica das obrigações e contratos civis.",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpc.parte-especial.livro-i.titulo-iii~processa~cc.parte-especial.livro-iv",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-iii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#processa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "av:nota": "Ações de família (arts. 693 a 699 do CPC) e demais procedimentos especiais ligados ao direito de família.",
+      "av:fundamento": "arts. 693 a 699 do CPC",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpc.parte-especial.livro-i.titulo-iii~processa~cc.parte-especial.livro-v",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-i/titulo-iii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#processa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-v",
+      "av:nota": "Inventário e partilha (arts. 610 a 673 do CPC) executam o direito das sucessões.",
+      "av:fundamento": "arts. 610 a 673 do CPC",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpc.parte-especial.livro-ii~processa~cc.parte-especial.livro-i.titulo-viii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpc/parte-especial/livro-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#processa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-i/titulo-viii",
+      "av:nota": "A execução de título extrajudicial é o caminho típico dos títulos de crédito.",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpp.livro-ii~processa~cp.parte-especial",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#processa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial",
+      "av:nota": "Os processos em espécie dão curso à persecução dos crimes tipificados na Parte Especial.",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpp.livro-i.titulo-iii~regulamenta~cp.parte-geral.titulo-vii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-iii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#regulamenta",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-vii",
+      "av:nota": "O CP define a ação penal pública e privada; o CPP disciplina seu exercício.",
+      "av:desde": 1941
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/lep.titulo-v~executa~cp.parte-geral.titulo-v",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-v",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#executa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-v",
+      "av:nota": "A LEP executa as penas cominadas e aplicadas segundo o Título V do Código Penal.",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/lep.titulo-vi~executa~cp.parte-geral.titulo-vi",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/lep/titulo-vi",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#executa",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-vi",
+      "av:nota": "Execução das medidas de segurança previstas no Código Penal.",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/lep~excepciona~cpp.livro-iv",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/lep",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#excepciona",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-iv",
+      "av:nota": "A LEP substituiu, na prática, a disciplina da execução contida no Livro IV do CPP.",
+      "av:desde": 1984
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cpp.livro-i.titulo-ix~concretiza~cf.titulo-ii.cap-i",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cpp/livro-i/titulo-ix",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#concretiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-i",
+      "av:nota": "Prisão, medidas cautelares e liberdade provisória concretizam as garantias do art. 5º (LXI a LXVI).",
+      "av:fundamento": "art. 5º, LXI a LXVI, da CF",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/ctn.livro-primeiro~regulamenta~cf.titulo-vi.cap-i",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/ctn/livro-primeiro",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#regulamenta",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vi/cap-i",
+      "av:nota": "O CTN cumpre a função de lei complementar do art. 146 da CF para o Sistema Tributário Nacional.",
+      "av:fundamento": "art. 146 da CF",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/clt.titulo-ii~concretiza~cf.titulo-ii.cap-ii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#concretiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-ii",
+      "av:nota": "Jornada, salário mínimo, férias e segurança do trabalho concretizam o art. 7º da CF.",
+      "av:fundamento": "art. 7º da CF",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/clt.titulo-viii~organiza~cf.titulo-iv.cap-iii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-viii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#organiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iv/cap-iii",
+      "av:nota": "Organiza a Justiça do Trabalho prevista nos arts. 111 a 116 da CF.",
+      "av:fundamento": "arts. 111 a 116 da CF",
+      "av:desde": 1988
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/clt.titulo-x~subsidiario~cpc",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/clt/titulo-x",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#subsidiario",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "av:nota": "O processo do trabalho aplica subsidiariamente o CPC (art. 769 da CLT e art. 15 do CPC).",
+      "av:fundamento": "art. 769 da CLT; art. 15 do CPC",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cdc.titulo-i~concretiza~cf.titulo-vii.cap-i",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-i",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#concretiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-i",
+      "av:nota": "A defesa do consumidor é princípio da ordem econômica (art. 170, V) e direito fundamental (art. 5º, XXXII).",
+      "av:fundamento": "art. 170, V, e art. 5º, XXXII, da CF",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cdc.titulo-iii~subsidiario~cpc",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-iii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#subsidiario",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cpc",
+      "av:nota": "A tutela coletiva do consumidor aplica o CPC naquilo que não contrariar suas disposições (art. 90 do CDC).",
+      "av:fundamento": "art. 90 do CDC",
+      "av:desde": 2015
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cdc.titulo-ii~subsidiario~cp.parte-geral",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cdc/titulo-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#subsidiario",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral",
+      "av:nota": "Aos crimes de consumo aplicam-se as regras gerais do Código Penal (art. 61 do CDC).",
+      "av:fundamento": "art. 61 do CDC",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/eca.livro-i.titulo-ii~concretiza~cf.titulo-viii.cap-iv-viii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#concretiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-viii/cap-iv-viii",
+      "av:nota": "Concretiza a proteção integral do art. 227 da CF.",
+      "av:fundamento": "art. 227 da CF",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/eca.livro-ii.titulo-iii~excepciona~cp.parte-geral.titulo-iii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/eca/livro-ii/titulo-iii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#excepciona",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-geral/titulo-iii",
+      "av:nota": "Menores de 18 anos são inimputáveis (art. 27 do CP) e sujeitos ao regime do ato infracional.",
+      "av:fundamento": "art. 27 do CP",
+      "av:desde": 1990
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/eca.livro-i.titulo-ii.cap-iii~regulamenta~cc.parte-especial.livro-iv",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/eca/livro-i/titulo-ii/cap-iii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#regulamenta",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-iv",
+      "av:nota": "Guarda, tutela e adoção de crianças e adolescentes seguem o ECA, com remissão ao direito de família do CC.",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/l14133~regulamenta~cf.titulo-iii.cap-vii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/l14133",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#regulamenta",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-vii",
+      "av:nota": "Regulamenta o dever de licitar do art. 37, XXI, da CF.",
+      "av:fundamento": "art. 37, XXI, da CF",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/l14133.titulo-v.alteracoes~insere~cp.parte-especial.titulo-xi",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-v/alteracoes",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#insere",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-xi",
+      "av:nota": "Insere os crimes em licitações e contratos (arts. 337-E a 337-P) no Código Penal.",
+      "av:fundamento": "arts. 337-E a 337-P do CP",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/l9784~concretiza~cf.titulo-ii.cap-i",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#concretiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-ii/cap-i",
+      "av:nota": "Concretiza o contraditório e a ampla defesa em processo administrativo (art. 5º, LV).",
+      "av:fundamento": "art. 5º, LV, da CF",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/l9784~regulamenta~cf.titulo-iii.cap-vii",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#regulamenta",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-iii/cap-vii",
+      "av:nota": "Disciplina a atuação procedimental da Administração Pública segundo os princípios do art. 37.",
+      "av:fundamento": "art. 37 da CF",
+      "av:desde": 1999
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/l14133.titulo-iv.cap-ii~subsidiario~l9784",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/l14133/titulo-iv/cap-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#subsidiario",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/l9784",
+      "av:nota": "Impugnações e recursos nas licitações seguem a Lei 9.784 subsidiariamente.",
+      "av:desde": 2021
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cc.parte-especial.livro-ii~concretiza~cf.titulo-vii.cap-i",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#concretiza",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/cf/titulo-vii/cap-i",
+      "av:nota": "O direito de empresa concretiza a livre iniciativa e a função social da propriedade.",
+      "av:desde": 2002
+    },
+    {
+      "@id": "https://luccas-amorim.github.io/ariadne/id/rel/cp.parte-especial.titulo-iv~regulamenta~clt",
+      "@type": "av:Relacao",
+      "av:origem": "https://luccas-amorim.github.io/ariadne/id/cp/parte-especial/titulo-iv",
+      "av:tipo": "https://luccas-amorim.github.io/ariadne/vocab#regulamenta",
+      "av:destino": "https://luccas-amorim.github.io/ariadne/id/clt",
+      "av:nota": "Crimes contra a organização do trabalho tutelam penalmente as relações disciplinadas pela CLT.",
+      "av:desde": 1943
+    }
+  ]
+}

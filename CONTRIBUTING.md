@@ -113,7 +113,11 @@ Mudanças em `docs/data/` seguem o checklist do template de pull request: fonte,
 node scripts/validate.js
 ```
 
-O script verifica campos, ids, ramos, status, relações apontando para nós existentes e glossário, e roda no CI a cada pull request. Depois, abra a página localmente e confira a árvore:
+O script verifica campos, ids, ramos, status, relações apontando para nós existentes e glossário, e roda no CI a cada pull request. Depois de mudar qualquer arquivo de `docs/data/`, regenere os arquivos derivados (`all.json`, `graph.jsonld`, `graph.ttl`, os CSV) e inclua-os no PR; o CI falha se estiverem desatualizados:
+
+```bash
+npm run build:data
+``` Depois, abra a página localmente e confira a árvore:
 
 ```bash
 python3 -m http.server --directory docs 8080

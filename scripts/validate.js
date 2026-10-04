@@ -181,7 +181,7 @@ function main() {
   }
 
   // Arquivos órfãos: existem na pasta mas não estão no catálogo.
-  const reserved = new Set(['index.json', 'schema.json', 'relations.json', 'glossary.json', 'tours.json']);
+  const reserved = new Set(['index.json', 'schema.json', 'relations.json', 'glossary.json', 'tours.json', 'all.json']); // all.json é gerado (build-graph.js)
   for (const f of fs.readdirSync(DATA_DIR)) {
     if (!f.endsWith('.json') || reserved.has(f)) continue;
     const id = f.replace(/\.json$/, '');

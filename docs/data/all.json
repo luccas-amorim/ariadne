@@ -1,0 +1,4312 @@
+{
+  "$schema": "./schema.json#/definitions/all",
+  "description": "Gerado por scripts/build-graph.js a partir dos demais arquivos desta pasta. Não edite à mão.",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "catalog": {
+    "root": "cf",
+    "ramos": [
+      {
+        "id": "constitucional",
+        "name": "Direito Constitucional",
+        "short": "Constitucional",
+        "color": "#0f172a",
+        "description": "A Constituição é o nó central do ordenamento. Dela derivam a validade e os limites de todos os demais ramos: organiza o Estado, distribui competências e enuncia os direitos fundamentais que cada código concretiza."
+      },
+      {
+        "id": "privado",
+        "name": "Direito Privado",
+        "short": "Privado",
+        "color": "#059669",
+        "description": "Relações entre particulares em posição de igualdade formal: pessoas, bens, obrigações, contratos, família, sucessões e empresa. O Estado atua como garantidor, não como parte."
+      },
+      {
+        "id": "publico",
+        "name": "Direito Público",
+        "short": "Público",
+        "color": "#2563eb",
+        "description": "Relação Estado ↔ particular em posição de supremacia do interesse público: administração, tributação, licitações, processo administrativo. O Estado é parte e, ao mesmo tempo, sujeito a limites."
+      },
+      {
+        "id": "social",
+        "name": "Direito Social",
+        "short": "Social",
+        "color": "#d97706",
+        "description": "Relações entre instituições e pessoas em que o Estado intervém em favor do equilíbrio: trabalho, consumo, criança e adolescente. Parte-se da desigualdade material e corrige-se com normas de ordem pública."
+      },
+      {
+        "id": "penal",
+        "name": "Direito Penal",
+        "short": "Penal",
+        "color": "#e11d48",
+        "description": "O jus puniendi: a definição de crimes, a cominação de penas e o procedimento pelo qual o Estado pode aplicá-las. Ramo em que a Constituição impõe as garantias mais rígidas ao poder estatal."
+      }
+    ],
+    "diplomas": [
+      "cf",
+      "cc",
+      "cpc",
+      "cp",
+      "cpp",
+      "clt",
+      "cdc",
+      "eca",
+      "ctn",
+      "l14133",
+      "l9784",
+      "lep"
+    ],
+    "planned": [
+      {
+        "id": "lindb",
+        "title": "Lei de Introdução às Normas do Direito Brasileiro",
+        "shortTitle": "LINDB",
+        "norm": "Decreto-Lei nº 4.657, de 4 de setembro de 1942",
+        "ramo": "privado",
+        "natureza": "material",
+        "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del4657compilado.htm",
+        "note": "Norma sobre normas: vigência, interpretação e aplicação do direito. Fica no ramo privado por tradição histórica, embora alcance todo o ordenamento."
+      },
+      {
+        "id": "l8112",
+        "title": "Regime Jurídico dos Servidores Públicos Civis da União",
+        "shortTitle": "Lei 8.112",
+        "norm": "Lei nº 8.112, de 11 de dezembro de 1990",
+        "ramo": "publico",
+        "natureza": "material",
+        "source": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+      },
+      {
+        "id": "l8429",
+        "title": "Lei de Improbidade Administrativa",
+        "shortTitle": "Lei 8.429",
+        "norm": "Lei nº 8.429, de 2 de junho de 1992",
+        "ramo": "publico",
+        "natureza": "material",
+        "source": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm"
+      },
+      {
+        "id": "lgpd",
+        "title": "Lei Geral de Proteção de Dados Pessoais",
+        "shortTitle": "LGPD",
+        "norm": "Lei nº 13.709, de 14 de agosto de 2018",
+        "ramo": "social",
+        "natureza": "material",
+        "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+        "note": "Protege a pessoa natural frente a agentes de tratamento públicos e privados, com autoridade estatal interveniente; por isso o ramo social."
+      },
+      {
+        "id": "l11340",
+        "title": "Lei Maria da Penha",
+        "shortTitle": "Lei 11.340",
+        "norm": "Lei nº 11.340, de 7 de agosto de 2006",
+        "ramo": "penal",
+        "natureza": "material",
+        "source": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm"
+      },
+      {
+        "id": "l11343",
+        "title": "Lei de Drogas",
+        "shortTitle": "Lei 11.343",
+        "norm": "Lei nº 11.343, de 23 de agosto de 2006",
+        "ramo": "penal",
+        "natureza": "material",
+        "source": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm"
+      },
+      {
+        "id": "l9099",
+        "title": "Lei dos Juizados Especiais",
+        "shortTitle": "Lei 9.099",
+        "norm": "Lei nº 9.099, de 26 de setembro de 1995",
+        "ramo": "privado",
+        "natureza": "processual",
+        "source": "https://www.planalto.gov.br/ccivil_03/leis/l9099.htm",
+        "note": "Reúne juizados cíveis e criminais; classificada pelo ramo da sua primeira parte."
+      }
+    ],
+    "relationTypes": {
+      "concretiza": {
+        "label": "concretiza",
+        "description": "O diploma ou divisão dá densidade a um comando constitucional ou a um princípio de outro diploma."
+      },
+      "regulamenta": {
+        "label": "regulamenta",
+        "description": "Disciplina em detalhe matéria cujo fundamento está na outra divisão."
+      },
+      "processa": {
+        "label": "processa",
+        "description": "Direito formal que dá curso judicial ao direito material da outra divisão."
+      },
+      "executa": {
+        "label": "executa",
+        "description": "Disciplina a execução daquilo que a outra divisão define."
+      },
+      "subsidiario": {
+        "label": "aplicação subsidiária",
+        "description": "A outra divisão se aplica nas lacunas desta."
+      },
+      "excepciona": {
+        "label": "excepciona",
+        "description": "Afasta ou modula a regra geral da outra divisão."
+      },
+      "insere": {
+        "label": "insere em",
+        "description": "Introduz dispositivos no corpo da outra divisão."
+      },
+      "organiza": {
+        "label": "organiza",
+        "description": "Estrutura o órgão ou sistema previsto na outra divisão."
+      },
+      "sucede": {
+        "label": "sucede",
+        "description": "O diploma substitui um antecessor que ocupava o mesmo lugar no ordenamento."
+      }
+    }
+  },
+  "diplomas": {
+    "cf": {
+      "id": "cf",
+      "title": "Constituição Federal",
+      "shortTitle": "CF/88",
+      "norm": "Constituição da República Federativa do Brasil de 1988",
+      "urn": "urn:lex:br:federal:constituicao:1988-10-05;1988",
+      "ramo": "constitucional",
+      "natureza": "material",
+      "status": "revisado",
+      "source": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "year": 1988,
+      "predecessors": [
+        {
+          "title": "Constituição Política do Império do Brasil",
+          "shortTitle": "CF/1824",
+          "norm": "Carta outorgada em 25 de março de 1824",
+          "from": 1824,
+          "to": 1891
+        },
+        {
+          "title": "Constituição da República dos Estados Unidos do Brasil de 1891",
+          "shortTitle": "CF/1891",
+          "norm": "Promulgada em 24 de fevereiro de 1891",
+          "from": 1891,
+          "to": 1934
+        },
+        {
+          "title": "Constituição de 1934",
+          "shortTitle": "CF/1934",
+          "norm": "Promulgada em 16 de julho de 1934",
+          "from": 1934,
+          "to": 1937
+        },
+        {
+          "title": "Constituição de 1937 (Estado Novo)",
+          "shortTitle": "CF/1937",
+          "norm": "Outorgada em 10 de novembro de 1937",
+          "from": 1937,
+          "to": 1946
+        },
+        {
+          "title": "Constituição de 1946",
+          "shortTitle": "CF/1946",
+          "norm": "Promulgada em 18 de setembro de 1946",
+          "from": 1946,
+          "to": 1967
+        },
+        {
+          "title": "Constituição de 1967, com a Emenda nº 1 de 1969",
+          "shortTitle": "CF/1967",
+          "norm": "Promulgada em 24 de janeiro de 1967; EC 1 de 17 de outubro de 1969",
+          "from": 1967,
+          "to": 1988
+        }
+      ],
+      "root": {
+        "id": "cf",
+        "name": "Constituição Federal",
+        "label": "CF/88",
+        "subtitle": "Raiz",
+        "content": "Constituição da República Federativa do Brasil de 1988. É a Lei Maior e suprema do ordenamento jurídico brasileiro, servindo de parâmetro de validade a todas as demais espécies normativas.",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Princípios Fundamentais",
+            "label": "Título I",
+            "subtitle": "Arts. 1º a 4º",
+            "content": "Estabelece os fundamentos da República (Soberania, Cidadania, Dignidade da Pessoa Humana), a separação dos poderes e os princípios que regem o Brasil nas relações internacionais."
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Direitos e Garantias Fundamentais",
+            "label": "Título II",
+            "subtitle": "Arts. 5º a 17",
+            "content": "Elenca o núcleo essencial de proteção do cidadão: direitos individuais, coletivos, sociais, políticos e de nacionalidade.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Individuais e Coletivos",
+                "label": "Cap. I",
+                "subtitle": "Art. 5º",
+                "content": "Direito à vida, liberdade, igualdade, segurança e propriedade. Inclui remédios constitucionais (HC, MS, MI, HD)."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Direitos Sociais",
+                "label": "Cap. II",
+                "subtitle": "Arts. 6º a 11",
+                "content": "Educação, saúde, alimentação, trabalho, moradia, etc., e direitos dos trabalhadores urbanos e rurais.",
+                "history": [
+                  {
+                    "year": 2000,
+                    "norm": "EC 26/2000",
+                    "note": "Moradia incluída entre os direitos sociais do art. 6º."
+                  },
+                  {
+                    "year": 2010,
+                    "norm": "EC 64/2010",
+                    "note": "Alimentação incluída entre os direitos sociais do art. 6º."
+                  }
+                ]
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Nacionalidade",
+                "label": "Cap. III",
+                "subtitle": "Arts. 12 e 13",
+                "content": "Critérios para brasileiros natos e naturalizados, perda da nacionalidade e símbolos da República."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Direitos Políticos",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 14 a 16",
+                "content": "Soberania popular, alistamento eleitoral, condições de elegibilidade e hipóteses de inelegibilidade."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Partidos Políticos",
+                "label": "Cap. V",
+                "subtitle": "Art. 17",
+                "content": "Livre criação, fusão, incorporação e extinção de partidos políticos, respeitados a soberania e o regime democrático."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Organização do Estado",
+            "label": "Título III",
+            "subtitle": "Arts. 18 a 43",
+            "content": "Estrutura o pacto federativo, dividindo competências e bens entre União, Estados, Municípios e Distrito Federal.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Org. Político-Administrativa",
+                "label": "Cap. I",
+                "subtitle": "Arts. 18 e 19",
+                "content": "Composição da República e vedação de alianças, recusas de fé e cultos religiosos pelo Estado."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Da União",
+                "label": "Cap. II",
+                "subtitle": "Arts. 20 a 24",
+                "content": "Bens da União e competências exclusivas, privativas e concorrentes de legislação e administração."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Dos Estados Federados",
+                "label": "Cap. III",
+                "subtitle": "Arts. 25 a 28",
+                "content": "Competência residual e regras gerais de administração estadual."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Dos Municípios",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 29 a 31",
+                "content": "Autonomia municipal, eleição de prefeitos e vereadores, e controle das contas."
+              },
+              {
+                "id": "cap-v-e-vi",
+                "name": "Capítulo V e VI - DF, Territórios e Intervenção",
+                "label": "Cap. V e VI",
+                "subtitle": "Arts. 32 a 36",
+                "content": "Regras sobre o Distrito Federal, criação de Territórios e as estritas hipóteses de Intervenção Federal."
+              },
+              {
+                "id": "cap-vii",
+                "name": "Capítulo VII - Administração Pública",
+                "label": "Cap. VII",
+                "subtitle": "Arts. 37 a 43",
+                "content": "Princípios da administração (LIMPE), regras para servidores públicos e militares dos Estados."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Organização dos Poderes",
+            "label": "Título IV",
+            "subtitle": "Arts. 44 a 135",
+            "content": "Desenha a estrutura, o funcionamento, as competências e as garantias do Legislativo, Executivo e Judiciário.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Poder Legislativo",
+                "label": "Cap. I",
+                "subtitle": "Arts. 44 a 75",
+                "content": "Congresso Nacional (Câmara e Senado), processo legislativo (como se criam leis) e fiscalização pelo TCU."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Poder Executivo",
+                "label": "Cap. II",
+                "subtitle": "Arts. 76 a 91",
+                "content": "Atribuições do Presidente e Vice-Presidente da República, Ministros de Estado e Conselhos da República e de Defesa."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Poder Judiciário",
+                "label": "Cap. III",
+                "subtitle": "Arts. 92 a 126",
+                "content": "Disposições gerais, STF, STJ, Tribunais Regionais Federais, Tribunais do Trabalho, Eleitorais, Militares e Estaduais.",
+                "history": [
+                  {
+                    "year": 2004,
+                    "norm": "EC 45/2004",
+                    "note": "Reforma do Judiciário: criação do CNJ, súmula vinculante e repercussão geral."
+                  }
+                ]
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Funções Essenciais à Justiça",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 127 a 135",
+                "content": "Ministério Público, Advocacia Pública (AGU, PGE), Advocacia e Defensoria Pública."
+              }
+            ]
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Defesa do Estado e das Instituições",
+            "label": "Título V",
+            "subtitle": "Arts. 136 a 144",
+            "content": "Mecanismos para situações de crise institucional e garantia da ordem pública.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Estado de Defesa e Sítio",
+                "label": "Cap. I",
+                "subtitle": "Arts. 136 a 141",
+                "content": "Hipóteses de decretação e medidas coercitivas restritivas de direitos em estado de exceção."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Forças Armadas",
+                "label": "Cap. II",
+                "subtitle": "Arts. 142 e 143",
+                "content": "Marinha, Exército e Aeronáutica, destinadas à defesa da Pátria e garantia dos poderes constitucionais."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Da Segurança Pública",
+                "label": "Cap. III",
+                "subtitle": "Art. 144",
+                "content": "Órgãos de segurança: Polícia Federal, PRF, Polícias Civis, Militares e Penais.",
+                "history": [
+                  {
+                    "year": 2019,
+                    "norm": "EC 104/2019",
+                    "note": "Inclusão das polícias penais federal, estaduais e distrital no rol do art. 144."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "titulo-vi",
+            "name": "Título VI - Tributação e Orçamento",
+            "label": "Título VI",
+            "subtitle": "Arts. 145 a 169",
+            "content": "Limita o poder de cobrar impostos e dita as regras de planejamento de gastos do Estado.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Sistema Tributário Nacional",
+                "label": "Cap. I",
+                "subtitle": "Arts. 145 a 162",
+                "content": "Princípios gerais, limitações ao poder de tributar, impostos de cada ente e repartição das receitas.",
+                "history": [
+                  {
+                    "year": 2023,
+                    "norm": "EC 132/2023",
+                    "note": "Reforma tributária: criação do IBS e da CBS e extinção gradual de ICMS, ISS, PIS e Cofins."
+                  }
+                ]
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Finanças Públicas",
+                "label": "Cap. II",
+                "subtitle": "Arts. 163 a 169",
+                "content": "Normas gerais e as leis orçamentárias (PPA, LDO e LOA)."
+              }
+            ]
+          },
+          {
+            "id": "titulo-vii",
+            "name": "Título VII - Ordem Econômica e Financeira",
+            "label": "Título VII",
+            "subtitle": "Arts. 170 a 192",
+            "content": "Princípios gerais da atividade econômica baseada na valorização do trabalho e na livre iniciativa.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Princípios Gerais",
+                "label": "Cap. I",
+                "subtitle": "Arts. 170 a 181",
+                "content": "Livre iniciativa, função social da propriedade, defesa do consumidor e repressão ao abuso do poder econômico."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Política Urbana",
+                "label": "Cap. II",
+                "subtitle": "Arts. 182 e 183",
+                "content": "Plano diretor, desenvolvimento das funções sociais da cidade e usucapião urbana."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Política Agrícola e Fundiária",
+                "label": "Cap. III",
+                "subtitle": "Arts. 184 a 191",
+                "content": "Reforma agrária, desapropriação por interesse social e usucapião rural."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Sistema Financeiro Nacional",
+                "label": "Cap. IV",
+                "subtitle": "Art. 192",
+                "content": "Estruturação para promover o desenvolvimento equilibrado do País."
+              }
+            ]
+          },
+          {
+            "id": "titulo-viii",
+            "name": "Título VIII - Da Ordem Social",
+            "label": "Título VIII",
+            "subtitle": "Arts. 193 a 232",
+            "content": "Regras sobre seguridade social, educação, cultura, desporto, meio ambiente e outros direitos essenciais da sociedade.",
+            "children": [
+              {
+                "id": "cap-i-e-ii",
+                "name": "Capítulo I e II - Base e Seguridade Social",
+                "label": "Cap. I e II",
+                "subtitle": "Arts. 193 a 204",
+                "content": "O primado do trabalho e os sistemas integrados de Saúde (SUS), Previdência e Assistência Social."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Educação, Cultura e Desporto",
+                "label": "Cap. III",
+                "subtitle": "Arts. 205 a 217",
+                "content": "A educação como direito de todos, princípios do ensino e preservação do patrimônio cultural."
+              },
+              {
+                "id": "cap-iv-viii",
+                "name": "Capítulos IV a VIII - Diversos",
+                "label": "Cap. IV-VIII",
+                "subtitle": "Arts. 218 a 232",
+                "content": "Ciência/Tecnologia, Comunicação Social, Proteção ao Meio Ambiente, Família/Criança/Idoso e Direitos Indígenas.",
+                "history": [
+                  {
+                    "year": 2010,
+                    "norm": "EC 65/2010",
+                    "note": "Capítulo VII renomeado para incluir o jovem: Da Família, da Criança, do Adolescente, do Jovem e do Idoso."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "titulo-ix",
+            "name": "Título IX - Disposições Gerais",
+            "label": "Título IX",
+            "subtitle": "Arts. 233 a 250",
+            "content": "Disposições constitucionais gerais e diversas."
+          },
+          {
+            "id": "adct",
+            "name": "ADCT",
+            "label": "ADCT",
+            "subtitle": "Ato das Disposições",
+            "content": "Ato das Disposições Constitucionais Transitórias. Regula a transição entre o ordenamento antigo e a nova Constituição promulgada em 1988."
+          }
+        ]
+      }
+    },
+    "cc": {
+      "id": "cc",
+      "title": "Código Civil",
+      "shortTitle": "CC",
+      "norm": "Lei nº 10.406, de 10 de janeiro de 2002",
+      "urn": "urn:lex:br:federal:lei:2002-01-10;10406",
+      "ramo": "privado",
+      "natureza": "material",
+      "status": "revisado",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm",
+      "year": 2002,
+      "predecessors": [
+        {
+          "title": "Código Civil de 1916",
+          "shortTitle": "CC/1916",
+          "norm": "Lei nº 3.071, de 1º de janeiro de 1916",
+          "from": 1916,
+          "to": 2002
+        }
+      ],
+      "root": {
+        "id": "cc",
+        "name": "Código Civil",
+        "label": "CC",
+        "subtitle": "Raiz",
+        "content": "Lei nº 10.406/2002. Institui o Código Civil, regulando os direitos e obrigações de ordem privada relativos às pessoas, aos bens e às suas relações.",
+        "children": [
+          {
+            "id": "parte-geral",
+            "name": "Parte Geral",
+            "label": "Parte Geral",
+            "subtitle": "Arts. 1º a 232",
+            "content": "Estabelece as regras e princípios fundamentais que se aplicam a todo o direito civil, tratando das pessoas, dos bens e dos fatos jurídicos.",
+            "children": [
+              {
+                "id": "livro-i",
+                "name": "Livro I - Das Pessoas",
+                "label": "Livro I",
+                "subtitle": "Arts. 1º a 78",
+                "content": "Trata das pessoas naturais e jurídicas, definindo quem é sujeito de direitos e obrigações.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Das Pessoas Naturais",
+                    "label": "Título I",
+                    "subtitle": "Arts. 1º a 39",
+                    "content": "Personalidade, capacidade, direitos da personalidade e ausência.",
+                    "history": [
+                      {
+                        "year": 2015,
+                        "norm": "Lei 13.146/2015 (Estatuto da Pessoa com Deficiência)",
+                        "note": "Nova disciplina da capacidade civil: a deficiência deixou de ser causa de incapacidade absoluta."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Das Pessoas Jurídicas",
+                    "label": "Título II",
+                    "subtitle": "Arts. 40 a 69",
+                    "content": "Disposições gerais, associações e fundações."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Do Domicílio",
+                    "label": "Título III",
+                    "subtitle": "Arts. 70 a 78",
+                    "content": "Regras sobre o domicílio da pessoa natural e jurídica."
+                  }
+                ]
+              },
+              {
+                "id": "livro-ii",
+                "name": "Livro II - Dos Bens",
+                "label": "Livro II",
+                "subtitle": "Arts. 79 a 103",
+                "content": "Classifica os diferentes tipos de bens: imóveis, móveis, fungíveis, consumíveis, singulares, coletivos e bens públicos.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Diferentes Classes de Bens",
+                    "label": "Título I",
+                    "subtitle": "Arts. 79 a 91",
+                    "content": "Bens imóveis, móveis, fungíveis, consumíveis, divisíveis e singulares/coletivos."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Bens Reciprocamente Considerados",
+                    "label": "Título II",
+                    "subtitle": "Arts. 92 a 97",
+                    "content": "Bens principais, acessórios, frutos, produtos e benfeitorias."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Dos Bens Públicos",
+                    "label": "Título III",
+                    "subtitle": "Arts. 98 a 103",
+                    "content": "Bens de uso comum, uso especial e dominicais."
+                  }
+                ]
+              },
+              {
+                "id": "livro-iii",
+                "name": "Livro III - Dos Fatos Jurídicos",
+                "label": "Livro III",
+                "subtitle": "Arts. 104 a 232",
+                "content": "Regula o negócio jurídico, atos lícitos e ilícitos, prescrição, decadência e prova.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Do Negócio Jurídico",
+                    "label": "Título I",
+                    "subtitle": "Arts. 104 a 184",
+                    "content": "Requisitos de validade, representação, condição, termo, defeitos e invalidade."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Dos Atos Jurídicos Lícitos",
+                    "label": "Título II",
+                    "subtitle": "Art. 185",
+                    "content": "Disposição sobre os atos lícitos que não são negócios jurídicos."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Dos Atos Ilícitos",
+                    "label": "Título III",
+                    "subtitle": "Arts. 186 a 188",
+                    "content": "Ação ou omissão voluntária, negligência ou imprudência que causa dano."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Prescrição e Decadência",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 189 a 211",
+                    "content": "Prazos e regras sobre a perda do direito de ação e do próprio direito."
+                  },
+                  {
+                    "id": "titulo-v",
+                    "name": "Título V - Da Prova",
+                    "label": "Título V",
+                    "subtitle": "Arts. 212 a 232",
+                    "content": "Meios de prova dos fatos jurídicos (confissão, documento, testemunha, presunção, perícia)."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "parte-especial",
+            "name": "Parte Especial",
+            "label": "Parte Especial",
+            "subtitle": "Arts. 233 a 2.027",
+            "content": "Detalha as áreas específicas do direito civil (Obrigações, Empresa, Coisas, Família e Sucessões).",
+            "children": [
+              {
+                "id": "livro-i",
+                "name": "Livro I - Direito das Obrigações",
+                "label": "Livro I",
+                "subtitle": "Arts. 233 a 965",
+                "content": "Vínculos jurídicos (dar, fazer, não fazer), contratos e responsabilidade civil.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Modalidades das Obrigações",
+                    "label": "Título I",
+                    "subtitle": "Arts. 233 a 285",
+                    "content": "Obrigação de dar, fazer, não fazer, alternativas, divisíveis, indivisíveis e solidárias."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Transmissão das Obrigações",
+                    "label": "Título II",
+                    "subtitle": "Arts. 286 a 303",
+                    "content": "Cessão de crédito e assunção de dívida."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Adimplemento e Extinção",
+                    "label": "Título III",
+                    "subtitle": "Arts. 304 a 388",
+                    "content": "Pagamento, consignação, sub-rogação, imputação, dação, novação e compensação."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Inadimplemento",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 389 a 420",
+                    "content": "Mora, perdas e danos, juros, cláusula penal e arras."
+                  },
+                  {
+                    "id": "titulo-v",
+                    "name": "Título V - Contratos em Geral",
+                    "label": "Título V",
+                    "subtitle": "Arts. 421 a 480",
+                    "content": "Disposições gerais, formação, estipulação em favor de terceiro, vícios redibitórios."
+                  },
+                  {
+                    "id": "titulo-vi",
+                    "name": "Título VI - Várias Espécies de Contrato",
+                    "label": "Título VI",
+                    "subtitle": "Arts. 481 a 853",
+                    "content": "Compra e venda, troca, doação, locação, empréstimo, prestação de serviço, mandato, fiança, etc."
+                  },
+                  {
+                    "id": "titulo-vii",
+                    "name": "Título VII - Atos Unilaterais",
+                    "label": "Título VII",
+                    "subtitle": "Arts. 854 a 886",
+                    "content": "Promessa de recompensa, gestão de negócios, pagamento indevido."
+                  },
+                  {
+                    "id": "titulo-viii",
+                    "name": "Título VIII - Títulos de Crédito",
+                    "label": "Título VIII",
+                    "subtitle": "Arts. 887 a 926",
+                    "content": "Disposições gerais sobre títulos ao portador, à ordem e nominativos."
+                  },
+                  {
+                    "id": "titulo-ix",
+                    "name": "Título IX - Responsabilidade Civil",
+                    "label": "Título IX",
+                    "subtitle": "Arts. 927 a 954",
+                    "content": "Obrigação de indemnizar e indemnização."
+                  },
+                  {
+                    "id": "titulo-x",
+                    "name": "Título X - Preferências e Privilégios",
+                    "label": "Título X",
+                    "subtitle": "Arts. 955 a 965",
+                    "content": "Concurso de credores e privilégios creditórios."
+                  }
+                ]
+              },
+              {
+                "id": "livro-ii",
+                "name": "Livro II - Direito de Empresa",
+                "label": "Livro II",
+                "subtitle": "Arts. 966 a 1.195",
+                "content": "Disciplina o empresário, as sociedades e o estabelecimento.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Do Empresário",
+                    "label": "Título I",
+                    "subtitle": "Arts. 966 a 980",
+                    "content": "Caracterização, inscrição e capacidade."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Da Sociedade",
+                    "label": "Título II",
+                    "subtitle": "Arts. 981 a 1.141",
+                    "content": "Sociedades não personificadas (comum, conta de participação) e personificadas (simples, limitada, anônima, cooperativa)."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Do Estabelecimento",
+                    "label": "Título III",
+                    "subtitle": "Arts. 1.142 a 1.149",
+                    "content": "Disposições gerais sobre o complexo de bens organizado."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Institutos Complementares",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 1.150 a 1.195",
+                    "content": "Registro, nome empresarial e prepostos."
+                  }
+                ],
+                "history": [
+                  {
+                    "year": 2002,
+                    "norm": "Lei 10.406/2002",
+                    "note": "Unificação do direito das obrigações: o Livro II revogou a Parte Primeira do Código Comercial de 1850."
+                  }
+                ]
+              },
+              {
+                "id": "livro-iii",
+                "name": "Livro III - Direito das Coisas",
+                "label": "Livro III",
+                "subtitle": "Arts. 1.196 a 1.510-E",
+                "content": "Trata da posse e de todos os direitos reais estabelecidos na lei.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Da Posse",
+                    "label": "Título I",
+                    "subtitle": "Arts. 1.196 a 1.224",
+                    "content": "Classificação, aquisição, efeitos e perda da posse."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Dos Direitos Reais",
+                    "label": "Título II",
+                    "subtitle": "Arts. 1.225 a 1.227",
+                    "content": "Disposições gerais e rol dos direitos reais."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Da Propriedade",
+                    "label": "Título III",
+                    "subtitle": "Arts. 1.228 a 1.368",
+                    "content": "Aquisição, perda, vizinhança e condomínio (geral e edilício)."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Da Superfície",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 1.369 a 1.377",
+                    "content": "Concessão do direito de construir ou plantar em terreno alheio."
+                  },
+                  {
+                    "id": "titulo-v",
+                    "name": "Título V - Das Servidões",
+                    "label": "Título V",
+                    "subtitle": "Arts. 1.378 a 1.389",
+                    "content": "Constituição, exercício e extinção das servidões."
+                  },
+                  {
+                    "id": "titulo-vi",
+                    "name": "Título VI - Do Usufruto",
+                    "label": "Título VI",
+                    "subtitle": "Arts. 1.390 a 1.411",
+                    "content": "Direito de fruição sobre a utilidade e os frutos de uma coisa."
+                  },
+                  {
+                    "id": "titulo-vii",
+                    "name": "Título VII - Do Uso",
+                    "label": "Título VII",
+                    "subtitle": "Arts. 1.412 a 1.413",
+                    "content": "Direito de usar a coisa e perceber os seus frutos para as necessidades da família."
+                  },
+                  {
+                    "id": "titulo-viii",
+                    "name": "Título VIII - Da Habitação",
+                    "label": "Título VIII",
+                    "subtitle": "Arts. 1.414 a 1.416",
+                    "content": "Direito real temporário de ocupar gratuitamente casa alheia."
+                  },
+                  {
+                    "id": "titulo-ix",
+                    "name": "Título IX - Promitente Comprador",
+                    "label": "Título IX",
+                    "subtitle": "Arts. 1.417 a 1.418",
+                    "content": "Direito real à aquisição do imóvel."
+                  },
+                  {
+                    "id": "titulo-x",
+                    "name": "Título X - Penhor, Hipoteca e Anticrese",
+                    "label": "Título X",
+                    "subtitle": "Arts. 1.419 a 1.510",
+                    "content": "Direitos reais de garantia."
+                  },
+                  {
+                    "id": "titulo-xi",
+                    "name": "Título XI - Do Direito de Laje",
+                    "label": "Título XI",
+                    "subtitle": "Arts. 1.510-A a 1.510-E",
+                    "content": "Direito real sobre a unidade imobiliária autónoma construída em elevação.",
+                    "since": 2017,
+                    "history": [
+                      {
+                        "year": 2017,
+                        "norm": "Lei 13.465/2017",
+                        "note": "Inclusão do Título XI, Do Direito de Laje."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "livro-iv",
+                "name": "Livro IV - Direito de Família",
+                "label": "Livro IV",
+                "subtitle": "Arts. 1.511 a 1.783",
+                "content": "Regula o casamento, relações de parentesco, regime de bens, união estável e tutela.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Do Direito Pessoal",
+                    "label": "Título I",
+                    "subtitle": "Arts. 1.511 a 1.638",
+                    "content": "Casamento (formalidades, invalidade, dissolução), parentesco e poder familiar."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Do Direito Patrimonial",
+                    "label": "Título II",
+                    "subtitle": "Arts. 1.639 a 1.722",
+                    "content": "Regimes de bens, usufruto dos bens dos filhos, alimentos e bem de família."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Da União Estável",
+                    "label": "Título III",
+                    "subtitle": "Arts. 1.723 a 1.727",
+                    "content": "Reconhecimento, direitos e deveres."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Tutela e Curatela",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 1.728 a 1.783",
+                    "content": "Tutela, curatela e tomada de decisão apoiada."
+                  }
+                ]
+              },
+              {
+                "id": "livro-v",
+                "name": "Livro V - Direito das Sucessões",
+                "label": "Livro V",
+                "subtitle": "Arts. 1.784 a 2.027",
+                "content": "Disciplina a herança, sucessão legítima, testamentária e partilha.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Da Sucessão em Geral",
+                    "label": "Título I",
+                    "subtitle": "Arts. 1.784 a 1.828",
+                    "content": "Herança, vocação hereditária, aceitação, renúncia, excluídos e herança jacente."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Da Sucessão Legítima",
+                    "label": "Título II",
+                    "subtitle": "Arts. 1.829 a 1.856",
+                    "content": "Ordem da vocação hereditária, herdeiros necessários e direito de representação."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Sucessão Testamentária",
+                    "label": "Título III",
+                    "subtitle": "Arts. 1.857 a 1.990",
+                    "content": "Testamento, disposições testamentárias, legados, deserdação e revogação."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Inventário e Partilha",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 1.991 a 2.027",
+                    "content": "Apuração e divisão do acervo hereditário, sonegados e colação."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "livro-comp",
+            "name": "Livro Complementar",
+            "label": "Livro Comp.",
+            "subtitle": "Arts. 2.028 a 2.046",
+            "content": "Das Disposições Finais e Transitórias. Trata da transição e aplicação das regras do novo Código Civil (2002) em relação ao antigo (1916)."
+          }
+        ]
+      }
+    },
+    "cpc": {
+      "id": "cpc",
+      "title": "Código de Processo Civil",
+      "shortTitle": "CPC",
+      "norm": "Lei nº 13.105, de 16 de março de 2015",
+      "urn": "urn:lex:br:federal:lei:2015-03-16;13105",
+      "ramo": "privado",
+      "natureza": "processual",
+      "status": "revisado",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+      "year": 2015,
+      "predecessors": [
+        {
+          "title": "Código de Processo Civil de 1939",
+          "shortTitle": "CPC/1939",
+          "norm": "Decreto-Lei nº 1.608, de 18 de setembro de 1939",
+          "from": 1939,
+          "to": 1973
+        },
+        {
+          "title": "Código de Processo Civil de 1973 (Código Buzaid)",
+          "shortTitle": "CPC/1973",
+          "norm": "Lei nº 5.869, de 11 de janeiro de 1973",
+          "from": 1973,
+          "to": 2015
+        }
+      ],
+      "root": {
+        "id": "cpc",
+        "name": "Código de Processo Civil",
+        "label": "CPC",
+        "subtitle": "Raiz",
+        "content": "Lei nº 13.105/2015. Estabelece as normas fundamentais e disciplina a tramitação do processo civil no Brasil.",
+        "children": [
+          {
+            "id": "parte-geral",
+            "name": "Parte Geral",
+            "label": "Parte Geral",
+            "subtitle": "Arts. 1º a 317",
+            "content": "Estabelece as normas processuais fundamentais, a jurisdição, sujeitos, atos e tutela provisória.",
+            "children": [
+              {
+                "id": "livro-i",
+                "name": "Livro I - Normas Processuais Civis",
+                "label": "Livro I",
+                "subtitle": "Arts. 1º a 15",
+                "content": "Das Normas Fundamentais e da Aplicação das Normas Processuais.",
+                "children": [
+                  {
+                    "id": "tit-unico",
+                    "name": "Título Único",
+                    "label": "Tít. Único",
+                    "subtitle": "Arts. 1º a 15",
+                    "content": "Normas fundamentais do processo civil brasileiro."
+                  }
+                ]
+              },
+              {
+                "id": "livro-ii",
+                "name": "Livro II - Função Jurisdicional",
+                "label": "Livro II",
+                "subtitle": "Arts. 16 a 69",
+                "content": "Trata dos limites da jurisdição e da competência.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Jurisdição e Ação",
+                    "label": "Título I",
+                    "subtitle": "Arts. 16 a 20",
+                    "content": "Princípio da inércia e interesse de agir."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Limites da Jurisdição e Cooperação",
+                    "label": "Título II",
+                    "subtitle": "Arts. 21 a 41",
+                    "content": "Jurisdição nacional e cooperação internacional."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Competência Interna",
+                    "label": "Título III",
+                    "subtitle": "Arts. 42 a 69",
+                    "content": "Regras de competência, modificação e conflitos."
+                  }
+                ]
+              },
+              {
+                "id": "livro-iii",
+                "name": "Livro III - Sujeitos do Processo",
+                "label": "Livro III",
+                "subtitle": "Arts. 70 a 187",
+                "content": "Quem atua no processo: partes, juiz e auxiliares.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Partes e Procuradores",
+                    "label": "Título I",
+                    "subtitle": "Arts. 70 a 112",
+                    "content": "Capacidade, deveres, despesas, honorários e procuradores."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Do Litisconsórcio",
+                    "label": "Título II",
+                    "subtitle": "Arts. 113 a 118",
+                    "content": "Pluralidade de partes no processo."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Intervenção de Terceiros",
+                    "label": "Título III",
+                    "subtitle": "Arts. 119 a 138",
+                    "content": "Assistência, denunciação da lide, chamamento ao processo, amicus curiae."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Juiz e Auxiliares",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 139 a 175",
+                    "content": "Poderes, impedimento, suspeição e serventuários da justiça."
+                  },
+                  {
+                    "id": "titulo-v",
+                    "name": "Título V - Do Ministério Público",
+                    "label": "Título V",
+                    "subtitle": "Arts. 176 a 181",
+                    "content": "Atuação do MP como parte ou fiscal da ordem jurídica."
+                  },
+                  {
+                    "id": "titulo-vi",
+                    "name": "Título VI - Da Advocacia Pública",
+                    "label": "Título VI",
+                    "subtitle": "Arts. 182 a 184",
+                    "content": "Prerrogativas dos procuradores federais, estaduais e municipais."
+                  },
+                  {
+                    "id": "titulo-vii",
+                    "name": "Título VII - Da Defensoria Pública",
+                    "label": "Título VII",
+                    "subtitle": "Arts. 185 a 187",
+                    "content": "Prerrogativas da defesa de necessitados."
+                  }
+                ]
+              },
+              {
+                "id": "livro-iv",
+                "name": "Livro IV - Atos Processuais",
+                "label": "Livro IV",
+                "subtitle": "Arts. 188 a 293",
+                "content": "Forma, tempo, lugar, prazos e nulidades dos atos processuais.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Forma, Tempo e Lugar",
+                    "label": "Título I",
+                    "subtitle": "Arts. 188 a 235",
+                    "content": "Como e onde os atos devem ser praticados e prazos."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Da Comunicação",
+                    "label": "Título II",
+                    "subtitle": "Arts. 236 a 275",
+                    "content": "Citação, cartas e intimação."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Das Nulidades",
+                    "label": "Título III",
+                    "subtitle": "Arts. 276 a 283",
+                    "content": "Quando um ato processual é considerado nulo."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Distribuição e Registro",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 284 a 290",
+                    "content": "Regras sobre a distribuição das petições."
+                  },
+                  {
+                    "id": "titulo-v",
+                    "name": "Título V - Do Valor da Causa",
+                    "label": "Título V",
+                    "subtitle": "Arts. 291 a 293",
+                    "content": "Regras de fixação do valor da ação."
+                  }
+                ]
+              },
+              {
+                "id": "livro-v",
+                "name": "Livro V - Tutela Provisória",
+                "label": "Livro V",
+                "subtitle": "Arts. 294 a 311",
+                "content": "Medidas concedidas antes do julgamento final.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Disposições Gerais",
+                    "label": "Título I",
+                    "subtitle": "Arts. 294 a 299",
+                    "content": "Princípios gerais da tutela provisória."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Tutela de Urgência",
+                    "label": "Título II",
+                    "subtitle": "Arts. 300 a 310",
+                    "content": "Medidas cautelares e antecipadas, em caráter antecedente ou incidental."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Tutela da Evidência",
+                    "label": "Título III",
+                    "subtitle": "Art. 311",
+                    "content": "Concessão independente de perigo de dano, em casos de direito evidente."
+                  }
+                ]
+              },
+              {
+                "id": "livro-vi",
+                "name": "Livro VI - Formação e Extinção",
+                "label": "Livro VI",
+                "subtitle": "Arts. 312 a 317",
+                "content": "O início, a pausa e o fim do processo.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Da Formação",
+                    "label": "Título I",
+                    "subtitle": "Art. 312",
+                    "content": "Quando se considera proposto o processo."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Da Suspensão",
+                    "label": "Título II",
+                    "subtitle": "Arts. 313 a 315",
+                    "content": "Hipóteses de paragem provisória do processo."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Da Extinção",
+                    "label": "Título III",
+                    "subtitle": "Arts. 316 a 317",
+                    "content": "Encerramento da fase de conhecimento."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "parte-especial",
+            "name": "Parte Especial",
+            "label": "Parte Especial",
+            "subtitle": "Arts. 318 a 1.044",
+            "content": "Regula o Processo de Conhecimento, Cumprimento de Sentença, Execução e Recursos.",
+            "children": [
+              {
+                "id": "livro-i",
+                "name": "Livro I - Conhecimento e Cumprimento",
+                "label": "Livro I",
+                "subtitle": "Arts. 318 a 770",
+                "content": "Procedimento comum, especiais e o cumprimento das sentenças.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Procedimento Comum",
+                    "label": "Título I",
+                    "subtitle": "Arts. 318 a 512",
+                    "content": "Petição inicial, contestação, provas, audiências, sentença e coisa julgada."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Cumprimento de Sentença",
+                    "label": "Título II",
+                    "subtitle": "Arts. 513 a 538",
+                    "content": "Execução dos títulos judiciais (pagar quantia, alimentos, contra a Fazenda)."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Procedimentos Especiais",
+                    "label": "Título III",
+                    "subtitle": "Arts. 539 a 770",
+                    "content": "Consignação, ações possessórias, inventário, embargos de terceiro, ação monitória, etc."
+                  }
+                ]
+              },
+              {
+                "id": "livro-ii",
+                "name": "Livro II - Processo de Execução",
+                "label": "Livro II",
+                "subtitle": "Arts. 771 a 925",
+                "content": "Execução de títulos extrajudiciais.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Execução em Geral",
+                    "label": "Título I",
+                    "subtitle": "Arts. 771 a 796",
+                    "content": "Requisitos, competência e responsabilidade patrimonial (penhora)."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Espécies de Execução",
+                    "label": "Título II",
+                    "subtitle": "Arts. 797 a 913",
+                    "content": "Para entrega de coisa, obrigações de fazer/não fazer e quantia certa."
+                  },
+                  {
+                    "id": "titulo-iii",
+                    "name": "Título III - Embargos à Execução",
+                    "label": "Título III",
+                    "subtitle": "Arts. 914 a 920",
+                    "content": "Defesa do executado."
+                  },
+                  {
+                    "id": "titulo-iv",
+                    "name": "Título IV - Suspensão e Extinção",
+                    "label": "Título IV",
+                    "subtitle": "Arts. 921 a 925",
+                    "content": "Pausa e fim da execução."
+                  }
+                ]
+              },
+              {
+                "id": "livro-iii",
+                "name": "Livro III - Processos nos Tribunais",
+                "label": "Livro III",
+                "subtitle": "Arts. 926 a 1.044",
+                "content": "Atuação nas cortes de segunda instância e tribunais superiores.",
+                "children": [
+                  {
+                    "id": "titulo-i",
+                    "name": "Título I - Ordem dos Processos e Competência Originária",
+                    "label": "Título I",
+                    "subtitle": "Arts. 926 a 993",
+                    "content": "Precedentes, ação rescisória, IRDR e assunção de competência."
+                  },
+                  {
+                    "id": "titulo-ii",
+                    "name": "Título II - Dos Recursos",
+                    "label": "Título II",
+                    "subtitle": "Arts. 994 a 1.044",
+                    "content": "Apelação, agravo de instrumento, embargos de declaração, REsp, RE, etc."
+                  }
+                ],
+                "history": [
+                  {
+                    "year": 2015,
+                    "norm": "Lei 13.105/2015",
+                    "note": "Sistema de precedentes vinculantes (arts. 926 a 928) e IRDR, novidades do CPC de 2015."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "livro-comp",
+            "name": "Livro Complementar",
+            "label": "Livro Comp.",
+            "subtitle": "Arts. 1.045 a 1.072",
+            "content": "Disposições Finais e Transitórias do CPC."
+          }
+        ]
+      }
+    },
+    "cp": {
+      "id": "cp",
+      "title": "Código Penal",
+      "shortTitle": "CP",
+      "norm": "Decreto-Lei nº 2.848, de 7 de dezembro de 1940",
+      "urn": "urn:lex:br:federal:decreto.lei:1940-12-07;2848",
+      "ramo": "penal",
+      "natureza": "material",
+      "status": "revisado",
+      "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
+      "year": 1940,
+      "predecessors": [
+        {
+          "title": "Código Criminal do Império",
+          "shortTitle": "CCrim/1830",
+          "norm": "Lei de 16 de dezembro de 1830",
+          "from": 1830,
+          "to": 1890
+        },
+        {
+          "title": "Código Penal de 1890",
+          "shortTitle": "CP/1890",
+          "norm": "Decreto nº 847, de 11 de outubro de 1890",
+          "from": 1890,
+          "to": 1940
+        }
+      ],
+      "root": {
+        "id": "cp",
+        "name": "Código Penal",
+        "label": "CP",
+        "subtitle": "Raiz",
+        "content": "Decreto-Lei nº 2.848/1940. É o principal diploma legal brasileiro para a tipificação de crimes e previsão de penas, estabelecendo os princípios do direito penal no país.",
+        "children": [
+          {
+            "id": "parte-geral",
+            "name": "Parte Geral",
+            "label": "Parte Geral",
+            "subtitle": "Arts. 1º a 120",
+            "content": "Reúne os princípios gerais do Direito Penal, tratando da aplicação da lei, da teoria do crime, da imputabilidade, das penas e da extinção da punibilidade.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Da Aplicação da Lei Penal",
+                "label": "Título I",
+                "subtitle": "Arts. 1º a 12",
+                "content": "Princípio da legalidade, lei penal no tempo e no espaço, extraterritorialidade e eficácia de sentença estrangeira."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Do Crime",
+                "label": "Título II",
+                "subtitle": "Arts. 13 a 25",
+                "content": "Relação de causalidade, consumação, tentativa, desistência, arrependimento, erro de tipo/proibição e excludentes de ilicitude (legítima defesa, estado de necessidade)."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da Imputabilidade Penal",
+                "label": "Título III",
+                "subtitle": "Arts. 26 a 28",
+                "content": "Regras sobre doença mental, desenvolvimento mental incompleto, menoridade penal e embriaguez."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Do Concurso de Pessoas",
+                "label": "Título IV",
+                "subtitle": "Arts. 29 a 31",
+                "content": "Regras aplicáveis quando duas ou mais pessoas concorrem para a prática de uma infração penal."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Das Penas",
+                "label": "Título V",
+                "subtitle": "Arts. 32 a 95",
+                "content": "Espécies de pena (privativas de liberdade, restritivas de direitos, multa), cominação, aplicação, suspensão condicional e livramento condicional."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Das Medidas de Segurança",
+                "label": "Título VI",
+                "subtitle": "Arts. 96 a 99",
+                "content": "Medidas aplicáveis a inimputáveis ou semi-imputáveis (internação em hospital de custódia e tratamento ambulatorial)."
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Da Ação Penal",
+                "label": "Título VII",
+                "subtitle": "Arts. 100 a 106",
+                "content": "Ação penal pública (incondicionada e condicionada) e ação penal de iniciativa privada."
+              },
+              {
+                "id": "titulo-viii",
+                "name": "Título VIII - Extinção da Punibilidade",
+                "label": "Título VIII",
+                "subtitle": "Arts. 107 a 120",
+                "content": "Causas que extinguem o direito de punir do Estado (morte do agente, anistia, prescrição, decadência, perdão)."
+              }
+            ],
+            "history": [
+              {
+                "year": 1984,
+                "norm": "Lei 7.209/1984",
+                "note": "Nova Parte Geral: sistema vicariante, penas restritivas de direitos e reforma da teoria do crime."
+              }
+            ]
+          },
+          {
+            "id": "parte-especial",
+            "name": "Parte Especial",
+            "label": "Parte Especial",
+            "subtitle": "Arts. 121 a 359-U",
+            "content": "Tipifica, um a um, os crimes previstos no Brasil, dividindo-os de acordo com o bem jurídico tutelado protegido (vida, patrimônio, honra, etc).",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Crimes Contra a Pessoa",
+                "label": "Título I",
+                "subtitle": "Arts. 121 a 154-B",
+                "content": "Crimes contra a vida (homicídio, aborto), lesões corporais, periclitação da vida, crimes contra a honra (calúnia, difamação) e contra a liberdade.",
+                "history": [
+                  {
+                    "year": 2015,
+                    "norm": "Lei 13.104/2015",
+                    "note": "Feminicídio incluído como qualificadora do homicídio."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Crimes Contra o Patrimônio",
+                "label": "Título II",
+                "subtitle": "Arts. 155 a 183",
+                "content": "Furto, roubo, extorsão, apropriação indébita, estelionato, fraudes, receptação e disposições gerais aplicáveis à família."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Crimes Contra a Propriedade Imaterial",
+                "label": "Título III",
+                "subtitle": "Arts. 184 a 196",
+                "content": "Violação de direito autoral e crimes contra o privilégio de invenção e marcas."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Crimes Contra a Organização do Trabalho",
+                "label": "Título IV",
+                "subtitle": "Arts. 197 a 207",
+                "content": "Atentado contra a liberdade de trabalho, paralisação, aliciamento de trabalhadores e frustração de direitos trabalhistas."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Crimes Contra Sentimento Religioso e Mortos",
+                "label": "Título V",
+                "subtitle": "Arts. 208 a 212",
+                "content": "Vilipêndio a cadáver, destruição de sepultura e impedimento de culto religioso."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Crimes Contra a Dignidade Sexual",
+                "label": "Título VI",
+                "subtitle": "Arts. 213 a 234-C",
+                "content": "Estupro, violação sexual mediante fraude, assédio sexual, estupro de vulnerável e exploração sexual.",
+                "history": [
+                  {
+                    "year": 2009,
+                    "norm": "Lei 12.015/2009",
+                    "note": "Título renomeado de Crimes contra os Costumes para Crimes contra a Dignidade Sexual."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Crimes Contra a Família",
+                "label": "Título VII",
+                "subtitle": "Arts. 235 a 249",
+                "content": "Bigamia, ocultação de impedimento, crimes contra o estado de filiação e abandono (material, intelectual ou moral)."
+              },
+              {
+                "id": "titulo-viii",
+                "name": "Título VIII - Crimes Contra a Incolumidade Pública",
+                "label": "Título VIII",
+                "subtitle": "Arts. 250 a 285",
+                "content": "Incêndio, explosão, inundação e crimes contra a saúde pública (falsificação de remédios, epidemia)."
+              },
+              {
+                "id": "titulo-ix",
+                "name": "Título IX - Crimes Contra a Paz Pública",
+                "label": "Título IX",
+                "subtitle": "Arts. 286 a 288-A",
+                "content": "Incitação ao crime, apologia de crime ou criminoso, associação criminosa e constituição de milícia."
+              },
+              {
+                "id": "titulo-x",
+                "name": "Título X - Crimes Contra a Fé Pública",
+                "label": "Título X",
+                "subtitle": "Arts. 289 a 311-A",
+                "content": "Moeda falsa, falsificação de documentos públicos e particulares, falsidade ideológica e fraudes em certames de interesse público."
+              },
+              {
+                "id": "titulo-xi",
+                "name": "Título XI - Crimes Contra a Administração Pública",
+                "label": "Título XI",
+                "subtitle": "Arts. 312 a 359-H",
+                "content": "Peculato, corrupção (ativa e passiva), concussão, prevaricação, desacato, falso testemunho e crimes contra as finanças públicas.",
+                "history": [
+                  {
+                    "year": 2021,
+                    "norm": "Lei 14.133/2021",
+                    "note": "Inclusão do Capítulo II-B, Dos Crimes em Licitações e Contratos Administrativos (arts. 337-E a 337-P)."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-xii",
+                "name": "Título XII - Crimes Contra o Estado Democrático de Direito",
+                "label": "Título XII",
+                "subtitle": "Arts. 359-I a 359-U",
+                "content": "Atentado à soberania, abolição violenta do Estado Democrático de Direito, golpe de estado e violência política (Incluído em 2021).",
+                "since": 2021,
+                "history": [
+                  {
+                    "year": 2021,
+                    "norm": "Lei 14.197/2021",
+                    "note": "Inclusão do Título XII, Dos Crimes contra o Estado Democrático de Direito, com revogação da Lei de Segurança Nacional."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "disposicoes-f",
+            "name": "Disposições Finais",
+            "label": "Disposições F.",
+            "subtitle": "Arts. 360 e 361",
+            "content": "Regras de encerramento do diploma legal penal e ressalvas em relação à legislação especial vigente."
+          }
+        ]
+      }
+    },
+    "cpp": {
+      "id": "cpp",
+      "title": "Código de Processo Penal",
+      "shortTitle": "CPP",
+      "norm": "Decreto-Lei nº 3.689, de 3 de outubro de 1941",
+      "urn": "urn:lex:br:federal:decreto.lei:1941-10-03;3689",
+      "ramo": "penal",
+      "natureza": "processual",
+      "status": "revisado",
+      "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm",
+      "year": 1941,
+      "predecessors": [
+        {
+          "title": "Código de Processo Criminal do Império e códigos estaduais da República",
+          "shortTitle": "CPCrim/1832",
+          "norm": "Lei de 29 de novembro de 1832; na República Velha, códigos de processo estaduais",
+          "from": 1832,
+          "to": 1941
+        }
+      ],
+      "root": {
+        "id": "cpp",
+        "name": "Código de Processo Penal",
+        "label": "CPP",
+        "subtitle": "Raiz",
+        "content": "Decreto-Lei nº 3.689/1941. Estabelece as regras e procedimentos para a persecução penal, desde a fase investigatória até o julgamento e recursos cabíveis.",
+        "children": [
+          {
+            "id": "livro-i",
+            "name": "Livro I - Do Processo em Geral",
+            "label": "Livro I",
+            "subtitle": "Arts. 1º a 393",
+            "content": "Reúne as normas fundamentais sobre investigação, ação penal, competência, provas, sujeitos do processo, prisões cautelares e sentença.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Disposições Preliminares",
+                "label": "Título I",
+                "subtitle": "Arts. 1º a 3º-F",
+                "content": "Aplicação da lei processual penal e criação do juiz das garantias."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Do Inquérito Policial",
+                "label": "Título II",
+                "subtitle": "Arts. 4º a 23",
+                "content": "Fase pré-processual e investigação conduzida pela polícia judiciária."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da Ação Penal",
+                "label": "Título III",
+                "subtitle": "Arts. 24 a 62",
+                "content": "Ação penal de iniciativa pública (incondicionada e condicionada) e privada."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Da Ação Civil",
+                "label": "Título IV",
+                "subtitle": "Arts. 63 a 68",
+                "content": "Regras para a reparação do dano causado pela infração penal."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Da Competência",
+                "label": "Título V",
+                "subtitle": "Arts. 69 a 91",
+                "content": "Determinação do juízo competente (lugar da infração, domicílio, prevenção, conexão ou continência)."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Questões e Processos Incidentes",
+                "label": "Título VI",
+                "subtitle": "Arts. 92 a 154",
+                "content": "Questões prejudiciais, exceções, restituição de coisas apreendidas, falsidade de documento e insanidade mental."
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Da Prova",
+                "label": "Título VII",
+                "subtitle": "Arts. 155 a 250",
+                "content": "Corpo de delito, perícias, interrogatório, testemunhas, acareação, documentos e busca e apreensão.",
+                "history": [
+                  {
+                    "year": 2008,
+                    "norm": "Lei 11.690/2008",
+                    "note": "Reforma da prova: vedação às provas ilícitas e sistema de apreciação pelo juiz."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-viii",
+                "name": "Título VIII - Sujeitos do Processo",
+                "label": "Título VIII",
+                "subtitle": "Arts. 251 a 281",
+                "content": "Do juiz, do Ministério Público, do acusado, defensor, assistentes e funcionários da justiça."
+              },
+              {
+                "id": "titulo-ix",
+                "name": "Título IX - Prisão, Medidas Cautelares e Liberdade",
+                "label": "Título IX",
+                "subtitle": "Arts. 282 a 350",
+                "content": "Prisão em flagrante, preventiva, medidas cautelares diversas da prisão e liberdade provisória com ou sem fiança.",
+                "history": [
+                  {
+                    "year": 2011,
+                    "norm": "Lei 12.403/2011",
+                    "note": "Título renomeado para Da Prisão, das Medidas Cautelares e da Liberdade Provisória, com o rol de cautelares diversas da prisão."
+                  },
+                  {
+                    "year": 2019,
+                    "norm": "Lei 13.964/2019 (Pacote Anticrime)",
+                    "note": "Audiência de custódia e juiz das garantias (este último com eficácia modulada pelo STF)."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-x",
+                "name": "Título X - Das Citações e Intimações",
+                "label": "Título X",
+                "subtitle": "Arts. 351 a 372",
+                "content": "Regras para a comunicação formal dos atos processuais penais."
+              },
+              {
+                "id": "titulo-xi",
+                "name": "Título XI - Aplicação Provisória",
+                "label": "Título XI",
+                "subtitle": "Arts. 373 a 380",
+                "content": "Interdições de direitos e medidas de segurança aplicadas provisoriamente."
+              },
+              {
+                "id": "titulo-xii",
+                "name": "Título XII - Da Sentença",
+                "label": "Título XII",
+                "subtitle": "Arts. 381 a 393",
+                "content": "Requisitos essenciais da sentença, hipóteses de absolvição e de condenação."
+              }
+            ]
+          },
+          {
+            "id": "livro-ii",
+            "name": "Livro II - Dos Processos em Espécie",
+            "label": "Livro II",
+            "subtitle": "Arts. 394 a 562",
+            "content": "Estabelece os diferentes ritos e procedimentos aplicáveis ao julgamento das infrações penais.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Do Processo Comum",
+                "label": "Título I",
+                "subtitle": "Arts. 394 a 497",
+                "content": "Instrução criminal, procedimentos ordinário e sumário, e rito especial do Tribunal do Júri.",
+                "history": [
+                  {
+                    "year": 2008,
+                    "norm": "Lei 11.719/2008",
+                    "note": "Novo rito do procedimento comum, com resposta à acusação e audiência una."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Dos Processos Especiais",
+                "label": "Título II",
+                "subtitle": "Arts. 503 a 548",
+                "content": "Crimes de responsabilidade de funcionários públicos, crimes contra a honra e contra a propriedade imaterial."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Processos em Tribunais",
+                "label": "Título III",
+                "subtitle": "Arts. 556 a 562",
+                "content": "Regras dos processos de competência originária do STF e dos Tribunais de Apelação."
+              }
+            ]
+          },
+          {
+            "id": "livro-iii",
+            "name": "Livro III - Das Nulidades e dos Recursos",
+            "label": "Livro III",
+            "subtitle": "Arts. 563 a 667",
+            "content": "Sistema de invalidação de atos processuais com defeito e os meios de impugnação contra as decisões judiciais.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Das Nulidades",
+                "label": "Título I",
+                "subtitle": "Arts. 563 a 573",
+                "content": "Princípio do prejuízo, causas de nulidade absoluta e relativa, e sua decretação."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Dos Recursos em Geral",
+                "label": "Título II",
+                "subtitle": "Arts. 574 a 667",
+                "content": "Recurso em Sentido Estrito, Apelação, Embargos, Revisão Criminal, Habeas Corpus e Carta Testemunhável."
+              }
+            ]
+          },
+          {
+            "id": "livro-iv",
+            "name": "Livro IV - Da Execução",
+            "label": "Livro IV",
+            "subtitle": "Arts. 668 a 779",
+            "content": "Regras do processo de execução das penas e medidas de segurança (em sua maioria, suplantadas pela Lei de Execução Penal).",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Disposições Gerais",
+                "label": "Título I",
+                "subtitle": "Arts. 668 a 673",
+                "content": "Princípios da execução e guia de recolhimento."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Execução das Penas em Espécie",
+                "label": "Título II",
+                "subtitle": "Arts. 674 a 709",
+                "content": "Execução das penas privativas de liberdade, pecuniárias e acessórias."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Dos Incidentes da Execução",
+                "label": "Título III",
+                "subtitle": "Arts. 710 a 733",
+                "content": "Suspensão condicional da pena, livramento condicional e unificação das penas."
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Graça, Indulto e Anistia",
+                "label": "Título IV",
+                "subtitle": "Arts. 734 a 750",
+                "content": "Extinção e comutação de penas e processo de reabilitação criminal."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Execução das Medidas de Segurança",
+                "label": "Título V",
+                "subtitle": "Arts. 751 a 779",
+                "content": "Internação em hospital de custódia e tratamento ambulatorial."
+              }
+            ],
+            "history": [
+              {
+                "year": 1984,
+                "norm": "Lei 7.210/1984 (LEP)",
+                "note": "A execução penal passou a ser regida pela LEP; o Livro IV ficou em grande parte esvaziado."
+              }
+            ]
+          },
+          {
+            "id": "livro-v",
+            "name": "Livro V - Relações Jurisdicionais",
+            "label": "Livro V",
+            "subtitle": "Arts. 780 a 790",
+            "content": "Relações com autoridades estrangeiras, como cumprimento de cartas rogatórias, homologação de sentença e extradição."
+          },
+          {
+            "id": "livro-vi",
+            "name": "Livro VI - Disposições Gerais",
+            "label": "Livro VI",
+            "subtitle": "Arts. 791 a 811",
+            "content": "Regras finais do Código sobre tramitação de autos, prazos processuais e disposições transitórias."
+          }
+        ]
+      }
+    },
+    "clt": {
+      "id": "clt",
+      "title": "Consolidação das Leis do Trabalho",
+      "shortTitle": "CLT",
+      "norm": "Decreto-Lei nº 5.452, de 1º de maio de 1943",
+      "urn": "urn:lex:br:federal:decreto.lei:1943-05-01;5452",
+      "ramo": "social",
+      "natureza": "material",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm",
+      "year": 1943,
+      "note": "A CLT reúne direito material e, no Título X, o processo do trabalho. O mapa a classifica pela natureza predominante.",
+      "root": {
+        "id": "clt",
+        "name": "Consolidação das Leis do Trabalho",
+        "label": "CLT",
+        "subtitle": "Raiz",
+        "content": "Decreto-Lei nº 5.452/1943. Consolida as normas que regulam as relações individuais e coletivas de trabalho, a organização sindical, a fiscalização e a Justiça do Trabalho. Profundamente alterada pela Lei 13.467/2017 (Reforma Trabalhista).",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Introdução",
+            "label": "Título I",
+            "subtitle": "Arts. 1º a 12",
+            "content": "Âmbito de aplicação, conceitos de empregador e empregado, fontes do direito do trabalho, prescrição e nulidade de atos que fraudem a lei."
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Das Normas Gerais de Tutela do Trabalho",
+            "label": "Título II",
+            "subtitle": "Arts. 13 a 223",
+            "content": "Proteções mínimas aplicáveis a todos os empregados: identificação profissional, jornada, salário mínimo, férias e segurança e medicina do trabalho.",
+            "history": [
+              {
+                "year": 2017,
+                "norm": "Lei 13.467/2017",
+                "note": "Inclusão do Capítulo II-A, sobre teletrabalho."
+              }
+            ],
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Da Identificação Profissional",
+                "label": "Cap. I",
+                "subtitle": "Arts. 13 a 56",
+                "content": "Carteira de Trabalho e Previdência Social (hoje digital), emissão, anotações e valor probatório."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Da Duração do Trabalho",
+                "label": "Cap. II",
+                "subtitle": "Arts. 57 a 75",
+                "content": "Jornada de 8 horas, horas extras, banco de horas, trabalho noturno, intervalos e descanso semanal."
+              },
+              {
+                "id": "cap-ii-a",
+                "name": "Capítulo II-A - Do Teletrabalho",
+                "label": "Cap. II-A",
+                "subtitle": "Arts. 75-A a 75-F",
+                "content": "Prestação de serviços fora das dependências do empregador com uso de tecnologia; contrato, controle de jornada e responsabilidade por equipamentos.",
+                "since": 2017
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Do Salário Mínimo",
+                "label": "Cap. III",
+                "subtitle": "Arts. 76 a 128",
+                "content": "Conceito, fixação e irredutibilidade do salário mínimo."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Das Férias Anuais",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 129 a 153",
+                "content": "Direito a férias, período aquisitivo e concessivo, fracionamento, remuneração e abono pecuniário."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Da Segurança e da Medicina do Trabalho",
+                "label": "Cap. V",
+                "subtitle": "Arts. 154 a 201",
+                "content": "Normas Regulamentadoras, CIPA, EPI, insalubridade, periculosidade e fiscalização das condições de trabalho."
+              }
+            ]
+          },
+          {
+            "id": "titulo-ii-a",
+            "name": "Título II-A - Do Dano Extrapatrimonial",
+            "label": "Título II-A",
+            "subtitle": "Arts. 223-A a 223-G",
+            "content": "Reparação dos danos de natureza extrapatrimonial decorrentes da relação de trabalho: os bens tutelados da pessoa física e da jurídica, quem responde pelo dano e os critérios que o juízo considera para fixar a indenização.",
+            "since": 2017,
+            "history": [
+              {
+                "year": 2017,
+                "norm": "Lei 13.467/2017",
+                "note": "Inclusão do Título II-A, Do Dano Extrapatrimonial (arts. 223-A a 223-G)."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Das Normas Especiais de Tutela do Trabalho",
+            "label": "Título III",
+            "subtitle": "Arts. 224 a 441",
+            "content": "Regimes especiais de certas categorias e a proteção ao trabalho da mulher e do menor.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Disposições Especiais sobre Duração e Condições de Trabalho",
+                "label": "Cap. I",
+                "subtitle": "Arts. 224 a 351",
+                "content": "Bancários, telefonia, músicos, ferroviários, frigoríficos, minas, jornalistas, professores, químicos e outras categorias com jornada própria."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Da Nacionalização do Trabalho",
+                "label": "Cap. II",
+                "subtitle": "Arts. 352 a 371",
+                "content": "Proporcionalidade de empregados brasileiros nas empresas e regras sobre trabalhadores estrangeiros."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Da Proteção do Trabalho da Mulher",
+                "label": "Cap. III",
+                "subtitle": "Arts. 372 a 401-B",
+                "content": "Igualdade salarial, proteção à maternidade, licença-maternidade, estabilidade da gestante e amamentação."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Da Proteção do Trabalho do Menor",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 402 a 441",
+                "content": "Idade mínima, trabalhos proibidos, jornada do menor e contrato de aprendizagem."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Do Contrato Individual do Trabalho",
+            "label": "Título IV",
+            "subtitle": "Arts. 442 a 510",
+            "content": "O núcleo do direito individual do trabalho: formação, remuneração, alteração, suspensão, rescisão e estabilidade do contrato de emprego.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Disposições Gerais",
+                "label": "Cap. I",
+                "subtitle": "Arts. 442 a 456",
+                "content": "Conceito de contrato de trabalho, prazo determinado e indeterminado, trabalho intermitente e sucessão de empregadores."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Da Remuneração",
+                "label": "Cap. II",
+                "subtitle": "Arts. 457 a 467",
+                "content": "Salário e remuneração, parcelas integrantes, gorjetas, equiparação salarial e pagamento."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Da Alteração",
+                "label": "Cap. III",
+                "subtitle": "Arts. 468 a 470",
+                "content": "Limites à alteração contratual: mútuo consentimento e vedação de prejuízo ao empregado."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Da Suspensão e da Interrupção",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 471 a 476-A",
+                "content": "Afastamentos com e sem remuneração, serviço militar, auxílio-doença e suspensão para qualificação."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Da Rescisão",
+                "label": "Cap. V",
+                "subtitle": "Arts. 477 a 486",
+                "content": "Verbas rescisórias, justa causa do empregado e do empregador, rescisão indireta e por acordo."
+              },
+              {
+                "id": "cap-vi",
+                "name": "Capítulo VI - Do Aviso Prévio",
+                "label": "Cap. VI",
+                "subtitle": "Arts. 487 a 491",
+                "content": "Prazo, proporcionalidade, aviso trabalhado ou indenizado e redução de jornada."
+              },
+              {
+                "id": "cap-vii",
+                "name": "Capítulo VII - Da Estabilidade",
+                "label": "Cap. VII",
+                "subtitle": "Arts. 492 a 500",
+                "content": "Estabilidade decenal, hoje residual após o regime do FGTS; indenização e inquérito para apuração de falta grave."
+              },
+              {
+                "id": "cap-viii",
+                "name": "Capítulo VIII - Da Força Maior",
+                "label": "Cap. VIII",
+                "subtitle": "Arts. 501 a 504",
+                "content": "Conceito de força maior e seus efeitos sobre a indenização rescisória."
+              },
+              {
+                "id": "cap-ix",
+                "name": "Capítulo IX - Disposições Especiais",
+                "label": "Cap. IX",
+                "subtitle": "Arts. 505 a 510",
+                "content": "Regras complementares sobre o contrato individual."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iv-a",
+            "name": "Título IV-A - Da Representação dos Empregados",
+            "label": "Título IV-A",
+            "subtitle": "Arts. 510-A a 510-E",
+            "content": "Comissão de representantes dos empregados em empresas com mais de 200 empregados, eleição e garantias dos representantes. Introduzido pela Reforma de 2017.",
+            "since": 2017,
+            "history": [
+              {
+                "year": 2017,
+                "norm": "Lei 13.467/2017",
+                "note": "Criação da representação dos empregados no local de trabalho."
+              }
+            ]
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Da Organização Sindical",
+            "label": "Título V",
+            "subtitle": "Arts. 511 a 610",
+            "content": "Estrutura dos sindicatos, federações e confederações, enquadramento por categoria e contribuição sindical (facultativa desde 2017).",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Da Instituição Sindical",
+                "label": "Cap. I",
+                "subtitle": "Arts. 511 a 569",
+                "content": "Associação em sindicato, reconhecimento, administração, eleições e sistema confederativo."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Do Enquadramento Sindical",
+                "label": "Cap. II",
+                "subtitle": "Arts. 570 a 577",
+                "content": "Categorias econômicas e profissionais e o quadro de atividades."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Da Contribuição Sindical",
+                "label": "Cap. III",
+                "subtitle": "Arts. 578 a 610",
+                "content": "Recolhimento, aplicação e, após 2017, exigência de autorização prévia e expressa."
+              }
+            ]
+          },
+          {
+            "id": "titulo-vi",
+            "name": "Título VI - Convenções Coletivas de Trabalho",
+            "label": "Título VI",
+            "subtitle": "Arts. 611 a 625",
+            "content": "Convenções e acordos coletivos, prevalência do negociado sobre o legislado (art. 611-A) e limites (art. 611-B)."
+          },
+          {
+            "id": "titulo-vi-a",
+            "name": "Título VI-A - Das Comissões de Conciliação Prévia",
+            "label": "Título VI-A",
+            "subtitle": "Arts. 625-A a 625-H",
+            "content": "Comissões paritárias para tentativa de conciliação extrajudicial dos conflitos individuais.",
+            "since": 2000,
+            "history": [
+              {
+                "year": 2000,
+                "norm": "Lei 9.958/2000",
+                "note": "Criação das Comissões de Conciliação Prévia."
+              }
+            ]
+          },
+          {
+            "id": "titulo-vii",
+            "name": "Título VII - Do Processo de Multas Administrativas",
+            "label": "Título VII",
+            "subtitle": "Arts. 626 a 642",
+            "content": "Fiscalização do trabalho, autos de infração, defesa e cobrança de multas."
+          },
+          {
+            "id": "titulo-vii-a",
+            "name": "Título VII-A - Da Prova de Inexistência de Débitos Trabalhistas",
+            "label": "Título VII-A",
+            "subtitle": "Art. 642-A",
+            "content": "Certidão Negativa de Débitos Trabalhistas (CNDT).",
+            "since": 2011,
+            "history": [
+              {
+                "year": 2011,
+                "norm": "Lei 12.440/2011",
+                "note": "Criação da Certidão Negativa de Débitos Trabalhistas."
+              }
+            ]
+          },
+          {
+            "id": "titulo-viii",
+            "name": "Título VIII - Da Justiça do Trabalho",
+            "label": "Título VIII",
+            "subtitle": "Arts. 643 a 735",
+            "content": "Organização e competência dos órgãos da Justiça do Trabalho: Varas, Tribunais Regionais e Tribunal Superior do Trabalho.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Introdução",
+                "label": "Cap. I",
+                "subtitle": "Arts. 643 a 646",
+                "content": "Órgãos da Justiça do Trabalho e sua composição."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Varas do Trabalho",
+                "label": "Cap. II",
+                "subtitle": "Arts. 647 a 667",
+                "content": "Jurisdição, competência e funcionamento das Varas (antigas Juntas de Conciliação e Julgamento)."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Dos Juízos de Direito",
+                "label": "Cap. III",
+                "subtitle": "Arts. 668 a 669",
+                "content": "Jurisdição trabalhista exercida por juízes de direito onde não há Vara do Trabalho."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Dos Tribunais Regionais do Trabalho",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 670 a 689",
+                "content": "Composição, competência e funcionamento dos TRTs."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Do Tribunal Superior do Trabalho",
+                "label": "Cap. V",
+                "subtitle": "Arts. 690 a 709",
+                "content": "Composição, competência e funcionamento do TST."
+              },
+              {
+                "id": "cap-vi-viii",
+                "name": "Capítulos VI a VIII - Serviços Auxiliares, Penalidades e Disposições Gerais",
+                "label": "Caps. VI-VIII",
+                "subtitle": "Arts. 710 a 735",
+                "content": "Secretarias, distribuidores, penalidades aplicáveis a servidores e disposições gerais sobre a organização judiciária."
+              }
+            ]
+          },
+          {
+            "id": "titulo-ix",
+            "name": "Título IX - Do Ministério Público do Trabalho",
+            "label": "Título IX",
+            "subtitle": "Arts. 736 a 762",
+            "content": "Organização e atribuições do MPT, em grande parte superadas pela Lei Complementar 75/1993."
+          },
+          {
+            "id": "titulo-x",
+            "name": "Título X - Do Processo Judiciário do Trabalho",
+            "label": "Título X",
+            "subtitle": "Arts. 763 a 910",
+            "content": "O processo do trabalho: princípios, atos, dissídios individuais e coletivos, execução e recursos. Aplicação subsidiária do CPC (art. 769).",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Disposições Preliminares",
+                "label": "Cap. I",
+                "subtitle": "Arts. 763 a 769",
+                "content": "Princípios do processo do trabalho e aplicação subsidiária do direito processual comum."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Do Processo em Geral",
+                "label": "Cap. II",
+                "subtitle": "Arts. 770 a 836",
+                "content": "Atos, prazos, nulidades, partes e procuradores, distribuição, custas, provas, decisão e sua eficácia."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Dos Dissídios Individuais",
+                "label": "Cap. III",
+                "subtitle": "Arts. 837 a 855",
+                "content": "Reclamação trabalhista, audiência, conciliação, instrução, julgamento e rito sumaríssimo."
+              },
+              {
+                "id": "cap-iii-a",
+                "name": "Capítulo III-A - Homologação de Acordo Extrajudicial",
+                "label": "Cap. III-A",
+                "subtitle": "Arts. 855-B a 855-E",
+                "content": "Procedimento de jurisdição voluntária para homologação de acordo extrajudicial, criado em 2017.",
+                "since": 2017
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Dos Dissídios Coletivos",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 856 a 875",
+                "content": "Instauração, conciliação, julgamento, extensão e revisão das decisões normativas."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Da Execução",
+                "label": "Cap. V",
+                "subtitle": "Arts. 876 a 892",
+                "content": "Títulos executivos, liquidação, penhora, embargos e expropriação de bens."
+              },
+              {
+                "id": "cap-vi",
+                "name": "Capítulo VI - Dos Recursos",
+                "label": "Cap. VI",
+                "subtitle": "Arts. 893 a 902",
+                "content": "Recurso ordinário, de revista, agravos, embargos e seus pressupostos; transcendência."
+              },
+              {
+                "id": "cap-vii-viii",
+                "name": "Capítulos VII e VIII - Penalidades e Disposições Finais",
+                "label": "Caps. VII-VIII",
+                "subtitle": "Arts. 903 a 910",
+                "content": "Aplicação de penalidades processuais e disposições finais do processo do trabalho."
+              }
+            ]
+          },
+          {
+            "id": "titulo-xi",
+            "name": "Título XI - Disposições Finais e Transitórias",
+            "label": "Título XI",
+            "subtitle": "Arts. 911 a 922",
+            "content": "Vigência, aplicação às relações em curso e regras de transição."
+          }
+        ]
+      }
+    },
+    "cdc": {
+      "id": "cdc",
+      "title": "Código de Defesa do Consumidor",
+      "shortTitle": "CDC",
+      "norm": "Lei nº 8.078, de 11 de setembro de 1990",
+      "urn": "urn:lex:br:federal:lei:1990-09-11;8078",
+      "ramo": "social",
+      "natureza": "material",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "year": 1990,
+      "note": "Classificação assumidamente didática: parte da doutrina situa o CDC no Direito Privado, como microssistema de ordem pública.",
+      "root": {
+        "id": "cdc",
+        "name": "Código de Defesa do Consumidor",
+        "label": "CDC",
+        "subtitle": "Raiz",
+        "content": "Lei nº 8.078/1990. Estabelece normas de proteção e defesa do consumidor, de ordem pública e interesse social, em cumprimento aos arts. 5º, XXXII, e 170, V, da Constituição e ao art. 48 do ADCT.",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Dos Direitos do Consumidor",
+            "label": "Título I",
+            "subtitle": "Arts. 1º a 60",
+            "content": "O direito material do consumo: conceitos, política nacional, direitos básicos, responsabilidade do fornecedor, práticas comerciais, proteção contratual e sanções administrativas.",
+            "history": [
+              {
+                "year": 2021,
+                "norm": "Lei 14.181/2021",
+                "note": "Inclusão das regras de prevenção e tratamento do superendividamento (arts. 54-A a 54-G)."
+              }
+            ],
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Disposições Gerais",
+                "label": "Cap. I",
+                "subtitle": "Arts. 1º a 3º",
+                "content": "Natureza de ordem pública e definições de consumidor, fornecedor, produto e serviço."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Da Política Nacional de Relações de Consumo",
+                "label": "Cap. II",
+                "subtitle": "Arts. 4º e 5º",
+                "content": "Objetivos e princípios: vulnerabilidade do consumidor, harmonização, boa-fé e instrumentos de execução da política."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Dos Direitos Básicos do Consumidor",
+                "label": "Cap. III",
+                "subtitle": "Arts. 6º e 7º",
+                "content": "Proteção da vida, informação, proteção contra publicidade enganosa, modificação de cláusulas, inversão do ônus da prova e crédito responsável."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Da Qualidade de Produtos e Serviços, da Prevenção e da Reparação dos Danos",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 8º a 28",
+                "content": "Proteção à saúde e segurança, responsabilidade pelo fato e pelo vício do produto ou serviço, decadência, prescrição e desconsideração da personalidade jurídica."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Das Práticas Comerciais",
+                "label": "Cap. V",
+                "subtitle": "Arts. 29 a 45",
+                "content": "Oferta, publicidade, práticas abusivas, cobrança de dívidas e bancos de dados e cadastros de consumidores."
+              },
+              {
+                "id": "cap-vi",
+                "name": "Capítulo VI - Da Proteção Contratual",
+                "label": "Cap. VI",
+                "subtitle": "Arts. 46 a 54-G",
+                "content": "Interpretação favorável ao consumidor, direito de arrependimento, cláusulas abusivas, contratos de adesão e prevenção e tratamento do superendividamento."
+              },
+              {
+                "id": "cap-vii",
+                "name": "Capítulo VII - Das Sanções Administrativas",
+                "label": "Cap. VII",
+                "subtitle": "Arts. 55 a 60",
+                "content": "Multa, apreensão, cassação de licença, interdição e contrapropaganda aplicadas pela Administração."
+              }
+            ]
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Das Infrações Penais",
+            "label": "Título II",
+            "subtitle": "Arts. 61 a 80",
+            "content": "Crimes contra as relações de consumo: omissão de informação, publicidade enganosa, produtos impróprios, entre outros. Aplicação subsidiária do Código Penal."
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Da Defesa do Consumidor em Juízo",
+            "label": "Título III",
+            "subtitle": "Arts. 81 a 104-C",
+            "content": "A tutela coletiva do consumidor: legitimados, ações coletivas, coisa julgada e, desde 2021, a conciliação no superendividamento. Base do microssistema processual coletivo, com a Lei da Ação Civil Pública.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Disposições Gerais",
+                "label": "Cap. I",
+                "subtitle": "Arts. 81 a 90",
+                "content": "Interesses difusos, coletivos e individuais homogêneos; legitimados; competência e aplicação do CPC e da Lei 7.347/1985."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Ações Coletivas para a Defesa de Interesses Individuais Homogêneos",
+                "label": "Cap. II",
+                "subtitle": "Arts. 91 a 100",
+                "content": "Ação civil coletiva, sentença genérica, liquidação e execução individuais e fluid recovery."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Das Ações de Responsabilidade do Fornecedor de Produtos e Serviços",
+                "label": "Cap. III",
+                "subtitle": "Arts. 101 e 102",
+                "content": "Foro do domicílio do autor, chamamento ao processo do segurador e ação para proibir produtos nocivos."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Da Coisa Julgada",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 103 e 104",
+                "content": "Efeitos erga omnes e ultra partes, coisa julgada secundum eventum litis e relação com as ações individuais."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Da Conciliação no Superendividamento",
+                "label": "Cap. V",
+                "subtitle": "Arts. 104-A a 104-C",
+                "content": "Processo de repactuação de dívidas com audiência global de conciliação e plano judicial compulsório.",
+                "since": 2021,
+                "history": [
+                  {
+                    "year": 2021,
+                    "norm": "Lei 14.181/2021",
+                    "note": "Criação do procedimento de conciliação no superendividamento."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Do Sistema Nacional de Defesa do Consumidor",
+            "label": "Título IV",
+            "subtitle": "Arts. 105 e 106",
+            "content": "Integração dos órgãos federais, estaduais e municipais (Procons) e das entidades privadas de defesa do consumidor; atribuições da Senacon."
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Da Convenção Coletiva de Consumo",
+            "label": "Título V",
+            "subtitle": "Arts. 107 e 108",
+            "content": "Convenções entre entidades civis de consumidores e associações de fornecedores sobre preço, qualidade e garantia."
+          },
+          {
+            "id": "titulo-vi",
+            "name": "Título VI - Disposições Finais",
+            "label": "Título VI",
+            "subtitle": "Arts. 109 a 119",
+            "content": "Alterações na Lei da Ação Civil Pública, vigência e regras de transição."
+          }
+        ]
+      }
+    },
+    "eca": {
+      "id": "eca",
+      "title": "Estatuto da Criança e do Adolescente",
+      "shortTitle": "ECA",
+      "norm": "Lei nº 8.069, de 13 de julho de 1990",
+      "urn": "urn:lex:br:federal:lei:1990-07-13;8069",
+      "ramo": "social",
+      "natureza": "material",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l8069.htm",
+      "year": 1990,
+      "note": "Classificado como Direito Social pela doutrina da proteção integral, embora contenha normas penais, processuais e administrativas.",
+      "predecessors": [
+        {
+          "title": "Código de Menores de 1927 (Código Mello Mattos)",
+          "shortTitle": "CMen/1927",
+          "norm": "Decreto nº 17.943-A, de 12 de outubro de 1927",
+          "from": 1927,
+          "to": 1979
+        },
+        {
+          "title": "Código de Menores de 1979",
+          "shortTitle": "CMen/1979",
+          "norm": "Lei nº 6.697, de 10 de outubro de 1979",
+          "from": 1979,
+          "to": 1990
+        }
+      ],
+      "root": {
+        "id": "eca",
+        "name": "Estatuto da Criança e do Adolescente",
+        "label": "ECA",
+        "subtitle": "Raiz",
+        "content": "Lei nº 8.069/1990. Dispõe sobre a proteção integral à criança e ao adolescente, regulamentando o art. 227 da Constituição: direitos fundamentais, política de atendimento, medidas de proteção, ato infracional, Conselho Tutelar e acesso à Justiça.",
+        "children": [
+          {
+            "id": "livro-i",
+            "name": "Livro I - Parte Geral",
+            "label": "Livro I",
+            "subtitle": "Arts. 1º a 85",
+            "content": "Princípios da proteção integral e da prioridade absoluta, os direitos fundamentais e as regras de prevenção.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Das Disposições Preliminares",
+                "label": "Título I",
+                "subtitle": "Arts. 1º a 6º",
+                "content": "Proteção integral, definição de criança (até 12 anos incompletos) e adolescente (12 a 18), prioridade absoluta e interpretação."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Dos Direitos Fundamentais",
+                "label": "Título II",
+                "subtitle": "Arts. 7º a 69",
+                "content": "Catálogo dos direitos: vida e saúde, liberdade, respeito e dignidade, convivência familiar, educação, cultura, esporte, lazer, profissionalização e proteção no trabalho.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Do Direito à Vida e à Saúde",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 7º a 14",
+                    "content": "Atendimento pré-natal, SUS, aleitamento, vacinação e notificação de maus-tratos."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Do Direito à Liberdade, ao Respeito e à Dignidade",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 15 a 18-B",
+                    "content": "Liberdade de ir e vir, opinião e crença; inviolabilidade da integridade; direito de ser educado sem castigos físicos (Lei Menino Bernardo)."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Do Direito à Convivência Familiar e Comunitária",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 19 a 52-D",
+                    "content": "Família natural e extensa, poder familiar, família substituta: guarda, tutela e adoção, inclusive internacional.",
+                    "history": [
+                      {
+                        "year": 2009,
+                        "norm": "Lei 12.010/2009 (Lei Nacional da Adoção)",
+                        "note": "Nova disciplina da adoção e do acolhimento, com prioridade à família extensa."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Do Direito à Educação, à Cultura, ao Esporte e ao Lazer",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 53 a 59",
+                    "content": "Acesso à escola, dever do Estado, participação dos pais e proteção contra evasão."
+                  },
+                  {
+                    "id": "cap-v",
+                    "name": "Capítulo V - Do Direito à Profissionalização e à Proteção no Trabalho",
+                    "label": "Cap. V",
+                    "subtitle": "Arts. 60 a 69",
+                    "content": "Proibição de trabalho antes dos 14 anos, aprendizagem e trabalho educativo."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da Prevenção",
+                "label": "Título III",
+                "subtitle": "Arts. 70 a 85",
+                "content": "Dever geral de prevenir ameaças e violações e regras especiais sobre informação, diversões, produtos, serviços e viagens.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Disposições Gerais",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 70 a 73",
+                    "content": "Dever de todos de prevenir a ameaça ou violação de direitos."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Da Prevenção Especial",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 74 a 85",
+                    "content": "Classificação indicativa, acesso a diversões e espetáculos, venda de produtos proibidos e autorização para viajar."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "livro-ii",
+            "name": "Livro II - Parte Especial",
+            "label": "Livro II",
+            "subtitle": "Arts. 86 a 258-F",
+            "content": "A operação do sistema de garantias: política de atendimento, medidas de proteção, ato infracional e medidas socioeducativas, Conselho Tutelar, acesso à Justiça e crimes e infrações administrativas.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Da Política de Atendimento",
+                "label": "Título I",
+                "subtitle": "Arts. 86 a 97",
+                "content": "Diretrizes, Conselhos de Direitos, fundos, entidades de atendimento e programas de acolhimento."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Das Medidas de Proteção",
+                "label": "Título II",
+                "subtitle": "Arts. 98 a 102",
+                "content": "Hipóteses de aplicação e medidas específicas: orientação, matrícula, acolhimento institucional e familiar, colocação em família substituta."
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Da Prática de Ato Infracional",
+                "label": "Título III",
+                "subtitle": "Arts. 103 a 128",
+                "content": "Conduta descrita como crime ou contravenção praticada por criança ou adolescente; garantias e medidas socioeducativas.",
+                "children": [
+                  {
+                    "id": "cap-i-iii",
+                    "name": "Capítulos I a III - Disposições Gerais, Direitos Individuais e Garantias Processuais",
+                    "label": "Caps. I-III",
+                    "subtitle": "Arts. 103 a 111",
+                    "content": "Inimputabilidade, apreensão apenas em flagrante ou por ordem judicial, devido processo e defesa técnica."
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Das Medidas Socioeducativas",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 112 a 125",
+                    "content": "Advertência, reparação do dano, prestação de serviços, liberdade assistida, semiliberdade e internação."
+                  },
+                  {
+                    "id": "cap-v",
+                    "name": "Capítulo V - Da Remissão",
+                    "label": "Cap. V",
+                    "subtitle": "Arts. 126 a 128",
+                    "content": "Exclusão, suspensão ou extinção do processo por remissão concedida pelo Ministério Público ou pelo juiz."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Das Medidas Pertinentes aos Pais ou Responsável",
+                "label": "Título IV",
+                "subtitle": "Arts. 129 e 130",
+                "content": "Encaminhamento a programas, obrigação de matrícula, advertência, perda da guarda, destituição do poder familiar e afastamento do agressor."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Do Conselho Tutelar",
+                "label": "Título V",
+                "subtitle": "Arts. 131 a 140",
+                "content": "Órgão permanente e autônomo, escolha dos conselheiros, atribuições e impedimentos."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Do Acesso à Justiça",
+                "label": "Título VI",
+                "subtitle": "Arts. 141 a 224",
+                "content": "Justiça da Infância e da Juventude, procedimentos, recursos, Ministério Público, advogado e tutela coletiva.",
+                "children": [
+                  {
+                    "id": "cap-i-ii",
+                    "name": "Capítulos I e II - Disposições Gerais e Justiça da Infância e da Juventude",
+                    "label": "Caps. I-II",
+                    "subtitle": "Arts. 141 a 151",
+                    "content": "Acesso gratuito, competência do juízo da infância e serviços auxiliares."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Dos Procedimentos",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 152 a 197-F",
+                    "content": "Perda e suspensão do poder familiar, colocação em família substituta, apuração de ato infracional, habilitação de pretendentes à adoção."
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Dos Recursos",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 198 a 199-E",
+                    "content": "Sistema recursal do CPC com adaptações, prazos e prioridade de julgamento."
+                  },
+                  {
+                    "id": "cap-v-vi",
+                    "name": "Capítulos V e VI - Do Ministério Público e do Advogado",
+                    "label": "Caps. V-VI",
+                    "subtitle": "Arts. 200 a 207",
+                    "content": "Atribuições do MP na infância e juventude e garantia de defesa técnica."
+                  },
+                  {
+                    "id": "cap-vii",
+                    "name": "Capítulo VII - Da Proteção Judicial dos Interesses Individuais, Difusos e Coletivos",
+                    "label": "Cap. VII",
+                    "subtitle": "Arts. 208 a 224",
+                    "content": "Ações de responsabilidade por ofensa a direitos, legitimados e aplicação da Lei da Ação Civil Pública."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-vii",
+                "name": "Título VII - Dos Crimes e das Infrações Administrativas",
+                "label": "Título VII",
+                "subtitle": "Arts. 225 a 258-F",
+                "content": "Tipos penais e infrações administrativas praticados contra crianças e adolescentes.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Dos Crimes",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 225 a 244-B",
+                    "content": "Crimes de ação pública incondicionada, incluindo pornografia infantil, corrupção de menores e venda de bebidas alcoólicas."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Das Infrações Administrativas",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 245 a 258-F",
+                    "content": "Infrações de médicos, professores, responsáveis por espetáculos, hospedagem e transporte, com multas."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "disposicoes-finais",
+            "name": "Disposições Finais e Transitórias",
+            "label": "Disp. Finais",
+            "subtitle": "Arts. 259 a 267",
+            "content": "Adaptação dos entes federativos, destinação de recursos a fundos e vigência."
+          }
+        ]
+      }
+    },
+    "ctn": {
+      "id": "ctn",
+      "title": "Código Tributário Nacional",
+      "shortTitle": "CTN",
+      "norm": "Lei nº 5.172, de 25 de outubro de 1966",
+      "urn": "urn:lex:br:federal:lei:1966-10-25;5172",
+      "ramo": "publico",
+      "natureza": "material",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm",
+      "year": 1966,
+      "note": "Lei ordinária na origem, recepcionada pela Constituição de 1988 com status de lei complementar (art. 146 da CF).",
+      "root": {
+        "id": "ctn",
+        "name": "Código Tributário Nacional",
+        "label": "CTN",
+        "subtitle": "Raiz",
+        "content": "Lei nº 5.172/1966. Dispõe sobre o Sistema Tributário Nacional e institui normas gerais de direito tributário aplicáveis à União, Estados e Municípios: competência, impostos, obrigação, crédito e administração tributária.",
+        "children": [
+          {
+            "id": "livro-primeiro",
+            "name": "Livro Primeiro - Sistema Tributário Nacional",
+            "label": "Livro I",
+            "subtitle": "Arts. 1º a 95",
+            "content": "Define tributo e suas espécies, distribui competências, limita o poder de tributar e descreve cada imposto. Boa parte foi superada pela Constituição de 1988, mas as definições permanecem referência.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Disposições Gerais",
+                "label": "Título I",
+                "subtitle": "Arts. 1º a 5º",
+                "content": "Conceito de tributo (art. 3º), natureza jurídica determinada pelo fato gerador e espécies: impostos, taxas e contribuições de melhoria."
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Competência Tributária",
+                "label": "Título II",
+                "subtitle": "Arts. 6º a 15",
+                "content": "Atribuição constitucional de competência, indelegabilidade e limitações (legalidade, anterioridade, imunidades).",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Disposições Gerais",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 6º a 8º",
+                    "content": "Competência plena, indelegabilidade e não exercício da competência."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Limitações da Competência Tributária",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 9º a 15",
+                    "content": "Vedações aos entes, imunidades recíproca, de templos, partidos e livros, e empréstimos compulsórios."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Impostos",
+                "label": "Título III",
+                "subtitle": "Arts. 16 a 76",
+                "content": "Conceito de imposto e disciplina de cada um por grupo econômico: comércio exterior, patrimônio e renda, produção e circulação, impostos especiais.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Disposições Gerais",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 16 a 18",
+                    "content": "Imposto como tributo não vinculado a atividade estatal específica; competência residual e impostos extraordinários."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Impostos sobre o Comércio Exterior",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 19 a 28",
+                    "content": "Imposto de importação e imposto de exportação: fato gerador, base de cálculo e contribuinte."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Impostos sobre o Patrimônio e a Renda",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 29 a 45",
+                    "content": "ITR, IPTU, ITBI e imposto de renda."
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Impostos sobre a Produção e a Circulação",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 46 a 73",
+                    "content": "IPI, o antigo ICM (hoje ICMS), IOF e imposto sobre serviços; vários dispositivos revogados ou superados."
+                  },
+                  {
+                    "id": "cap-v",
+                    "name": "Capítulo V - Impostos Especiais",
+                    "label": "Cap. V",
+                    "subtitle": "Arts. 74 a 76",
+                    "content": "Impostos únicos sobre combustíveis, energia e minerais (extintos) e impostos extraordinários de guerra."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Taxas",
+                "label": "Título IV",
+                "subtitle": "Arts. 77 a 80",
+                "content": "Poder de polícia e serviço público específico e divisível; vedação de base de cálculo própria de imposto."
+              },
+              {
+                "id": "titulo-v",
+                "name": "Título V - Contribuição de Melhoria",
+                "label": "Título V",
+                "subtitle": "Arts. 81 e 82",
+                "content": "Valorização imobiliária decorrente de obra pública; limites total e individual e requisitos da lei instituidora."
+              },
+              {
+                "id": "titulo-vi",
+                "name": "Título VI - Distribuições de Receitas Tributárias",
+                "label": "Título VI",
+                "subtitle": "Arts. 83 a 95",
+                "content": "Repartição do produto da arrecadação entre os entes e fundos de participação; em grande parte superado pelos arts. 157 a 162 da CF."
+              }
+            ]
+          },
+          {
+            "id": "livro-segundo",
+            "name": "Livro Segundo - Normas Gerais de Direito Tributário",
+            "label": "Livro II",
+            "subtitle": "Arts. 96 a 218",
+            "content": "A parte viva do CTN: legislação tributária, obrigação, crédito e administração. É aqui que estão lançamento, suspensão, extinção e exclusão do crédito.",
+            "children": [
+              {
+                "id": "titulo-i",
+                "name": "Título I - Legislação Tributária",
+                "label": "Título I",
+                "subtitle": "Arts. 96 a 112",
+                "content": "Fontes, vigência, aplicação, interpretação e integração da legislação tributária.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Disposições Gerais",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 96 a 100",
+                    "content": "Conceito de legislação tributária, reserva legal, tratados, decretos e normas complementares."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Vigência da Legislação Tributária",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 101 a 104",
+                    "content": "Vigência no espaço e no tempo e regras especiais para impostos sobre patrimônio e renda."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Aplicação da Legislação Tributária",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 105 e 106",
+                    "content": "Aplicação imediata a fatos pendentes e retroatividade benigna em matéria de infrações."
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Interpretação e Integração da Legislação Tributária",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 107 a 112",
+                    "content": "Analogia, princípios gerais, equidade, interpretação literal das isenções e interpretação benigna das infrações."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-ii",
+                "name": "Título II - Obrigação Tributária",
+                "label": "Título II",
+                "subtitle": "Arts. 113 a 138",
+                "content": "Obrigação principal e acessória, fato gerador, sujeitos ativo e passivo, solidariedade, capacidade, domicílio e responsabilidade.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Disposições Gerais",
+                    "label": "Cap. I",
+                    "subtitle": "Art. 113",
+                    "content": "Obrigação principal (pagar tributo ou penalidade) e acessória (prestações positivas ou negativas)."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Fato Gerador",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 114 a 118",
+                    "content": "Fato gerador da obrigação principal e acessória, momento de ocorrência, negócios condicionais e norma antielisiva."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Sujeito Ativo",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 119 e 120",
+                    "content": "Pessoa jurídica de direito público titular da competência para exigir o tributo."
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Sujeito Passivo",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 121 a 127",
+                    "content": "Contribuinte e responsável, convenções particulares, solidariedade, capacidade tributária e domicílio."
+                  },
+                  {
+                    "id": "cap-v",
+                    "name": "Capítulo V - Responsabilidade Tributária",
+                    "label": "Cap. V",
+                    "subtitle": "Arts. 128 a 138",
+                    "content": "Responsabilidade dos sucessores, de terceiros, por infrações e denúncia espontânea."
+                  }
+                ]
+              },
+              {
+                "id": "titulo-iii",
+                "name": "Título III - Crédito Tributário",
+                "label": "Título III",
+                "subtitle": "Arts. 139 a 193",
+                "content": "Constituição do crédito pelo lançamento e suas vicissitudes: suspensão, extinção, exclusão, garantias e privilégios.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Disposições Gerais",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 139 a 141",
+                    "content": "O crédito decorre da obrigação principal e só se modifica nos casos previstos no Código."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Constituição de Crédito Tributário",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 142 a 150",
+                    "content": "Lançamento: conceito, modalidades de ofício, por declaração e por homologação, e sua revisão."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Suspensão do Crédito Tributário",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 151 a 155-A",
+                    "content": "Moratória, depósito integral, reclamações e recursos, liminares, tutela antecipada e parcelamento.",
+                    "history": [
+                      {
+                        "year": 2001,
+                        "norm": "LC 104/2001",
+                        "note": "Inclusão do parcelamento como causa de suspensão (art. 151, VI) e do art. 155-A."
+                      }
+                    ]
+                  },
+                  {
+                    "id": "cap-iv",
+                    "name": "Capítulo IV - Extinção do Crédito Tributário",
+                    "label": "Cap. IV",
+                    "subtitle": "Arts. 156 a 174",
+                    "content": "Pagamento, compensação, transação, remissão, prescrição e decadência, conversão de depósito, consignação, decisão definitiva e dação em pagamento."
+                  },
+                  {
+                    "id": "cap-v",
+                    "name": "Capítulo V - Exclusão de Crédito Tributário",
+                    "label": "Cap. V",
+                    "subtitle": "Arts. 175 a 182",
+                    "content": "Isenção (dispensa legal do tributo devido) e anistia (perdão das infrações e respectivas penalidades)."
+                  },
+                  {
+                    "id": "cap-vi",
+                    "name": "Capítulo VI - Garantias e Privilégios do Crédito Tributário",
+                    "label": "Cap. VI",
+                    "subtitle": "Arts. 183 a 193",
+                    "content": "Universalidade dos bens do devedor, presunção de fraude, preferências, concurso de credores e quitação em falência e inventário.",
+                    "history": [
+                      {
+                        "year": 2005,
+                        "norm": "LC 118/2005",
+                        "note": "Adaptação das preferências do crédito tributário à nova Lei de Falências."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "titulo-iv",
+                "name": "Título IV - Administração Tributária",
+                "label": "Título IV",
+                "subtitle": "Arts. 194 a 208",
+                "content": "Poderes e deveres da Fazenda: fiscalização, sigilo, dívida ativa e certidões.",
+                "children": [
+                  {
+                    "id": "cap-i",
+                    "name": "Capítulo I - Fiscalização",
+                    "label": "Cap. I",
+                    "subtitle": "Arts. 194 a 200",
+                    "content": "Competência e poderes das autoridades, dever de informar, sigilo fiscal e assistência mútua."
+                  },
+                  {
+                    "id": "cap-ii",
+                    "name": "Capítulo II - Dívida Ativa",
+                    "label": "Cap. II",
+                    "subtitle": "Arts. 201 a 204",
+                    "content": "Inscrição, requisitos do termo e presunção de certeza e liquidez."
+                  },
+                  {
+                    "id": "cap-iii",
+                    "name": "Capítulo III - Certidões Negativas",
+                    "label": "Cap. III",
+                    "subtitle": "Arts. 205 a 208",
+                    "content": "Certidão negativa e positiva com efeitos de negativa; responsabilidade do servidor."
+                  }
+                ]
+              },
+              {
+                "id": "disposicoes-finais",
+                "name": "Disposições Finais e Transitórias",
+                "label": "Disp. Finais",
+                "subtitle": "Arts. 209 a 218",
+                "content": "Prazos, vigência e regras de transição."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "l14133": {
+      "id": "l14133",
+      "title": "Lei de Licitações e Contratos Administrativos",
+      "shortTitle": "Lei 14.133",
+      "norm": "Lei nº 14.133, de 1º de abril de 2021",
+      "urn": "urn:lex:br:federal:lei:2021-04-01;14133",
+      "ramo": "publico",
+      "natureza": "material",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm",
+      "year": 2021,
+      "note": "Rascunho: a numeração interna dos Capítulos do Título II foi simplificada em grupos e deve ser conferida contra o texto oficial.",
+      "predecessors": [
+        {
+          "title": "Estatuto das Licitações de 1986",
+          "shortTitle": "DL 2.300",
+          "norm": "Decreto-Lei nº 2.300, de 21 de novembro de 1986",
+          "from": 1986,
+          "to": 1993
+        },
+        {
+          "title": "Lei de Licitações de 1993",
+          "shortTitle": "Lei 8.666",
+          "norm": "Lei nº 8.666, de 21 de junho de 1993",
+          "from": 1993,
+          "to": 2021
+        }
+      ],
+      "root": {
+        "id": "l14133",
+        "name": "Lei de Licitações e Contratos Administrativos",
+        "label": "Lei 14.133",
+        "subtitle": "Raiz",
+        "content": "Lei nº 14.133/2021. Substitui a Lei 8.666/1993, a Lei do Pregão e o RDC, estabelecendo normas gerais de licitação e contratação para as Administrações Públicas diretas, autárquicas e fundacionais de todos os entes.",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Disposições Preliminares",
+            "label": "Título I",
+            "subtitle": "Arts. 1º a 10",
+            "content": "Âmbito de aplicação, princípios, definições legais e regras sobre os agentes públicos que atuam nas contratações.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Do Âmbito de Aplicação desta Lei",
+                "label": "Cap. I",
+                "subtitle": "Arts. 1º a 4º",
+                "content": "Entes e órgãos abrangidos, exclusões (estatais, Lei 13.303) e aplicação às contratações com recursos de empréstimos internacionais."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Dos Princípios",
+                "label": "Cap. II",
+                "subtitle": "Art. 5º",
+                "content": "Legalidade, impessoalidade, moralidade, publicidade, eficiência, planejamento, segregação de funções, entre outros, e aplicação da LINDB."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Das Definições",
+                "label": "Cap. III",
+                "subtitle": "Art. 6º",
+                "content": "Glossário legal: órgão, entidade, obra, serviço, bens e serviços comuns, contratação integrada, matriz de riscos e outros conceitos."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Dos Agentes Públicos",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 7º a 10",
+                "content": "Agente de contratação, comissão de contratação, pregoeiro, vedações e assessoramento jurídico."
+              }
+            ]
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Das Licitações",
+            "label": "Título II",
+            "subtitle": "Arts. 11 a 88",
+            "content": "Todo o procedimento licitatório, do planejamento ao encerramento, mais a contratação direta, as alienações e os instrumentos auxiliares.",
+            "children": [
+              {
+                "id": "processo-licitatorio",
+                "name": "Do Processo Licitatório",
+                "label": "Processo",
+                "subtitle": "Arts. 11 a 17",
+                "content": "Objetivos da licitação, formato preferencialmente eletrônico, participação, impedimentos e fases do procedimento (art. 17)."
+              },
+              {
+                "id": "fase-preparatoria",
+                "name": "Da Fase Preparatória",
+                "label": "Fase prep.",
+                "subtitle": "Arts. 18 a 27",
+                "content": "Planejamento: estudo técnico preliminar, termo de referência, anteprojeto e projetos, orçamento estimado, edital e minuta de contrato."
+              },
+              {
+                "id": "modalidades",
+                "name": "Das Modalidades de Licitação",
+                "label": "Modalidades",
+                "subtitle": "Arts. 28 a 32",
+                "content": "Pregão, concorrência, concurso, leilão e diálogo competitivo; extinção da tomada de preços e do convite."
+              },
+              {
+                "id": "criterios-julgamento",
+                "name": "Dos Critérios de Julgamento",
+                "label": "Julgamento",
+                "subtitle": "Arts. 33 a 39",
+                "content": "Menor preço, maior desconto, melhor técnica ou conteúdo artístico, técnica e preço, maior lance e maior retorno econômico."
+              },
+              {
+                "id": "disposicoes-setoriais",
+                "name": "Das Disposições Setoriais",
+                "label": "Setoriais",
+                "subtitle": "Arts. 40 a 52",
+                "content": "Regras específicas para compras, obras e serviços de engenharia, serviços em geral, locação de imóveis e licitações internacionais."
+              },
+              {
+                "id": "edital-propostas",
+                "name": "Da Divulgação do Edital, das Propostas e dos Lances",
+                "label": "Edital e lances",
+                "subtitle": "Arts. 53 a 61",
+                "content": "Controle prévio de legalidade, publicação no PNCP, prazos mínimos, apresentação de propostas, modos de disputa aberto e fechado e desempate."
+              },
+              {
+                "id": "habilitacao",
+                "name": "Da Habilitação",
+                "label": "Habilitação",
+                "subtitle": "Arts. 62 a 70",
+                "content": "Habilitação jurídica, técnica, fiscal, social, trabalhista e econômico-financeira; inversão de fases como regra."
+              },
+              {
+                "id": "encerramento",
+                "name": "Do Encerramento da Licitação",
+                "label": "Encerramento",
+                "subtitle": "Art. 71",
+                "content": "Homologação, adjudicação, revogação e anulação."
+              },
+              {
+                "id": "contratacao-direta",
+                "name": "Da Contratação Direta",
+                "label": "Contr. direta",
+                "subtitle": "Arts. 72 a 75",
+                "content": "Processo de contratação direta, inexigibilidade (art. 74) e dispensa de licitação (art. 75)."
+              },
+              {
+                "id": "alienacoes",
+                "name": "Das Alienações",
+                "label": "Alienações",
+                "subtitle": "Art. 76",
+                "content": "Alienação de bens imóveis e móveis da Administração, com os casos de dispensa."
+              },
+              {
+                "id": "instrumentos-auxiliares",
+                "name": "Dos Instrumentos Auxiliares",
+                "label": "Instr. auxiliares",
+                "subtitle": "Arts. 77 a 88",
+                "content": "Credenciamento, pré-qualificação, procedimento de manifestação de interesse, sistema de registro de preços e registro cadastral."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Dos Contratos Administrativos",
+            "label": "Título III",
+            "subtitle": "Arts. 89 a 154",
+            "content": "Formalização, garantias, riscos, prerrogativas, duração, execução, alteração, extinção, recebimento, pagamento, nulidade e meios alternativos de solução de controvérsias.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Da Formalização dos Contratos",
+                "label": "Cap. I",
+                "subtitle": "Arts. 89 a 95",
+                "content": "Cláusulas necessárias, convocação para assinatura, publicidade e instrumento de contrato."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Garantias",
+                "label": "Cap. II",
+                "subtitle": "Arts. 96 a 102",
+                "content": "Caução, seguro-garantia e fiança bancária; cláusula de retomada em obras."
+              },
+              {
+                "id": "cap-iii-iv",
+                "name": "Capítulos III e IV - Alocação de Riscos e Prerrogativas da Administração",
+                "label": "Caps. III-IV",
+                "subtitle": "Arts. 103 e 104",
+                "content": "Matriz de riscos e as prerrogativas de modificar, extinguir, fiscalizar, sancionar e ocupar provisoriamente."
+              },
+              {
+                "id": "cap-v",
+                "name": "Capítulo V - Da Duração dos Contratos",
+                "label": "Cap. V",
+                "subtitle": "Arts. 105 a 114",
+                "content": "Vigência, contratos de serviços contínuos de até 5 anos prorrogáveis até 10, e contratos de até 35 anos para certos objetos."
+              },
+              {
+                "id": "cap-vi",
+                "name": "Capítulo VI - Da Execução dos Contratos",
+                "label": "Cap. VI",
+                "subtitle": "Arts. 115 a 123",
+                "content": "Fiscalização, subcontratação, responsabilidade do contratado e encargos trabalhistas e previdenciários."
+              },
+              {
+                "id": "cap-vii",
+                "name": "Capítulo VII - Da Alteração dos Contratos e dos Preços",
+                "label": "Cap. VII",
+                "subtitle": "Arts. 124 a 136",
+                "content": "Alterações unilaterais e consensuais, limites de 25% e 50%, equilíbrio econômico-financeiro, reajuste e repactuação."
+              },
+              {
+                "id": "cap-viii",
+                "name": "Capítulo VIII - Das Hipóteses de Extinção dos Contratos",
+                "label": "Cap. VIII",
+                "subtitle": "Arts. 137 a 139",
+                "content": "Extinção unilateral, consensual, judicial ou arbitral e seus efeitos."
+              },
+              {
+                "id": "cap-ix-x",
+                "name": "Capítulos IX e X - Recebimento do Objeto e Pagamento",
+                "label": "Caps. IX-X",
+                "subtitle": "Arts. 140 a 146",
+                "content": "Recebimento provisório e definitivo, ordem cronológica de pagamentos e antecipação."
+              },
+              {
+                "id": "cap-xi",
+                "name": "Capítulo XI - Da Nulidade dos Contratos",
+                "label": "Cap. XI",
+                "subtitle": "Arts. 147 a 150",
+                "content": "Declaração de nulidade ponderada pelas consequências e indenização do contratado de boa-fé."
+              },
+              {
+                "id": "cap-xii",
+                "name": "Capítulo XII - Dos Meios Alternativos de Resolução de Controvérsias",
+                "label": "Cap. XII",
+                "subtitle": "Arts. 151 a 154",
+                "content": "Conciliação, mediação, comitê de resolução de disputas e arbitragem."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Das Irregularidades",
+            "label": "Título IV",
+            "subtitle": "Arts. 155 a 173",
+            "content": "Infrações e sanções administrativas, impugnações, recursos e o controle das contratações.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Das Infrações e Sanções Administrativas",
+                "label": "Cap. I",
+                "subtitle": "Arts. 155 a 163",
+                "content": "Advertência, multa, impedimento de licitar e declaração de inidoneidade; processo de responsabilização e reabilitação."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Impugnações, dos Pedidos de Esclarecimento e dos Recursos",
+                "label": "Cap. II",
+                "subtitle": "Arts. 164 a 168",
+                "content": "Impugnação ao edital, recurso hierárquico e pedido de reconsideração, com prazos."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Do Controle das Contratações",
+                "label": "Cap. III",
+                "subtitle": "Arts. 169 a 173",
+                "content": "Três linhas de defesa, controle interno e externo, tribunais de contas e gestão de riscos."
+              }
+            ]
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Disposições Gerais",
+            "label": "Título V",
+            "subtitle": "Arts. 174 a 194",
+            "content": "Portal Nacional de Contratações Públicas, alterações em outras leis (inclusive os crimes em licitações inseridos no Código Penal) e regras de transição.",
+            "children": [
+              {
+                "id": "pncp",
+                "name": "Do Portal Nacional de Contratações Públicas",
+                "label": "PNCP",
+                "subtitle": "Arts. 174 a 176",
+                "content": "Sítio eletrônico oficial para divulgação centralizada e obrigatória dos atos de contratação."
+              },
+              {
+                "id": "alteracoes",
+                "name": "Das Alterações Legislativas",
+                "label": "Alterações",
+                "subtitle": "Arts. 177 a 178",
+                "content": "Inclusão do Capítulo II-B no Título XI do Código Penal (arts. 337-E a 337-P): crimes em licitações e contratos administrativos."
+              },
+              {
+                "id": "transitorias",
+                "name": "Disposições Transitórias e Finais",
+                "label": "Transitórias",
+                "subtitle": "Arts. 179 a 194",
+                "content": "Período de convivência com a Lei 8.666, revogações e vigência."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "l9784": {
+      "id": "l9784",
+      "title": "Lei do Processo Administrativo Federal",
+      "shortTitle": "Lei 9.784",
+      "norm": "Lei nº 9.784, de 29 de janeiro de 1999",
+      "urn": "urn:lex:br:federal:lei:1999-01-29;9784",
+      "ramo": "publico",
+      "natureza": "processual",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm",
+      "year": 1999,
+      "note": "Direito formal da Administração: aplica-se subsidiariamente aos processos administrativos específicos e, por construção jurisprudencial, a Estados e Municípios sem lei própria.",
+      "root": {
+        "id": "l9784",
+        "name": "Lei do Processo Administrativo Federal",
+        "label": "Lei 9.784",
+        "subtitle": "Raiz",
+        "content": "Lei nº 9.784/1999. Regula o processo administrativo no âmbito da Administração Pública Federal, concretizando o contraditório e a ampla defesa (art. 5º, LV, da CF) e fixando o regime de anulação, revogação e convalidação dos atos administrativos.",
+        "children": [
+          {
+            "id": "cap-i",
+            "name": "Capítulo I - Das Disposições Gerais",
+            "label": "Cap. I",
+            "subtitle": "Arts. 1º e 2º",
+            "content": "Âmbito de aplicação, definições e os princípios do processo administrativo: legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público e eficiência."
+          },
+          {
+            "id": "cap-ii-iii",
+            "name": "Capítulos II e III - Dos Direitos e dos Deveres dos Administrados",
+            "label": "Caps. II-III",
+            "subtitle": "Arts. 3º e 4º",
+            "content": "Direito de ser tratado com respeito, ter ciência da tramitação, formular alegações e fazer-se assistir por advogado; deveres de lealdade e verdade."
+          },
+          {
+            "id": "cap-iv-v",
+            "name": "Capítulos IV e V - Do Início do Processo e dos Interessados",
+            "label": "Caps. IV-V",
+            "subtitle": "Arts. 5º a 10",
+            "content": "Início de ofício ou a pedido, requisitos do requerimento, vedação à recusa de recebimento e legitimados como interessados."
+          },
+          {
+            "id": "cap-vi",
+            "name": "Capítulo VI - Da Competência",
+            "label": "Cap. VI",
+            "subtitle": "Arts. 11 a 17",
+            "content": "Irrenunciabilidade, delegação e avocação de competência e seus limites."
+          },
+          {
+            "id": "cap-vii",
+            "name": "Capítulo VII - Dos Impedimentos e da Suspeição",
+            "label": "Cap. VII",
+            "subtitle": "Arts. 18 a 21",
+            "content": "Hipóteses de impedimento e suspeição da autoridade ou servidor e dever de comunicação."
+          },
+          {
+            "id": "cap-viii-ix",
+            "name": "Capítulos VIII e IX - Da Forma, Tempo e Lugar dos Atos e da Comunicação",
+            "label": "Caps. VIII-IX",
+            "subtitle": "Arts. 22 a 28",
+            "content": "Informalismo moderado, atos em dias úteis, intimação do interessado e efeitos do não comparecimento."
+          },
+          {
+            "id": "cap-x",
+            "name": "Capítulo X - Da Instrução",
+            "label": "Cap. X",
+            "subtitle": "Arts. 29 a 47",
+            "content": "Produção de provas, consulta e audiência públicas, pareceres, alegações finais e relatório."
+          },
+          {
+            "id": "cap-xi-xii",
+            "name": "Capítulos XI e XII - Do Dever de Decidir e da Motivação",
+            "label": "Caps. XI-XII",
+            "subtitle": "Arts. 48 a 50",
+            "content": "Prazo de 30 dias para decidir e hipóteses em que a motivação explícita é obrigatória."
+          },
+          {
+            "id": "cap-xiii",
+            "name": "Capítulo XIII - Da Desistência e Outros Casos de Extinção do Processo",
+            "label": "Cap. XIII",
+            "subtitle": "Arts. 51 e 52",
+            "content": "Desistência, renúncia e extinção por exaurimento ou impossibilidade do objeto."
+          },
+          {
+            "id": "cap-xiv",
+            "name": "Capítulo XIV - Da Anulação, Revogação e Convalidação",
+            "label": "Cap. XIV",
+            "subtitle": "Arts. 53 a 55",
+            "content": "Autotutela, decadência de 5 anos para anular atos favoráveis e convalidação de defeitos sanáveis."
+          },
+          {
+            "id": "cap-xv",
+            "name": "Capítulo XV - Do Recurso Administrativo e da Revisão",
+            "label": "Cap. XV",
+            "subtitle": "Arts. 56 a 65",
+            "content": "Recurso em até três instâncias, efeitos, legitimados, prazos, vedação à reformatio in pejus na revisão e súmula vinculante."
+          },
+          {
+            "id": "cap-xvi-xvii",
+            "name": "Capítulos XVI e XVII - Dos Prazos e das Sanções",
+            "label": "Caps. XVI-XVII",
+            "subtitle": "Arts. 66 a 68",
+            "content": "Contagem de prazos e garantia de processo administrativo prévio à aplicação de sanções."
+          },
+          {
+            "id": "cap-xviii",
+            "name": "Capítulo XVIII - Das Disposições Finais",
+            "label": "Cap. XVIII",
+            "subtitle": "Arts. 69 a 70",
+            "content": "Aplicação subsidiária aos processos específicos e vigência."
+          }
+        ]
+      }
+    },
+    "lep": {
+      "id": "lep",
+      "title": "Lei de Execução Penal",
+      "shortTitle": "LEP",
+      "norm": "Lei nº 7.210, de 11 de julho de 1984",
+      "urn": "urn:lex:br:federal:lei:1984-07-11;7210",
+      "ramo": "penal",
+      "natureza": "processual",
+      "status": "rascunho",
+      "source": "https://www.planalto.gov.br/ccivil_03/leis/l7210.htm",
+      "year": 1984,
+      "note": "Direito formal do ramo penal: disciplina a execução das penas e medidas de segurança fixadas com base no Código Penal, substituindo em grande parte o Livro IV do CPP.",
+      "predecessors": [
+        {
+          "title": "Execução penal pelo Livro IV do Código de Processo Penal",
+          "shortTitle": "CPP, Livro IV",
+          "norm": "Decreto-Lei nº 3.689/1941, arts. 668 a 779",
+          "from": 1941,
+          "to": 1984
+        }
+      ],
+      "root": {
+        "id": "lep",
+        "name": "Lei de Execução Penal",
+        "label": "LEP",
+        "subtitle": "Raiz",
+        "content": "Lei nº 7.210/1984. Regula a execução das penas e das medidas de segurança, com o objetivo de efetivar as disposições da sentença e proporcionar condições para a harmônica integração social do condenado e do internado.",
+        "children": [
+          {
+            "id": "titulo-i",
+            "name": "Título I - Do Objeto e da Aplicação da Lei de Execução Penal",
+            "label": "Título I",
+            "subtitle": "Arts. 1º a 4º",
+            "content": "Finalidades da execução, jurisdição penal competente, direitos não atingidos pela sentença e cooperação da comunidade."
+          },
+          {
+            "id": "titulo-ii",
+            "name": "Título II - Do Condenado e do Internado",
+            "label": "Título II",
+            "subtitle": "Arts. 5º a 60",
+            "content": "Classificação, assistência, trabalho, deveres, direitos e disciplina de quem cumpre pena ou medida de segurança.",
+            "history": [
+              {
+                "year": 2003,
+                "norm": "Lei 10.792/2003",
+                "note": "Criação do Regime Disciplinar Diferenciado (RDD), art. 52."
+              }
+            ],
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Da Classificação",
+                "label": "Cap. I",
+                "subtitle": "Arts. 5º a 9º-A",
+                "content": "Individualização da execução, Comissão Técnica de Classificação, exame criminológico e identificação do perfil genético."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Da Assistência",
+                "label": "Cap. II",
+                "subtitle": "Arts. 10 a 27",
+                "content": "Assistência material, à saúde, jurídica, educacional, social e religiosa, e assistência ao egresso."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Do Trabalho",
+                "label": "Cap. III",
+                "subtitle": "Arts. 28 a 37",
+                "content": "Trabalho como dever social e condição de dignidade; trabalho interno e externo, remuneração e jornada."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Dos Deveres, dos Direitos e da Disciplina",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 38 a 60",
+                "content": "Deveres e direitos do preso, faltas disciplinares, sanções e recompensas, Regime Disciplinar Diferenciado e procedimento disciplinar."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iii",
+            "name": "Título III - Dos Órgãos da Execução Penal",
+            "label": "Título III",
+            "subtitle": "Arts. 61 a 81-B",
+            "content": "Rede de órgãos que atuam na execução: do Conselho Nacional de Política Criminal e Penitenciária à Defensoria Pública.",
+            "children": [
+              {
+                "id": "cap-i-ii",
+                "name": "Capítulos I e II - Disposições Gerais e Conselho Nacional de Política Criminal e Penitenciária",
+                "label": "Caps. I-II",
+                "subtitle": "Arts. 61 a 64",
+                "content": "Rol dos órgãos da execução e atribuições do CNPCP."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Do Juízo da Execução",
+                "label": "Cap. III",
+                "subtitle": "Arts. 65 e 66",
+                "content": "Competência do juiz da execução: progressão, livramento, remição, incidentes e inspeção de estabelecimentos."
+              },
+              {
+                "id": "cap-iv-v",
+                "name": "Capítulos IV e V - Do Ministério Público e do Conselho Penitenciário",
+                "label": "Caps. IV-V",
+                "subtitle": "Arts. 67 a 70",
+                "content": "Fiscalização da execução pelo MP e órgão consultivo e fiscalizador da execução."
+              },
+              {
+                "id": "cap-vi-ix",
+                "name": "Capítulos VI a IX - Departamentos Penitenciários, Patronato, Conselho da Comunidade e Defensoria Pública",
+                "label": "Caps. VI-IX",
+                "subtitle": "Arts. 71 a 81-B",
+                "content": "Departamento Penitenciário Nacional e locais, patronato de egressos, participação da comunidade e atuação da Defensoria."
+              }
+            ]
+          },
+          {
+            "id": "titulo-iv",
+            "name": "Título IV - Dos Estabelecimentos Penais",
+            "label": "Título IV",
+            "subtitle": "Arts. 82 a 104",
+            "content": "Tipologia dos estabelecimentos conforme o regime e a situação da pessoa presa.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Disposições Gerais",
+                "label": "Cap. I",
+                "subtitle": "Arts. 82 a 86",
+                "content": "Destinação por sexo e situação, lotação, separação de presos e instalações obrigatórias."
+              },
+              {
+                "id": "cap-ii-iv",
+                "name": "Capítulos II a IV - Penitenciária, Colônia e Casa do Albergado",
+                "label": "Caps. II-IV",
+                "subtitle": "Arts. 87 a 95",
+                "content": "Estabelecimentos dos regimes fechado, semiaberto e aberto."
+              },
+              {
+                "id": "cap-v-vii",
+                "name": "Capítulos V a VII - Centro de Observação, Hospital de Custódia e Cadeia Pública",
+                "label": "Caps. V-VII",
+                "subtitle": "Arts. 96 a 104",
+                "content": "Exames criminológicos, cumprimento de medida de segurança e recolhimento de presos provisórios."
+              }
+            ]
+          },
+          {
+            "id": "titulo-v",
+            "name": "Título V - Da Execução das Penas em Espécie",
+            "label": "Título V",
+            "subtitle": "Arts. 105 a 170",
+            "content": "Como se executa cada pena do Código Penal: privativas de liberdade, restritivas de direitos, suspensão condicional e multa.",
+            "history": [
+              {
+                "year": 2019,
+                "norm": "Lei 13.964/2019 (Pacote Anticrime)",
+                "note": "Novos percentuais de progressão de regime no art. 112."
+              }
+            ],
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Das Penas Privativas de Liberdade",
+                "label": "Cap. I",
+                "subtitle": "Arts. 105 a 146-D",
+                "content": "Guia de recolhimento, regimes e progressão, autorizações de saída, remição por trabalho e estudo, livramento condicional e monitoração eletrônica."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Das Penas Restritivas de Direitos",
+                "label": "Cap. II",
+                "subtitle": "Arts. 147 a 155",
+                "content": "Prestação de serviços à comunidade, limitação de fim de semana e interdição temporária de direitos."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Da Suspensão Condicional",
+                "label": "Cap. III",
+                "subtitle": "Arts. 156 a 163",
+                "content": "Sursis: condições, audiência admonitória, fiscalização e revogação."
+              },
+              {
+                "id": "cap-iv",
+                "name": "Capítulo IV - Da Pena de Multa",
+                "label": "Cap. IV",
+                "subtitle": "Arts. 164 a 170",
+                "content": "Cobrança, parcelamento, desconto em vencimentos e suspensão da execução."
+              }
+            ]
+          },
+          {
+            "id": "titulo-vi",
+            "name": "Título VI - Da Execução das Medidas de Segurança",
+            "label": "Título VI",
+            "subtitle": "Arts. 171 a 179",
+            "content": "Guia de internação, exames de cessação de periculosidade e desinternação ou liberação."
+          },
+          {
+            "id": "titulo-vii",
+            "name": "Título VII - Dos Incidentes de Execução",
+            "label": "Título VII",
+            "subtitle": "Arts. 180 a 193",
+            "content": "Questões que alteram o curso da execução.",
+            "children": [
+              {
+                "id": "cap-i",
+                "name": "Capítulo I - Das Conversões",
+                "label": "Cap. I",
+                "subtitle": "Arts. 180 a 184",
+                "content": "Conversão de pena privativa em restritiva e vice-versa, e de pena em medida de segurança."
+              },
+              {
+                "id": "cap-ii",
+                "name": "Capítulo II - Do Excesso ou Desvio",
+                "label": "Cap. II",
+                "subtitle": "Arts. 185 e 186",
+                "content": "Prática de ato além dos limites da sentença ou das normas; legitimados a suscitar."
+              },
+              {
+                "id": "cap-iii",
+                "name": "Capítulo III - Da Anistia e do Indulto",
+                "label": "Cap. III",
+                "subtitle": "Arts. 187 a 193",
+                "content": "Procedimento para declaração de extinção da punibilidade por anistia e para concessão de indulto e comutação."
+              }
+            ]
+          },
+          {
+            "id": "titulo-viii",
+            "name": "Título VIII - Do Procedimento Judicial",
+            "label": "Título VIII",
+            "subtitle": "Arts. 194 a 197",
+            "content": "Procedimento dos incidentes perante o juízo da execução e recurso de agravo sem efeito suspensivo."
+          },
+          {
+            "id": "titulo-ix",
+            "name": "Título IX - Das Disposições Finais e Transitórias",
+            "label": "Título IX",
+            "subtitle": "Arts. 198 a 204",
+            "content": "Sigilo, prazos para adaptação dos estabelecimentos e vigência."
+          }
+        ]
+      }
+    }
+  },
+  "relations": [
+    {
+      "from": "cpc/parte-especial/livro-i",
+      "to": "cc/parte-especial/livro-i",
+      "type": "processa",
+      "note": "O procedimento comum e o cumprimento de sentença são a via judicial típica das obrigações e contratos civis."
+    },
+    {
+      "from": "cpc/parte-especial/livro-i/titulo-iii",
+      "to": "cc/parte-especial/livro-iv",
+      "type": "processa",
+      "note": "Ações de família (arts. 693 a 699 do CPC) e demais procedimentos especiais ligados ao direito de família.",
+      "basis": "arts. 693 a 699 do CPC"
+    },
+    {
+      "from": "cpc/parte-especial/livro-i/titulo-iii",
+      "to": "cc/parte-especial/livro-v",
+      "type": "processa",
+      "note": "Inventário e partilha (arts. 610 a 673 do CPC) executam o direito das sucessões.",
+      "basis": "arts. 610 a 673 do CPC"
+    },
+    {
+      "from": "cpc/parte-especial/livro-ii",
+      "to": "cc/parte-especial/livro-i/titulo-viii",
+      "type": "processa",
+      "note": "A execução de título extrajudicial é o caminho típico dos títulos de crédito."
+    },
+    {
+      "from": "cpp/livro-ii",
+      "to": "cp/parte-especial",
+      "type": "processa",
+      "note": "Os processos em espécie dão curso à persecução dos crimes tipificados na Parte Especial."
+    },
+    {
+      "from": "cpp/livro-i/titulo-iii",
+      "to": "cp/parte-geral/titulo-vii",
+      "type": "regulamenta",
+      "note": "O CP define a ação penal pública e privada; o CPP disciplina seu exercício."
+    },
+    {
+      "from": "lep/titulo-v",
+      "to": "cp/parte-geral/titulo-v",
+      "type": "executa",
+      "note": "A LEP executa as penas cominadas e aplicadas segundo o Título V do Código Penal."
+    },
+    {
+      "from": "lep/titulo-vi",
+      "to": "cp/parte-geral/titulo-vi",
+      "type": "executa",
+      "note": "Execução das medidas de segurança previstas no Código Penal."
+    },
+    {
+      "from": "lep",
+      "to": "cpp/livro-iv",
+      "type": "excepciona",
+      "note": "A LEP substituiu, na prática, a disciplina da execução contida no Livro IV do CPP."
+    },
+    {
+      "from": "cpp/livro-i/titulo-ix",
+      "to": "cf/titulo-ii/cap-i",
+      "type": "concretiza",
+      "note": "Prisão, medidas cautelares e liberdade provisória concretizam as garantias do art. 5º (LXI a LXVI).",
+      "basis": "art. 5º, LXI a LXVI, da CF"
+    },
+    {
+      "from": "ctn/livro-primeiro",
+      "to": "cf/titulo-vi/cap-i",
+      "type": "regulamenta",
+      "note": "O CTN cumpre a função de lei complementar do art. 146 da CF para o Sistema Tributário Nacional.",
+      "basis": "art. 146 da CF"
+    },
+    {
+      "from": "clt/titulo-ii",
+      "to": "cf/titulo-ii/cap-ii",
+      "type": "concretiza",
+      "note": "Jornada, salário mínimo, férias e segurança do trabalho concretizam o art. 7º da CF.",
+      "basis": "art. 7º da CF"
+    },
+    {
+      "from": "clt/titulo-viii",
+      "to": "cf/titulo-iv/cap-iii",
+      "type": "organiza",
+      "note": "Organiza a Justiça do Trabalho prevista nos arts. 111 a 116 da CF.",
+      "basis": "arts. 111 a 116 da CF"
+    },
+    {
+      "from": "clt/titulo-x",
+      "to": "cpc",
+      "type": "subsidiario",
+      "note": "O processo do trabalho aplica subsidiariamente o CPC (art. 769 da CLT e art. 15 do CPC).",
+      "basis": "art. 769 da CLT; art. 15 do CPC"
+    },
+    {
+      "from": "cdc/titulo-i",
+      "to": "cf/titulo-vii/cap-i",
+      "type": "concretiza",
+      "note": "A defesa do consumidor é princípio da ordem econômica (art. 170, V) e direito fundamental (art. 5º, XXXII).",
+      "basis": "art. 170, V, e art. 5º, XXXII, da CF"
+    },
+    {
+      "from": "cdc/titulo-iii",
+      "to": "cpc",
+      "type": "subsidiario",
+      "note": "A tutela coletiva do consumidor aplica o CPC naquilo que não contrariar suas disposições (art. 90 do CDC).",
+      "basis": "art. 90 do CDC"
+    },
+    {
+      "from": "cdc/titulo-ii",
+      "to": "cp/parte-geral",
+      "type": "subsidiario",
+      "note": "Aos crimes de consumo aplicam-se as regras gerais do Código Penal (art. 61 do CDC).",
+      "basis": "art. 61 do CDC"
+    },
+    {
+      "from": "eca/livro-i/titulo-ii",
+      "to": "cf/titulo-viii/cap-iv-viii",
+      "type": "concretiza",
+      "note": "Concretiza a proteção integral do art. 227 da CF.",
+      "basis": "art. 227 da CF"
+    },
+    {
+      "from": "eca/livro-ii/titulo-iii",
+      "to": "cp/parte-geral/titulo-iii",
+      "type": "excepciona",
+      "note": "Menores de 18 anos são inimputáveis (art. 27 do CP) e sujeitos ao regime do ato infracional.",
+      "basis": "art. 27 do CP"
+    },
+    {
+      "from": "eca/livro-i/titulo-ii/cap-iii",
+      "to": "cc/parte-especial/livro-iv",
+      "type": "regulamenta",
+      "note": "Guarda, tutela e adoção de crianças e adolescentes seguem o ECA, com remissão ao direito de família do CC."
+    },
+    {
+      "from": "l14133",
+      "to": "cf/titulo-iii/cap-vii",
+      "type": "regulamenta",
+      "note": "Regulamenta o dever de licitar do art. 37, XXI, da CF.",
+      "basis": "art. 37, XXI, da CF"
+    },
+    {
+      "from": "l14133/titulo-v/alteracoes",
+      "to": "cp/parte-especial/titulo-xi",
+      "type": "insere",
+      "note": "Insere os crimes em licitações e contratos (arts. 337-E a 337-P) no Código Penal.",
+      "basis": "arts. 337-E a 337-P do CP"
+    },
+    {
+      "from": "l9784",
+      "to": "cf/titulo-ii/cap-i",
+      "type": "concretiza",
+      "note": "Concretiza o contraditório e a ampla defesa em processo administrativo (art. 5º, LV).",
+      "basis": "art. 5º, LV, da CF"
+    },
+    {
+      "from": "l9784",
+      "to": "cf/titulo-iii/cap-vii",
+      "type": "regulamenta",
+      "note": "Disciplina a atuação procedimental da Administração Pública segundo os princípios do art. 37.",
+      "basis": "art. 37 da CF"
+    },
+    {
+      "from": "l14133/titulo-iv/cap-ii",
+      "to": "l9784",
+      "type": "subsidiario",
+      "note": "Impugnações e recursos nas licitações seguem a Lei 9.784 subsidiariamente."
+    },
+    {
+      "from": "cc/parte-especial/livro-ii",
+      "to": "cf/titulo-vii/cap-i",
+      "type": "concretiza",
+      "note": "O direito de empresa concretiza a livre iniciativa e a função social da propriedade."
+    },
+    {
+      "from": "cp/parte-especial/titulo-iv",
+      "to": "clt",
+      "type": "regulamenta",
+      "note": "Crimes contra a organização do trabalho tutelam penalmente as relações disciplinadas pela CLT."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "usucapião",
+      "definition": "Aquisição da propriedade ou de outro direito real pela posse prolongada, contínua e sem oposição, nos prazos que a lei fixa."
+    },
+    {
+      "term": "prescrição",
+      "definition": "Perda da pretensão de exigir um direito em juízo pelo decurso do prazo legal sem exercício."
+    },
+    {
+      "term": "decadência",
+      "definition": "Perda do próprio direito potestativo pelo não exercício no prazo fixado em lei ou contrato."
+    },
+    {
+      "term": "punibilidade",
+      "definition": "Possibilidade jurídica de o Estado aplicar a pena; extingue-se por morte, anistia, prescrição, entre outras causas."
+    },
+    {
+      "term": "imputabilidade",
+      "definition": "Capacidade de entender o caráter ilícito do fato e de se determinar conforme esse entendimento; pressuposto da culpabilidade."
+    },
+    {
+      "term": "ato infracional",
+      "definition": "Conduta descrita como crime ou contravenção penal quando praticada por criança ou adolescente."
+    },
+    {
+      "term": "remissão",
+      "aliases": [
+        "remição"
+      ],
+      "definition": "No ECA, perdão que exclui, suspende ou extingue o processo por ato infracional. Não confundir com remição, que é o abatimento da pena pelo trabalho ou estudo."
+    },
+    {
+      "term": "livramento condicional",
+      "definition": "Liberdade antecipada e condicionada do condenado, após cumprimento de parte da pena privativa de liberdade."
+    },
+    {
+      "term": "medida de segurança",
+      "aliases": [
+        "medidas de segurança"
+      ],
+      "definition": "Resposta penal aplicada ao inimputável ou semi-imputável perigoso, com internação ou tratamento ambulatorial."
+    },
+    {
+      "term": "fato gerador",
+      "definition": "Situação definida em lei como necessária e suficiente ao surgimento da obrigação tributária."
+    },
+    {
+      "term": "lançamento",
+      "definition": "Procedimento administrativo que constitui o crédito tributário, verificando o fato gerador, calculando o tributo e identificando o sujeito passivo."
+    },
+    {
+      "term": "crédito tributário",
+      "definition": "Direito da Fazenda de exigir o tributo, constituído pelo lançamento a partir da obrigação principal."
+    },
+    {
+      "term": "competência",
+      "definition": "Medida da jurisdição ou da atribuição de um órgão: diz qual juízo ou autoridade pode atuar em determinado caso."
+    },
+    {
+      "term": "jurisdição",
+      "definition": "Poder-dever do Estado de dizer o direito e resolver conflitos com força definitiva."
+    },
+    {
+      "term": "litisconsórcio",
+      "definition": "Pluralidade de partes no mesmo polo da relação processual."
+    },
+    {
+      "term": "tutela provisória",
+      "definition": "Decisão judicial antecipada ou cautelar, fundada em urgência ou evidência, que produz efeitos antes do julgamento final."
+    },
+    {
+      "term": "coisa julgada",
+      "definition": "Imutabilidade da decisão judicial depois de esgotados os recursos."
+    },
+    {
+      "term": "cumprimento de sentença",
+      "definition": "Fase em que se efetiva, no mesmo processo, a condenação reconhecida em título judicial."
+    },
+    {
+      "term": "procedimento comum",
+      "definition": "Rito padrão do processo de conhecimento no CPC, aplicável quando não há procedimento especial."
+    },
+    {
+      "term": "responsabilidade civil",
+      "definition": "Dever de reparar o dano causado a outrem por ato ilícito ou, nos casos legais, independentemente de culpa."
+    },
+    {
+      "term": "negócio jurídico",
+      "definition": "Declaração de vontade destinada a produzir efeitos jurídicos, como contratos e testamentos."
+    },
+    {
+      "term": "poder familiar",
+      "definition": "Conjunto de direitos e deveres dos pais em relação aos filhos menores."
+    },
+    {
+      "term": "ordem pública",
+      "definition": "Qualidade de normas inderrogáveis pela vontade das partes, por protegerem interesses coletivos ou de parte vulnerável."
+    },
+    {
+      "term": "superendividamento",
+      "definition": "Impossibilidade manifesta de o consumidor de boa-fé pagar a totalidade de suas dívidas de consumo sem comprometer o mínimo existencial."
+    },
+    {
+      "term": "inversão do ônus da prova",
+      "definition": "Transferência ao fornecedor do encargo de provar, quando verossímil a alegação do consumidor ou quando ele for hipossuficiente."
+    },
+    {
+      "term": "interesses difusos",
+      "aliases": [
+        "difusos"
+      ],
+      "definition": "Direitos transindividuais e indivisíveis de pessoas indeterminadas ligadas por circunstância de fato."
+    },
+    {
+      "term": "individuais homogêneos",
+      "definition": "Direitos divisíveis de pessoas determináveis com origem comum, defendidos coletivamente."
+    },
+    {
+      "term": "dissídio coletivo",
+      "aliases": [
+        "dissídios coletivos"
+      ],
+      "definition": "Processo em que a Justiça do Trabalho cria normas para uma categoria, quando falha a negociação coletiva."
+    },
+    {
+      "term": "aviso prévio",
+      "definition": "Comunicação antecipada da rescisão do contrato de trabalho sem justa causa, trabalhado ou indenizado."
+    },
+    {
+      "term": "contraditório",
+      "definition": "Garantia de ser informado dos atos do processo e de poder reagir a eles."
+    },
+    {
+      "term": "ampla defesa",
+      "definition": "Garantia de usar todos os meios lícitos para resistir à pretensão deduzida contra si."
+    },
+    {
+      "term": "autotutela",
+      "definition": "Poder da Administração de anular seus atos ilegais e revogar os inconvenientes, sem recorrer ao Judiciário."
+    },
+    {
+      "term": "convalidação",
+      "definition": "Saneamento, com efeitos retroativos, de ato administrativo com defeito sanável."
+    },
+    {
+      "term": "inexigibilidade",
+      "definition": "Contratação direta quando a competição é inviável, como no caso de fornecedor exclusivo."
+    },
+    {
+      "term": "dispensa de licitação",
+      "aliases": [
+        "dispensa"
+      ],
+      "definition": "Contratação direta nos casos em que a lei autoriza não licitar, embora a competição fosse possível."
+    },
+    {
+      "term": "ADCT",
+      "definition": "Ato das Disposições Constitucionais Transitórias: regras de transição anexas à Constituição de 1988."
+    },
+    {
+      "term": "remédios constitucionais",
+      "definition": "Ações previstas no art. 5º da CF para proteger direitos: habeas corpus, mandado de segurança, mandado de injunção, habeas data e ação popular."
+    }
+  ],
+  "tours": [
+    {
+      "id": "compra-defeituosa",
+      "title": "O caminho de uma compra defeituosa",
+      "summary": "Da Constituição ao Código Penal: por onde passa um produto com defeito.",
+      "status": "rascunho",
+      "steps": [
+        {
+          "key": "cf/titulo-vii/cap-i",
+          "text": "Tudo começa na ordem econômica: a defesa do consumidor é princípio da atividade econômica (art. 170, V). A livre iniciativa vem acompanhada desse limite."
+        },
+        {
+          "key": "cf/titulo-ii/cap-i",
+          "text": "E é também direito fundamental: o Estado promoverá, na forma da lei, a defesa do consumidor (art. 5º, XXXII). A lei prometida é o CDC."
+        },
+        {
+          "key": "cdc/titulo-i/cap-iv",
+          "text": "O produto quebrou. Aqui o CDC distingue vício (o produto não serve) de fato (o produto causou dano), com prazos de decadência e prescrição próprios e responsabilidade objetiva do fornecedor."
+        },
+        {
+          "key": "cdc/titulo-i/cap-vi",
+          "text": "Se o contrato tenta afastar essa responsabilidade, a cláusula é nula: o Capítulo da proteção contratual lista as cláusulas abusivas e garante o direito de arrependimento."
+        },
+        {
+          "key": "cdc/titulo-iii",
+          "text": "Sem acordo, o consumidor vai a juízo. O Título III organiza a tutela individual e coletiva, com foro no domicílio do autor e inversão do ônus da prova."
+        },
+        {
+          "key": "cpc/parte-especial/livro-i/titulo-i",
+          "text": "O rito, porém, é o do CPC: o procedimento comum conduz a ação, porque o CDC aplica o processo civil no que não contrariar suas regras (art. 90)."
+        },
+        {
+          "key": "cdc/titulo-ii",
+          "text": "Se houve dolo, a conduta pode ser crime de consumo: omitir informação relevante ou fazer publicidade enganosa são tipos do Título II."
+        },
+        {
+          "key": "cp/parte-geral",
+          "text": "E esses crimes seguem as regras gerais do Código Penal, de tempo e lugar do crime à aplicação da pena: o CDC remete expressamente a ele (art. 61)."
+        }
+      ]
+    },
+    {
+      "id": "crime-execucao",
+      "title": "Do crime à execução da pena",
+      "summary": "O percurso completo do jus puniendi: garantia, tipo, processo, pena e execução.",
+      "status": "rascunho",
+      "steps": [
+        {
+          "key": "cf/titulo-ii/cap-i",
+          "text": "Antes de punir, a Constituição limita: legalidade penal, presunção de inocência, devido processo, juiz natural e vedação a penas cruéis estão todos no art. 5º."
+        },
+        {
+          "key": "cp/parte-geral/titulo-ii",
+          "text": "O que é crime? A Parte Geral define o fato típico, a relação de causalidade, a tentativa e as excludentes de ilicitude, como a legítima defesa."
+        },
+        {
+          "key": "cp/parte-especial/titulo-ii",
+          "text": "Um furto, por exemplo, está entre os crimes contra o patrimônio. A Parte Especial descreve cada conduta e comina a pena."
+        },
+        {
+          "key": "cpp/livro-i/titulo-ii",
+          "text": "O Estado reage pelo inquérito policial: investigação preliminar, sigilosa e dispensável, que reúne elementos para a acusação."
+        },
+        {
+          "key": "cpp/livro-i/titulo-iii",
+          "text": "Com indícios, o Ministério Público oferece a denúncia. A ação penal pública é a regra; a privada, exceção definida no próprio Código Penal."
+        },
+        {
+          "key": "cpp/livro-ii/titulo-i",
+          "text": "O processo comum conduz a instrução e o julgamento: citação, resposta, audiência de instrução e sentença."
+        },
+        {
+          "key": "cp/parte-geral/titulo-v",
+          "text": "Condenado, o réu recebe uma pena dosada em três fases, segundo o Título V: privativa de liberdade, restritiva de direitos ou multa, com regime inicial definido."
+        },
+        {
+          "key": "lep/titulo-v",
+          "text": "A execução sai do CPP e vai para a LEP: progressão de regime, remição, saídas e livramento condicional estão no Título V."
+        },
+        {
+          "key": "lep/titulo-ii/cap-iv",
+          "text": "Durante o cumprimento, o preso conserva direitos e sujeita-se à disciplina: faltas, sanções e o Regime Disciplinar Diferenciado fecham o percurso."
+        }
+      ]
+    },
+    {
+      "id": "demissao",
+      "title": "Uma demissão e seus desdobramentos",
+      "summary": "Da garantia constitucional ao recurso no TST, passando pela rescisão e pela Vara do Trabalho.",
+      "status": "rascunho",
+      "steps": [
+        {
+          "key": "cf/titulo-ii/cap-ii",
+          "text": "O art. 7º lista os direitos dos trabalhadores: proteção contra despedida arbitrária, FGTS, aviso prévio proporcional, férias e décimo terceiro. É o piso de tudo o que vem depois."
+        },
+        {
+          "key": "clt/titulo-iv/cap-i",
+          "text": "O contrato individual de trabalho é o vínculo: a CLT define empregado e empregador, prazo e as modalidades, inclusive o trabalho intermitente."
+        },
+        {
+          "key": "clt/titulo-iv/cap-v",
+          "text": "A rescisão: sem justa causa, por justa causa, indireta ou por acordo. Cada hipótese tem suas verbas, e o Capítulo V as detalha."
+        },
+        {
+          "key": "clt/titulo-iv/cap-vi",
+          "text": "O aviso prévio antecede a saída, trabalhado ou indenizado, e cresce com o tempo de casa por força da Lei 12.506/2011."
+        },
+        {
+          "key": "clt/titulo-x/cap-iii",
+          "text": "Se há divergência sobre as verbas, nasce o dissídio individual: a reclamação trabalhista, com audiência, tentativa de conciliação e instrução."
+        },
+        {
+          "key": "clt/titulo-viii/cap-ii",
+          "text": "Quem julga é a Vara do Trabalho, órgão de primeiro grau da Justiça do Trabalho, cuja organização está no Título VIII."
+        },
+        {
+          "key": "clt/titulo-x/cap-vi",
+          "text": "Da sentença cabe recurso ordinário ao TRT e, em tese, recurso de revista ao TST, agora filtrado pela transcendência."
+        },
+        {
+          "key": "cpc",
+          "text": "Nas lacunas do processo do trabalho, aplica-se o CPC (art. 769 da CLT e art. 15 do CPC): é o direito processual comum que completa o especial."
+        }
+      ]
+    },
+    {
+      "id": "tributo",
+      "title": "Um tributo, do fato gerador à certidão",
+      "summary": "Como um imposto nasce, é lançado, cobrado e, por fim, atestado como pago.",
+      "status": "rascunho",
+      "steps": [
+        {
+          "key": "cf/titulo-vi/cap-i",
+          "text": "A Constituição reparte o poder de tributar entre União, Estados e Municípios e o limita com princípios e imunidades. É o Sistema Tributário Nacional."
+        },
+        {
+          "key": "ctn/livro-primeiro/titulo-ii",
+          "text": "O CTN detalha a competência e suas limitações, cumprindo o papel de lei complementar que o art. 146 da CF exige."
+        },
+        {
+          "key": "ctn/livro-segundo/titulo-ii/cap-ii",
+          "text": "Ocorre o fato gerador: a situação definida em lei como necessária e suficiente para que a obrigação tributária nasça."
+        },
+        {
+          "key": "ctn/livro-segundo/titulo-iii/cap-ii",
+          "text": "A obrigação vira crédito pelo lançamento, de ofício, por declaração ou por homologação. Só então a Fazenda pode exigir."
+        },
+        {
+          "key": "ctn/livro-segundo/titulo-iii/cap-iii",
+          "text": "O contribuinte discute o valor e pede parcelamento: a exigibilidade fica suspensa enquanto durar a discussão ou o parcelamento."
+        },
+        {
+          "key": "ctn/livro-segundo/titulo-iii/cap-iv",
+          "text": "Pagamento, compensação, prescrição ou decisão definitiva extinguem o crédito. Cada causa tem seu regime."
+        },
+        {
+          "key": "ctn/livro-segundo/titulo-iv/cap-iii",
+          "text": "Quitado, o contribuinte obtém a certidão negativa, documento que prova a regularidade fiscal e abre portas em licitações e financiamentos."
+        },
+        {
+          "key": "l9784",
+          "text": "Toda a discussão administrativa correu sob um processo com contraditório e ampla defesa: na esfera federal, é a Lei 9.784 que o disciplina."
+        }
+      ]
+    },
+    {
+      "id": "obra-publica",
+      "title": "Uma obra pública, da licitação ao contrato",
+      "summary": "O ciclo da contratação pública e o que acontece quando ele é fraudado.",
+      "status": "rascunho",
+      "steps": [
+        {
+          "key": "cf/titulo-iii/cap-vii",
+          "text": "A Administração só contrata mediante licitação, ressalvados os casos previstos em lei: é o comando do art. 37, XXI, da Constituição."
+        },
+        {
+          "key": "l14133/titulo-i/cap-ii",
+          "text": "A Lei 14.133 abre com os princípios: planejamento, segregação de funções, eficiência e os clássicos da Administração."
+        },
+        {
+          "key": "l14133/titulo-ii/fase-preparatoria",
+          "text": "Antes do edital, a fase preparatória: estudo técnico preliminar, projeto, orçamento e matriz de riscos. É onde a maioria dos problemas nasce ou se evita."
+        },
+        {
+          "key": "l14133/titulo-ii/modalidades",
+          "text": "Escolhe-se a modalidade: concorrência para obras, pregão para bens e serviços comuns, diálogo competitivo para soluções inovadoras."
+        },
+        {
+          "key": "l14133/titulo-ii/habilitacao",
+          "text": "Vence quem oferece a melhor proposta e comprova habilitação jurídica, técnica, fiscal e econômica, agora depois do julgamento."
+        },
+        {
+          "key": "l14133/titulo-iii/cap-vii",
+          "text": "Durante a execução, alterações e reequilíbrio econômico-financeiro seguem limites quantitativos e exigem motivação."
+        },
+        {
+          "key": "l14133/titulo-iv/cap-i",
+          "text": "Descumprimento gera sanções administrativas: advertência, multa, impedimento de licitar e declaração de inidoneidade."
+        },
+        {
+          "key": "l14133/titulo-v/alteracoes",
+          "text": "A lei também alterou o Código Penal, inserindo nele os crimes em licitações e contratos (arts. 337-E a 337-P)."
+        },
+        {
+          "key": "cp/parte-especial/titulo-xi",
+          "text": "Esses crimes vivem hoje no Título XI do Código Penal, entre os crimes contra a Administração Pública: a fraude à licitação é crime, não só infração."
+        }
+      ]
+    },
+    {
+      "id": "crianca",
+      "title": "A criança entre a família e o Estado",
+      "summary": "Proteção integral, família, medidas de proteção e ato infracional.",
+      "status": "rascunho",
+      "steps": [
+        {
+          "key": "cf/titulo-viii/cap-iv-viii",
+          "text": "O art. 227 impõe à família, à sociedade e ao Estado o dever de assegurar à criança, com absoluta prioridade, seus direitos fundamentais."
+        },
+        {
+          "key": "eca/livro-i/titulo-i",
+          "text": "O ECA traduz isso na doutrina da proteção integral: criança e adolescente são sujeitos de direitos, não objetos de tutela."
+        },
+        {
+          "key": "eca/livro-i/titulo-ii/cap-iii",
+          "text": "O primeiro direito é conviver com a família. Quando isso falha, entram guarda, tutela e adoção, com prioridade à família extensa."
+        },
+        {
+          "key": "cc/parte-especial/livro-iv",
+          "text": "O direito de família do Código Civil dá a base: poder familiar, parentesco, alimentos. O ECA o especializa para a infância."
+        },
+        {
+          "key": "eca/livro-ii/titulo-ii",
+          "text": "Diante de ameaça ou violação de direitos, aplicam-se medidas de proteção, do encaminhamento à família ao acolhimento institucional."
+        },
+        {
+          "key": "eca/livro-ii/titulo-v",
+          "text": "Quem as aplica, no dia a dia, é o Conselho Tutelar, órgão autônomo e não jurisdicional eleito pela comunidade."
+        },
+        {
+          "key": "eca/livro-ii/titulo-iii",
+          "text": "Se o adolescente pratica ato infracional, a resposta não é pena, mas medida socioeducativa, da advertência à internação."
+        },
+        {
+          "key": "cp/parte-geral/titulo-iii",
+          "text": "Porque, pelo Código Penal, menores de 18 anos são inimputáveis (art. 27): a Constituição e o ECA os colocam fora do jus puniendi comum."
+        }
+      ]
+    }
+  ]
+}

@@ -4,11 +4,15 @@ on:
   push:
     paths:
       - "docs/data/**"
+      - "docs/js/data.js"
+      - "docs/js/graphdata.js"
       - "scripts/**"
       - ".github/workflows/validate.yml"
   pull_request:
     paths:
       - "docs/data/**"
+      - "docs/js/data.js"
+      - "docs/js/graphdata.js"
       - "scripts/**"
 
 jobs:
@@ -21,3 +25,5 @@ jobs:
           node-version: "24"
       - name: Validar catálogo e diplomas
         run: node scripts/validate.js
+      - name: Conferir se os arquivos gerados estão em dia
+        run: node scripts/build-graph.js --check

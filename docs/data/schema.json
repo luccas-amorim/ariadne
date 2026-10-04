@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://luccas-amorim.github.io/ariadne/data/schema.json",
   "title": "Ariadne — formato dos dados",
-  "description": "Um arquivo por diploma legal (docs/data/<id>.json), um catálogo (index.json), as relações internormativas (relations.json) e o glossário (glossary.json). A árvore vai até Títulos e Capítulos; artigos aparecem apenas como faixa no campo subtitle.",
+  "description": "Um arquivo por diploma legal (docs/data/<id>.json), um catálogo (index.json), as relações internormativas (relations.json), o glossário (glossary.json) e os percursos (tours.json). A árvore vai até Títulos e Capítulos; artigos aparecem apenas como faixa no campo subtitle. Gerados por scripts/build-graph.js a partir desses arquivos, sob a mesma licença CC BY 4.0, e conferidos no CI: all.json (tudo numa requisição, definitions/all), graph.jsonld e context.jsonld (JSON-LD com schema.org/Legislation e o vocabulário av:), graph.ttl e vocab.ttl (Turtle; cada relação também como nó av:Relacao, com nota, fundamento, vigência e status), edges.csv (from,to,type,since,until,status,basis) e nodes.csv (key,diploma,kind,label,name,subtitle,since,until,status,urn).",
   "definitions": {
     "id": {
       "type": "string",
@@ -218,6 +218,21 @@
         }
       }
     },
+    "all": {
+      "type": "object",
+      "description": "Arquivo gerado (all.json): o catálogo, todos os diplomas, as relações, o glossário e os percursos, para consumo externo numa só requisição.",
+      "required": ["license", "catalog", "diplomas", "relations", "glossary", "tours"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "description": { "type": "string" },
+        "license": { "type": "string", "format": "uri" },
+        "catalog": { "$ref": "#/definitions/catalog" },
+        "diplomas": { "type": "object", "additionalProperties": { "$ref": "#/definitions/diploma" } },
+        "relations": { "$ref": "#/definitions/relations/properties/relations" },
+        "glossary": { "$ref": "#/definitions/glossary/properties/terms" },
+        "tours": { "$ref": "#/definitions/tours/properties/tours" }
+      }
+    },
     "glossary": {
       "type": "object",
       "required": ["terms"],
@@ -245,6 +260,7 @@
     { "$ref": "#/definitions/catalog" },
     { "$ref": "#/definitions/relations" },
     { "$ref": "#/definitions/glossary" },
-    { "$ref": "#/definitions/tours" }
+    { "$ref": "#/definitions/tours" },
+    { "$ref": "#/definitions/all" }
   ]
 }

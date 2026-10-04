@@ -69,8 +69,16 @@ Os dados são JSON estáticos servidos junto com a página e podem ser consumido
 | `data/glossary.json` | Termos e definições |
 | `data/tours.json` | Percursos guiados: sequências de nós com texto de transição |
 | `data/schema.json` | JSON Schema de todos os formatos |
+| `data/all.json` | Gerado: catálogo, diplomas, relações, glossário e percursos numa requisição |
+| `data/graph.jsonld` | Gerado: o grafo em JSON-LD (schema.org/Legislation, `isPartOf`, `sameAs` para a URN, vocabulário `av:`); contexto em `data/context.jsonld` |
+| `data/graph.ttl` | Gerado: o grafo em Turtle; cada relação como tripla direta e como nó `av:Relacao` com nota, fundamento e vigência |
+| `data/vocab.ttl` | Gerado: o vocabulário `av:`, com os tipos de relação e as espécies de divisão |
+| `data/edges.csv` | Gerado: `from,to,type,since,until,status,basis` |
+| `data/nodes.csv` | Gerado: `key,diploma,kind,label,name,subtitle,since,until,status,urn` |
 
 Cada diploma traz a URN LexML (`urn`), conferida no resolvedor do LexML. Cada nó tem o IRI `https://luccas-amorim.github.io/ariadne/id/<chave>` (ex.: `…/id/cc/parte-geral/livro-i`), que abre o nó na árvore. Fragmentos de URN por divisão (`lexml`) só entram quando conferidos; sem eles, a divisão usa a URN do diploma.
+
+Os arquivos gerados saem de `scripts/build-graph.js`, a partir dos JSON curados, e o CI confere se estão em dia; herdam a licença CC BY 4.0, que vem declarada no JSON-LD e no cabeçalho do Turtle. Os antecessores (CC/1916, CPC/1973…) entram no JSON-LD e no Turtle como nós ligados pela relação `sucede`; os CSV trazem só os nós e as relações curados. A vista **Dados** (no cabeçalho) resume tudo isso, e a aba Dados do painel baixa o subgrafo de qualquer nó em Turtle.
 
 URL base: `https://luccas-amorim.github.io/ariadne/data/`. Licença do conteúdo: CC BY 4.0 (veja abaixo). O GitHub Pages responde com CORS liberado para leitura.
 
@@ -92,9 +100,12 @@ docs/
     aula.js             Modo aula (todas as relações, filtro por tipo, isolamento)
     graph.js            vista Grafo (D3): nós por diploma ou divisão, matriz origem × destino
     timeline.js         vista Linha do tempo: faixas, janela A → B, diff e genealogia
+    dataview.js         vista Dados: formatos, identidade de um nó, possibilidades
+    graphdata.js        JSON-LD, Turtle e CSV (os mesmos no navegador e no script)
     app.js              roteamento, painel, controles, comparação, tela cheia, teclado
   data/                 ver "Dados abertos"
 scripts/validate.js     validação dos dados (node, sem dependências)
+scripts/build-graph.js  gera all.json, JSON-LD, Turtle e CSV (node, sem dependências)
 tests/e2e.spec.js       testes de interface (Playwright)
 .github/workflows/      validação dos dados e testes a cada PR
 ```
@@ -107,6 +118,7 @@ Requer Node 24 ou superior.
 
 ```bash
 node scripts/validate.js        # dados: campos, ids, relações, glossário, percursos
+npm run build:data              # regenera os arquivos gerados de docs/data/ (--check só confere)
 npm install && npm run test:install
 npm test                        # interface: abrir, expandir, focar, buscar, comparar, estudar, linha do tempo, percursos, 3D
 ```

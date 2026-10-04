@@ -10,6 +10,8 @@ import { Study } from './study.js';
 import { Aula } from './aula.js';
 import { GraphView } from './graph.js';
 import { TimelineView } from './timeline.js';
+import { DataView } from './dataview.js';
+import { subgraphTurtle } from './graphdata.js';
 
 const $ = id => document.getElementById(id);
 const el = {
@@ -25,8 +27,8 @@ const el = {
     toursBtn: $('btn-tours'), toursPop: $('tours-pop'), tourCard: $('tour-card'),
     about: $('about'), printFooter: $('print-footer'),
     treeContainer: $('tree-container'), fsBtn: $('ctl-fullscreen'), aulaBtn: $('btn-aula'),
-    aula: $('aula'), aulaFs: $('aula-fs'), grafo: $('grafo'), tempo: $('tempo'), tlSpeed: $('tl-speed'),
-    modeNav: { arvore: $('mode-arvore'), grafo: $('mode-grafo'), tempo: $('mode-tempo') }
+    aula: $('aula'), aulaFs: $('aula-fs'), grafo: $('grafo'), tempo: $('tempo'), dados: $('dados'), tlSpeed: $('tl-speed'),
+    modeNav: { arvore: $('mode-arvore'), grafo: $('mode-grafo'), tempo: $('mode-tempo'), dados: $('mode-dados') }
 };
 
 const state = {
@@ -75,6 +77,7 @@ async function boot() {
             onPlay: year => { state.pendingPlay = true; location.hash = `#/?ano=${year}`; },
             els: { lanes: $('tempo-lanes'), aside: $('tempo-aside'), a: $('tempo-a'), b: $('tempo-b'), play: $('tempo-play') }
         }) };
+        views.dados = { el: el.dados, ctl: new DataView({ data: state.data, els: { root: el.dados } }) };
         el.loading.remove();
         study = new Study({
             model: state.model, trail, container: el.panel,
@@ -147,6 +150,7 @@ function route() {
     el.modeNav.arvore.setAttribute('href', '#/' + dq);
     el.modeNav.grafo.setAttribute('href', '#/grafo' + dq);
     el.modeNav.tempo.setAttribute('href', '#/tempo' + dq);
+    el.modeNav.dados.setAttribute('href', '#/dados' + dq);
     setModeNav(parts[0]);
     if (views[parts[0]]) { enterView(parts[0], view, query); return; }
     if (state.view) exitView();
@@ -330,6 +334,7 @@ function dataTab(model, d) {
             <div class="panel-actions">
                 <button type="button" class="btn btn-sm" data-copy="jsonld">Copiar JSON-LD</button>
                 <button type="button" class="btn btn-sm" data-copy="abnt">Citar (ABNT)</button>
+                <button type="button" class="btn btn-sm" data-ttl="1" title="Este nó, as divisões abaixo dele e as relações que tocam nelas, em Turtle">Subgrafo .ttl</button>
             </div>`
     };
 }
@@ -494,6 +499,9 @@ function setPanel({ tags, title, subtitle, html, extra = '', actions = [], foote
                 copyText(text, b.dataset.copy === 'jsonld' ? 'JSON-LD copiado' : 'Referência copiada');
             }));
         }
+        el.panel.querySelectorAll('[data-ttl]').forEach(b => b.addEventListener('click', () => {
+            downloadText(subgraphTurtle(activeModel().data, dados.key), `ariadne-${dados.key.replace(/\//g, '_')}.ttl`, 'text/turtle');
+        }));
         el.panel.querySelectorAll('.tl-year').forEach(b => b.addEventListener('click', () => setYear(+b.dataset.year)));
         bindTabs(available);
         syncTabInUrl(active);
@@ -1062,6 +1070,7 @@ function renderTourCard() {
 //   #/aula?m=3d&tipos=processa&sel=cp                 Modo aula (aula.js)
 //   #/grafo?por=divisao&tipos=processa&sel=cp&par=cpc,cc  Grafo (graph.js)
 //   #/tempo?a=2016&b=2026&g=cpc                       Linha do tempo (timeline.js)
+//   #/dados?no=lep/titulo-v                           Dados abertos (dataview.js)
 // Cada controlador tem apply(view, query), destroy(), setPalette(p), fit() e clearSelection().
 // ==========================================
 function setModeNav(name) {

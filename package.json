@@ -6,6 +6,8 @@
   "license": "MIT",
   "scripts": {
     "validate": "node scripts/validate.js",
+    "build:data": "node scripts/build-graph.js",
+    "check:data": "node scripts/build-graph.js --check",
     "serve": "python3 -m http.server --directory docs 8080",
     "test": "playwright test",
     "test:install": "playwright install chromium"

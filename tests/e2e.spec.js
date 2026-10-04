@@ -449,3 +449,40 @@ test('reprodução tem velocidade', async ({ page }) => {
   await page.click('#btn-timeline');
   await expect(page.locator('#tl-speed')).toHaveValue('2');
 });
+
+// ---------- Camada de dados ----------
+test('arquivos gerados: edges.csv com 27 relações, JSON-LD e Turtle com licença', async ({ page, request }) => {
+  const csv = await (await request.get('/data/edges.csv')).text();
+  const lines = csv.trim().split('\n');
+  expect(lines[0]).toBe('from,to,type,since,until,status,basis');
+  expect(lines).toHaveLength(28);
+  const ld = await (await request.get('/data/graph.jsonld')).json();
+  expect(ld['@context'].concretiza['@id']).toBe('av:concretiza');
+  expect(ld['@graph'][0].license).toBe('https://creativecommons.org/licenses/by/4.0/');
+  expect(ld['@graph'].find(n => n['@id'].endsWith('/id/cc')).sameAs).toBe('urn:lex:br:federal:lei:2002-01-10;10406');
+  const ttl = await (await request.get('/data/graph.ttl')).text();
+  expect(ttl).toContain('CC BY 4.0');
+  expect(ttl).toContain('av:sucede');
+  const all = await (await request.get('/data/all.json')).json();
+  expect(Object.keys(all.diplomas)).toHaveLength(12);
+  expect(all.relations).toHaveLength(27);
+});
+
+test('vista Dados e subgrafo .ttl do painel', async ({ page }) => {
+  await page.goto('/#/');
+  await page.click('#mode-dados');
+  await expect(page).toHaveURL(/#\/dados$/);
+  await expect(page.locator('#dados')).toContainText('Baixar o grafo');
+  await expect(page.locator('#dados a[href="data/edges.csv"]')).toBeVisible();
+  await expect(page.locator('#dados-ttl')).toContainText('av:executa');
+  await expect(page.locator('#dados')).toContainText('urn:lex:br:federal:lei:1984-07-11;7210');
+  await page.goto('/#/cc?aba=dados');
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('#tabpanel-dados [data-ttl]').click()
+  ]);
+  expect(download.suggestedFilename()).toBe('ariadne-cc.ttl');
+  const text = require('fs').readFileSync(await download.path(), 'utf8');
+  expect(text).toContain('a av:Relacao');
+  expect(text).toContain('<https://luccas-amorim.github.io/ariadne/id/cc/parte-especial/livro-ii> av:concretiza');
+});

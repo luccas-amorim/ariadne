@@ -84,8 +84,16 @@ Há 27 relações. O formato comporta centenas. Frentes:
 - [ ] Cache-busting dos módulos em `docs/js/` (hash no nome ou `?v=` gerado), para que atualizações cheguem sem recarregamento forçado.
 - [ ] Testes de interface no modo 3D além do smoke test atual (clique em nó, relações).
 - [ ] Verificação automática de links do Planalto (`source`) no CI, semanal.
-- [ ] Publicar um `data/all.json` consolidado para consumo externo em uma requisição.
+- [x] Publicar um `data/all.json` consolidado para consumo externo em uma requisição (com JSON-LD, Turtle e CSV, gerados e conferidos no CI).
 - [ ] Fragmentos LexML por divisão (campo `lexml`, ex.: `art5`), conferidos no texto marcado do LexML. Hoje toda divisão usa a URN do diploma.
+
+## Fora do escopo por ora
+
+Ideias registradas na vista Dados como proposta. Todas leriam os mesmos arquivos estáticos, sem backend próprio:
+
+- [ ] Servidor MCP com `estrutura(diploma, ano)`, `relacoes(no)` e `buscar(termo)`.
+- [ ] Embeddings de nós (síntese mais caminho no grafo), para achar divisões análogas entre diplomas.
+- [ ] Validação de citações: URN → `isPartOf` → vigência na data citada.
 
 ## Concluído
 

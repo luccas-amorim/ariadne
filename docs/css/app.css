@@ -285,7 +285,31 @@ body.mode-aula > header, body.mode-aula #toolbar-row, body.mode-aula #timeline-b
 #grafo { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: var(--bg); }
 #grafo.hidden { display: none; }
 body.mode-grafo #toolbar-row, body.mode-grafo #timeline-bar, body.mode-grafo #workspace,
-body.mode-tempo #toolbar-row, body.mode-tempo #timeline-bar, body.mode-tempo #workspace { display: none !important; }
+body.mode-tempo #toolbar-row, body.mode-tempo #timeline-bar, body.mode-tempo #workspace,
+body.mode-dados #toolbar-row, body.mode-dados #timeline-bar, body.mode-dados #workspace { display: none !important; }
+
+/* Vista Dados */
+#dados { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 2rem 1.5rem; background: var(--bg); }
+#dados.hidden { display: none; }
+.data-intro { max-width: 60rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
+.data-cols { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 1024px) { .data-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.data-col { display: flex; flex-direction: column; gap: .75rem; min-width: 0; }
+.data-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: .35rem; }
+.data-card p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+.data-card-head { display: flex; align-items: center; gap: .5rem; }
+.data-card-head code { font-size: 13px; font-weight: 700; color: var(--text-strong); }
+.data-card-head a { text-decoration: none; }
+.data-card-head a:hover code { text-decoration: underline; }
+.data-badge { margin-left: auto; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-muted); }
+.data-badge.fonte { border-color: var(--studied); color: var(--studied); }
+.data-badge.gerado { border-color: var(--text-muted); }
+.data-badge.proposta { border-color: var(--relation); color: var(--relation); }
+.g-head .data-badge { margin-left: .5rem; vertical-align: middle; }
+.data-who { margin-left: auto; font: 11px ui-monospace, monospace; color: var(--text-faint); }
+.data-sig { font-size: 12px; color: var(--relation); word-break: break-word; }
+#dados .code-block { white-space: pre-wrap; word-break: break-all; }
+.data-card.kv { display: grid; grid-template-columns: 96px 1fr; }
 #grafo-main { flex: 1 1 auto; min-height: 0; min-width: 0; display: flex; flex-direction: column; }
 #grafo-bar { display: flex; align-items: center; gap: .75rem; padding: .5rem 1.25rem; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 70%, transparent); overflow-x: auto; }
 #grafo-bar > * { flex: 0 0 auto; }
