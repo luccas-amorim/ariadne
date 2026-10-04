@@ -1,0 +1,28 @@
+from,to,type,since,until,status,basis
+cpc/parte-especial/livro-i,cc/parte-especial/livro-i,processa,2015,,,
+cpc/parte-especial/livro-i/titulo-iii,cc/parte-especial/livro-iv,processa,2015,,,arts. 693 a 699 do CPC
+cpc/parte-especial/livro-i/titulo-iii,cc/parte-especial/livro-v,processa,2015,,,arts. 610 a 673 do CPC
+cpc/parte-especial/livro-ii,cc/parte-especial/livro-i/titulo-viii,processa,2015,,,
+cpp/livro-ii,cp/parte-especial,processa,1941,,,
+cpp/livro-i/titulo-iii,cp/parte-geral/titulo-vii,regulamenta,1941,,,
+lep/titulo-v,cp/parte-geral/titulo-v,executa,1984,,,
+lep/titulo-vi,cp/parte-geral/titulo-vi,executa,1984,,,
+lep,cpp/livro-iv,excepciona,1984,,,
+cpp/livro-i/titulo-ix,cf/titulo-ii/cap-i,concretiza,1988,,,"art. 5º, LXI a LXVI, da CF"
+ctn/livro-primeiro,cf/titulo-vi/cap-i,regulamenta,1988,,,art. 146 da CF
+clt/titulo-ii,cf/titulo-ii/cap-ii,concretiza,1988,,,art. 7º da CF
+clt/titulo-viii,cf/titulo-iv/cap-iii,organiza,1988,,,arts. 111 a 116 da CF
+clt/titulo-x,cpc,subsidiario,2015,,,art. 769 da CLT; art. 15 do CPC
+cdc/titulo-i,cf/titulo-vii/cap-i,concretiza,1990,,,"art. 170, V, e art. 5º, XXXII, da CF"
+cdc/titulo-iii,cpc,subsidiario,2015,,,art. 90 do CDC
+cdc/titulo-ii,cp/parte-geral,subsidiario,1990,,,art. 61 do CDC
+eca/livro-i/titulo-ii,cf/titulo-viii/cap-iv-viii,concretiza,1990,,,art. 227 da CF
+eca/livro-ii/titulo-iii,cp/parte-geral/titulo-iii,excepciona,1990,,,art. 27 do CP
+eca/livro-i/titulo-ii/cap-iii,cc/parte-especial/livro-iv,regulamenta,2002,,,
+l14133,cf/titulo-iii/cap-vii,regulamenta,2021,,,"art. 37, XXI, da CF"
+l14133/titulo-v/alteracoes,cp/parte-especial/titulo-xi,insere,2021,,,arts. 337-E a 337-P do CP
+l9784,cf/titulo-ii/cap-i,concretiza,1999,,,"art. 5º, LV, da CF"
+l9784,cf/titulo-iii/cap-vii,regulamenta,1999,,,art. 37 da CF
+l14133/titulo-iv/cap-ii,l9784,subsidiario,2021,,,
+cc/parte-especial/livro-ii,cf/titulo-vii/cap-i,concretiza,2002,,,
+cp/parte-especial/titulo-iv,clt,regulamenta,1943,,,

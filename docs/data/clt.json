@@ -4,6 +4,7 @@
   "title": "Consolidação das Leis do Trabalho",
   "shortTitle": "CLT",
   "norm": "Decreto-Lei nº 5.452, de 1º de maio de 1943",
+  "urn": "urn:lex:br:federal:decreto.lei:1943-05-01;5452",
   "ramo": "social",
   "natureza": "material",
   "status": "rascunho",
@@ -80,6 +81,21 @@
             "label": "Cap. V",
             "subtitle": "Arts. 154 a 201",
             "content": "Normas Regulamentadoras, CIPA, EPI, insalubridade, periculosidade e fiscalização das condições de trabalho."
+          }
+        ]
+      },
+      {
+        "id": "titulo-ii-a",
+        "name": "Título II-A - Do Dano Extrapatrimonial",
+        "label": "Título II-A",
+        "subtitle": "Arts. 223-A a 223-G",
+        "content": "Reparação dos danos de natureza extrapatrimonial decorrentes da relação de trabalho: os bens tutelados da pessoa física e da jurídica, quem responde pelo dano e os critérios que o juízo considera para fixar a indenização.",
+        "since": 2017,
+        "history": [
+          {
+            "year": 2017,
+            "norm": "Lei 13.467/2017",
+            "note": "Inclusão do Título II-A, Do Dano Extrapatrimonial (arts. 223-A a 223-G)."
           }
         ]
       },

@@ -7,7 +7,7 @@
  * Verifica: campos obrigatórios, tipos, ids em kebab-case e únicos entre
  * irmãos, ramo/natureza/status válidos, coerência entre catálogo e arquivos,
  * fonte oficial em https, ausência de colisão entre mapeados e planejados,
- * relações internormativas apontando para nós existentes e glossário.
+ * relações internormativas apontando para nós existentes, URN LexML e glossário.
  * Sai com código 1 se houver qualquer erro.
  */
 const fs = require('fs');
@@ -17,9 +17,14 @@ const DATA_DIR = path.join(__dirname, '..', 'docs', 'data');
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*(\/[a-z0-9]+(-[a-z0-9]+)*)*$/;
 const NATUREZAS = new Set(['material', 'processual']);
-const STATUS = new Set(['rascunho', 'revisado']);
-const NODE_KEYS = new Set(['id', 'name', 'label', 'subtitle', 'content', 'children', 'history', 'revoked', 'since', 'until']);
-const META_KEYS = new Set(['$schema', 'id', 'title', 'shortTitle', 'norm', 'ramo', 'natureza', 'status', 'source', 'year', 'note', 'root', 'predecessors']);
+const STATUS = new Set(['rascunho', 'revisado']);   // 'gerado' só vale na camada de dispositivos
+const DISP_KINDS = new Set(['artigo', 'paragrafo', 'inciso', 'alinea']);
+const DISP_KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*\/art-[0-9a-z-]+(\/[a-z0-9-]+)*$/;
+const URN_RE = /^urn:lex:br:[a-z0-9.;:_-]+$/;
+const URN_DATE_RE = /:(\d{4})-\d{2}-\d{2};/;
+const LEXML_FRAG_RE = /^[a-z0-9_.-]+$/;
+const NODE_KEYS = new Set(['id', 'name', 'label', 'subtitle', 'content', 'children', 'history', 'revoked', 'since', 'until', 'lexml']);
+const META_KEYS = new Set(['$schema', 'id', 'title', 'shortTitle', 'norm', 'urn', 'ramo', 'natureza', 'status', 'source', 'year', 'note', 'root', 'predecessors']);
 
 const errors = [];
 const warnings = [];
@@ -55,6 +60,13 @@ function checkMeta(file, meta, ramos, { requireYear }) {
   if (meta.source && !/^https:\/\//.test(meta.source)) err(file, `source deve ser URL https: ${meta.source}`);
   if (meta.source && !/planalto\.gov\.br/.test(meta.source)) warn(file, `source fora do Planalto: ${meta.source}`);
   if (requireYear && typeof meta.year !== 'number') warn(file, 'campo year ausente');
+  if (meta.urn !== undefined) {
+    if (typeof meta.urn !== 'string' || !URN_RE.test(meta.urn)) err(file, `urn fora do padrão urn:lex:br:…: ${meta.urn}`);
+    else {
+      const m = URN_DATE_RE.exec(meta.urn);
+      if (m && typeof meta.year === 'number' && +m[1] !== meta.year) err(file, `a data da urn (${m[1]}) não bate com year (${meta.year})`);
+    }
+  } else if (requireYear) warn(file, 'campo urn ausente (URN LexML do diploma)');
   if (meta.predecessors !== undefined) {
     if (!Array.isArray(meta.predecessors) || !meta.predecessors.length) err(file, 'predecessors deve ser um array não vazio');
     else {
@@ -100,6 +112,7 @@ function checkNode(file, node, trail, stats, keys, docId) {
   if (node.label && node.label.length > 28) err(file, `${where}: label com mais de 28 caracteres: "${node.label}"`);
   if (node.content && node.content.length < 20) err(file, `${where}: content curto demais (mínimo 20 caracteres)`);
   if (node.revoked !== undefined && typeof node.revoked !== 'boolean') err(file, `${where}: revoked deve ser booleano`);
+  if (node.lexml !== undefined && (typeof node.lexml !== 'string' || !LEXML_FRAG_RE.test(node.lexml))) err(file, `${where}: lexml deve ser um fragmento como "art5": ${node.lexml}`);
   for (const k of ['since', 'until']) if (node[k] !== undefined && (typeof node[k] !== 'number' || node[k] < 1800)) err(file, `${where}: ${k} deve ser um ano`);
   if (typeof node.since === 'number' && typeof node.until === 'number' && node.until <= node.since) err(file, `${where}: until deve ser maior que since`);
   if (typeof node.since === 'number' && typeof stats.docYear === 'number' && node.since <= stats.docYear) err(file, `${where}: since (${node.since}) não é posterior ao ano do diploma (${stats.docYear}); omita o campo`);
@@ -150,11 +163,13 @@ function main() {
 
   const summary = [];
   const keys = new Set();
+  const docYears = {};
   for (const id of catalog.diplomas || []) {
     const file = `${id}.json`;
     const doc = readJson(file);
     if (!doc) continue;
     checkMeta(file, doc, ramos, { requireYear: true });
+    docYears[id] = doc.year;
     if (doc.id !== id) err(file, `id "${doc.id}" diferente do nome do arquivo`);
     if (!doc.root || typeof doc.root !== 'object') {
       err(file, 'campo root ausente');
@@ -168,7 +183,7 @@ function main() {
   }
 
   // Arquivos órfãos: existem na pasta mas não estão no catálogo.
-  const reserved = new Set(['index.json', 'schema.json', 'relations.json', 'glossary.json', 'tours.json']);
+  const reserved = new Set(['index.json', 'schema.json', 'relations.json', 'glossary.json', 'tours.json', 'all.json']); // all.json é gerado (build-graph.js)
   for (const f of fs.readdirSync(DATA_DIR)) {
     if (!f.endsWith('.json') || reserved.has(f)) continue;
     const id = f.replace(/\.json$/, '');
@@ -194,7 +209,17 @@ function main() {
       rel.relations.forEach((r, i) => {
         const where = `relations[${i}]`;
         for (const k of ['from', 'to', 'type']) if (typeof r[k] !== 'string') err('relations.json', `${where}: campo ausente: ${k}`);
-        for (const k of Object.keys(r)) if (!['from', 'to', 'type', 'note'].includes(k)) err('relations.json', `${where}: campo não previsto: ${k}`);
+        for (const k of Object.keys(r)) if (!['from', 'to', 'type', 'note', 'basis', 'since', 'until', 'status'].includes(k)) err('relations.json', `${where}: campo não previsto: ${k}`);
+        if (r.basis !== undefined && (typeof r.basis !== 'string' || r.basis.length < 3)) err('relations.json', `${where}: basis curto demais`);
+        if (r.status !== undefined && !STATUS.has(r.status)) err('relations.json', `${where}: status desconhecido: ${r.status}`);
+        for (const k of ['since', 'until']) if (r[k] !== undefined && (!Number.isInteger(r[k]) || r[k] < 1800)) err('relations.json', `${where}: ${k} deve ser um ano`);
+        if (Number.isInteger(r.since) && Number.isInteger(r.until) && r.since > r.until) err('relations.json', `${where}: since (${r.since}) posterior a until (${r.until})`);
+        if (Number.isInteger(r.since)) {
+          for (const k of ['from', 'to']) {
+            const y = typeof r[k] === 'string' ? docYears[r[k].split('/')[0]] : undefined;
+            if (typeof y === 'number' && r.since < y) err('relations.json', `${where}: since (${r.since}) anterior ao diploma de ${k} (${y})`);
+          }
+        }
         for (const k of ['from', 'to']) {
           if (typeof r[k] !== 'string') continue;
           if (!KEY_RE.test(r[k])) err('relations.json', `${where}: ${k} fora do padrão diploma/divisao: ${r[k]}`);
@@ -209,6 +234,39 @@ function main() {
       });
       relCount = rel.relations.length;
     }
+  }
+
+  // Camada experimental de dispositivos
+  let dispCount = 0;
+  for (const id of catalog.dispositivos || []) {
+    const file = `dispositivos/${id}.json`;
+    if (!mapped.has(id)) { err('index.json', `dispositivos: "${id}" não é um diploma mapeado`); continue; }
+    const d = readJson(file);
+    if (!d) continue;
+    for (const k of Object.keys(d)) if (!['$schema', 'description', 'diploma', 'status', 'source', 'scope', 'range', 'dispositivos'].includes(k)) err(file, `campo não previsto: ${k}`);
+    if (d.diploma !== id) err(file, `diploma "${d.diploma}" diferente do nome do arquivo`);
+    if (d.status !== 'gerado') err(file, 'status deve ser "gerado"');
+    if (!Array.isArray(d.scope) || !d.scope.length) err(file, 'scope deve listar as divisões cobertas');
+    else d.scope.forEach(k => { if (!keys.has(k)) err(file, `scope aponta para nó inexistente: ${k}`); });
+    if (!Array.isArray(d.dispositivos) || !d.dispositivos.length) { err(file, 'dispositivos deve ser um array não vazio'); continue; }
+    const seen = new Set();
+    const urnBase = (readJson(`${id}.json`) || {}).urn;
+    d.dispositivos.forEach((x, i) => {
+      const where = `dispositivos[${i}] ${x.key || '?'}`;
+      for (const k of ['key', 'parent', 'kind', 'num', 'urn', 'hash']) if (typeof x[k] !== 'string' || !x[k]) err(file, `${where}: campo ausente: ${k}`);
+      for (const k of Object.keys(x)) if (!['key', 'parent', 'kind', 'num', 'urn', 'remete', 'hash'].includes(k)) err(file, `${where}: campo não previsto: ${k}`);
+      if (x.key && !DISP_KEY_RE.test(x.key)) err(file, `${where}: chave fora do padrão diploma/art-N/...`);
+      if (x.key && !x.key.startsWith(id + '/')) err(file, `${where}: chave de outro diploma`);
+      if (seen.has(x.key)) err(file, `${where}: chave duplicada`);
+      if (x.parent && !seen.has(x.parent) && !d.scope.includes(x.parent)) err(file, `${where}: pai desconhecido (${x.parent}); deve vir antes ou estar em scope`);
+      seen.add(x.key);
+      if (x.kind && !DISP_KINDS.has(x.kind)) err(file, `${where}: kind desconhecido: ${x.kind}`);
+      if (x.urn && urnBase && !x.urn.startsWith(urnBase + '!')) err(file, `${where}: urn não começa pela URN do diploma`);
+      if (x.hash && !/^sha256:[0-9a-f]{16}$/.test(x.hash)) err(file, `${where}: hash fora do padrão sha256:<16 hex>`);
+      if (!Array.isArray(x.remete)) err(file, `${where}: remete deve ser um array`);
+      else x.remete.forEach(r => { if (!DISP_KEY_RE.test(r)) err(file, `${where}: remissão fora do padrão: ${r}`); });
+    });
+    dispCount += d.dispositivos.length;
   }
 
   // Glossário
@@ -260,7 +318,7 @@ function main() {
     }
   }
 
-  finish(summary, { relCount, termCount, tourCount });
+  finish(summary, { relCount, termCount, tourCount, dispCount });
 }
 
 function finish(summary = [], extra = {}) {
@@ -269,7 +327,7 @@ function finish(summary = [], extra = {}) {
     for (const s of summary) {
       console.log(`  ${s.id.padEnd(7)} ${String(s.nodes).padStart(3)} nós, profundidade ${s.depth}, ${String(s.history).padStart(2)} marcos  [${s.ramo}/${s.natureza}]  ${s.status}`);
     }
-    console.log(`Relações internormativas: ${extra.relCount || 0}   Termos do glossário: ${extra.termCount || 0}   Percursos: ${extra.tourCount || 0}`);
+    console.log(`Relações internormativas: ${extra.relCount || 0}   Termos do glossário: ${extra.termCount || 0}   Percursos: ${extra.tourCount || 0}   Dispositivos (gerados): ${extra.dispCount || 0}`);
   }
   for (const w of warnings) console.warn(`aviso  ${w}`);
   for (const e of errors) console.error(`ERRO   ${e}`);

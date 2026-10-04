@@ -5,6 +5,8 @@
 import { mix } from './features.js';
 
 const LEVEL_H = 150;       // altura entre camadas
+const ARC_LIFT = 150;      // Modo aula: altura dos arcos de relação acima da camada mais alta do par
+const ARC_STEP = 50;       // e o acréscimo para cada tipo a mais no mesmo par
 const SLAB_D = 14;         // espessura das placas
 const DURATION = 550;
 const easeOut = t => 1 - Math.pow(1 - t, 3);
@@ -19,6 +21,10 @@ export class Tree3D {
         this.selected = null;
         this.hideLabels = false;
         this.showRelations = true;
+        this.relationMode = 'selected';   // como no 2D: 'selected' ou 'all' (Modo aula)
+        this.relationTypes = null;
+        this.lecture = null;
+        this.autoRotate = false;
         this.userZoomed = false;
         this.items = new Map();      // node.key → { slab, label, link }
         this.relMeshes = [];
@@ -55,7 +61,10 @@ export class Tree3D {
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.08;
         this.controls.maxPolarAngle = Math.PI * 0.49;   // não passa por baixo do chão
-        this.controls.addEventListener('start', () => { this.userZoomed = true; });
+        this.controls.autoRotateSpeed = 0.35;
+        this.controls.autoRotate = this.autoRotate;
+        // o giro automático para no primeiro toque; "Reenquadrar" o religa
+        this.controls.addEventListener('start', () => { this.userZoomed = true; this.controls.autoRotate = false; });
 
         // Iluminação: hemisférica (céu/chão), direcional com sombra e um preenchimento suave.
         this.hemi = new THREE.HemisphereLight(0xffffff, 0x8899aa, 0.9);
@@ -145,7 +154,10 @@ export class Tree3D {
     setSelected(d) { this.selected = d; }
     setTrailProvider(fn) { this.trailProvider = fn; }
     setHideLabels(b) { this.hideLabels = b; this.textures.clear(); if (this.model.root) this.update(this.selected || this.model.root); }
-    setShowRelations(b) { this.showRelations = b; if (this.scene && this.model.root) this.drawRelations(); }
+    setShowRelations(b) { this.showRelations = b; if (this.scene && this.model.root) this.restyle(); }
+    setRelationMode(mode, { types = null } = {}) { this.relationMode = mode; this.relationTypes = types; }
+    setAutoRotate(on) { this.autoRotate = on; if (this.controls) this.controls.autoRotate = on; }
+    setFitInsets() { /* o 3D enquadra pela esfera da cena */ }
     setPalette(p) {
         this.palette = p; this.textures.clear(); this.matCache.clear();
         if (this.scene) this.applyPaletteToScene();
@@ -198,6 +210,30 @@ export class Tree3D {
         this.matCache.set(key, m);
         return m;
     }
+    computeLecture() {
+        if (this.relationMode !== 'all') return null;
+        return this.model.lectureState(this.selected, { types: this.relationTypes, show: this.showRelations });
+    }
+    nodeOpacity(d) {
+        const L = this.lecture;
+        if (!L || !L.selKey) return 1;
+        return L.linked.has(d.key) ? 1 : 0.25;
+    }
+    /** Galhos em segundo plano no Modo aula; mais apagados ainda com um diploma isolado. */
+    linkOpacity(d) {
+        const L = this.lecture;
+        if (!L) return 1;
+        if (L.selKey) return d.depth === 1 ? 0.15 : 0.12;
+        return d.depth === 1 ? 0.4 : 0.35;
+    }
+    nodeMaterial(d) {
+        const selected = d === this.selected;
+        return this.material(this.slabColor(d), {
+            emissive: selected ? 0.25 : d.data.kind === 'ramo' ? 0.12 : 0,
+            opacity: (d.data.planned ? 0.55 : 1) * this.nodeOpacity(d),
+            rough: d.data.kind === 'center' ? 0.35 : 0.55
+        });
+    }
     slabColor(d) {
         const m = this.model, p = this.palette, c = m.ramoOf(d).color, k = d.data.kind;
         if (k === 'center') return m.isCfCenter(d) ? p.centerFill : c;
@@ -218,8 +254,10 @@ export class Tree3D {
         const dark = p.name === 'dark';
         const bg = selected ? c : kind === 'ramo' || kind === 'center' ? (dark ? '#0f172a' : '#ffffff') : (dark ? 'rgba(15,23,42,.92)' : 'rgba(255,255,255,.94)');
         const fg = selected ? '#ffffff' : kind === 'ramo' ? c : (dark ? '#e2e8f0' : '#0f172a');
-        const badge = d._children ? d._children.length : 0;
-        const trail = this.trailProvider(d.key);
+        // no Modo aula a etiqueta fica limpa: sem contagem de divisões nem marca da trilha
+        const lecture = this.relationMode === 'all';
+        const badge = !lecture && d._children ? d._children.length : 0;
+        const trail = lecture ? null : this.trailProvider(d.key);
         const sub = kind === 'center' ? (m.isCfCenter(d) ? (m.isGhost(d) ? 'Constituição anterior' : 'Constituição') : m.ramoOf(d).short) : kind === 'division' ? d.data.node.subtitle : '';
         const key = [kind, label, bg, fg, badge, trail, sub, selected, d.data.planned].join('|');
         if (this.textures.has(key)) return this.textures.get(key);
@@ -291,6 +329,7 @@ export class Tree3D {
         if (this.disposed) return;
         const THREE = this.THREE, m = this.model, p = this.palette;
         m.layout();
+        this.lecture = this.computeLecture();
         const nodes = m.root.descendants();
         const now = performance.now();
         const srcItem = this.items.get(source.key);
@@ -301,9 +340,7 @@ export class Tree3D {
             alive.add(d.key);
             const target = this.posOf(d);
             const dm = this.dims(d);
-            const color = this.slabColor(d);
-            const selected = d === this.selected;
-            const mat = this.material(color, { emissive: selected ? 0.25 : d.data.kind === 'ramo' ? 0.12 : 0, opacity: d.data.planned ? 0.55 : 1, rough: d.data.kind === 'center' ? 0.35 : 0.55 });
+            const mat = this.nodeMaterial(d);
             let it = this.items.get(d.key);
             if (it && (it.dims.w !== dm.w || it.dims.h !== dm.h || it.dims.sphere !== dm.sphere)) {
                 // a mesma chave mudou de forma (ex.: antecessor → diploma atual): troca a geometria
@@ -334,7 +371,8 @@ export class Tree3D {
                 this.scene.add(it.label);
             } else if (it.label.material.map !== tex) { it.label.material.map = tex; it.label.material.needsUpdate = true; }
             it.label.userData.node = d;
-            const ls = d.data.kind === 'division' ? 0.9 : 1;
+            it.label.material.opacity = this.nodeOpacity(d);
+            const ls = this.relationMode === 'all' ? 1.35 : d.data.kind === 'division' ? 0.9 : 1;
             it.label.scale.set(tex.userData.w * ls, tex.userData.h * ls, 1);
             it.labelOffset = (dm.sphere ? dm.r : dm.h / 2) + tex.userData.h * ls / 2 - 2;
             this.tweens.add({ it, from: it.slab.position.clone(), to: target, t0: now, dur: DURATION });
@@ -349,7 +387,7 @@ export class Tree3D {
                 it.link = this.makeTube(this.linkCurve(d.parent, d), radius, linkMat);
                 it.link.userData = { node: d };
                 this.scene.add(it.link);
-                this.tweens.add({ fade: it.link, t0: now, dur: DURATION });
+                this.tweens.add({ fade: it.link, t0: now, dur: DURATION, to: this.linkOpacity(d) });
             }
         }
         for (const [key, it] of this.items) {
@@ -390,31 +428,127 @@ export class Tree3D {
         cam.updateProjectionMatrix();
     }
 
+    /** Reaplica cores, opacidades e relações sem refazer o layout (seleção no Modo aula). */
+    async restyle() {
+        await this.ready;
+        if (this.disposed || !this.model.root) return;
+        this.lecture = this.computeLecture();
+        for (const d of this.model.root.descendants()) {
+            const it = this.items.get(d.key);
+            if (!it) continue;
+            it.slab.material = this.nodeMaterial(d);
+            const tex = this.labelTexture(d);
+            if (it.label.material.map !== tex) { it.label.material.map = tex; it.label.material.needsUpdate = true; }
+            it.label.material.opacity = this.nodeOpacity(d);
+            if (it.link) {
+                const o = this.linkOpacity(d);
+                for (const t of this.tweens) if (t.fade === it.link) t.to = o;
+                it.link.material.transparent = o < 1;
+                it.link.material.opacity = o;
+            }
+        }
+        this.drawRelations();
+    }
+
+    /** Etiqueta de texto para as relações (sprite), com a cor de --relation. */
+    relationLabelTexture(text) {
+        const THREE = this.THREE, p = this.palette, dark = p.name === 'dark';
+        const key = `rel|${text}|${p.name}`;
+        if (this.textures.has(key)) return this.textures.get(key);
+        const font = 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+        const S = 3, fs = 12, pad = 8;
+        const probe = document.createElement('canvas').getContext('2d');
+        probe.font = `700 ${fs}px ${font}`;
+        const w = Math.ceil(probe.measureText(text).width + 14), h = 20;
+        const canvas = document.createElement('canvas');
+        canvas.width = (w + pad * 2) * S; canvas.height = (h + pad * 2) * S;
+        const ctx = canvas.getContext('2d');
+        ctx.scale(S, S); ctx.translate(pad, pad);
+        ctx.beginPath(); ctx.roundRect(0, 0, w, h, 5);
+        ctx.fillStyle = dark ? 'rgba(15,23,42,.94)' : 'rgba(255,255,255,.95)'; ctx.fill();
+        ctx.lineWidth = 1.2; ctx.strokeStyle = p.relation; ctx.stroke();
+        ctx.fillStyle = p.relation; ctx.font = `700 ${fs}px ${font}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(text, w / 2, h / 2 + 0.5);
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.userData = { w: w + pad * 2, h: h + pad * 2 };
+        this.textures.set(key, tex);
+        return tex;
+    }
+
+    /**
+     * Modo aula: as relações viram arcos acima das camadas, um por (origem, destino, tipo),
+     * com raio pela contagem e cone no destino. Rótulo só nas arestas do diploma isolado.
+     */
+    drawAllRelations() {
+        const THREE = this.THREE, m = this.model, p = this.palette, L = this.lecture, selKey = L.selKey;
+        const top = d => { const v = this.posOf(d), dm = this.dims(d); v.y += dm.sphere ? dm.r * 0.7 : dm.h / 2; return v; };
+        const pairSeen = {};
+        for (const g of L.groups) {
+            const a = m.visibleRep(m.byKey.get(g.fromKey)), b = m.visibleRep(m.byKey.get(g.toKey));
+            const pk = `${g.fromKey}|${g.toKey}`, i = pairSeen[pk] = (pairSeen[pk] || 0) + 1;
+            const hl = !!selKey && (g.fromKey === selKey || g.toKey === selKey);
+            const s = top(a), e = top(b);
+            const mid = s.clone().add(e).multiplyScalar(0.5);
+            const ctrl = new THREE.Vector3(mid.x * 0.5, Math.max(s.y, e.y) + ARC_LIFT + ARC_STEP * (i - 1), mid.z * 0.5);
+            const curve = new THREE.QuadraticBezierCurve3(s, ctrl, e);
+            const radius = 2 + g.n * 1.1;
+            const mat = this.material(p.relation, { emissive: 0.35, opacity: !selKey ? 0.7 : hl ? 0.95 : 0.06, rough: 0.5 });
+            const tube = this.makeTube(curve, radius, mat, 48);
+            tube.castShadow = false; tube.renderOrder = 5;
+            const cone = new THREE.Mesh(new THREE.ConeGeometry(radius * 3.2, 30, 14), mat);
+            cone.position.copy(curve.getPoint(0.96));
+            cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), curve.getTangent(0.96).normalize());
+            tube.userData.group = cone.userData.group = g;
+            this.scene.add(tube, cone);
+            this.relMeshes.push(tube, cone);
+            if (hl) {
+                const label = ((m.data.relationTypes[g.type] || {}).label || g.type) + (g.n > 1 ? ` ×${g.n}` : '');
+                const tex = this.relationLabelTexture(label);
+                const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: false }));
+                sprite.scale.set(tex.userData.w, tex.userData.h, 1);
+                // como no 2D: perto do outro diploma, e mais para o meio a cada tipo a mais no par
+                const out = g.fromKey === selKey;
+                sprite.position.copy(curve.getPoint(out ? 0.7 - (i - 1) * 0.15 : 0.3 + (i - 1) * 0.15));
+                sprite.renderOrder = 30;
+                sprite.geometry = sprite.geometry.clone(); // drawRelations descarta a geometria; não a compartilhada
+                this.scene.add(sprite);
+                this.relMeshes.push(sprite);
+            }
+        }
+    }
+
     drawRelations() {
         const THREE = this.THREE, m = this.model, p = this.palette, sel = this.selected;
         this.relMeshes.forEach(x => { this.scene.remove(x); x.geometry.dispose(); });
         this.relMeshes = [];
+        if (this.lecture) { this.drawAllRelations(); return; }
         if (!sel || !this.showRelations) return;
         const items = m.relationsFor(sel, { includeDescendants: sel.data.kind !== 'division' }).filter(r => r.other);
+        const top = d => { const v = this.posOf(d), dm = this.dims(d); v.y += dm.sphere ? dm.r * 0.7 : dm.h / 2; return v; };
         for (const r of items) {
             const rep = m.visibleRep(r.other);
             if (rep === sel) continue;
-            const a = this.posOf(sel), b = this.posOf(rep);
+            // o arco sai da origem da relação e chega ao destino, onde fica o cone
+            const [from, to] = r.direction === 'out' ? [sel, rep] : [rep, sel];
+            const a = top(from), b = top(to);
             const mid = a.clone().add(b).multiplyScalar(0.5);
             mid.y = Math.max(a.y, b.y) + 160 + a.distanceTo(b) * 0.12;
             const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
             const resolved = rep === r.other;
+            const radius = resolved ? 3.2 : 2.2;
             const mat = this.material(p.relation, { emissive: 0.6, opacity: resolved ? 0.95 : 0.5, rough: 0.4 });
-            const tube = this.makeTube(curve, resolved ? 3.2 : 2.2, mat, 32);
+            const tube = this.makeTube(curve, radius, mat, 32);
             tube.castShadow = false;
             tube.renderOrder = 5;
             this.scene.add(tube);
             this.relMeshes.push(tube);
-            // marcador no destino
-            const dot = new THREE.Mesh(new THREE.SphereGeometry(7, 16, 12), mat);
-            dot.position.copy(b); dot.position.y += this.dims(rep).h / 2 + 6;
-            this.scene.add(dot);
-            this.relMeshes.push(dot);
+            const cone = new THREE.Mesh(new THREE.ConeGeometry(radius * 3.2, 30, 14), mat);
+            cone.position.copy(curve.getPoint(0.96));
+            cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), curve.getTangent(0.96).normalize());
+            cone.userData.relation = r.rel;
+            this.scene.add(cone);
+            this.relMeshes.push(cone);
         }
     }
 
@@ -424,8 +558,9 @@ export class Tree3D {
         for (const t of this.tweens) {
             const s = easeOut(Math.min(1, (now - t.t0) / t.dur));
             if (t.fade) {
-                t.fade.material.opacity = s;
-                if (s >= 1) { t.fade.material.transparent = false; this.tweens.delete(t); }
+                const to = t.to == null ? 1 : t.to;
+                t.fade.material.opacity = s * to;
+                if (s >= 1) { t.fade.material.transparent = to < 1; this.tweens.delete(t); }
                 continue;
             }
             const it = t.it;

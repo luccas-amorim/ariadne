@@ -18,6 +18,7 @@ A contribuição mais valiosa é **mapear ou revisar um diploma**. Isso não exi
   "title": "Consolidação das Leis do Trabalho",
   "shortTitle": "CLT",
   "norm": "Decreto-Lei nº 5.452, de 1º de maio de 1943",
+  "urn": "urn:lex:br:federal:decreto.lei:1943-05-01;5452",
   "ramo": "social",
   "natureza": "material",
   "status": "rascunho",
@@ -57,9 +58,12 @@ Campos de cada nó:
 | `history` | opcional: marcos estruturais `{year, norm, note}` | inclusão, renomeação, revogação |
 | `since` / `until` | opcional: ano em que a divisão passou ou deixou de existir; a linha do tempo obedece | `2017` |
 | `revoked` | opcional: `true` se a divisão inteira foi revogada | |
+| `lexml` | opcional: fragmento LexML da divisão, só se conferido no texto marcado do LexML | `art5` |
+| `children` | filhos; omita o campo se não houver | |
 
 No cabeçalho do diploma, `predecessors` lista os diplomas que ocuparam o mesmo lugar antes dele, com `title`, `shortTitle`, `norm`, `from` e `to`. A linha do tempo os mostra como fantasmas nos anos em que vigeram.
-| `children` | filhos; omita o campo se não houver | |
+
+No cabeçalho, `urn` é a URN LexML do diploma. Confira antes de enviar: `https://www.lexml.gov.br/urn/<urn>` precisa abrir o diploma certo (uma URN inexistente mostra "urn não encontrada"). O validador avisa quando falta e confere se a data da URN bate com `year`.
 
 `ramo` aceita `constitucional`, `privado`, `publico`, `social`, `penal`. `natureza` aceita `material` ou `processual`. `status` começa em `rascunho`.
 
@@ -86,16 +90,29 @@ O JSON Schema completo está em `docs/data/schema.json`; com a linha `$schema` n
 Cada relação liga duas divisões de **diplomas distintos**:
 
 ```json
-{ "from": "lep/titulo-v", "to": "cp/parte-geral/titulo-v", "type": "executa", "note": "A LEP executa as penas cominadas segundo o Título V do Código Penal." }
+{ "from": "eca/livro-ii/titulo-iii", "to": "cp/parte-geral/titulo-iii", "type": "excepciona", "note": "Menores de 18 anos são inimputáveis e sujeitos ao regime do ato infracional.", "basis": "art. 27 do CP" }
 ```
 
 * `from` e `to` são chaves `diploma/divisao/subdivisao`, exatamente como aparecem na URL.
-* `type` é uma chave de `relationTypes` em `index.json` (concretiza, regulamenta, processa, executa, subsidiario, excepciona, insere, organiza). Para propor um tipo novo, defina-o lá com descrição.
-* `note` cita o dispositivo que fundamenta a relação. Sem fundamento, sem relação.
+* A leitura é `from` → `type` → `to`: a seta da interface aponta para `to`.
+* `type` é uma chave de `relationTypes` em `index.json` (concretiza, regulamenta, processa, executa, subsidiario, excepciona, insere, organiza, sucede). Para propor um tipo novo, defina-o lá com descrição. `sucede` é reservado à ligação entre um diploma e seus `predecessors`.
+* `note` explica a relação; `basis` cita o dispositivo que a fundamenta (ex.: `art. 5º, LV, da CF`). Sem fundamento, sem relação.
+* Opcionais: `since` e `until` (anos) quando a relação começa ou termina em data diferente da vigência dos próprios nós, por exemplo quando uma lei posterior cria a remissão. `since` não pode ser anterior ao `year` dos dois diplomas. `status` (`rascunho` | `revisado`) segue a mesma revisão por pares dos diplomas.
 
 ## 5-A. Percursos guiados: `docs/data/tours.json`
 
 Um percurso é uma sequência de 5 a 10 passos, cada um com uma `key` (como nas relações) e um `text` de uma a três frases que explica por que se vai daquele nó ao próximo. Escreva como quem conduz uma aula: o texto do passo fala do nó em que se está e prepara o seguinte. Percursos novos entram com `"status": "rascunho"` e seguem a mesma revisão por pares dos diplomas.
+
+## 5-B. Camada de dispositivos (experimental)
+
+`docs/data/dispositivos/<id>.json` desce abaixo dos Capítulos, até artigo, parágrafo, inciso e alínea, só numa faixa de artigos e só como ponteiros: chave, pai, URN, remissões explícitas (`remete`) e o hash de cada trecho. Não guarda o texto da lei e não entra na árvore. O arquivo é gerado, nunca editado à mão, e leva `"status": "gerado"`:
+
+```bash
+# baixe antes, à mão, o texto compilado do Planalto (o script não usa a rede)
+node scripts/extract-dispositivos.js l10406compilada.htm --diploma cc --de 927 --ate 954 --pai cc/parte-especial/livro-i/titulo-ix
+```
+
+Quando a redação de um dispositivo muda, o hash muda: rodar o script de novo e comparar o diff mostra o que mudou. Hoje só existe a prova de conceito do Título IX do Código Civil; expandir depende de uma decisão do projeto (ver ROADMAP).
 
 ## 6. Revisão por pares
 
@@ -107,7 +124,11 @@ Mudanças em `docs/data/` seguem o checklist do template de pull request: fonte,
 node scripts/validate.js
 ```
 
-O script verifica campos, ids, ramos, status, relações apontando para nós existentes e glossário, e roda no CI a cada pull request. Depois, abra a página localmente e confira a árvore:
+O script verifica campos, ids, ramos, status, relações apontando para nós existentes e glossário, e roda no CI a cada pull request. Depois de mudar qualquer arquivo de `docs/data/`, regenere os arquivos derivados (`all.json`, `graph.jsonld`, `graph.ttl`, os CSV) e inclua-os no PR; o CI falha se estiverem desatualizados:
+
+```bash
+npm run build:data
+``` Depois, abra a página localmente e confira a árvore:
 
 ```bash
 python3 -m http.server --directory docs 8080

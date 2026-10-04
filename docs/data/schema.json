@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://luccas-amorim.github.io/ariadne/data/schema.json",
   "title": "Ariadne — formato dos dados",
-  "description": "Um arquivo por diploma legal (docs/data/<id>.json), um catálogo (index.json), as relações internormativas (relations.json) e o glossário (glossary.json). A árvore vai até Títulos e Capítulos; artigos aparecem apenas como faixa no campo subtitle.",
+  "description": "Um arquivo por diploma legal (docs/data/<id>.json), um catálogo (index.json), as relações internormativas (relations.json), o glossário (glossary.json) e os percursos (tours.json). A árvore vai até Títulos e Capítulos; artigos aparecem apenas como faixa no campo subtitle. Gerados por scripts/build-graph.js a partir desses arquivos, sob a mesma licença CC BY 4.0, e conferidos no CI: all.json (tudo numa requisição, definitions/all), graph.jsonld e context.jsonld (JSON-LD com schema.org/Legislation e o vocabulário av:), graph.ttl e vocab.ttl (Turtle; cada relação também como nó av:Relacao, com nota, fundamento, vigência e status), edges.csv (from,to,type,since,until,status,basis) e nodes.csv (key,diploma,kind,label,name,subtitle,since,until,status,urn).",
   "definitions": {
     "id": {
       "type": "string",
@@ -25,8 +25,8 @@
     },
     "status": {
       "type": "string",
-      "enum": ["rascunho", "revisado"],
-      "description": "rascunho = estrutura ainda não conferida contra o texto oficial; revisado = conferida por ao menos um revisor além do autor."
+      "enum": ["rascunho", "revisado", "gerado"],
+      "description": "rascunho = estrutura ainda não conferida contra o texto oficial; revisado = conferida por ao menos um revisor além do autor; gerado = produzido por script, sem revisão humana (só na camada de dispositivos)."
     },
     "historyEntry": {
       "type": "object",
@@ -51,6 +51,7 @@
         "revoked": { "type": "boolean", "description": "true quando a divisão inteira foi revogada e permanece no mapa apenas por referência histórica." },
         "since": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a divisão passou a existir, quando posterior ao diploma. A linha do tempo só a mostra a partir daí." },
         "until": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a divisão deixou de existir. A linha do tempo a oculta a partir daí." },
+        "lexml": { "type": "string", "pattern": "^[a-z0-9_.-]+$", "description": "Fragmento LexML da divisão (o que vem depois de '!' na URN), só quando conferido no texto marcado do LexML. Ex.: 'art5'. Sem fragmento verificado, omita: a divisão usa a URN do diploma." },
         "history": {
           "type": "array",
           "minItems": 1,
@@ -73,6 +74,7 @@
         "title": { "type": "string", "minLength": 3 },
         "shortTitle": { "type": "string", "minLength": 1, "maxLength": 14 },
         "norm": { "type": "string", "description": "Espécie, número e data do ato normativo." },
+        "urn": { "type": "string", "pattern": "^urn:lex:br:", "description": "URN LexML do diploma, conferida no resolvedor (https://www.lexml.gov.br/urn/<urn>). Ex.: 'urn:lex:br:federal:lei:2002-01-10;10406'." },
         "ramo": { "$ref": "#/definitions/ramo" },
         "natureza": { "$ref": "#/definitions/natureza" },
         "status": { "$ref": "#/definitions/status" },
@@ -176,6 +178,11 @@
           "items": { "$ref": "#/definitions/diplomaMeta" },
           "description": "Diplomas previstos no roadmap. Aparecem esmaecidos no mapa até ganharem arquivo próprio."
         },
+        "dispositivos": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/id" },
+          "description": "Diplomas com camada experimental de dispositivos em dispositivos/<id>.json."
+        },
         "relationTypes": {
           "type": "object",
           "additionalProperties": {
@@ -206,10 +213,60 @@
               "from": { "$ref": "#/definitions/nodeKey" },
               "to": { "$ref": "#/definitions/nodeKey" },
               "type": { "type": "string", "description": "Chave de index.json → relationTypes." },
-              "note": { "type": "string", "minLength": 10 }
+              "note": { "type": "string", "minLength": 10 },
+              "basis": { "type": "string", "minLength": 3, "description": "Dispositivo que fundamenta a relação, separado da nota. Ex.: 'art. 5º, LXI a LXVI, da CF'." },
+              "since": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a relação passou a valer, quando posterior aos próprios nós. Não pode ser anterior ao year dos dois diplomas." },
+              "until": { "type": "integer", "minimum": 1800, "maximum": 2200, "description": "Ano em que a relação deixou de valer. A linha do tempo a oculta a partir daí." },
+              "status": { "$ref": "#/definitions/status" }
             }
           }
         }
+      }
+    },
+    "dispositivos": {
+      "type": "object",
+      "description": "Camada experimental (dispositivos/<id>.json), gerada por scripts/extract-dispositivos.js. Não entra na árvore principal e não guarda o texto da lei: só estrutura, URN, remissões explícitas e o hash de cada trecho.",
+      "required": ["diploma", "status", "source", "scope", "dispositivos"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "description": { "type": "string" },
+        "diploma": { "$ref": "#/definitions/id" },
+        "status": { "const": "gerado" },
+        "source": { "type": "string", "pattern": "^https://" },
+        "scope": { "type": "array", "items": { "$ref": "#/definitions/nodeKey" }, "description": "Divisões da árvore de que os dispositivos descendem." },
+        "range": { "type": "string" },
+        "dispositivos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["key", "parent", "kind", "num", "urn", "remete", "hash"],
+            "additionalProperties": false,
+            "properties": {
+              "key": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*/art-[0-9a-z-]+(/[a-z0-9-]+)*$", "description": "Ex.: cc/art-927/par-unico." },
+              "parent": { "type": "string", "description": "Divisão da árvore (para artigos) ou dispositivo pai." },
+              "kind": { "enum": ["artigo", "paragrafo", "inciso", "alinea"] },
+              "num": { "type": "string" },
+              "urn": { "type": "string", "pattern": "^urn:lex:br:.+!.+$" },
+              "remete": { "type": "array", "items": { "type": "string" }, "description": "Remissões explícitas a dispositivos do mesmo diploma, extraídas por regex." },
+              "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{16}$", "description": "Prefixo do SHA-256 do trecho, sem as notas editoriais; muda quando a redação muda." }
+            }
+          }
+        }
+      }
+    },
+    "all": {
+      "type": "object",
+      "description": "Arquivo gerado (all.json): o catálogo, todos os diplomas, as relações, o glossário e os percursos, para consumo externo numa só requisição.",
+      "required": ["license", "catalog", "diplomas", "relations", "glossary", "tours"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "description": { "type": "string" },
+        "license": { "type": "string", "format": "uri" },
+        "catalog": { "$ref": "#/definitions/catalog" },
+        "diplomas": { "type": "object", "additionalProperties": { "$ref": "#/definitions/diploma" } },
+        "relations": { "$ref": "#/definitions/relations/properties/relations" },
+        "glossary": { "$ref": "#/definitions/glossary/properties/terms" },
+        "tours": { "$ref": "#/definitions/tours/properties/tours" }
       }
     },
     "glossary": {
@@ -239,6 +296,7 @@
     { "$ref": "#/definitions/catalog" },
     { "$ref": "#/definitions/relations" },
     { "$ref": "#/definitions/glossary" },
-    { "$ref": "#/definitions/tours" }
+    { "$ref": "#/definitions/tours" },
+    { "$ref": "#/definitions/all" }
   ]
 }

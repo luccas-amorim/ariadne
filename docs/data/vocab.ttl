@@ -1,0 +1,101 @@
+# Ariadne: vocabulário (av:)
+# Gerado por scripts/build-graph.js a partir de docs/data/*.json. Não edite à mão.
+# Conteúdo sob CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Atribuição: Ariadne — Árvores Jurídicas BR (luccas-amorim.github.io/ariadne).
+
+@prefix av: <https://luccas-amorim.github.io/ariadne/vocab#> .
+@prefix schema: <https://schema.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://luccas-amorim.github.io/ariadne/vocab#> a <http://www.w3.org/2002/07/owl#Ontology> ;
+    rdfs:label "Vocabulário do Ariadne"@pt ;
+    schema:license <https://creativecommons.org/licenses/by/4.0/> .
+
+av:concretiza a rdf:Property ;
+    rdfs:label "concretiza"@pt ;
+    rdfs:comment "O diploma ou divisão dá densidade a um comando constitucional ou a um princípio de outro diploma."@pt .
+
+av:regulamenta a rdf:Property ;
+    rdfs:label "regulamenta"@pt ;
+    rdfs:comment "Disciplina em detalhe matéria cujo fundamento está na outra divisão."@pt .
+
+av:processa a rdf:Property ;
+    rdfs:label "processa"@pt ;
+    rdfs:comment "Direito formal que dá curso judicial ao direito material da outra divisão."@pt .
+
+av:executa a rdf:Property ;
+    rdfs:label "executa"@pt ;
+    rdfs:comment "Disciplina a execução daquilo que a outra divisão define."@pt .
+
+av:subsidiario a rdf:Property ;
+    rdfs:label "aplicação subsidiária"@pt ;
+    rdfs:comment "A outra divisão se aplica nas lacunas desta."@pt .
+
+av:excepciona a rdf:Property ;
+    rdfs:label "excepciona"@pt ;
+    rdfs:comment "Afasta ou modula a regra geral da outra divisão."@pt .
+
+av:insere a rdf:Property ;
+    rdfs:label "insere em"@pt ;
+    rdfs:comment "Introduz dispositivos no corpo da outra divisão."@pt .
+
+av:organiza a rdf:Property ;
+    rdfs:label "organiza"@pt ;
+    rdfs:comment "Estrutura o órgão ou sistema previsto na outra divisão."@pt .
+
+av:sucede a rdf:Property ;
+    rdfs:label "sucede"@pt ;
+    rdfs:comment "O diploma substitui um antecessor que ocupava o mesmo lugar no ordenamento."@pt .
+
+av:Relacao a rdfs:Class ;
+    rdfs:label "Relação internormativa"@pt ;
+    rdfs:comment "Relação qualificada entre dois nós: origem, tipo, destino, nota, fundamento, vigência e status. A tripla direta (origem tipo destino) também é publicada."@pt .
+
+av:Parte a rdfs:Class ;
+    rdfs:label "Parte do diploma"@pt .
+
+av:Livro a rdfs:Class ;
+    rdfs:label "Livro"@pt .
+
+av:Titulo a rdfs:Class ;
+    rdfs:label "Título"@pt .
+
+av:Capitulo a rdfs:Class ;
+    rdfs:label "Capítulo"@pt .
+
+av:Secao a rdfs:Class ;
+    rdfs:label "Seção"@pt .
+
+av:Divisao a rdfs:Class ;
+    rdfs:label "Divisão sem espécie própria (agrupamentos, disposições finais etc.)"@pt .
+
+av:origem a rdf:Property ;
+    rdfs:comment "Nó de onde a relação parte."@pt .
+
+av:destino a rdf:Property ;
+    rdfs:comment "Nó a que a relação chega."@pt .
+
+av:tipo a rdf:Property ;
+    rdfs:comment "Tipo da relação (uma das propriedades deste vocabulário)."@pt .
+
+av:nota a rdf:Property ;
+    rdfs:comment "Explicação da relação."@pt .
+
+av:fundamento a rdf:Property ;
+    rdfs:comment "Dispositivo que fundamenta a relação."@pt .
+
+av:desde a rdf:Property ;
+    rdfs:comment "Ano em que passou a valer."@pt .
+
+av:ate a rdf:Property ;
+    rdfs:comment "Ano em que deixou de valer (exclusivo)."@pt .
+
+av:status a rdf:Property ;
+    rdfs:comment "rascunho ou revisado."@pt .
+
+av:rotulo a rdf:Property ;
+    rdfs:comment "Rótulo curto da divisão."@pt .
+
+av:faixa a rdf:Property ;
+    rdfs:comment "Faixa de artigos da divisão."@pt .

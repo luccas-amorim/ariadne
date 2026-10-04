@@ -1,0 +1,4 @@
+{
+  "type": "module",
+  "description": "Os módulos de docs/js são ES modules; isto só informa o Node (scripts/build-graph.js), o navegador ignora."
+}

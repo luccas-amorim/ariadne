@@ -1,0 +1,115 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "av": "https://luccas-amorim.github.io/ariadne/vocab#",
+    "ar": "https://luccas-amorim.github.io/ariadne/id/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Legislation": "schema:Legislation",
+    "license": {
+      "@id": "schema:license",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@language": "pt"
+    },
+    "alternateName": {
+      "@id": "schema:alternateName"
+    },
+    "legislationIdentifier": {
+      "@id": "schema:legislationIdentifier",
+      "@language": "pt"
+    },
+    "legislationDate": {
+      "@id": "schema:legislationDate"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+    "isPartOf": {
+      "@id": "schema:isPartOf",
+      "@type": "@id"
+    },
+    "av:rotulo": {
+      "@id": "av:rotulo",
+      "@language": "pt"
+    },
+    "av:faixa": {
+      "@id": "av:faixa",
+      "@language": "pt"
+    },
+    "av:status": {
+      "@id": "av:status"
+    },
+    "av:desde": {
+      "@id": "av:desde",
+      "@type": "xsd:integer"
+    },
+    "av:ate": {
+      "@id": "av:ate",
+      "@type": "xsd:integer"
+    },
+    "av:origem": {
+      "@id": "av:origem",
+      "@type": "@id"
+    },
+    "av:tipo": {
+      "@id": "av:tipo",
+      "@type": "@id"
+    },
+    "av:destino": {
+      "@id": "av:destino",
+      "@type": "@id"
+    },
+    "av:nota": {
+      "@id": "av:nota",
+      "@language": "pt"
+    },
+    "av:fundamento": {
+      "@id": "av:fundamento",
+      "@language": "pt"
+    },
+    "concretiza": {
+      "@id": "av:concretiza",
+      "@type": "@id"
+    },
+    "regulamenta": {
+      "@id": "av:regulamenta",
+      "@type": "@id"
+    },
+    "processa": {
+      "@id": "av:processa",
+      "@type": "@id"
+    },
+    "executa": {
+      "@id": "av:executa",
+      "@type": "@id"
+    },
+    "subsidiario": {
+      "@id": "av:subsidiario",
+      "@type": "@id"
+    },
+    "excepciona": {
+      "@id": "av:excepciona",
+      "@type": "@id"
+    },
+    "insere": {
+      "@id": "av:insere",
+      "@type": "@id"
+    },
+    "organiza": {
+      "@id": "av:organiza",
+      "@type": "@id"
+    },
+    "sucede": {
+      "@id": "av:sucede",
+      "@type": "@id"
+    }
+  }
+}

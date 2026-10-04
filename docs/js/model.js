@@ -2,6 +2,8 @@
 // constrói a hierarquia (centro → ramos → diplomas → divisões), controla a visão
 // (foco, filtro), a expansão, o layout radial, a URL e as relações internormativas.
 
+import { relationActiveAt } from './data.js';
+
 const RING = [0, 150, 290];   // raios das três primeiras camadas (centro, ramos, diplomas)
 const RING_STEP = 125;        // acréscimo mínimo de raio por nível a partir daí
 const RING_MIN_GAP = 95;
@@ -69,7 +71,14 @@ export class TreeModel {
         const c = this.catalog, v = this.view, diplomas = this.data.diplomas;
         const Y = v.year == null ? null : v.year;
         let data;
-        if (v.focus) {
+        if (v.focus && Y != null && diplomas[v.focus].year > Y) {
+            // O foco obedece ao ano: antes da promulgação, o centro é o antecessor vigente.
+            const doc = diplomas[v.focus], p = predecessorAt(doc, Y);
+            const meta = p
+                ? { ...doc, title: p.title, shortTitle: p.shortTitle, norm: p.norm, year: p.from, ghostOf: doc, status: undefined, note: undefined, root: { ...doc.root, content: `${p.title}, vigente em ${Y}. A estrutura mapeada neste projeto é a de ${doc.title} (${doc.year}); a linha do tempo mostra a sucessão.`, children: undefined } }
+                : { ...doc, title: `${doc.title} (ainda não existia)`, shortTitle: '—', norm: `Ano ${Y}`, year: Y, ghostOf: doc, status: undefined, note: undefined, root: { ...doc.root, content: `Em ${Y}, ${doc.title} ainda não existia, e não há antecessor registrado.`, children: undefined } };
+            data = { kind: 'center', id: doc.id, meta };
+        } else if (v.focus) {
             const doc = diplomas[v.focus];
             const kids = this.divisions(doc.root, doc, Y);
             data = { kind: 'center', id: doc.id, meta: doc, children: kids.length ? kids : undefined };
@@ -287,24 +296,107 @@ export class TreeModel {
     }
 
     // ---------- relações internormativas ----------
+    /** Relações vigentes no ano da visão (todas, se a linha do tempo estiver desligada). */
+    activeRelations() {
+        const Y = this.view.year == null ? null : this.view.year;
+        return this.data.relations.filter(rel => relationActiveAt(this.data, rel, Y));
+    }
+
     /**
      * Relações do nó (como origem ou destino), incluindo as de seus descendentes recolhidos
-     * quando `includeDescendants` é true. Cada item: { rel, dir, other, otherKey }.
+     * quando `includeDescendants` é true. Respeita since/until quando a linha do tempo está ativa.
+     * Cada item: { rel, direction: 'in' | 'out', other, otherKey, selfKey }.
      * `other` é o nó correspondente na árvore atual, ou null se o diploma não está visível.
      */
     relationsFor(d, { includeDescendants = false } = {}) {
         const keys = new Set([d.key]);
-        if (includeDescendants) (function walk(x) { (x.children || x._children || []).forEach(c => { keys.add(c.key); walk(c); }); })(d);
+        // No mapa, o centro é a Constituição: suas divisões ficam sob o ramo constitucional,
+        // e não sob o centro (que tem todos os nós como descendentes).
+        let scope = d;
+        if (d.data.kind === 'center' && !this.isFocus()) scope = (this.root.children || []).find(r => r.data.id === d.data.meta.ramo) || null;
+        if (includeDescendants && scope) (function walk(x) { (x.children || x._children || []).forEach(c => { keys.add(c.key); walk(c); }); })(scope);
         const out = [];
-        for (const rel of this.data.relations) {
-            let dir = null, otherKey = null;
-            if (keys.has(rel.from)) { dir = 'out'; otherKey = rel.to; }
-            else if (keys.has(rel.to)) { dir = 'in'; otherKey = rel.from; }
-            if (!dir) continue;
+        for (const rel of this.activeRelations()) {
+            let direction = null, otherKey = null;
+            if (keys.has(rel.from)) { direction = 'out'; otherKey = rel.to; }
+            else if (keys.has(rel.to)) { direction = 'in'; otherKey = rel.from; }
+            if (!direction) continue;
             if (keys.has(otherKey)) continue; // relação interna ao subconjunto
-            out.push({ rel, dir, otherKey, other: this.byKey.get(otherKey) || null, selfKey: dir === 'out' ? rel.from : rel.to });
+            out.push({ rel, direction, otherKey, other: this.byKey.get(otherKey) || null, selfKey: direction === 'out' ? rel.from : rel.to });
         }
         return out;
+    }
+
+    /**
+     * Todas as relações vigentes, agregadas por par de diplomas e tipo, para o Modo aula e o grafo.
+     * Só entram grupos cujos dois diplomas estão na árvore atual.
+     * Cada grupo: { fromKey, toKey, type, n, items[] }, com fromKey/toKey = id do diploma
+     * (a mesma chave do nó do diploma, ou do centro no caso da Constituição).
+     * @param {{ types?: Set<string>|null, year?: number|null }} o  types null = todos
+     */
+    allRelations({ types = null, year = this.view.year } = {}) {
+        const groups = new Map();
+        for (const rel of this.data.relations) {
+            if (types && !types.has(rel.type)) continue;
+            if (!relationActiveAt(this.data, rel, year == null ? null : year)) continue;
+            const fromKey = rel.from.split('/')[0], toKey = rel.to.split('/')[0];
+            if (!this.byKey.has(fromKey) || !this.byKey.has(toKey)) continue;
+            const k = `${fromKey}|${toKey}|${rel.type}`;
+            if (!groups.has(k)) groups.set(k, { fromKey, toKey, type: rel.type, n: 0, items: [] });
+            const g = groups.get(k);
+            g.n++; g.items.push(rel);
+        }
+        return [...groups.values()];
+    }
+
+    /**
+     * Grafo dirigido das relações vigentes, para a vista Grafo.
+     * Por diploma (padrão), os nós são os diplomas da árvore atual; por divisão, as chaves que
+     * aparecem em alguma relação. Arestas agregadas por par (origem, destino), com os tipos.
+     * @returns {{ nodes: Map<string, {key, d, inN, outN}>, edges: Array<{fromKey, toKey, n, types: string[], items}> }}
+     */
+    relationGraph({ types = null, byDivision = false, year = this.view.year } = {}) {
+        const nodes = new Map(), pairs = new Map();
+        const addNode = key => {
+            if (!nodes.has(key)) nodes.set(key, { key, d: this.byKey.get(key), inN: 0, outN: 0 });
+            return nodes.get(key);
+        };
+        if (!byDivision) {
+            this.nodes.filter(d => (d.data.kind === 'diploma' && !d.data.planned) || this.isCfCenter(d)).forEach(d => addNode(d.key));
+        }
+        for (const rel of this.data.relations) {
+            if (types && !types.has(rel.type)) continue;
+            if (!relationActiveAt(this.data, rel, year == null ? null : year)) continue;
+            const fromKey = byDivision ? rel.from : rel.from.split('/')[0];
+            const toKey = byDivision ? rel.to : rel.to.split('/')[0];
+            if (!this.byKey.has(fromKey) || !this.byKey.has(toKey)) continue;
+            if (!this.byKey.has(rel.from.split('/')[0]) || !this.byKey.has(rel.to.split('/')[0])) continue;
+            addNode(fromKey).outN++;
+            addNode(toKey).inN++;
+            const k = `${fromKey}|${toKey}`;
+            if (!pairs.has(k)) pairs.set(k, { fromKey, toKey, n: 0, types: [], items: [] });
+            const e = pairs.get(k);
+            e.n++; e.items.push(rel);
+            if (!e.types.includes(rel.type)) e.types.push(rel.type);
+        }
+        return { nodes, edges: [...pairs.values()] };
+    }
+
+    /** Chaves ligadas a `key` pelos grupos (inclui a própria). */
+    linkedKeys(groups, key) {
+        const out = new Set(key ? [key] : []);
+        if (key) groups.forEach(g => { if (g.fromKey === key) out.add(g.toKey); if (g.toKey === key) out.add(g.fromKey); });
+        return out;
+    }
+
+    /**
+     * Estado do Modo aula para um nó selecionado: grupos visíveis, chave do diploma em foco
+     * (só diplomas e o centro isolam) e o conjunto de nós ligados a ele.
+     */
+    lectureState(selected, { types = null, show = true } = {}) {
+        const groups = show ? this.allRelations({ types }) : [];
+        const selKey = selected && (selected.data.kind === 'diploma' || selected.data.kind === 'center') ? selected.key : null;
+        return { groups, selKey, linked: this.linkedKeys(groups, selKey) };
     }
 
     nodeByKey(key) { return this.byKey.get(key) || null; }
