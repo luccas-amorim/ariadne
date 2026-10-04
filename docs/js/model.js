@@ -316,5 +316,34 @@ export class TreeModel {
         return out;
     }
 
+    /**
+     * Todas as relações vigentes, agregadas por par de diplomas e tipo, para o Modo aula e o grafo.
+     * Só entram grupos cujos dois diplomas estão na árvore atual.
+     * Cada grupo: { fromKey, toKey, type, n, items[] }, com fromKey/toKey = id do diploma
+     * (a mesma chave do nó do diploma, ou do centro no caso da Constituição).
+     * @param {{ types?: Set<string>|null, year?: number|null }} o  types null = todos
+     */
+    allRelations({ types = null, year = this.view.year } = {}) {
+        const groups = new Map();
+        for (const rel of this.data.relations) {
+            if (types && !types.has(rel.type)) continue;
+            if (!relationActiveAt(this.data, rel, year == null ? null : year)) continue;
+            const fromKey = rel.from.split('/')[0], toKey = rel.to.split('/')[0];
+            if (!this.byKey.has(fromKey) || !this.byKey.has(toKey)) continue;
+            const k = `${fromKey}|${toKey}|${rel.type}`;
+            if (!groups.has(k)) groups.set(k, { fromKey, toKey, type: rel.type, n: 0, items: [] });
+            const g = groups.get(k);
+            g.n++; g.items.push(rel);
+        }
+        return [...groups.values()];
+    }
+
+    /** Chaves ligadas a `key` pelos grupos (inclui a própria). */
+    linkedKeys(groups, key) {
+        const out = new Set(key ? [key] : []);
+        if (key) groups.forEach(g => { if (g.fromKey === key) out.add(g.toKey); if (g.toKey === key) out.add(g.fromKey); });
+        return out;
+    }
+
     nodeByKey(key) { return this.byKey.get(key) || null; }
 }
