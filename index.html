@@ -66,9 +66,11 @@ h2{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,4vw
 #c4 h2{color:#5B6270}
 #c4 p{margin:0}
 
-footer{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:72px 0 64px;font-size:13.5px;color:#5B6270}
+footer{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:72px 0 64px;font-size:13.5px;color:#5B6270}
 .fim{width:10px;height:10px;border-radius:50%;background:#9A3A2C;flex:none}
 footer a,footer a:hover{color:#5B6270}
+footer a.apoie:hover{color:#9A3A2C}
+footer .par{display:inline-flex;align-items:center;gap:12px}
 .citar{font:inherit;font-size:15px;font-weight:500;color:#1D2330;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(154,58,44,.7);text-decoration-thickness:1.5px;text-underline-offset:4px}
 .citar:hover{color:#9A3A2C}
 .citar:focus-visible{outline:2px solid #1D2330;outline-offset:3px}
@@ -179,8 +181,8 @@ footer a,footer a:hover{color:#5B6270}
     <footer>
       <span class="fim" data-fio="fim"></span>
       <a href="#topo">Voltar ao começo do fio</a>
-      <span aria-hidden="true">·</span>
-      <button type="button" class="citar" data-copiar-citacao aria-live="polite">copiar citação</button>
+      <span class="par"><span aria-hidden="true">·</span><button type="button" class="citar" data-copiar-citacao aria-live="polite">copiar citação</button></span>
+      <span class="par"><span aria-hidden="true">·</span><a class="apoie" href="https://luccas-amorim.github.io/apoie/">apoie o projeto</a></span>
     </footer>
   </div>
 </div>

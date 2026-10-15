@@ -52,6 +52,11 @@ Luccas de Amorim Rêgo Cavicchioli
 - ORCID: https://orcid.org/0000-0003-1910-1541
 - Lattes: http://lattes.cnpq.br/5257336387155202
 
+## Apoie
+
+O Ariadne é aberto, gratuito e sem anúncios. Se ele ajuda nos seus estudos, você pode apoiar pelo
+[GitHub Sponsors](https://github.com/sponsors/luccas-amorim) ou por [PIX](https://luccas-amorim.github.io/apoie/).
+
 ## Licença
 
 - Código (HTML, CSS, JS): [MIT](LICENSE)
