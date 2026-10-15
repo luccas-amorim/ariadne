@@ -1,6 +1,6 @@
 /* Projeto Ariadne — barra comum (o fio) para as páginas dos cadernos.
-   Uso: <script src="../ariadne.js" data-home="../" data-trail="Filosofia=index.html|Hegel=hegel.html|Ciência da Lógica"></script>
-   Opcional: data-extra="Glossário=kant-criticas.html#glossario" acrescenta um link no canto direito.
+   Uso: <script src="../../../ariadne.js" data-home="../../../" data-trail="Filosofia=../../|Hegel=../|Ciência da Lógica"></script>
+   Opcional: data-extra="Glossário=criticas/#glossario" acrescenta um link no canto direito.
    Opcional: data-sem-barra não desenha a barra (a home tem cabeçalho próprio), mas mantém o "copiar citação".
    Qualquer elemento com [data-copiar-citacao] copia a referência da página (ABNT) com o endereço e a data de acesso.
    A barra acompanha a leitura (fica presa ao topo). As barras próprias das páginas que também se prendem ao
