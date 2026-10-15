@@ -49,8 +49,8 @@ Use o botão **"Cite this repository"** do GitHub ou o arquivo [`CITATION.cff`](
 ## Autor
 
 Luccas de Amorim Rêgo Cavicchioli
-- ORCID: https://orcid.org/0000-0000-0000-0000
-- Lattes: http://lattes.cnpq.br/LATTES_ID
+- ORCID: https://orcid.org/0000-0003-1910-1541
+- Lattes: http://lattes.cnpq.br/5257336387155202
 
 ## Licença
 
