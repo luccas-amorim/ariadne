@@ -69,6 +69,9 @@ h2{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,4vw
 footer{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:72px 0 64px;font-size:13.5px;color:#5B6270}
 .fim{width:10px;height:10px;border-radius:50%;background:#9A3A2C;flex:none}
 footer a,footer a:hover{color:#5B6270}
+.citar{font:inherit;color:#5B6270;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(154,58,44,.6);text-underline-offset:3px}
+.citar:hover{color:#9A3A2C}
+.citar:focus-visible{outline:2px solid #1D2330;outline-offset:3px}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -176,9 +179,12 @@ footer a,footer a:hover{color:#5B6270}
     <footer>
       <span class="fim" data-fio="fim"></span>
       <a href="#topo">Voltar ao começo do fio</a>
+      <span aria-hidden="true">·</span>
+      <button type="button" class="citar" data-copiar-citacao aria-live="polite">copiar citação</button>
     </footer>
   </div>
 </div>
+<script src="ariadne.js" data-sem-barra></script>
 <script>
 /* O fio: um path medido do novelo até o ponto de cada caderno e até o rodapé. */
 (function(){
@@ -209,6 +215,8 @@ footer a,footer a:hover{color:#5B6270}
     var pts = [c(knot)];
     dots.forEach(function(dot){
       var b = c(dot), a = pts[pts.length - 1];
+      /* Mesma coluna: o novelo e os pontos diferem por 1px no centro; o fio segue reto, sem degrau. */
+      if (Math.abs(b.x - a.x) < 4) b.x = a.x;
       var gy = dot.parentElement.getBoundingClientRect().top - wr.top - 40;
       pts.push({ x: a.x, y: gy });
       var dx = b.x - a.x;
@@ -216,6 +224,7 @@ footer a,footer a:hover{color:#5B6270}
       pts.push({ x: b.x, y: gy }, b);
     });
     var e = c(end), a = pts[pts.length - 1], gy = e.y - 36;
+    if (Math.abs(e.x - a.x) < 4) e.x = a.x;
     pts.push({ x: a.x, y: gy }, { x: e.x, y: gy }, e);
     var d = round(pts, 14);
     if (d !== lastD) { path.setAttribute('d', d); lastD = d; }
