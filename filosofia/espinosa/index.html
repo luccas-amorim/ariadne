@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espinosa · Projeto Ariadne</title>
+<meta name="description" content="Baruch Espinosa: a Ética demonstrada em ordem geométrica, numa subida em cinco partes que vai de Deus à liberdade humana.">
+<meta property="og:title" content="Espinosa · Projeto Ariadne">
+<meta property="og:description" content="Baruch Espinosa: a Ética demonstrada em ordem geométrica, numa subida em cinco partes que vai de Deus à liberdade humana.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../filosofo.css">
+<style>:root{--fundo:#ECEEEE;--a:#3E5F70;--claro:#F5F6F6}</style>
+</head>
+<body>
+<script src="../../ariadne.js" data-home="../../" data-trail="Filosofia=../|Espinosa"></script>
+<div class="miolo">
+  <header>
+    <div class="sobre">Caderno I · Filosofia · textos a vir</div>
+    <h1>Baruch Espinosa</h1>
+    <p>1632–1677. A <em>Ética</em> é demonstrada em ordem geométrica: definições, axiomas, proposições e escólios, numa subida em cinco partes que vai de Deus à liberdade humana.</p>
+  </header>
+  <section class="obra">
+    <div class="esquema">
+      <div class="topo">
+        <h2 class="rotulo">Esquema · Ordem geométrica</h2>
+        <span class="nota"><em>Ethica ordine geometrico demonstrata</em>, 1677</span>
+      </div>
+      <div class="fig" id="figura" style="aspect-ratio:640/520"></div>
+    </div>
+    <div class="partes" id="partes"></div>
+  </section>
+  <section class="outras">
+    <h2 class="rotulo">Outras obras</h2>
+    <div id="outras"></div>
+  </section>
+</div>
+<script src="../filosofo.js"></script>
+<script>
+(function(){
+  var A = '#3E5F70', SERIF = 'Alegreya, Georgia, serif', SANS = 'Alegreya Sans, sans-serif';
+  var PARTES = [
+    { n: 'I', t: 'Deus', meta: 'De Deo', d: 'Substância, atributos e modos; Deus sive Natura; necessidade e a crítica das causas finais (Apêndice).' },
+    { n: 'II', t: 'A mente', meta: 'De natura et origine mentis', d: 'Mente como ideia do corpo; os três gêneros de conhecimento; o paralelismo.' },
+    { n: 'III', t: 'Os afetos', meta: 'De origine et natura affectuum', d: 'O conatus; alegria, tristeza e desejo; os afetos tratados como linhas, planos e corpos.' },
+    { n: 'IV', t: 'A servidão', meta: 'De servitute humana', d: 'A força dos afetos; o bem e o mal como utilidade; o homem livre.' },
+    { n: 'V', t: 'A liberdade', meta: 'De potentia intellectus seu de libertate', d: 'O poder do intelecto sobre os afetos; amor intelectual de Deus; a beatitude.' }
+  ];
+
+  function figura(h, el){
+    var svg = el('svg', { viewBox: '0 0 640 520', role: 'img', 'aria-label': 'Esquema da Ética' });
+    var add = function(e){ svg.appendChild(e); };
+    var T = function(x, y, t, o){ o = o || {}; return el('text', { x: x, y: y, 'font-family': o.f || SERIF, 'font-size': o.s || 16, 'font-weight': o.w || 400, 'font-style': o.i || 'normal', fill: o.c || '#1D2330', 'text-anchor': o.a || 'start' }, t); };
+    var pts = PARTES.map(function(p, i){ return { x: 30 + i * 120, y: 400 - i * 72 }; });
+    add(el('path', { d: 'M' + pts.map(function(p){ return (p.x + 60) + ',' + (p.y + 30); }).join(' L'), stroke: '#9A3A2C', 'stroke-width': 1.75, 'stroke-dasharray': '2 5', fill: 'none' }));
+    PARTES.forEach(function(p, i){
+      var x = pts[i].x, y = pts[i].y, on = h === p.n;
+      add(el('rect', { x: x, y: y, width: 112, height: 500 - y, fill: on ? A : '#F5F6F6', 'fill-opacity': 1, stroke: A, 'stroke-width': 2 }));
+      add(T(x + 12, y + 30, p.n, { s: 22, w: 700, c: on ? '#fff' : A }));
+      add(T(x + 12, y + 54, p.t, { s: 17, w: 700, c: on ? '#fff' : '#1D2330' }));
+      ['Def.', 'Ax.', 'Prop.', 'Esc.'].forEach(function(l, j){
+        var yy = y + 80 + j * 22;
+        if (yy > 486) return;
+        add(el('rect', { x: x + 12, y: yy - 9, width: 8, height: 8, fill: on ? '#fff' : A, 'fill-opacity': 1 - j * 0.2 }));
+        add(T(x + 26, yy, l, { f: SANS, s: 12, c: on ? '#fff' : '#5B6270' }));
+      });
+    });
+    add(el('path', { d: 'M20,500 H620', stroke: '#1D2330', 'stroke-width': 1 }));
+    add(T(30, 380, 'Deus sive Natura', { i: 'italic', s: 16, c: '#5B6270' }));
+    add(T(620, 90, 'beatitude', { a: 'end', i: 'italic', s: 16, c: '#5B6270' }));
+    return svg;
+  }
+
+  Filosofo.montar({
+    partes: PARTES, chave: 'n', metaItalico: true, figura: figura,
+    obras: [{ t: 'Tratado da emenda do intelecto', a: 'c. 1662' }, { t: 'Princípios da filosofia de Descartes', a: '1663' }, { t: 'Tratado teológico-político', a: '1670' }, { t: 'Tratado político', a: '1677, inacabado' }]
+  });
+})();
+</script>
+</body>
+</html>
