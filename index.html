@@ -1,40 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub de Estudos - Projeto Ariadne</title>
-    <style>
-        body { font-family: system-ui, sans-serif; margin: 40px auto; max-width: 800px; line-height: 1.6; color: #333; }
-        h1 { border-bottom: 2px solid #eaecef; padding-bottom: 10px; }
-        h2 { margin-top: 30px; color: #24292e; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 10px; padding: 10px; background: #f6f8fa; border-radius: 6px; }
-        a { text-decoration: none; color: #0366d6; font-weight: bold; display: block; }
-        a:hover { text-decoration: underline; color: #005cc5; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projeto Ariadne</title>
+<meta name="description" content="Cadernos de estudo ligados por um fio: filosofia, ritos processuais e história política do Brasil.">
+<meta property="og:title" content="Projeto Ariadne">
+<meta property="og:description" content="Cadernos de estudo ligados por um fio: filosofia, ritos processuais e história política do Brasil.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#ECEEEB;color:#1D2330;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:hover{color:#9A3A2C}
+a:focus-visible{outline:2px solid #1D2330;outline-offset:3px}
+
+#topo{position:relative;min-height:100vh;font-family:'Alegreya Sans','Segoe UI',system-ui,sans-serif;background:#ECEEEB;color:#1D2330}
+.faixa{position:absolute;left:0;right:0;top:0;height:2px;background:#9A3A2C}
+.fio{position:absolute;left:0;top:0;width:100%;height:0;pointer-events:none;overflow:visible;z-index:0}
+.fio path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.8s cubic-bezier(.55,0,.2,1)}
+.fio.drawn path{stroke-dashoffset:0}
+.miolo{position:relative;max-width:1040px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+
+.cab{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:40px;padding:72px 0 56px}
+.cab-texto{flex:1 1 380px;min-width:0}
+.sobre{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cab .sobre{color:#9A3A2C}
+h1{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(2.8rem,8vw,4.8rem);line-height:.98;letter-spacing:-.015em;margin:14px 0 18px}
+.sub{font-size:1.125rem;line-height:1.5;color:#5B6270;margin:0;max-width:30rem;text-wrap:pretty}
+.convite{display:flex;align-items:center;gap:12px;margin-top:40px;font-size:13.5px;color:#5B6270}
+.novelo{width:14px;height:14px;border-radius:50%;background:#9A3A2C;box-shadow:0 0 0 4px rgba(154,58,44,.15);flex:none}
+
+.planta{flex:0 0 auto;margin:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.planta svg{display:block;overflow:visible}
+.planta figcaption{font-size:12.5px;color:#5B6270;letter-spacing:.02em}
+.sala rect{fill-opacity:.07}
+.sala:hover rect{fill-opacity:.2}
+.sala.livre rect{fill-opacity:.05}
+.sala.livre:hover rect{fill-opacity:.16}
+
+main{display:flex;flex-direction:column;gap:88px;padding-bottom:40px}
+.caderno{position:relative;z-index:1;padding-left:52px;max-width:720px}
+.caderno.desloca{margin-left:min(22%,220px)}
+.ponto{position:absolute;left:0;top:8px;width:16px;height:16px;border-radius:50%;background:#ECEEEB;border:2px solid var(--c);box-sizing:border-box}
+.ponto.tracejado{border-style:dashed}
+.caderno .sobre{color:var(--c)}
+h2{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.08;margin:6px 0 10px}
+.caderno p{font-size:1.0625rem;line-height:1.5;color:#5B6270;margin:0 0 20px;max-width:34rem;text-wrap:pretty}
+.linhas{display:flex;flex-direction:column;border-top:1px solid #C9CDD4}
+.linha{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 20px;padding:14px 10px;border-bottom:1px solid #C9CDD4}
+.linha:hover{background:var(--c7)}
+.linha.subcap{padding-left:30px}
+.linha .l{position:absolute;left:10px;top:0;bottom:50%;width:12px;border-left:1.5px solid var(--c);border-bottom:1.5px solid var(--c)}
+.linha .t{font-family:Alegreya,Georgia,serif;font-size:1.25rem;font-weight:500}
+.linha .n{font-size:13.5px;color:#5B6270}
+#c1{--c:#2C5A84;--c7:rgba(44,90,132,.07)}
+#c2{--c:#3B4146;--c7:rgba(59,65,70,.07)}
+#c3{--c:#2F5D4A;--c7:rgba(47,93,74,.07)}
+#c4{--c:#94721F}
+#c4 .sobre{color:#7E6119}
+#c4 h2{color:#5B6270}
+#c4 p{margin:0}
+
+footer{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:72px 0 64px;font-size:13.5px;color:#5B6270}
+.fim{width:10px;height:10px;border-radius:50%;background:#9A3A2C;flex:none}
+footer a,footer a:hover{color:#5B6270}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .fio path{transition:none;stroke-dashoffset:0}
+}
+</style>
 </head>
 <body>
-    <h1>Hub Central de Anotações</h1>
-    <p>Selecione um dos mapas ou anotações abaixo para acessar o conteúdo detalhado:</p>
-    
-    <h2>Filosofia</h2>
-    <ul>
-        <li><a href="filosofia/mapa-historia-filosofia.html">História da filosofia</a></li>
-        <li><a href="filosofia/filosofia_direito.html">Filosofia do Direito</a></li>
-        <li><a href="filosofia/hegel-logica.html">G. W. F. Hegel</a></li>
-        <li><a href="filosofia/hegel-direito.html">G. W. F. Hegel</a></li>
-        <li><a href="filosofia/kant.html">Immanuel Kant</a></li>
-    </ul>
+<div id="topo">
+  <div class="faixa"></div>
+  <svg class="fio" aria-hidden="true"><path fill="none" stroke="#9A3A2C" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path></svg>
+  <div class="miolo">
 
-    <h2>Direito e Processos</h2>
-    <ul>
-        <li><a href="direito/mapa_processos.html">Mapas de Processos</a></li>
-    </ul>
+    <header class="cab">
+      <div class="cab-texto">
+        <div class="sobre">Cadernos de estudo</div>
+        <h1>Projeto Ariadne</h1>
+        <p class="sub">Cadernos ligados por um fio: filosofia, ritos processuais e história política do Brasil.</p>
+        <div class="convite">
+          <span class="novelo" data-fio="inicio"></span>
+          <span>Siga o fio, ou escolha uma sala na planta.</span>
+        </div>
+      </div>
+      <figure class="planta">
+        <svg viewBox="0 0 240 252" width="232" height="244" aria-label="Planta do labirinto: uma sala para cada caderno">
+          <a class="sala" href="#c1" aria-label="Caderno I · Cadernos de filosofia"><rect x="22" y="122" width="96" height="96" fill="#2C5A84"></rect></a>
+          <a class="sala" href="#c2" aria-label="Caderno II · Ritos processuais"><rect x="22" y="22" width="96" height="96" fill="#3B4146"></rect></a>
+          <a class="sala" href="#c3" aria-label="Caderno III · Espectros políticos do Brasil"><rect x="122" y="22" width="96" height="96" fill="#2F5D4A"></rect></a>
+          <a class="sala livre" href="#c4" aria-label="Caderno IV · sala livre"><rect x="122" y="122" width="96" height="96" fill="#94721F"></rect></a>
+          <g fill="none" stroke="#1D2330" stroke-width="3" stroke-linecap="square" pointer-events="none">
+            <path d="M58 220 H20 V20 H220 V220 H82"></path>
+            <path d="M120 20 V56 M120 84 V220"></path>
+            <path d="M20 120 H56 M84 120 H156 M184 120 H220"></path>
+          </g>
+          <path d="M70 252 V70 H170 V170" fill="none" stroke="#9A3A2C" stroke-width="2" stroke-linecap="round" pointer-events="none"></path>
+          <g font-family="Alegreya, Georgia, serif" font-size="15" font-weight="700" text-anchor="middle" pointer-events="none">
+            <circle cx="70" cy="170" r="13" fill="#ECEEEB" stroke="#2C5A84" stroke-width="2"></circle><text x="70" y="175" fill="#2C5A84">I</text>
+            <circle cx="70" cy="70" r="13" fill="#ECEEEB" stroke="#3B4146" stroke-width="2"></circle><text x="70" y="75" fill="#3B4146">II</text>
+            <circle cx="170" cy="70" r="13" fill="#ECEEEB" stroke="#2F5D4A" stroke-width="2"></circle><text x="170" y="75" fill="#2F5D4A">III</text>
+            <circle cx="170" cy="170" r="13" fill="#ECEEEB" stroke="#94721F" stroke-width="2" stroke-dasharray="3 3"></circle><text x="170" y="175" fill="#94721F">IV</text>
+          </g>
+        </svg>
+        <figcaption>A planta: uma sala por caderno</figcaption>
+      </figure>
+    </header>
 
-    <h2>História</h2>
-    <ul>
-        <li><a href="historia/historia_politica_brasil.html">História do Brasil</a></li>
-    </ul>
+    <main>
+
+      <section id="c1" class="caderno">
+        <span class="ponto" data-fio="ponto"></span>
+        <div class="sobre">Caderno I</div>
+        <h2>Cadernos de filosofia</h2>
+        <p>O mapa da história da filosofia, as páginas de cada filósofo com um esquema da estrutura da obra, e a filosofia do direito como subcapítulo.</p>
+        <div class="linhas">
+          <a class="linha" href="filosofia/">
+            <span class="t">Entrada do caderno</span>
+            <span class="n">Filósofos e mapa, lado a lado</span>
+          </a>
+          <a class="linha" href="filosofia/mapa-historia-filosofia.html">
+            <span class="t">Linha do tempo da filosofia</span>
+            <span class="n">De Tales ao século XXI</span>
+          </a>
+          <a class="linha subcap" href="filosofia/filosofia_direito.html">
+            <span class="l"></span>
+            <span class="t">Filosofia do Direito</span>
+            <span class="n">Subcapítulo · expoentes, temas e referências</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="c2" class="caderno desloca">
+        <span class="ponto" data-fio="ponto"></span>
+        <div class="sobre">Caderno II</div>
+        <h2>Ritos processuais</h2>
+        <p>Cada rito desenhado como linha do tempo: filtros de entrada, etapas em trilhos paralelos e o que vale durante todo o percurso.</p>
+        <div class="linhas">
+          <a class="linha" href="direito/mapa_processos.html">
+            <span class="t">Mapas dos Processos</span>
+            <span class="n">Artigos, doutrina e jurisprudência por etapa</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="c3" class="caderno">
+        <span class="ponto" data-fio="ponto"></span>
+        <div class="sobre">Caderno III</div>
+        <h2>Espectros políticos do Brasil</h2>
+        <p>Uma grande anotação sobre direita, esquerda e centro, da chegada da corte em 1808 ao primeiro turno de 2026.</p>
+        <div class="linhas">
+          <a class="linha" href="historia/historia_politica_brasil.html">
+            <span class="t">Uma história das ideologias políticas no Brasil</span>
+            <span class="n">Prólogo e 12 capítulos · 1808–2026</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="c4" class="caderno desloca">
+        <span class="ponto tracejado" data-fio="ponto"></span>
+        <div class="sobre">Caderno IV · sala livre</div>
+        <h2>Em aberto</h2>
+        <p>Uma sala ainda sem caderno.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span class="fim" data-fio="fim"></span>
+      <a href="#topo">Voltar ao começo do fio</a>
+    </footer>
+  </div>
+</div>
+<script>
+/* O fio: um path medido do novelo até o ponto de cada caderno e até o rodapé. */
+(function(){
+  var wrap = document.getElementById('topo');
+  var svg = wrap.querySelector('.fio'), path = svg.querySelector('path');
+  var knot = wrap.querySelector('[data-fio="inicio"]');
+  var dots = Array.prototype.slice.call(wrap.querySelectorAll('[data-fio="ponto"]'));
+  var end = wrap.querySelector('[data-fio="fim"]');
+  var lastD = '', lastH = -1;
+
+  function round(raw, r){
+    var p = raw.reduce(function(acc, q){ var l = acc[acc.length - 1]; if (!l || Math.hypot(q.x - l.x, q.y - l.y) > 0.5) acc.push(q); return acc; }, []);
+    var d = 'M' + p[0].x + ',' + p[0].y;
+    for (var i = 1; i < p.length - 1; i++) {
+      var a = p[i - 1], b = p[i], c = p[i + 1];
+      var l1 = Math.hypot(b.x - a.x, b.y - a.y), l2 = Math.hypot(c.x - b.x, c.y - b.y);
+      var rr = Math.min(r, l1 / 2, l2 / 2);
+      d += ' L' + (b.x + (a.x - b.x) * rr / l1) + ',' + (b.y + (a.y - b.y) * rr / l1) +
+           ' Q' + b.x + ',' + b.y + ' ' + (b.x + (c.x - b.x) * rr / l2) + ',' + (b.y + (c.y - b.y) * rr / l2);
+    }
+    var z = p[p.length - 1];
+    return d + ' L' + z.x + ',' + z.y;
+  }
+
+  function measure(){
+    var wr = wrap.getBoundingClientRect();
+    var c = function(el){ var r = el.getBoundingClientRect(); return { x: r.left - wr.left + r.width / 2, y: r.top - wr.top + r.height / 2 }; };
+    var pts = [c(knot)];
+    dots.forEach(function(dot){
+      var b = c(dot), a = pts[pts.length - 1];
+      var gy = dot.parentElement.getBoundingClientRect().top - wr.top - 40;
+      pts.push({ x: a.x, y: gy });
+      var dx = b.x - a.x;
+      if (Math.abs(dx) > 70) { var m = a.x + dx / 2; pts.push({ x: m - 12, y: gy }, { x: m - 12, y: gy - 18 }, { x: m + 12, y: gy - 18 }, { x: m + 12, y: gy }); }
+      pts.push({ x: b.x, y: gy }, b);
+    });
+    var e = c(end), a = pts[pts.length - 1], gy = e.y - 36;
+    pts.push({ x: a.x, y: gy }, { x: e.x, y: gy }, e);
+    var d = round(pts, 14);
+    if (d !== lastD) { path.setAttribute('d', d); lastD = d; }
+    if (wr.height !== lastH) { svg.style.height = wr.height + 'px'; lastH = wr.height; }
+  }
+
+  measure();
+  if (window.ResizeObserver) new ResizeObserver(measure).observe(wrap);
+  else window.addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  setTimeout(function(){ svg.classList.add('drawn'); }, 150);
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "Se usar este material, cite-o como abaixo."
+type: dataset
+title: "Projeto Ariadne: cadernos de estudo"
+abstract: >-
+  Cadernos de estudo ligados por um fio: filosofia (Hobbes, Espinosa, Hume,
+  Rousseau, Kant, Hegel e filosofia do direito), mapas dos ritos processuais
+  brasileiros e uma história das ideologias políticas no Brasil (1808–2026).
+authors:
+  - family-names: "Cavicchioli"
+    given-names: "Luccas de Amorim Rêgo"
+    orcid: "https://orcid.org/0000-0003-1910-1541"
+    website: "http://lattes.cnpq.br/5257336387155202"
+version: "2.0.0"
+date-released: "2026-10-15"
+url: "https://luccas-amorim.github.io/ariadne/"
+repository-code: "https://github.com/luccas-amorim/ariadne"
+license: CC-BY-NC-SA-4.0
+keywords:
+  - filosofia
+  - filosofia do direito
+  - Kant
+  - Hegel
+  - processo civil
+  - processo penal
+  - processo constitucional
+  - execução penal
+  - processo trabalhista
+  - história política do Brasil
+  - material de estudo
+languages:
+  - pt
