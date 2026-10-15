@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Linha do tempo da filosofia</title>
+<meta name="description" content="Linha do tempo da filosofia, de Tales ao século XXI, por correntes, influências e áreas.">
+<meta property="og:title" content="Linha do tempo da filosofia">
+<meta property="og:description" content="Linha do tempo da filosofia, de Tales ao século XXI, por correntes, influências e áreas.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
@@ -106,7 +111,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,.no:focus-visible{outli
 .no.linkado .nome{font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .no a:hover .nome{fill:var(--tom)}
 .no .ponto{stroke:var(--fundo);stroke-width:1.2}
-.no.linkado .ponto{stroke:var(--tinta);stroke-width:1.4}
+.no.linkado .ponto{stroke:#9A3A2C;stroke-width:2.2}
+.no.linkado .nome{font-weight:700}
 .aresta{fill:none;stroke-linecap:round;opacity:.2;stroke-width:1;transition:opacity .15s}
 .aresta.m{stroke-width:1.7;opacity:.3}
 .aresta.c{stroke-dasharray:4 3}
@@ -208,8 +214,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,.no:focus-visible{outli
    uma entrada aqui (id do filósofo: lista de páginas).
    ========================================================== */
 const PAGINAS = {
-  kant:  [{t:'As Críticas de Kant, reconstruídas', u:'https://claude.ai/artifact/Br2d7QK9CZYjF7Qauaf89y'}],
-  hegel: [{t:'A Ciência da Lógica, reconstruída', u:'https://claude.ai/artifact/H3upyjhSxK49KkUeq9g7R5'}]
+  hobbes:   [{t:'Hobbes · o Leviatã', u:'hobbes.html'}],
+  espinosa: [{t:'Espinosa · a Ética', u:'espinosa.html'}],
+  hume:     [{t:'Hume · o Tratado', u:'hume.html'}],
+  rousseau: [{t:'Rousseau · o Contrato social', u:'rousseau.html'}],
+  kant:     [{t:'Kant · a planta do sistema', u:'kant.html'}, {t:'As Críticas, reconstruídas', u:'kant-criticas.html'}],
+  hegel:    [{t:'Hegel · três obras', u:'hegel.html'}, {t:'A Ciência da Lógica, reconstruída', u:'hegel-logica.html'}, {t:'A Filosofia do Direito, reconstruída', u:'hegel-direito.html'}]
 };
 
 /* Grandes tradições (dão a cor das correntes) */
@@ -1322,7 +1332,7 @@ function render(opc = {}){
     sn += `<g class="no${ln ? ' linkado' : ''}" data-id="${n.id}" tabindex="0" role="button" aria-label="${escH(n.nome)}, ${escH(n.dt)}">
       <rect x="${n.x - 6}" y="${n.y}" width="${n.w + 20}" height="${ROW - 3}" fill="transparent"/>
       <circle class="ponto" cx="${n.x}" cy="${n.y + 9}" r="${ln ? 4.4 : 3.7}" fill="${b.cor.ponto}"/>
-      ${ln ? `<a href="${escH(n.pag[0].u)}" target="_blank" rel="noopener" aria-label="Abrir ${escH(n.pag[0].t)}">${nome}</a>` : nome}
+      ${ln ? `<a href="${escH(n.pag[0].u)}" target="_top" aria-label="Abrir ${escH(n.pag[0].t)}">${nome}</a>` : nome}
       <text class="datas" x="${n.x + 8}" y="${n.y + 25}">${escH(n.dt)}</text></g>`;
   }));
   sv += `<g class="nos">${sn}</g>`;
@@ -1415,7 +1425,7 @@ function abrirFicha(id){
     <button type="button" class="fechar" aria-label="Fechar ficha">×</button>
     <h2>${escH(p.nome)}</h2>
     <p class="vida">${escH(p.dt)}, filosofia ${escH(PERIODOS[p.per].n.toLowerCase())}</p>
-    ${p.pag ? `<div class="paginas">${p.pag.map(g => `<a href="${escH(g.u)}" target="_blank" rel="noopener">Abrir página de estudo<span>${escH(g.t)}</span></a>`).join('')}</div>` : ''}
+    ${p.pag ? `<div class="paginas">${p.pag.map(g => `<a href="${escH(g.u)}" target="_top">Abrir página de estudo<span>${escH(g.t)}</span></a>`).join('')}</div>` : ''}
     <p class="corrente"><span class="sw" style="background:${c.ponto}"></span><button type="button" data-escola="${e.id}">${escH(e.nome)}</button></p>
     <p class="desc">${md(e.desc)}</p>
     <p class="rel"><em>Grande corrente:</em> <button type="button" class="ir" data-escola="${MAPA[e.id]}">${escH(MAC[MAPA[e.id]].nome)}</button></p>
@@ -1653,5 +1663,6 @@ montarControles();
 render({inicio: true});
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { _cw.clear(); render({centro: centroAtual()}); });
 </script>
+<script src="../ariadne.js" data-home="../" data-trail="Filosofia=index.html|Linha do tempo da filosofia"></script>
 </body>
 </html>
