@@ -1,6 +1,6 @@
 # Projeto Ariadne
 
-Cadernos de estudo ligados por um fio: filosofia, ritos processuais e história política do Brasil.
+Cadernos de estudo ligados por um fio: filosofia, ritos processuais, história política do Brasil e tribunais internacionais.
 
 **Site:** https://luccas-amorim.github.io/ariadne/
 
@@ -13,7 +13,7 @@ O Ariadne é um caderno de estudos pessoal, organizado como um labirinto. Cada s
 | I | **Cadernos de filosofia** | Filósofos em ordem cronológica, cada um com o esquema da estrutura da obra (Hobbes, Espinosa, Hume, Rousseau, Kant, Hegel); a linha do tempo da filosofia; e o subcapítulo Filosofia do Direito |
 | II | **Ritos processuais** | Mapas dos Processos: processo constitucional, penal, execução penal, civil e trabalhista, desenhados como linha do tempo, com artigos, doutrina e jurisprudência em cada etapa |
 | III | **Espectros políticos do Brasil** | *Uma história das ideologias políticas no Brasil*: prólogo e doze capítulos sobre direita, esquerda e centro, de 1808 a 2026 |
-| IV | *Sala livre* | Em aberto |
+| IV | **Tribunais internacionais** | *Atlas dos Tribunais Internacionais*: 49 cortes, tribunais e câmaras de 1899 a 2026, em mapa, quadro por família e cronologia, com instrumento de criação, mantenedor, Estados vinculados e situação atual |
 
 ## Como funciona
 
@@ -23,7 +23,7 @@ O site é estático: HTML, CSS e JavaScript puros, sem build e sem dependências
 index.html               página inicial (a planta e o fio)
 ariadne.js               barra de navegação comum
 filosofia/               Caderno I
-direito/                 Caderno II
+direito/                 Caderno II e, em tribunais-internacionais/, Caderno IV
 historia/                Caderno III
 ```
 

@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projeto Ariadne</title>
-<meta name="description" content="Cadernos de estudo ligados por um fio: filosofia, ritos processuais e história política do Brasil.">
+<meta name="description" content="Cadernos de estudo ligados por um fio: filosofia, ritos processuais, história política do Brasil e tribunais internacionais.">
 <meta property="og:title" content="Projeto Ariadne">
-<meta property="og:description" content="Cadernos de estudo ligados por um fio: filosofia, ritos processuais e história política do Brasil.">
+<meta property="og:description" content="Cadernos de estudo ligados por um fio: filosofia, ritos processuais, história política do Brasil e tribunais internacionais.">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,14 +40,11 @@ h1{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(2.8rem,8vw
 .planta figcaption{font-size:12.5px;color:#5B6270;letter-spacing:.02em}
 .sala rect{fill-opacity:.07}
 .sala:hover rect{fill-opacity:.2}
-.sala.livre rect{fill-opacity:.05}
-.sala.livre:hover rect{fill-opacity:.16}
 
 main{display:flex;flex-direction:column;gap:88px;padding-bottom:40px}
 .caderno{position:relative;z-index:1;padding-left:52px;max-width:720px}
 .caderno.desloca{margin-left:min(22%,220px)}
 .ponto{position:absolute;left:0;top:8px;width:16px;height:16px;border-radius:50%;background:#ECEEEB;border:2px solid var(--c);box-sizing:border-box}
-.ponto.tracejado{border-style:dashed}
 .caderno .sobre{color:var(--c)}
 h2{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.08;margin:6px 0 10px}
 .caderno p{font-size:1.0625rem;line-height:1.5;color:#5B6270;margin:0 0 20px;max-width:34rem;text-wrap:pretty}
@@ -61,10 +58,8 @@ h2{font-family:Alegreya,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,4vw
 #c1{--c:#2C5A84;--c7:rgba(44,90,132,.07)}
 #c2{--c:#3B4146;--c7:rgba(59,65,70,.07)}
 #c3{--c:#2F5D4A;--c7:rgba(47,93,74,.07)}
-#c4{--c:#94721F}
+#c4{--c:#94721F;--c7:rgba(148,114,31,.07)}
 #c4 .sobre{color:#7E6119}
-#c4 h2{color:#5B6270}
-#c4 p{margin:0}
 
 footer{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:72px 0 64px;font-size:13.5px;color:#5B6270}
 .fim{width:10px;height:10px;border-radius:50%;background:#9A3A2C;flex:none}
@@ -91,7 +86,7 @@ footer .par{display:inline-flex;align-items:center;gap:12px}
       <div class="cab-texto">
         <div class="sobre">Cadernos de estudo</div>
         <h1>Projeto Ariadne</h1>
-        <p class="sub">Cadernos ligados por um fio: filosofia, ritos processuais e história política do Brasil.</p>
+        <p class="sub">Cadernos ligados por um fio: filosofia, ritos processuais, história política do Brasil e tribunais internacionais.</p>
         <div class="convite">
           <span class="novelo" data-fio="inicio"></span>
           <span>Siga o fio, ou escolha uma sala na planta.</span>
@@ -102,7 +97,7 @@ footer .par{display:inline-flex;align-items:center;gap:12px}
           <a class="sala" href="#c1" aria-label="Caderno I · Cadernos de filosofia"><rect x="22" y="122" width="96" height="96" fill="#2C5A84"></rect></a>
           <a class="sala" href="#c2" aria-label="Caderno II · Ritos processuais"><rect x="22" y="22" width="96" height="96" fill="#3B4146"></rect></a>
           <a class="sala" href="#c3" aria-label="Caderno III · Espectros políticos do Brasil"><rect x="122" y="22" width="96" height="96" fill="#2F5D4A"></rect></a>
-          <a class="sala livre" href="#c4" aria-label="Caderno IV · sala livre"><rect x="122" y="122" width="96" height="96" fill="#94721F"></rect></a>
+          <a class="sala" href="#c4" aria-label="Caderno IV · Tribunais internacionais"><rect x="122" y="122" width="96" height="96" fill="#94721F"></rect></a>
           <g fill="none" stroke="#1D2330" stroke-width="3" stroke-linecap="square" pointer-events="none">
             <path d="M58 220 H20 V20 H220 V220 H82"></path>
             <path d="M120 20 V56 M120 84 V220"></path>
@@ -113,7 +108,7 @@ footer .par{display:inline-flex;align-items:center;gap:12px}
             <circle cx="70" cy="170" r="13" fill="#ECEEEB" stroke="#2C5A84" stroke-width="2"></circle><text x="70" y="175" fill="#2C5A84">I</text>
             <circle cx="70" cy="70" r="13" fill="#ECEEEB" stroke="#3B4146" stroke-width="2"></circle><text x="70" y="75" fill="#3B4146">II</text>
             <circle cx="170" cy="70" r="13" fill="#ECEEEB" stroke="#2F5D4A" stroke-width="2"></circle><text x="170" y="75" fill="#2F5D4A">III</text>
-            <circle cx="170" cy="170" r="13" fill="#ECEEEB" stroke="#94721F" stroke-width="2" stroke-dasharray="3 3"></circle><text x="170" y="175" fill="#94721F">IV</text>
+            <circle cx="170" cy="170" r="13" fill="#ECEEEB" stroke="#94721F" stroke-width="2"></circle><text x="170" y="175" fill="#94721F">IV</text>
           </g>
         </svg>
         <figcaption>A planta: uma sala por caderno</figcaption>
@@ -171,10 +166,16 @@ footer .par{display:inline-flex;align-items:center;gap:12px}
       </section>
 
       <section id="c4" class="caderno desloca">
-        <span class="ponto tracejado" data-fio="ponto"></span>
-        <div class="sobre">Caderno IV · sala livre</div>
-        <h2>Em aberto</h2>
-        <p>Uma sala ainda sem caderno.</p>
+        <span class="ponto" data-fio="ponto"></span>
+        <div class="sobre">Caderno IV</div>
+        <h2>Tribunais internacionais</h2>
+        <p>As cortes, tribunais e câmaras criados por instrumento internacional, de 1899 até hoje: onde estão, quem os mantém, que Estados vinculam e em que situação se encontram.</p>
+        <div class="linhas">
+          <a class="linha" href="direito/tribunais-internacionais/">
+            <span class="t">Atlas dos Tribunais Internacionais</span>
+            <span class="n">49 tribunais · mapa, quadro e cronologia · 1899–2026</span>
+          </a>
+        </div>
       </section>
     </main>
 
