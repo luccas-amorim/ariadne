@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>As Críticas de Kant, reconstruídas</title>
+<meta name="description" content="As Críticas de Kant e a Doutrina do Direito reconstruídas em 26 capítulos, cada argumento em premissas e conclusão.">
+<meta property="og:title" content="As Críticas de Kant, reconstruídas">
+<meta property="og:description" content="As Críticas de Kant e a Doutrina do Direito reconstruídas em 26 capítulos, cada argumento em premissas e conclusão.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="leitura.css">
+<link rel="stylesheet" href="../../../ariadne.css">
+</head>
+<body>
+<header class="barra">
+  <a class="marca" href="#planta">As Críticas de Kant</a>
+  <a href="#planta" data-vista="planta">Planta</a>
+  <a href="#glossario" data-vista="glossario">Glossário</a>
+</header>
+<main>
+<section class="vista" id="planta">
+  <div class="cabeca">
+    <h1>As Críticas de Kant, reconstruídas</h1>
+    <p>Cada argumento em premissas e conclusão. A planta segue a arquitetônica do sistema: a razão teórica de um lado, a razão prática e o juízo do outro, a liberdade no fecho do arco e a Doutrina do Direito construída sobre ele.</p>
+    <p class="progresso">{{PROGRESSO}}. Toque numa pedra para abrir o capítulo.</p>
+  </div>
+  <div class="arco">{{PLANTA}}</div>
+  {{LEGENDA}}
+  <div class="indice">{{INDICE}}</div>
+  <p class="rodape">Texto de referência: <i>Akademie-Ausgabe</i>. A KrV é citada pela paginação A/B; as demais obras, por volume e página da AA.</p>
+</section>
+{{CAPITULOS}}
+<section class="vista glossario" id="glossario">
+  <h1>Glossário</h1>
+  <p>Os termos de todos os capítulos, com a tradução adotada. Filtre por palavra em português ou em alemão.</p>
+  <input type="search" id="filtro" placeholder="Filtrar termos" aria-label="Filtrar termos">
+  <div id="grupos">{{GLOSSARIO}}</div>
+  <p class="vazio" id="vazio" hidden>Nenhum termo corresponde ao filtro.</p>
+</section>
+</main>
+<script src="leitura.js"></script>
+<script src="../../../ariadne.js" data-home="../../../" data-trail="Filosofia=../../|Kant=../|As Críticas"></script>
+</body>
+</html>

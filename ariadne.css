@@ -1,0 +1,101 @@
+.ariadne-fio {
+  position:sticky;
+  top:0;
+  z-index:40;
+  flex:none;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px 12px;
+  padding:12px clamp(16px,3vw,32px) 10px;
+  font:500 14px/1.2 "Alegreya Sans","Segoe UI",system-ui,sans-serif;
+  border-bottom:1px solid rgba(110,120,130,.22);
+  color:inherit;
+}
+.ariadne-fio::before {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:2px;
+  background:#9A3A2C;
+}
+.ariadne-fio a {
+  color:inherit;
+  text-decoration:none;
+}
+.ariadne-fio a:hover {
+  color:#9A3A2C;
+}
+.ariadne-fio a:focus-visible,.ariadne-fio button:focus-visible {
+  outline:2px solid currentColor;
+  outline-offset:3px;
+  border-radius:2px;
+}
+.ariadne-fio .af-marca {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-size:12.5px;
+}
+.ariadne-fio .af-novelo {
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#9A3A2C;
+  box-shadow:0 0 0 3px rgba(154,58,44,.16);
+}
+.ariadne-fio .af-sep {
+  width:16px;
+  height:1.5px;
+  background:#9A3A2C;
+  opacity:.75;
+}
+.ariadne-fio .af-atual {
+  opacity:.62;
+}
+.ariadne-fio .af-vao {
+  flex:1;
+}
+.ariadne-fio .af-extra {
+  font-size:13.5px;
+  color:#525C68;
+}
+.ariadne-fio .af-citar {
+  font:inherit;
+  font-size:15px;
+  font-weight:500;
+  color:inherit;
+  background:none;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  text-decoration:underline;
+  text-decoration-color:rgba(154,58,44,.7);
+  text-decoration-thickness:1.5px;
+  text-underline-offset:4px;
+}
+.ariadne-fio .af-citar:hover {
+  color:#9A3A2C;
+}
+:where(html.ariadne-pagina) {
+  scroll-padding-top:var(--af-h,0px);
+}
+:where(.ariadne-pagina) :is(.texto, .capitulo, .p-sec) :is(p, li),
+:where(.ariadne-pagina) .node-body li {
+  text-align:justify;
+  -webkit-hyphens:auto;
+  hyphens:auto;
+}
+:where(.ariadne-pagina) .texto p.tese {
+  text-align:left;
+}
+@media print {
+  .ariadne-fio {
+    display:none;
+  }
+}
