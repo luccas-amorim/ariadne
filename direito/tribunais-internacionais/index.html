@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mapa, quadro por família e cronologia de 49 tribunais internacionais (1899–2026): instrumento de criação, mantenedor, Estados vinculados e situação atual.">
+<meta property="og:title" content="Atlas dos Tribunais Internacionais">
+<meta property="og:description" content="Mapa, quadro por família e cronologia de 49 tribunais internacionais (1899–2026).">
+<meta property="og:type" content="website">
+<title>Atlas dos Tribunais Internacionais</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="atlas.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Caderno IV · Direito internacional público · situação em nov./2026</span>
+    <h1>Atlas dos Tribunais Internacionais</h1>
+    <p class="lede">49 cortes, tribunais e câmaras criados por instrumento internacional, de 1899 até hoje. Clique em uma cidade do mapa ou em um bloco do quadro para abrir a ficha: instrumento de criação, mantenedor e Estados vinculados.</p>
+  </header>
+
+  <section aria-labelledby="h-26">
+    <div class="sechead"><h2 id="h-26">O que mudou em 2026</h2></div>
+    <div class="news" id="news"></div>
+  </section>
+
+  <section aria-labelledby="h-map">
+    <div class="sechead">
+      <h2 id="h-map">Onde estão</h2>
+      <p>Cada círculo é uma sede, dividido pelas famílias dos tribunais que abriga; o número indica quantos. A Europa Ocidental está ampliada no quadro ao lado.</p>
+    </div>
+    <div class="filters" id="mapFilters" role="group" aria-label="Destacar família no mapa"></div>
+    <div class="maps">
+      <div class="mapcard"><div id="world"></div><div class="mapcap"><span>Mundo · projeção Natural Earth</span><span id="worldInfo"></span></div></div>
+      <div class="mapcard"><div id="europe"></div><div class="mapcap"><span>Europa · ampliação</span><span><b id="eurN"></b> tribunais em 8 cidades</span></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-board">
+    <div class="sechead">
+      <h2 id="h-board">Quadro por família</h2>
+      <div class="keyrow" id="key"></div>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section aria-labelledby="h-cron">
+    <div class="sechead">
+      <h2 id="h-cron">Cronologia</h2>
+      <div class="keyrow"><span><svg width="18" height="10"><rect width="18" height="10" fill="url(#hatchKey)" stroke="var(--muted)"/><defs><pattern id="hatchKey" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--muted)" stroke-width="1.6"/></pattern></defs></svg>da criação à instalação</span><span><svg width="18" height="10"><rect width="18" height="10" fill="var(--muted)"/></svg>em funcionamento</span><span>○ ativo</span><span>┃ extinto</span></div>
+    </div>
+    <div class="chartbox" id="chartbox"></div>
+  </section>
+
+  <section class="method" aria-labelledby="h-met">
+    <h2 id="h-met">Critério e limites</h2>
+    <p><b>O que entra.</b> Órgãos permanentes ou <i>ad hoc</i> que proferem decisões vinculantes com base no direito internacional, criados por tratado, por resolução de organização internacional ou por acordo entre organização e Estado (tribunais híbridos). Os tribunais administrativos aparecem numa seleção dos principais, porque há praticamente um por organização.</p>
+    <h3>Ficaram de fora</h3>
+    <ul>
+      <li>Órgãos quase judiciais sem força vinculante: comitês de tratados da ONU, Comissão Interamericana, Comissão Africana.</li>
+      <li>Tribunais arbitrais <i>ad hoc</i> de um só caso (Anexo VII da CNUDM, tribunais mistos do pós-1919).</li>
+      <li>O Tribunal Arbitral do Esporte (TAS/CAS), fundação privada de direito suíço.</li>
+      <li>Tribunais nacionais no exercício de jurisdição universal.</li>
+    </ul>
+    <h3>Previstos, mas nunca instalados</h3>
+    <ul>
+      <li><b>Corte Internacional de Presas</b> (XII Convenção da Haia, 1907).</li>
+      <li><b>Corte de Justiça da União Africana</b> (Protocolo de Maputo, 2003): em vigor desde 2009, mas nunca instalada.</li>
+      <li><b>Corte Africana de Justiça e Direitos Humanos</b> (Protocolos de 2008 e de Malabo, 2014): ainda sem as 15 ratificações necessárias.</li>
+      <li><b>Corte Árabe de Direitos Humanos</b> (Estatuto de 2014): sem as 7 ratificações necessárias.</li>
+    </ul>
+    <h3>Precisão dos números</h3>
+    <p>Contagens conferidas em 2026: TPI (125), CNUDM/TIDM (172), CPA (129), cláusula facultativa da CIJ (75), retiradas da Corte Centro-Americana (2025–26), Tribunal Especial para a Agressão (36 Estados e a UE). As contagens da Corte Africana (base 2024) e do CIADI são aproximadas. Antes de citar qualquer número, confira a fonte primária, ou seja, o depositário do tratado.</p>
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="dTitle">
+  <div class="dhead"><h3 id="dTitle"></h3><button class="x" id="dClose" aria-label="Fechar">×</button></div>
+  <div class="dbody" id="dBody"></div>
+</aside>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="geo.js"></script>
+<script src="dados.js"></script>
+<script src="atlas.js"></script>
+<script src="../../ariadne.js" data-home="../../" data-trail="Tribunais internacionais"></script>
+</body>
+</html>
