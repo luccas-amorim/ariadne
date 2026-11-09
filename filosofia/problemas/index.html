@@ -113,8 +113,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,.no:focus-visible{outli
 .no.ponte .nome{font-weight:600;fill:var(--tom)}
 .no.achado .caixa{fill:var(--achado)}
 .no.atual .caixa{stroke:var(--tinta);stroke-width:2.2;stroke-opacity:1}
-.elo{stroke:var(--tinta-suave);stroke-width:1.1;stroke-dasharray:1.5 3;stroke-linecap:round;fill:none}
-.elo.ponte{stroke:var(--tom);stroke-width:1.8}
+.no .obra{font-style:italic;font-weight:400}
+.no .obra-r{font-weight:400}
+.no .sep,.no .ano-l{font-size:11px;font-weight:400;fill:var(--tinta-suave)}
+.no .etq text{font-size:9.5px;font-weight:500}
 .aresta{opacity:.55;transition:opacity .15s}
 .aresta path{fill:none;stroke:var(--tinta);stroke-linecap:round}
 .aresta .toque{stroke:transparent;stroke-width:11;cursor:help}
@@ -127,8 +129,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,.no:focus-visible{outli
 .foco .aresta.ativa{opacity:1}
 .foco .no{opacity:.28}
 .foco .no.ativo{opacity:1}
-.foco .elo{opacity:.2}
-.foco .elo.ativo{opacity:1}
 
 /* ficha */
 .ficha{position:absolute;top:0;right:0;bottom:0;z-index:4;width:min(25rem,94vw);overflow:auto;
@@ -151,6 +151,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,.no:focus-visible{outli
 .ficha .sw{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-right:.4rem;vertical-align:.05em}
 .ficha .perg{color:var(--tinta-suave);font-size:.92rem}
 .ficha .nada{color:var(--tinta-suave);font-style:italic}
+.ficha .etiquetas{margin:.45rem 0 .2rem;font-size:.85rem;color:var(--tinta-suave)}
+.ficha .posicao{margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--linha)}
+.ficha .posicao .obra-t{margin:0 0 .2rem;font-weight:500}
+.ficha .posicao.em-foco{margin-left:-.7rem;padding-left:.6rem;border-left:2px solid var(--tinta)}
+.ficha .etq{display:inline-block;margin:.15rem .25rem 0 0;padding:.02rem .45rem;border:1px solid;border-radius:2px;font:inherit;font-size:.8rem;font-weight:500;cursor:pointer;line-height:1.5}
+.ficha .etq:hover{text-decoration:underline}
 .ficha .paginas{margin:.6rem 0 .2rem;display:flex;flex-direction:column;gap:.35rem}
 .ficha .paginas a{display:block;padding:.45rem .7rem;border:1px solid var(--tinta);border-radius:2px;color:var(--tinta);text-decoration:none;background:var(--fundo)}
 .ficha .paginas a:hover{background:var(--papel)}
@@ -208,7 +214,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,.no:focus-visible{outli
     <summary>Como ler</summary>
     <div class="como-ler" id="comoLer">
       <p>Cada <strong>faixa</strong> é um subproblema: uma pergunta que tem linhagem própria de respostas. O nome e a pergunta ficam à esquerda; acima das faixas, os nomes que o problema recebeu em cada período.</p>
-      <p>Cada <strong>nó</strong> é uma posição: uma tese de um autor numa obra datada. O ponto marca o ano da obra, não a vida do autor. A mesma posição pode responder a mais de um subproblema; nesse caso aparece em cada faixa, e uma linha vertical fina pontilhada liga as cópias.</p>
+      <p>Cada <strong>nó</strong> é um autor, e aparece uma só vez. Cada linha dentro dele é uma posição: uma tese numa obra datada. O ponto marca o ano da primeira obra, não a vida do autor. O nó fica na faixa do primeiro subproblema da sua posição mais antiga; os outros subproblemas vêm como etiquetas pequenas no próprio nó.</p>
       <p>As <strong>relações</strong> vão sempre da posição mais nova para a mais antiga a que ela se refere. Os tipos se distinguem pelo traço, não pela cor:</p>
       <dl>
         <dt><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="1.3"/></svg>responde a</dt><dd>enfrenta a pergunta posta pela outra posição</dd>
@@ -263,6 +269,7 @@ POSICOES.forEach(p => {
   p.aut = AUT[p.autor] || {id: p.autor, nome: p.autor, dt: '', per: null};
   p.anoTxt = (p.aprox ? 'c. ' : '') + anoTxt(p.ano);
   p.probs = [...new Set(p.subproblemas.filter(s => SUB[s]).map(s => SUB[s].problema))];
+  p.casas = p.probs.map(pr => casa(p, pr));
   p.busca = semAcento([p.aut.nome, p.autor, semMd(p.obra), semMd(p.tese)].join(' '));
 });
 POSICOES.forEach(p => p.relacoes.forEach(([t, a]) => { if (POS[a]) (RECEB[a] = RECEB[a] || []).push([t, p.id]); }));
@@ -281,8 +288,8 @@ const VERBO = {responde:'responde a', objeta:'objeta a', radicaliza:'radicaliza'
 const $ = s => document.querySelector(s);
 const palco = $('.palco'), rol = $('#rolagem'), eixo = $('#eixo'), mapa = $('#mapa'), ficha = $('#ficha'), dica = $('#dica');
 const estado = {prob: PROBLEMAS[0].id, comp: null, zoom: 1, sel: null, hover: null, achados: new Set()};
-const G = {Z:1, O:0, s:1, LW:232, W:0, Wc:0, H:0, vset:new Set(), pontes:new Set(), inst:[], porPos:new Map(), arestas:[], nosEl:[], arEl:[], eloEl:[]};
-const MARG = 36, ROW = 37, NH = 31, HEAD = 12, PADB = 11, GH = 42, GAPG = 22, EIXO_H = 70;
+const G = {Z:1, O:0, s:1, LW:232, W:0, Wc:0, H:0, vset:new Set(), aset:new Set(), pontes:new Set(), inst:[], noAut:new Map(), arestas:[], nosEl:[], arEl:[]};
+const MARG = 36, ROW = 37, NH = 33, NH1 = 22, HEAD = 12, PADB = 11, GH = 42, GAPG = 22, EIXO_H = 70;
 const F_NOME = '500 13px Spectral, Georgia, serif', F_ANO = '400 10.5px Spectral, Georgia, serif', F_PERG = '400 11.5px Spectral, Georgia, serif', F_ALIAS = '400 12px Spectral, Georgia, serif';
 const _cv = document.createElement('canvas').getContext('2d'); const _cw = new Map();
 function medir(t, f){ const k = f + '|' + t; if (!_cw.has(k)) { _cv.font = f; _cw.set(k, _cv.measureText(t).width); } return _cw.get(k); }
@@ -291,6 +298,54 @@ function quebrar(t, f, larg){
   t.split(' ').forEach(p => { const c = l ? l + ' ' + p : p; if (l && medir(c, f) > larg) { linhas.push(l); l = p; } else l = c; });
   if (l) linhas.push(l);
   return linhas;
+}
+/* título curto da obra: o primeiro título em itálico, se a obra começa por ele;
+   senão, o texto até a primeira vírgula, sem itálico. Títulos longos são
+   cortados na última palavra que cabe, com reticências. */
+const F_OBRA = 'italic 400 13px Spectral, Georgia, serif', F_OBRA_R = '400 13px Spectral, Georgia, serif', F_SEP = '400 11px Spectral, Georgia, serif', F_ETQ = '500 9.5px Spectral, Georgia, serif';
+const OBRA_MAX = 245;
+function obraCurta(o){
+  const m = /^\*(.+?)\*/.exec(o);
+  const it = !!m, f = it ? F_OBRA : F_OBRA_R;
+  let t = it ? m[1] : semMd(o.split(',')[0]).trim();
+  if (medir(t, f) > OBRA_MAX){
+    const ps = t.split(' '); let c = '';
+    for (const p of ps){ const n = c ? c + ' ' + p : p; if (medir(n + '…', f) > OBRA_MAX) break; c = n; }
+    // não termina em artigo, preposição ou conjunção
+    const vazias = /\s(a|o|as|os|à|às|ao|aos|de|da|do|das|dos|em|na|no|e|pela|pelo|para|com|of|the|and|to|a|an)$/i;
+    while (vazias.test(c)) c = c.replace(vazias, '');
+    t = c.replace(/[,;:]$/, '') + '…';
+  }
+  return {t, it, f};
+}
+/* faixa em que a posição fica num problema: o primeiro subproblema dela que pertence a ele */
+function casa(p, pr){ return p.subproblemas.find(s => SUB[s] && SUB[s].problema === pr); }
+/* medidas do nó de um autor numa faixa. Uma linha por posição, em ordem de ano:
+   a primeira é "Autor · obra · ano", as seguintes "obra · ano". Embaixo, etiquetas
+   dos outros subproblemas dessas posições, quebradas em mais de uma fila se preciso. */
+const LH = 17, ETQ_H = 14;
+const ORD_SUB = {}; SUBPROBLEMAS.forEach((s, i) => { ORD_SUB[s.id] = i; });
+function medidasAutor(ps, sid){
+  const sep = medir(' · ', F_SEP);
+  // se o mesmo título se repete no nó, cada linha mostra também a parte da obra ("Introdução", "livro I")
+  const cont = {};
+  ps.forEach(p => { const oc = p.curta || (p.curta = obraCurta(p.obra)); cont[oc.t] = (cont[oc.t] || 0) + 1; });
+  const linhas = ps.map(p => ({oc: p.curta, loc: cont[p.curta.t] > 1 && p.curta.it ? semMd(p.obra.replace(/^\*.+?\*/, '')).replace(/^,\s*/, '').trim() : ''}));
+  let wl = 0;
+  linhas.forEach((l, i) => {
+    wl = Math.max(wl, (i ? 0 : medir(ps[0].aut.nome, F_NOME) + sep) + medir(l.oc.t, l.oc.f) + (l.loc ? medir(', ' + l.loc, F_OBRA_R) : 0) + sep + medir(ps[i].anoTxt, F_SEP));
+  });
+  const subs = [...new Set(ps.flatMap(p => p.subproblemas))].filter(s => SUB[s] && s !== sid).sort((a, b) => ORD_SUB[a] - ORD_SUB[b]);
+  const larg = Math.max(wl, 180), etqs = [];
+  let dx = 0, ln = 0;
+  subs.forEach(s => {
+    const w = medir(SUB[s].nome, F_ETQ) + 10;
+    if (dx && dx + w > larg){ ln++; dx = 0; }
+    etqs.push({s, w, dx, ln}); dx += w + 4;
+  });
+  const we = etqs.reduce((m, e) => Math.max(m, e.dx + e.w), 0);
+  const filas = etqs.length ? ln + 1 : 0;
+  return {w: Math.max(wl, we), h: 21 + (ps.length - 1) * LH + filas * ETQ_H, etqs, linhas};
 }
 function escuro(){ const t = document.documentElement.getAttribute('data-theme'); return t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); }
 function paleta(h, s){
@@ -312,12 +367,12 @@ function centroAtual(cx, cy){
 /* ==========================================================
    DISPOSIÇÃO E DESENHO
    ========================================================== */
-function caminho(na, nb){
-  const ya = na.y + NH / 2, yb = nb.y + NH / 2;
+/* a aresta sai da linha da posição de origem e chega à linha da posição de destino */
+function caminho(na, nb, ya, yb){
   const xs = na.x0, xt = nb.x1;
   if (xs - xt > 24){ const dx = Math.min(150, (xs - xt) * .5); return `M${xs},${ya} C${xs - dx},${ya} ${xt + dx},${yb} ${xt},${yb}`; }
   // nós quase no mesmo ano: na mesma linha, laço por baixo; em linhas diferentes, colchete pela esquerda
-  if (Math.abs(na.y - nb.y) < 1){ const sx = na.x + 2, tx = nb.x + 2, yy = na.y + NH; return `M${sx},${yy} C${sx},${yy + 24} ${tx},${yy + 24} ${tx},${yy}`; }
+  if (Math.abs(na.y - nb.y) < 1){ const sx = na.x + 2, tx = nb.x + 2, ys = na.y + na.h, yt = nb.y + nb.h, yy = Math.max(ys, yt); return `M${sx},${ys} C${sx},${yy + 24} ${tx},${yy + 24} ${tx},${yt}`; }
   const b = Math.min(na.x0, nb.x0) - 16 - Math.min(40, Math.abs(ya - yb) * .12);
   return `M${na.x0},${ya} C${b},${ya} ${b},${yb} ${nb.x0},${yb}`;
 }
@@ -325,8 +380,14 @@ function caminho(na, nb){
 function render(opc = {}){
   const atv = ativos(), vis = visiveis();
   G.vset = new Set(vis.map(p => p.id));
-  G.pontes = new Set(estado.comp ? vis.filter(p => p.probs.includes(estado.prob) && p.probs.includes(estado.comp)).map(p => p.id) : []);
-  if (estado.sel && !G.vset.has(estado.sel)) fecharFicha(true);
+  // posições visíveis de cada autor, em ordem de ano
+  const psAut = new Map();
+  vis.forEach(p => { if (!psAut.has(p.autor)) psAut.set(p.autor, []); psAut.get(p.autor).push(p); });
+  psAut.forEach(ps => ps.sort((a, b) => a.ano - b.ano));
+  G.aset = new Set(psAut.keys());
+  // ponte: autor com posições nos dois problemas comparados
+  G.pontes = new Set(estado.comp ? [...psAut].filter(([, ps]) => ps.some(p => p.probs.includes(estado.prob)) && ps.some(p => p.probs.includes(estado.comp))).map(([a]) => a) : []);
+  if (estado.sel && !G.aset.has(estado.sel)) fecharFicha(true);
   atualizarControles();
 
   const LW = rol.clientWidth < 640 ? 136 : 236; G.LW = LW;
@@ -337,33 +398,44 @@ function render(opc = {}){
   const X = y => (cum(y) - O) * Z + LW + MARG; G.X = X;
   const XA = y => X(y) * s;
 
-  // faixas e nós (uma cópia da posição por faixa ativa)
+  // faixas e nós: um único nó por autor. Fica no problema principal, se tiver posição nele
+  // (senão, no comparado), na faixa do primeiro subproblema da sua posição mais antiga ali.
+  // O ponto marca o ano da primeira posição visível do autor.
   const faixas = [], FX = {};
   atv.forEach(pr => PROB[pr].subproblemas.forEach(sid => { if (!SUB[sid]) return; const f = {s: SUB[sid], pr, ns: []}; faixas.push(f); FX[sid] = f; }));
-  const inst = [], porPos = new Map();
-  vis.forEach(p => p.subproblemas.forEach(sid => {
-    const f = FX[sid]; if (!f) return;
-    const n = {p, f, x: X(p.ano)};
-    n.w = Math.max(medir(p.aut.nome, F_NOME), medir(p.anoTxt, F_ANO));
+  const inst = [], noAut = new Map();
+  psAut.forEach((ps, aid) => {
+    const pr = atv.find(k => ps.some(p => p.probs.includes(k)));
+    const sid = casa(ps.find(p => p.probs.includes(pr)), pr), f = FX[sid]; if (!f) return;
+    const n = {aid, a: ps[0].aut, ps, f, x: X(ps[0].ano), ...medidasAutor(ps, sid), lin: {}};
+    ps.forEach((p, i) => { n.lin[p.id] = i; });
     n.x0 = n.x - 8; n.x1 = n.x + 10 + n.w + 8;
-    f.ns.push(n); inst.push(n);
-    if (!porPos.has(p.id)) porPos.set(p.id, []); porPos.get(p.id).push(n);
-  }));
+    f.ns.push(n); inst.push(n); noAut.set(aid, n);
+  });
   faixas.forEach(f => {
-    f.ns.sort((a, b) => a.x - b.x || a.p.ano - b.p.ano);
-    const linhas = [];
-    f.ns.forEach(n => { let r = linhas.findIndex(e => e + 8 <= n.x0); if (r < 0) { r = linhas.length; linhas.push(0); } linhas[r] = n.x1; n.row = r; });
+    // empilha os nós da faixa: cada um desce até não encostar em nenhum já posto
+    f.ns.sort((a, b) => a.x - b.x || a.ps[0].ano - b.ps[0].ano);
+    const postos = [];
+    f.ns.forEach(n => {
+      let yo = 0, mexeu = true;
+      while (mexeu){
+        mexeu = false;
+        for (const m of postos) if (m.x1 + 8 > n.x0 && n.x1 + 8 > m.x0 && m.yo < yo + n.h + 6 && yo < m.yo + m.h + 6){ yo = m.yo + m.h + 6; mexeu = true; }
+      }
+      n.yo = yo; postos.push(n);
+    });
     f.perg = quebrar(f.s.pergunta, F_PERG, LW - 24);
     f.nomeL = quebrar(f.s.nome, 'italic 500 13.5px Spectral, Georgia, serif', LW - 24);
     const hRot = 10 + f.nomeL.length * 17 + f.perg.length * 14.5 + 10;
-    f.h = Math.max(HEAD + (Math.max(1, linhas.length) - 1) * ROW + NH + PADB, hRot);
+    const fundo = f.ns.reduce((m, n) => Math.max(m, n.yo + n.h), NH1);
+    f.h = Math.max(HEAD + fundo + PADB, hRot);
   });
 
   // empilhamento vertical
   let y = 12; const grupos = [];
   atv.forEach(pr => {
     const g = {pr, y0: y}; y += GH;
-    faixas.filter(f => f.pr === pr).forEach(f => { f.y0 = y; f.y1 = y + f.h; f.ns.forEach(n => { n.y = f.y0 + HEAD + n.row * ROW; }); y = f.y1; });
+    faixas.filter(f => f.pr === pr).forEach(f => { f.y0 = y; f.y1 = y + f.h; f.ns.forEach(n => { n.y = f.y0 + HEAD + n.yo; }); y = f.y1; });
     g.y1 = y; grupos.push(g); y += GAPG;
   });
   const H = y + 10;
@@ -429,28 +501,17 @@ function render(opc = {}){
   });
   sv += aliasSvg.join('');
 
-  // elos entre cópias da mesma posição
-  const elos = [];
-  porPos.forEach((ns, id) => {
-    const o = [...ns].sort((a, b) => a.y - b.y);
-    for (let i = 1; i < o.length; i++) elos.push({id, x: o[i].x, y1: o[i - 1].y + NH, y2: o[i].y});
-  });
-  sv += `<g class="elos">${elos.map(e => `<line class="elo${G.pontes.has(e.id) ? ' ponte' : ''}" data-id="${e.id}" x1="${e.x}" y1="${e.y1}" x2="${e.x}" y2="${e.y2}"/>`).join('')}</g>`;
-
-  // arestas: da posição mais nova à mais antiga, entre as cópias mais próximas
-  const arestas = [];
+  // arestas: da posição mais nova à mais antiga, entre as linhas das duas posições nos nós dos autores.
+  // Relações entre posições do mesmo autor ficam só na ficha.
+  const arestas = [], yLin = (n, pid) => n.y + 11 + n.lin[pid] * LH;
   vis.forEach(p => p.relacoes.forEach(([t, alvo]) => {
-    if (!G.vset.has(alvo) || !ROT_IDA[t]) return;
-    let melhor = null;
-    porPos.get(p.id).forEach(na => porPos.get(alvo).forEach(nb => {
-      const d = Math.abs(na.y - nb.y) + (na.f === nb.f ? 0 : 1);
-      if (!melhor || d < melhor.d) melhor = {d, na, nb};
-    }));
-    arestas.push({t, a: p.id, b: alvo, na: melhor.na, nb: melhor.nb});
+    if (!G.vset.has(alvo) || !ROT_IDA[t] || POS[alvo].autor === p.autor) return;
+    const na = noAut.get(p.autor), nb = noAut.get(POS[alvo].autor); if (!na || !nb) return;
+    arestas.push({t, a: p.autor, b: POS[alvo].autor, pa: p.id, pb: alvo, na, nb, ya: yLin(na, p.id), yb: yLin(nb, alvo)});
   }));
   let sa = '', masc = '';
   arestas.forEach((r, i) => {
-    const d = caminho(r.na, r.nb);
+    const d = caminho(r.na, r.nb, r.ya, r.yb);
     if (r.t === 'sintetiza') masc += `<mask id="m${i}" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}"><rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/><path d="${d}" fill="none" stroke="#000" stroke-width="1.8"/></mask>`;
     sa += `<g class="aresta ${r.t}" data-i="${i}"><path class="traco" d="${d}"${r.t === 'sintetiza' ? ` mask="url(#m${i})"` : ''}/><path class="toque" d="${d}"/></g>`;
   });
@@ -459,14 +520,26 @@ function render(opc = {}){
   // nós
   let sn = '';
   inst.forEach((n, i) => {
-    const p = n.p, cls = ['no', p.status === 'rascunho' ? 'rascunho' : 'verificada'];
-    if (G.pontes.has(p.id)) cls.push('ponte');
+    const cls = ['no', n.ps.every(p => p.status === 'rascunho') ? 'rascunho' : 'verificada'];
+    if (G.pontes.has(n.aid)) cls.push('ponte');
     n.i = i;
-    sn += `<g class="${cls.join(' ')}" data-id="${p.id}" data-n="${i}" tabindex="0" role="button" aria-label="${escH(p.aut.nome)}, ${escH(p.anoTxt)}: ${escH(semMd(p.tese))}">
-      <rect class="caixa" x="${n.x0}" y="${n.y}" width="${n.x1 - n.x0}" height="${NH}" rx="3"/>
+    let tx = '';
+    n.ps.forEach((p, j) => {
+      const {oc, loc} = n.linhas[j];
+      tx += `<text class="nome" data-pos="${p.id}" x="${n.x + 9}" y="${n.y + 15 + j * LH}">${j ? '' : escH(n.a.nome) + '<tspan class="sep"> · </tspan>'}<tspan class="${oc.it ? 'obra' : 'obra-r'}">${escH(oc.t)}</tspan>${loc ? `<tspan class="obra-r">, ${escH(loc)}</tspan>` : ''}<tspan class="sep"> · </tspan><tspan class="ano-l">${escH(p.anoTxt)}</tspan></text>`;
+    });
+    let et = '';
+    const ye = n.y + 15 + (n.ps.length - 1) * LH + 4;
+    n.etqs.forEach(e => {
+      const c = corProb(SUB[e.s].problema), ex = n.x + 9 + e.dx, ey = ye + e.ln * ETQ_H;
+      et += `<g class="etq"><title>${escH(PROB[SUB[e.s].problema].nome)}: ${escH(SUB[e.s].pergunta)}</title><rect x="${ex}" y="${ey}" width="${e.w}" height="11.5" rx="2" fill="${c.fundo}" stroke="${c.borda}"/><text x="${ex + 5}" y="${ey + 8.6}" fill="${c.texto}">${escH(SUB[e.s].nome)}</text></g>`;
+    });
+    const rot = n.ps.map(p => `${semMd(p.obra)}, ${p.anoTxt}`).join('; ');
+    const outros = n.etqs.length ? `; também em ${n.etqs.map(e => SUB[e.s].nome).join(', ')}` : '';
+    sn += `<g class="${cls.join(' ')}" data-id="${escH(n.aid)}" data-n="${i}" tabindex="0" role="button" aria-label="${escH(n.a.nome)}: ${escH(rot)}${escH(outros)}">
+      <rect class="caixa" x="${n.x0}" y="${n.y}" width="${n.x1 - n.x0}" height="${n.h}" rx="3"/>
       <circle class="ponto" cx="${n.x}" cy="${n.y + 10.5}" r="3.6" fill="${n.f.cor.ponto}"/>
-      <text class="nome" x="${n.x + 9}" y="${n.y + 14.5}">${escH(p.aut.nome)}</text>
-      <text class="ano" x="${n.x + 9}" y="${n.y + 26.5}">${escH(p.anoTxt)}</text></g>`;
+      ${tx}${et}</g>`;
   });
   sv += `<g class="nos">${sn}</g>`;
 
@@ -489,13 +562,12 @@ function render(opc = {}){
   mapa.setAttribute('width', W * s); mapa.setAttribute('height', H * s); mapa.setAttribute('viewBox', `0 0 ${W} ${H}`);
   mapa.innerHTML = sv;
 
-  G.inst = inst; G.porPos = porPos; G.arestas = arestas; G.faixas = faixas;
+  G.inst = inst; G.noAut = noAut; G.arestas = arestas; G.faixas = faixas;
   G.nosEl = [...mapa.querySelectorAll('.no')];
   G.arEl = [...mapa.querySelectorAll('.aresta')];
-  G.eloEl = [...mapa.querySelectorAll('.elo')];
 
   const np = G.pontes.size;
-  $('#contagem').textContent = `${vis.length} posições em ${faixas.length} faixas, ${arestas.length} ${arestas.length === 1 ? 'relação' : 'relações'}` +
+  $('#contagem').textContent = `${noAut.size} autores, ${vis.length} posições em ${faixas.length} faixas, ${arestas.length} ${arestas.length === 1 ? 'relação' : 'relações'}` +
     (estado.comp ? ` · ${np} ${np === 1 ? 'ponte' : 'pontes'} entre ${PROB[estado.prob].nome.toLowerCase()} e ${PROB[estado.comp].nome.toLowerCase()}` : '');
 
   if (opc.irPara) centralizar(opc.irPara, false);
@@ -522,7 +594,7 @@ rol.addEventListener('scroll', () => requestAnimationFrame(fixarRotulos), {passi
    ========================================================== */
 function aplicarFoco(){
   const id = estado.sel || estado.hover;
-  const foco = !!id && G.vset.has(id);
+  const foco = !!id && G.aset.has(id);
   const nos = new Set(), ar = new Set();
   if (foco){
     nos.add(id);
@@ -536,7 +608,6 @@ function aplicarFoco(){
     el.classList.toggle('achado', estado.achados.has(pid));
   });
   G.arEl.forEach((el, i) => el.classList.toggle('ativa', ar.has(i)));
-  G.eloEl.forEach(el => el.classList.toggle('ativo', foco && el.dataset.id === id));
 }
 
 /* ==========================================================
@@ -554,50 +625,58 @@ function blocoRel(pares, rot){
   });
   return h;
 }
-function abrirFicha(id){
-  const p = POS[id], a = p.aut;
+/* ficha do autor: todas as suas posições, em ordem de ano, cada uma com tese,
+   etiquetas de subproblema e relações. "foco" é a posição a mostrar primeiro. */
+function abrirFicha(aid, foco){
+  const ps = POSICOES.filter(q => q.autor === aid).sort((x, y) => x.ano - y.ano);
+  if (!ps.length) return;
+  const a = ps[0].aut;
   const per = a.per && PERIODOS[a.per] ? `, filosofia ${PERIODOS[a.per].n.toLowerCase()}` : '';
-  const subs = p.subproblemas.filter(s => SUB[s]).map(s => {
-    const sb = SUB[s], c = corProb(sb.problema);
-    return `<li><span class="sw" style="background:${c.ponto}"></span><button type="button" class="ir" data-sub="${s}" data-pos="${p.id}">${escH(PROB[sb.problema].nome)} · ${escH(sb.nome)}</button><br><span class="perg">${escH(sb.pergunta)}</span></li>`;
+  const blocos = ps.map(p => {
+    const etqs = p.subproblemas.filter(s => SUB[s]).map(s => {
+      const sb = SUB[s], c = corProb(sb.problema);
+      return `<button type="button" class="etq" data-sub="${s}" data-pos="${p.id}" style="background:${c.fundo};border-color:${c.borda};color:${c.texto}" title="${escH(PROB[sb.problema].nome)}: ${escH(sb.pergunta)}">${escH(sb.nome)}</button>`;
+    }).join('');
+    const ida = blocoRel(p.relacoes, ROT_IDA), volta = blocoRel(RECEB[p.id] || [], ROT_VOLTA);
+    return `<section class="posicao${p.id === foco && ps.length > 1 ? ' em-foco' : ''}" id="pos-${p.id}">
+      <p class="obra-t">${md(p.obra)}, ${escH(p.anoTxt)}</p>
+      ${p.status === 'rascunho' ? '<p class="aviso">Tese em rascunho, ainda não conferida</p>' : ''}
+      <p class="tese">${md(p.tese)}</p>
+      <p class="etiquetas">${etqs}</p>
+      ${ida || volta ? ida + volta : '<p class="nada">Nenhuma relação registrada.</p>'}
+    </section>`;
   }).join('');
-  const ida = blocoRel(p.relacoes, ROT_IDA), volta = blocoRel(RECEB[id] || [], ROT_VOLTA);
-  const outras = POSICOES.filter(q => q.autor === p.autor && q.id !== p.id).sort((x, y) => x.ano - y.ano);
-  const pag = PAGINAS[p.autor];
+  const pag = PAGINAS[aid];
   ficha.innerHTML = `
     <button type="button" class="fechar" aria-label="Fechar ficha">×</button>
     <h2>${escH(a.nome)}</h2>
     <p class="vida">${escH(a.dt)}${per}</p>
-    ${p.status === 'rascunho' ? '<p class="aviso">Tese em rascunho, ainda não conferida</p>' : ''}
-    <p class="tese">${md(p.tese)}</p>
-    <p class="obra">${md(p.obra)}, ${escH(p.anoTxt)}</p>
     ${pag ? `<div class="paginas">${pag.map(g => `<a href="${escH(g.u)}" target="_top">Abrir página de estudo<span>${escH(g.t)}</span></a>`).join('')}</div>` : ''}
-    <h3>Subproblemas</h3>
-    <ul class="lista" style="list-style:none;padding-left:0">${subs}</ul>
-    <h3>Relações</h3>
-    ${ida || volta ? ida + volta : '<p class="nada">Nenhuma relação registrada.</p>'}
-    ${outras.length ? `<h3>Outras posições de ${escH(a.nome)}</h3><ul class="lista">${outras.map(q => `<li><button type="button" class="ir" data-ir="${q.id}">${md(q.obra)}</button> (${escH(q.anoTxt)})</li>`).join('')}</ul>` : ''}`;
+    ${ps.length > 1 ? `<h3>${ps.length} posições</h3>` : ''}
+    ${blocos}`;
   ficha.hidden = false;
   // em tela larga, o mapa recua para a esquerda da ficha, e nada fica escondido atrás dela
   palco.classList.toggle('com-ficha', innerWidth > 700);
+  const el = foco && ps.length > 1 && document.getElementById('pos-' + foco);
+  if (el) ficha.scrollTop = el.offsetTop - 12; else ficha.scrollTop = 0;
 }
 function fecharFicha(silencioso){
   estado.sel = null; ficha.hidden = true; ficha.innerHTML = '';
   palco.classList.remove('com-ficha');
   if (!silencioso) aplicarFoco();
 }
-function selecionar(id){
-  estado.sel = id; estado.hover = null;
-  abrirFicha(id); aplicarFoco();
-  const n = (G.porPos.get(id) || [])[0];
+/* seleciona um autor (id de FILOS); pid, se houver, é a posição clicada */
+function selecionar(aid, pid){
+  estado.sel = aid; estado.hover = null;
+  abrirFicha(aid, pid); aplicarFoco();
+  const n = G.noAut.get(aid);
   if (n){
     const l = rol.scrollLeft + G.LW * G.s, r = rol.scrollLeft + rol.clientWidth, t = rol.scrollTop, b = rol.scrollTop + rol.clientHeight - EIXO_H;
-    if (n.x0 * G.s < l || n.x1 * G.s > r || n.y * G.s < t || (n.y + NH) * G.s > b) centralizar(id, true);
+    if (n.x0 * G.s < l || n.x1 * G.s > r || n.y * G.s < t || (n.y + n.h) * G.s > b) centralizar(aid, true);
   }
 }
-function centralizar(id, suave, sub){
-  const ns = G.porPos.get(id); if (!ns) return;
-  const n = (sub && ns.find(m => m.f.s.id === sub)) || ns[0];
+function centralizar(aid, suave){
+  const n = G.noAut.get(aid); if (!n) return;
   const esq = G.LW * G.s, meio = esq + (rol.clientWidth - esq) / 2;
   rol.scrollTo({left: (n.x0 + n.x1) / 2 * G.s - meio, top: n.y * G.s - (rol.clientHeight - EIXO_H) / 2, behavior: suave ? 'smooth' : 'auto'});
 }
@@ -606,16 +685,16 @@ function irPara(id, sub){
   const p = POS[id]; if (!p || !p.probs.length) return;
   let mudou = false;
   const alvo = sub ? SUB[sub].problema : null;
-  if (alvo ? !ativos().includes(alvo) : !G.vset.has(id)){
+  if (alvo ? !ativos().includes(alvo) : !p.probs.some(k => ativos().includes(k))){
     estado.prob = alvo || p.probs[0];
     if (estado.comp === estado.prob) estado.comp = null;
     mudou = true;
   }
-  estado.sel = id;
+  estado.sel = p.autor;
   if (mudou){ estado.zoom = zoomInicial(); render({inicio: true}); }
   estado.hover = null;
-  abrirFicha(id); aplicarFoco();
-  centralizar(id, !mudou, sub);
+  abrirFicha(p.autor, id); aplicarFoco();
+  centralizar(p.autor, !mudou);
 }
 
 /* ==========================================================
@@ -668,8 +747,12 @@ function zoomInteiro(){
   const LW = rol.clientWidth < 640 ? 136 : 236;
   const livre = rol.clientWidth - LW - 2 * MARG - 26;
   let z = ZOOM_MAX;
-  vis.forEach(p => {
-    const c = cum(p.ano) - O, w = Math.max(medir(p.aut.nome, F_NOME), medir(p.anoTxt, F_ANO)) + 18;
+  const psAut = new Map();
+  vis.forEach(p => { if (!psAut.has(p.autor)) psAut.set(p.autor, []); psAut.get(p.autor).push(p); });
+  psAut.forEach(ps => {
+    ps.sort((a, b) => a.ano - b.ano);
+    const pr = ativos().find(k => ps.some(p => p.probs.includes(k)));
+    const c = cum(ps[0].ano) - O, w = medidasAutor(ps, casa(ps.find(p => p.probs.includes(pr)), pr)).w + 18;
     if (c > 0) z = Math.min(z, (livre - w) / c);
   });
   return Math.max(ZOOM_MIN, Math.min(1, z));
@@ -696,16 +779,20 @@ mapa.addEventListener('mouseover', e => {
   if (_esp) return;
   const g = e.target.closest('.no');
   if (g){
-    const p = POS[g.dataset.id];
-    dica.innerHTML = `<strong>${escH(p.aut.nome)}</strong> <span class="s">· ${md(p.obra)}, ${escH(p.anoTxt)}</span><br>${md(p.tese)}`;
+    // a dica mostra a posição da linha sob o ponteiro (ou a primeira do autor)
+    const n = G.noAut.get(g.dataset.id), lp = e.target.closest('[data-pos]');
+    const p = lp ? POS[lp.dataset.pos] : n.ps[0];
+    const mais = !lp && n.ps.length > 1 ? `<br><span class="s">e mais ${n.ps.length - 1} ${n.ps.length === 2 ? 'posição' : 'posições'}</span>` : '';
+    dica.innerHTML = `<strong>${escH(p.aut.nome)}</strong> <span class="s">· ${md(p.obra)}, ${escH(p.anoTxt)}</span><br>${md(p.tese)}${mais}`;
     dica.classList.add('on'); moverDica(e);
-    if (!estado.sel && estado.hover !== p.id){ estado.hover = p.id; aplicarFoco(); }
+    if (!estado.sel && estado.hover !== n.aid){ estado.hover = n.aid; aplicarFoco(); }
     return;
   }
   const a = e.target.closest('.aresta');
   if (a){
-    const r = G.arestas[+a.dataset.i];
-    dica.innerHTML = `<strong>${escH(POS[r.a].aut.nome)}</strong> (${escH(POS[r.a].anoTxt)}) <em>${VERBO[r.t]}</em> <strong>${escH(POS[r.b].aut.nome)}</strong> (${escH(POS[r.b].anoTxt)})`;
+    const r = G.arestas[+a.dataset.i], pa = POS[r.pa], pb = POS[r.pb];
+    const ob = q => q.curta.it ? `<em>${escH(q.curta.t)}</em>` : escH(q.curta.t);
+    dica.innerHTML = `<strong>${escH(pa.aut.nome)}</strong>, ${ob(pa)} (${escH(pa.anoTxt)}) <span class="s">${VERBO[r.t]}</span> <strong>${escH(pb.aut.nome)}</strong>, ${ob(pb)} (${escH(pb.anoTxt)})`;
     dica.classList.add('on'); moverDica(e);
   }
 });
@@ -717,7 +804,7 @@ mapa.addEventListener('mouseout', e => {
   if (g.classList.contains('no') && estado.hover){ estado.hover = null; aplicarFoco(); }
 });
 mapa.addEventListener('click', e => {
-  const g = e.target.closest('.no'); if (g){ selecionar(g.dataset.id); return; }
+  const g = e.target.closest('.no'); if (g){ const lp = e.target.closest('[data-pos]'); selecionar(g.dataset.id, lp && lp.dataset.pos); return; }
   if (estado.sel) fecharFicha();
 });
 mapa.addEventListener('keydown', e => {
@@ -766,7 +853,7 @@ function buscar(v){
   if (!q){ _bq = ''; estado.achados = new Set(); $('#achados').textContent = ''; aplicarFoco(); return; }
   const res = POSICOES.filter(p => p.probs.length && p.busca.includes(q)).sort((a, b) => a.ano - b.ano);
   if (q !== _bq){ _bq = q; _bi = -1; }
-  estado.achados = new Set(res.map(p => p.id));
+  estado.achados = new Set(res.map(p => p.autor));
   if (!res.length){ $('#achados').textContent = 'Nada encontrado'; aplicarFoco(); return; }
   _bi = (_bi + 1) % res.length;
   $('#achados').textContent = res.length === 1 ? '1 posição' : `${_bi + 1} de ${res.length} · Enter para a próxima`;
@@ -794,7 +881,7 @@ new MutationObserver(_redesenhar).observe(document.documentElement, {attributes:
 montarControles();
 estado.zoom = zoomInicial();
 render({inicio: true});
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { _cw.clear(); if (!estado.sel){ estado.zoom = zoomInicial(); render({inicio: true}); } else render({centro: centroAtual()}); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { _cw.clear(); POSICOES.forEach(p => { delete p.curta; });if (!estado.sel){ estado.zoom = zoomInicial(); render({inicio: true}); } else render({centro: centroAtual()}); });
 </script>
 <script src="../../ariadne.js" data-home="../../" data-trail="Filosofia=../|Linha do tempo dos problemas"></script>
 </body>
