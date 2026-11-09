@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../filosofo.css">
 <style>:root{--fundo:#ECEEEE;--a:#3E5F70;--claro:#F5F6F6}</style>
+<link rel="stylesheet" href="../../ariadne.css">
 </head>
 <body>
 <script src="../../ariadne.js" data-home="../../" data-trail="Filosofia=../|Espinosa"></script>
@@ -39,46 +40,6 @@
   </section>
 </div>
 <script src="../filosofo.js"></script>
-<script>
-(function(){
-  var A = '#3E5F70', SERIF = 'Alegreya, Georgia, serif', SANS = 'Alegreya Sans, sans-serif';
-  var PARTES = [
-    { n: 'I', t: 'Deus', meta: 'De Deo', d: 'Substância, atributos e modos; Deus sive Natura; necessidade e a crítica das causas finais (Apêndice).' },
-    { n: 'II', t: 'A mente', meta: 'De natura et origine mentis', d: 'Mente como ideia do corpo; os três gêneros de conhecimento; o paralelismo.' },
-    { n: 'III', t: 'Os afetos', meta: 'De origine et natura affectuum', d: 'O conatus; alegria, tristeza e desejo; os afetos tratados como linhas, planos e corpos.' },
-    { n: 'IV', t: 'A servidão', meta: 'De servitute humana', d: 'A força dos afetos; o bem e o mal como utilidade; o homem livre.' },
-    { n: 'V', t: 'A liberdade', meta: 'De potentia intellectus seu de libertate', d: 'O poder do intelecto sobre os afetos; amor intelectual de Deus; a beatitude.' }
-  ];
-
-  function figura(h, el){
-    var svg = el('svg', { viewBox: '0 0 640 520', role: 'img', 'aria-label': 'Esquema da Ética' });
-    var add = function(e){ svg.appendChild(e); };
-    var T = function(x, y, t, o){ o = o || {}; return el('text', { x: x, y: y, 'font-family': o.f || SERIF, 'font-size': o.s || 16, 'font-weight': o.w || 400, 'font-style': o.i || 'normal', fill: o.c || '#1D2330', 'text-anchor': o.a || 'start' }, t); };
-    var pts = PARTES.map(function(p, i){ return { x: 30 + i * 120, y: 400 - i * 72 }; });
-    add(el('path', { d: 'M' + pts.map(function(p){ return (p.x + 60) + ',' + (p.y + 30); }).join(' L'), stroke: '#9A3A2C', 'stroke-width': 1.75, 'stroke-dasharray': '2 5', fill: 'none' }));
-    PARTES.forEach(function(p, i){
-      var x = pts[i].x, y = pts[i].y, on = h === p.n;
-      add(el('rect', { x: x, y: y, width: 112, height: 500 - y, fill: on ? A : '#F5F6F6', 'fill-opacity': 1, stroke: A, 'stroke-width': 2 }));
-      add(T(x + 12, y + 30, p.n, { s: 22, w: 700, c: on ? '#fff' : A }));
-      add(T(x + 12, y + 54, p.t, { s: 17, w: 700, c: on ? '#fff' : '#1D2330' }));
-      ['Def.', 'Ax.', 'Prop.', 'Esc.'].forEach(function(l, j){
-        var yy = y + 80 + j * 22;
-        if (yy > 486) return;
-        add(el('rect', { x: x + 12, y: yy - 9, width: 8, height: 8, fill: on ? '#fff' : A, 'fill-opacity': 1 - j * 0.2 }));
-        add(T(x + 26, yy, l, { f: SANS, s: 12, c: on ? '#fff' : '#5B6270' }));
-      });
-    });
-    add(el('path', { d: 'M20,500 H620', stroke: '#1D2330', 'stroke-width': 1 }));
-    add(T(30, 380, 'Deus sive Natura', { i: 'italic', s: 16, c: '#5B6270' }));
-    add(T(620, 90, 'beatitude', { a: 'end', i: 'italic', s: 16, c: '#5B6270' }));
-    return svg;
-  }
-
-  Filosofo.montar({
-    partes: PARTES, chave: 'n', metaItalico: true, figura: figura,
-    obras: [{ t: 'Tratado da emenda do intelecto', a: 'c. 1662' }, { t: 'Princípios da filosofia de Descartes', a: '1663' }, { t: 'Tratado teológico-político', a: '1670' }, { t: 'Tratado político', a: '1677, inacabado' }]
-  });
-})();
-</script>
+<script src="figura.js"></script>
 </body>
 </html>
